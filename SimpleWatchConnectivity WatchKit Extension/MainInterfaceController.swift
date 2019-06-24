@@ -41,7 +41,7 @@ class MainInterfaceController: WKInterfaceController, TestDataProvider, SessionC
             updateUI(with: context)
             type(of: self).instances.append(self)
         } else {
-            statusLabel.setText("Activating...")
+            statusLabel.setText("Connecting...")
             reloadRootController()
         }
         
@@ -104,9 +104,10 @@ class MainInterfaceController: WKInterfaceController, TestDataProvider, SessionC
     // If a current context is specified, use the timed color it provided.
     //
     private func reloadRootController(with currentContext: CommandStatus? = nil) {
-        let commands: [Command] = [.updateAppContext, .sendMessage, .sendMessageData,
-                                   .transferFile, .transferUserInfo,
-                                   .transferCurrentComplicationUserInfo]
+        //let commands: [Command] = [.updateAppContext, .sendMessage, .sendMessageData,
+        //                           .transferFile, .transferUserInfo,
+        //                           .transferCurrentComplicationUserInfo]
+        let commands: [Command] = [.updateAppContext, .sendMessage]
         var contexts = [CommandStatus]()
         for aCommand in commands {
             var commandStatus = CommandStatus(command: aCommand, phrase: .finished)
@@ -156,7 +157,8 @@ class MainInterfaceController: WKInterfaceController, TestDataProvider, SessionC
     @objc
     func reachabilityDidChange(_ notification: Notification) {
         statusLabel.setText("Device disconnected.")
-        WKInterfaceDevice.current().play(.failure) 
+        WKInterfaceDevice.current().play(.failure)
+        WKInterfaceDevice.current().play(.failure)
         print("\(#function): isReachable:\(WCSession.default.isReachable)")
     }
     

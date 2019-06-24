@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Trigger WCSession activation at the early phase of app launching.
         //
-        assert(WCSession.isSupported(), "This sample requires Watch Connectivity support!")
+        assert(WCSession.isSupported(), "BlueBuzz requires Apple Watch!")
         WCSession.default.delegate = sessionDelegater
         WCSession.default.activate()
         

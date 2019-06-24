@@ -31,8 +31,6 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         //    print("Specify shared container ID for WatchSettings.sharedContainerID to use watch settings!")
         //}
         
-        _ = WCSession.default
-        
         // WKWatchConnectivityRefreshBackgroundTask should be completed – Otherwise they will keep consuming
         // the background executing time and eventually causes an app crash.
         // The timing to complete the tasks is when the current WCSession turns to not .activated or
@@ -92,7 +90,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         //
         wcBackgroundTasks.removeAll()
         
-        let date = Date(timeIntervalSinceNow: 10)
+        let date = Date(timeIntervalSinceNow: 5)
         WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: date, userInfo: nil) { error in
             self.applicationDidEnterBackground();
         }

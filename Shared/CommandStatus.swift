@@ -11,20 +11,20 @@ import WatchConnectivity
 // Constants to identify the Watch Connectivity methods, also used as user-visible strings in UI.
 //
 enum Command: String {
-    case updateAppContext = "UpdateAppContext"
-    case sendMessage = "SendMessage"
-    case sendMessageData = "SendMessageData"
-    case transferUserInfo = "TransferUserInfo"
-    case transferFile = "TransferFile"
-    case transferCurrentComplicationUserInfo = "TransferComplicationUserInfo"
+    case updateAppContext = "Check Device"
+    case sendMessage = "Message Device"
+    case sendMessageData = "Send Data"
+    case transferUserInfo = "Transfer User Info"
+    case transferFile = "Transfer File"
+    case transferCurrentComplicationUserInfo = "Transfer Complication User Info"
 }
 
 // Constants to identify the phrases of a Watch Connectivity communication.
 //
 enum Phrase: String {
-    case updated = "Updated"
+    case updated = "Checked"
     case sent = "Sent"
-    case received = "Received"
+    case received = "Device Connected"
     case replied = "Replied"
     case transferring = "Transferring"
     case canceled = "Canceled"
@@ -41,7 +41,7 @@ struct TimedColor {
     var color: UIColor {
         let optional = ((try? NSKeyedUnarchiver.unarchivedObject(ofClasses: [UIColor.self], from: colorData)) as Any??)
         guard let color = optional as? UIColor else {
-            fatalError("Failed to unarchive a UIClor object!")
+            fatalError("Failed to unarchive a UIColor object!")
         }
         return color
     }
