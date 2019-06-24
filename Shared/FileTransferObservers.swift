@@ -40,7 +40,7 @@ class FileTransferObservers {
     // Unobserve a file transfer, invalidate the observation.
     //
     func unobserve(_ fileTransfer: WCSessionFileTransfer) {
-        guard let index = fileTransfers.index(of: fileTransfer) else { return }
+        guard let index = fileTransfers.firstIndex(of: fileTransfer) else { return }
         let observation = observations.remove(at: index)
         observation.invalidate()
         fileTransfers.remove(at: index)

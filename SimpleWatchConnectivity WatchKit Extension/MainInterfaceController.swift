@@ -137,7 +137,7 @@ class MainInterfaceController: WKInterfaceController, TestDataProvider, SessionC
         
         // Move the screen to the page matching the data channel, then update the color and time stamp.
         //
-        if let index = type(of: self).instances.index(where: { $0.command == commandStatus.command }) {
+        if let index = type(of: self).instances.firstIndex(where: { $0.command == commandStatus.command }) {
             let controller = MainInterfaceController.instances[index]
             controller.becomeCurrentPage()
             controller.updateUI(with: commandStatus, errorMessage: commandStatus.errorMessage)
@@ -155,7 +155,8 @@ class MainInterfaceController: WKInterfaceController, TestDataProvider, SessionC
     //
     @objc
     func reachabilityDidChange(_ notification: Notification) {
-        statusLabel.setText("Disconnected")
+        statusLabel.setText("Device disconnected.")
+        WKInterfaceDevice.current().play(.failure) 
         print("\(#function): isReachable:\(WCSession.default.isReachable)")
     }
     

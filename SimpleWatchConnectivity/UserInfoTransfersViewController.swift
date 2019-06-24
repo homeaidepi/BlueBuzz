@@ -54,9 +54,9 @@ class UserInfoTransfersViewController: UIViewController, UITableViewDelegate, UI
     // MARK: - Actions handlers.
     //
     @IBAction func dismiss(_ sender: UIButton) {
-        willMove(toParentViewController: nil)
+        willMove(toParent: nil)
         view.removeFromSuperview()
-        removeFromParentViewController()
+        removeFromParent()
     }
     
     @objc

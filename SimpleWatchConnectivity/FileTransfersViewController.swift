@@ -30,7 +30,7 @@ class FileTransfersViewController: UserInfoTransfersViewController {
         for transfer in fileTransfers {
             fileTransferObservers.observe(transfer) { progress in
                 DispatchQueue.main.async {
-                    guard let index = self.transfers.index(where: {
+                    guard let index = self.transfers.firstIndex(where: {
                         ($0 as? WCSessionFileTransfer)?.progress === progress }) else { return }
                     
                     let indexPath = IndexPath(row: index, section: 0)

@@ -25,11 +25,13 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     
     override init() {
         super.init()
-        assert(WCSession.isSupported(), "This app requires a platform supporting Apple Watch Connectivity!")
+        assert(WCSession.isSupported(), "BlueBuzz requires Apple Watch!")
         
-        if WatchSettings.sharedContainerID.isEmpty {
-            print("Specify a shared container ID for WatchSettings.sharedContainerID to use watch settings!")
-        }
+        //if WatchSettings.sharedContainerID.isEmpty {
+        //    print("Specify shared container ID for WatchSettings.sharedContainerID to use watch settings!")
+        //}
+        
+        _ = WCSession.default
         
         // WKWatchConnectivityRefreshBackgroundTask should be completed – Otherwise they will keep consuming
         // the background executing time and eventually causes an app crash.
@@ -54,6 +56,22 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         WCSession.default.delegate = sessionDelegater
         WCSession.default.activate()
     }
+
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        DispatchQueue.main.async {
+            self.completeBackgroundTasks()
+        }
+    }
+    
+    func applicationDidEnterBackground() {
+        let date = Date(timeIntervalSinceNow: 3)
+        WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: date, userInfo: nil) { error in
+            if let error = error {
+                print("scheduleSnapshotRefresh error: \(error)!")
+            }
+        }
+        self.completeBackgroundTasks()
+    }
     
     // Compelete the background tasks, and schedule a snapshot refresh.
     //
@@ -72,14 +90,12 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
         // Schedule a snapshot refresh if the UI is updated by background tasks.
         //
-        let date = Date(timeIntervalSinceNow: 1)
-        WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: date, userInfo: nil) { error in
-            
-            if let error = error {
-                print("scheduleSnapshotRefresh error: \(error)!")
-            }
-        }
         wcBackgroundTasks.removeAll()
+        
+        let date = Date(timeIntervalSinceNow: 10)
+        WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: date, userInfo: nil) { error in
+            self.applicationDidEnterBackground();
+        }
     }
     
     // Be sure to complete all the tasks - otherwise they will keep consuming the background executing
