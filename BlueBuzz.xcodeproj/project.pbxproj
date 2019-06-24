@@ -341,7 +341,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 40D46F461E8065200077A7B7 /* Build configuration list for PBXProject "SimpleWatchConnectivity" */;
+			buildConfigurationList = 40D46F461E8065200077A7B7 /* Build configuration list for PBXProject "BlueBuzz" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -752,7 +752,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		40D46F461E8065200077A7B7 /* Build configuration list for PBXProject "SimpleWatchConnectivity" */ = {
+		40D46F461E8065200077A7B7 /* Build configuration list for PBXProject "BlueBuzz" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				40D46F781E8065200077A7B7 /* Debug */,

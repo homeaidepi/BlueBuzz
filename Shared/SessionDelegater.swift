@@ -36,10 +36,10 @@ class SessionDelegater: NSObject, WCSessionDelegate {
     // Called when WCSession reachability is changed.
     //
     func sessionReachabilityDidChange(_ session: WCSession) {
-        var commandStatus = CommandStatus(command: .sendMessageData, phrase: .received)
-        let messageData = Data(base64Encoded: "Session Reachability Changed")
-        commandStatus.timedColor = TimedColor(messageData!)
-        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
+        //var commandStatus = CommandStatus(command: .sendMessageData, phrase: .received)
+        //let messageData = Data(base64Encoded: "Session Reachability Changed")
+        //commandStatus.timedColor = TimedColor(messageData!)
+        //postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
         postNotificationOnMainQueueAsync(name: .reachabilityDidChange)
     }
     

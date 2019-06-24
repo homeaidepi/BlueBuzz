@@ -155,6 +155,7 @@ class MainInterfaceController: WKInterfaceController, TestDataProvider, SessionC
     //
     @objc
     func reachabilityDidChange(_ notification: Notification) {
+        statusLabel.setText("Disconnected")
         print("\(#function): isReachable:\(WCSession.default.isReachable)")
     }
     
