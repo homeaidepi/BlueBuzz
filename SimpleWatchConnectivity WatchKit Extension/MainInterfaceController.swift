@@ -62,7 +62,7 @@ class MainInterfaceController: WKInterfaceController, TestDataProvider, SessionC
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        //NotificationCenter.default.removeObserver(self)
     }
     
     override func willActivate() {
@@ -156,9 +156,15 @@ class MainInterfaceController: WKInterfaceController, TestDataProvider, SessionC
     //
     @objc
     func reachabilityDidChange(_ notification: Notification) {
-        statusLabel.setText("Device disconnected.")
-        WKInterfaceDevice.current().play(.failure)
-        WKInterfaceDevice.current().play(.failure)
+        if (WCSession.default.isReachable) {
+            statusLabel.setText("Device connected.")
+            WKInterfaceDevice.current().play(.success)
+        }
+        else {
+            statusLabel.setText("Device disconnected.")
+            WKInterfaceDevice.current().play(.failure)
+        }
+        
         print("\(#function): isReachable:\(WCSession.default.isReachable)")
     }
     

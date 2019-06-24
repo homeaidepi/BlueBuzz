@@ -12,9 +12,10 @@ class CommandsViewController: UITableViewController, TestDataProvider, SessionCo
 
     // List the supported methods, shown in the main table.
     //
-    let commands: [Command] = [.updateAppContext, .sendMessage, .sendMessageData,
-                               .transferFile, .transferUserInfo,
-                               .transferCurrentComplicationUserInfo]
+    //let commands: [Command] = [.updateAppContext, .sendMessage, .sendMessageData,
+    //                           .transferFile, .transferUserInfo,
+    //                           .transferCurrentComplicationUserInfo]
+    let commands: [Command] = [.updateAppContext, .sendMessage]
     
     var currentCommand: Command = .updateAppContext // Default to .updateAppContext.
     var currentColor: UIColor?

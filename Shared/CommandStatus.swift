@@ -22,7 +22,7 @@ enum Command: String {
 // Constants to identify the phrases of a Watch Connectivity communication.
 //
 enum Phrase: String {
-    case updated = "Checked"
+    case updated = "Device Checked"
     case sent = "Sent"
     case received = "Device Connected"
     case replied = "Replied"

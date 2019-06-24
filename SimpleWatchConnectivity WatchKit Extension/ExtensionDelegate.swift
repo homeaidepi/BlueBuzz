@@ -90,7 +90,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         //
         wcBackgroundTasks.removeAll()
         
-        let date = Date(timeIntervalSinceNow: 5)
+        let date = Date(timeIntervalSinceNow: 10)
         WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: date, userInfo: nil) { error in
             self.applicationDidEnterBackground();
         }
