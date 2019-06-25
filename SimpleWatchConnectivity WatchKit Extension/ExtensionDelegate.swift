@@ -88,12 +88,11 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
         // Schedule a snapshot refresh if the UI is updated by background tasks.
         //
-        //wcBackgroundTasks.removeAll()
+        wcBackgroundTasks.removeAll()
         
         let date = Date(timeIntervalSinceNow: 3)
         WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: date, userInfo: nil) { error in
-            WCSession.default.delegate = self.sessionDelegater
-            WCSession.default.activate()
+            self.applicationDidEnterBackground()
         }
     }
     

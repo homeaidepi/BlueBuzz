@@ -17,7 +17,7 @@ class CommandsViewController: UITableViewController, TestDataProvider, SessionCo
     //                           .transferCurrentComplicationUserInfo]
     let commands: [Command] = [.updateAppConnection, .sendMessage]
     
-    var currentCommand: Command = .updateAppContext // Default to .updateAppContext.
+    var currentCommand: Command = .updateAppConnection // Default to .updateAppConnection.
     var currentColor: UIColor?
     
     override func viewDidLoad() {
@@ -31,7 +31,7 @@ class CommandsViewController: UITableViewController, TestDataProvider, SessionCo
     }
     
     deinit {
-        //NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
     // .dataDidFlow notification handler. Update the UI with the notification object.
@@ -52,71 +52,71 @@ extension CommandsViewController { // MARK: - UITableViewDelegate and UITableVie
     // The button is used as the accessory view of the table cell.
     //
     private func newAccessoryView(cellCommand: Command, titleColor: UIColor?) -> UIButton {
-        var transferCount = 0
+        //var transferCount = 0
         
         // Retrieve the transfer count for the command.
         //
-        if cellCommand == .transferFile {
-            transferCount = WCSession.default.outstandingFileTransfers.count
-            
-        } else if cellCommand == .transferUserInfo {
-            let transfers = WCSession.default.outstandingUserInfoTransfers.filter {
-                $0.isCurrentComplicationInfo == false
-            }
-            transferCount = transfers.count
-            
-        } else if cellCommand == .transferCurrentComplicationUserInfo {
-            let transfers = WCSession.default.outstandingUserInfoTransfers.filter {
-                $0.isCurrentComplicationInfo == true
-            }
-            transferCount = transfers.count
-        }
+//        if cellCommand == .transferFile {
+//            transferCount = WCSession.default.outstandingFileTransfers.count
+//
+//        } else if cellCommand == .transferUserInfo {
+//            let transfers = WCSession.default.outstandingUserInfoTransfers.filter {
+//                $0.isCurrentComplicationInfo == false
+//            }
+//            transferCount = transfers.count
+//
+//        } else if cellCommand == .transferCurrentComplicationUserInfo {
+//            let transfers = WCSession.default.outstandingUserInfoTransfers.filter {
+//                $0.isCurrentComplicationInfo == true
+//            }
+//            transferCount = transfers.count
+//        }
         
         // Create and configure the button.
         //
         let button = UIButton(type: .roundedRect)
-        button.addTarget(self, action: #selector(type(of: self).showTransfers(_:)), for: .touchUpInside)
+        //button.addTarget(self, action: #selector(type(of: self).showTransfers(_:)), for: .touchUpInside)
         button.setTitleColor(titleColor, for: .normal)
-        button.setTitle(" \(transferCount) ", for: .normal)
+        //button.setTitle(" \(transferCount) ", for: .normal)
         button.sizeToFit()
         return button
     }
     
     // Action handler of the accessory view. Present the view controller for the current command.
     //
-    @objc
-    private func showTransfers(_ sender: UIButton) {
-        let buttonPosition = sender.convert(CGPoint.zero, to: tableView)
-        guard let indexPath = tableView.indexPathForRow(at: buttonPosition) else { return }
-
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let command = commands[indexPath.row]
-        
-        var childViewController: UIViewController
-        
-        if command == .transferFile {
-            let viewController = storyboard.instantiateViewController(withIdentifier: "FileTransfersViewController")
-            guard let transfersViewController = viewController as? FileTransfersViewController else {
-                fatalError("View controller (FileTransfersViewController) doesn't have a right class!")
-            }
-            transfersViewController.command = command
-            childViewController = transfersViewController
-            
-        } else { //if command == .transferUserInfo || command == .transferCurrentComplicationUserInfo {
-            
-            let viewController = storyboard.instantiateViewController(withIdentifier: "UserInfoTransfersViewController")
-            guard let transfersViewController = viewController as? UserInfoTransfersViewController else {
-                fatalError("View controller (UserInfoTransfersViewController) doesn't have a right class!")
-            }
-            transfersViewController.command = command
-            childViewController = transfersViewController
-        }
-        
-        addChild(childViewController)
-        childViewController.view.frame = view.convert(tableView.bounds, from: tableView)
-        view.addSubview(childViewController.view)
-        childViewController.didMove(toParent: self)
-    }
+//    @objc
+//    private func showTransfers(_ sender: UIButton) {
+//        let buttonPosition = sender.convert(CGPoint.zero, to: tableView)
+//        guard let indexPath = tableView.indexPathForRow(at: buttonPosition) else { return }
+//
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let command = commands[indexPath.row]
+//
+//        var childViewController: UIViewController
+//
+//        if command == .transferFile {
+//            let viewController = storyboard.instantiateViewController(withIdentifier: "FileTransfersViewController")
+//            guard let transfersViewController = viewController as? FileTransfersViewController else {
+//                fatalError("View controller (FileTransfersViewController) doesn't have a right class!")
+//            }
+//            transfersViewController.command = command
+//            childViewController = transfersViewController
+//
+//        } else if command == .transferUserInfo || command == .transferCurrentComplicationUserInfo {
+//
+//            let viewController = storyboard.instantiateViewController(withIdentifier: "UserInfoTransfersViewController")
+//            guard let transfersViewController = viewController as? UserInfoTransfersViewController else {
+//                fatalError("View controller (UserInfoTransfersViewController) doesn't have a right class!")
+//            }
+//            transfersViewController.command = command
+//            childViewController = transfersViewController
+//        }
+//
+//        addChild(childViewController)
+//        childViewController.view.frame = view.convert(tableView.bounds, from: tableView)
+//        view.addSubview(childViewController.view)
+//        childViewController.didMove(toParent: self)
+//    }
 
     // UITableViewDelegate and UITableViewDataSource.
     //
@@ -137,9 +137,9 @@ extension CommandsViewController { // MARK: - UITableViewDelegate and UITableVie
         cell.detailTextLabel?.text = nil
         cell.accessoryView = nil
         
-        if [.transferFile, .transferCurrentComplicationUserInfo, .transferUserInfo].contains(cellCommand) {
-            cell.accessoryView = newAccessoryView(cellCommand: cellCommand, titleColor: textColor)
-        }
+//        if [.transferFile, .transferCurrentComplicationUserInfo, .transferUserInfo].contains(cellCommand) {
+//            cell.accessoryView = newAccessoryView(cellCommand: cellCommand, titleColor: textColor)
+//        }
         
         return cell
     }
@@ -150,13 +150,13 @@ extension CommandsViewController { // MARK: - UITableViewDelegate and UITableVie
         
         currentCommand = commands[indexPath.row]
         switch currentCommand {
-        case .updateAppConnection: updateAppConnection(appConnection)
-        case .updateAppContext: updateAppContext(appContext)
-        case .sendMessage: sendMessage(message)
-        case .sendMessageData: sendMessageData(messageData)
-        case .transferUserInfo: transferUserInfo(userInfo)
-        case .transferFile: transferFile(file, metadata: fileMetaData)
-        case .transferCurrentComplicationUserInfo: transferCurrentComplicationUserInfo(currentComplicationInfo)
+            case .updateAppConnection: updateAppConnection(appConnection)
+            //case .updateAppContext: updateAppContext(appContext)
+            case .sendMessage: sendMessage(message)
+            case .sendMessageData: sendMessageData(messageData)
+    //        case .transferUserInfo: transferUserInfo(userInfo)
+    //        case .transferFile: transferFile(file, metadata: fileMetaData)
+    //        case .transferCurrentComplicationUserInfo: transferCurrentComplicationUserInfo(currentComplicationInfo)
         }
     }
 }

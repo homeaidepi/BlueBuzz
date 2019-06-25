@@ -16,12 +16,12 @@ import UserNotifications
 //
 protocol SessionCommands {
     func updateAppConnection(_ context: [String: Any])
-    func updateAppContext(_ context: [String: Any])
+    //func updateAppContext(_ context: [String: Any])
     func sendMessage(_ message: [String: Any])
     func sendMessageData(_ messageData: Data)
-    func transferUserInfo(_ userInfo: [String: Any])
-    func transferFile(_ file: URL, metadata: [String: Any])
-    func transferCurrentComplicationUserInfo(_ userInfo: [String: Any])
+//    func transferUserInfo(_ userInfo: [String: Any])
+//    func transferFile(_ file: URL, metadata: [String: Any])
+//    func transferCurrentComplicationUserInfo(_ userInfo: [String: Any])
 }
 
 // Implement the commands. Every command handles the communication and notifies clients
@@ -32,13 +32,15 @@ extension SessionCommands {
     // Update app connection if the session is activated and update UI with the command status.
     //
     func updateAppConnection(_ context: [String: Any]) {
-        var commandStatus = CommandStatus(command: .updateAppConnection, phrase: .updated)
-        commandStatus.timedColor = TimedColor(context)
+
+        var commandStatus = CommandStatus(command: .updateAppConnection, phrase: .unauthorized)
         
-        guard WCSession.default.activationState == .activated else {
-            return handleSessionUnactivated(with: commandStatus)
+        if (WCSession.default.activationState == .activated)
+        {
+            commandStatus = CommandStatus(command: .updateAppConnection, phrase: .authorized)
+            commandStatus.timedColor = TimedColor(context)
         }
-        do {
+        else {
             let center = UNUserNotificationCenter.current()
             
             center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
@@ -49,26 +51,27 @@ extension SessionCommands {
                 }
             }
         }
+        
         postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
     }
     
     // Update app context if the session is activated and update UI with the command status.
     //
-    func updateAppContext(_ context: [String: Any]) {
-        var commandStatus = CommandStatus(command: .updateAppContext, phrase: .updated)
-        commandStatus.timedColor = TimedColor(context)
-        
-        guard WCSession.default.activationState == .activated else {
-            return handleSessionUnactivated(with: commandStatus)
-        }
-        do {
-            try WCSession.default.updateApplicationContext(context)
-        } catch {
-            commandStatus.phrase = .failed
-            commandStatus.errorMessage = error.localizedDescription
-        }
-        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
-    }
+    //func updateAppContext(_ context: [String: Any]) {
+    //    var commandStatus = CommandStatus(command: .updateAppContext, phrase: .updated)
+    //    commandStatus.timedColor = TimedColor(context)
+    //
+    //    guard WCSession.default.activationState == .activated else {
+    //        return handleSessionUnactivated(with: commandStatus)
+    //    }
+    //    do {
+    //        try WCSession.default.updateApplicationContext(context)
+    //    } catch {
+    //        commandStatus.phrase = .failed
+    //        commandStatus.errorMessage = error.localizedDescription
+    //    }
+    //    postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
+    //}
 
     // Send a message if the session is activated and update UI with the command status.
     //
@@ -119,61 +122,61 @@ extension SessionCommands {
     // Transfer a piece of user info if the session is activated and update UI with the command status.
     // A WCSessionUserInfoTransfer object is returned to monitor the progress or cancel the operation.
     //
-    func transferUserInfo(_ userInfo: [String: Any]) {
-        var commandStatus = CommandStatus(command: .transferUserInfo, phrase: .transferring)
-        commandStatus.timedColor = TimedColor(userInfo)
-
-        guard WCSession.default.activationState == .activated else {
-            return handleSessionUnactivated(with: commandStatus)
-        }
-
-        commandStatus.userInfoTranser = WCSession.default.transferUserInfo(userInfo)
-        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
-    }
+//    func transferUserInfo(_ userInfo: [String: Any]) {
+//        var commandStatus = CommandStatus(command: .transferUserInfo, phrase: .transferring)
+//        commandStatus.timedColor = TimedColor(userInfo)
+//
+//        guard WCSession.default.activationState == .activated else {
+//            return handleSessionUnactivated(with: commandStatus)
+//        }
+//
+//        commandStatus.userInfoTranser = WCSession.default.transferUserInfo(userInfo)
+//        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
+//    }
     
     // Transfer a file if the session is activated and update UI with the command status.
     // A WCSessionFileTransfer object is returned to monitor the progress or cancel the operation.
     //
-    func transferFile(_ file: URL, metadata: [String: Any]) {
-        var commandStatus = CommandStatus(command: .transferFile, phrase: .transferring)
-        commandStatus.timedColor = TimedColor(metadata)
-
-        guard WCSession.default.activationState == .activated else {
-            return handleSessionUnactivated(with: commandStatus)
-        }
-        commandStatus.fileTransfer = WCSession.default.transferFile(file, metadata: metadata)
-        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
-    }
+//    func transferFile(_ file: URL, metadata: [String: Any]) {
+//        var commandStatus = CommandStatus(command: .transferFile, phrase: .transferring)
+//        commandStatus.timedColor = TimedColor(metadata)
+//
+//        guard WCSession.default.activationState == .activated else {
+//            return handleSessionUnactivated(with: commandStatus)
+//        }
+//        commandStatus.fileTransfer = WCSession.default.transferFile(file, metadata: metadata)
+//        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
+//    }
     
     // Transfer a piece fo user info for current complications if the session is activated
     // and update UI with the command status.
     // a WCSessionUserInfoTransfer object is returned to monitor the progress or cancel the operation.
     //
-    func transferCurrentComplicationUserInfo(_ userInfo: [String: Any]) {
-        var commandStatus = CommandStatus(command: .transferCurrentComplicationUserInfo, phrase: .failed)
-        commandStatus.timedColor = TimedColor(userInfo)
-
-        guard WCSession.default.activationState == .activated else {
-            return handleSessionUnactivated(with: commandStatus)
-        }
-        
-        commandStatus.errorMessage = "Not supported on watchOS!"
-        
-        #if os(iOS)
-        if WCSession.default.isComplicationEnabled {
-            let userInfoTranser = WCSession.default.transferCurrentComplicationUserInfo(userInfo)
-            commandStatus.phrase = .transferring
-            commandStatus.errorMessage = nil
-            commandStatus.userInfoTranser = userInfoTranser
-            
-        } else {
-            commandStatus.errorMessage = "\nComplication is not enabled!"
-        }
-        #endif
-        
-        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
-    }
-    
+//    func transferCurrentComplicationUserInfo(_ userInfo: [String: Any]) {
+//        var commandStatus = CommandStatus(command: .transferCurrentComplicationUserInfo, phrase: .failed)
+//        commandStatus.timedColor = TimedColor(userInfo)
+//
+//        guard WCSession.default.activationState == .activated else {
+//            return handleSessionUnactivated(with: commandStatus)
+//        }
+//
+//        commandStatus.errorMessage = "Not supported on watchOS!"
+//
+//        #if os(iOS)
+//        if WCSession.default.isComplicationEnabled {
+//            let userInfoTranser = WCSession.default.transferCurrentComplicationUserInfo(userInfo)
+//            commandStatus.phrase = .transferring
+//            commandStatus.errorMessage = nil
+//            commandStatus.userInfoTranser = userInfoTranser
+//
+//        } else {
+//            commandStatus.errorMessage = "\nComplication is not enabled!"
+//        }
+//        #endif
+//
+//        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
+//    }
+//
     // Post a notification on the main thread asynchronously.
     //
     private func postNotificationOnMainQueueAsync(name: NSNotification.Name, object: CommandStatus) {

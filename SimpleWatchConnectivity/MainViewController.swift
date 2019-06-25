@@ -72,7 +72,7 @@ class MainViewController: UIViewController {
     }
     
     deinit {
-        //NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     // Append the message to the end of the text view and make sure it is visiable.
@@ -130,27 +130,27 @@ class MainViewController: UIViewController {
         
         log("#\(commandStatus.command.rawValue)...\n\(commandStatus.phrase.rawValue) at \(timedColor.timeStamp)")
         
-        if let fileURL = commandStatus.file?.fileURL {
-            
-            if fileURL.pathExtension == "log",
-                let content = try? String(contentsOf: fileURL, encoding: .utf8), !content.isEmpty {
-                log("\(fileURL.lastPathComponent)\n\(content)")
-            } else {
-                log("\(fileURL.lastPathComponent)\n")
-            }
-        }
+//        if let fileURL = commandStatus.file?.fileURL {
+//
+//            if fileURL.pathExtension == "log",
+//                let content = try? String(contentsOf: fileURL, encoding: .utf8), !content.isEmpty {
+//                log("\(fileURL.lastPathComponent)\n\(content)")
+//            } else {
+//                log("\(fileURL.lastPathComponent)\n")
+//            }
+//        }
         
-        if let fileTransfer = commandStatus.fileTransfer, commandStatus.command == .transferFile {
-
-            if commandStatus.phrase == .finished {
-                fileTransferObservers.unobserve(fileTransfer)
-                
-            } else if commandStatus.phrase == .transferring {
-                fileTransferObservers.observe(fileTransfer) { _ in
-                    self.logProgress(for: fileTransfer)
-                }
-            }
-        }
+//        if let fileTransfer = commandStatus.fileTransfer, commandStatus.command == .transferFile {
+//
+//            if commandStatus.phrase == .finished {
+//                fileTransferObservers.unobserve(fileTransfer)
+//                
+//            } else if commandStatus.phrase == .transferring {
+//                fileTransferObservers.observe(fileTransfer) { _ in
+//                    self.logProgress(for: fileTransfer)
+//                }
+//            }
+//        }
     }
     
     // Log the file transfer progress.

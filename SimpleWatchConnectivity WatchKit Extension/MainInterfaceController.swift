@@ -66,11 +66,19 @@ class MainInterfaceController: WKInterfaceController, TestDataProvider, SessionC
     
     @objc
     func appDidEnterBackground(_ notification: Notification) {
+        if (WCSession.default.isReachable) {
+            statusLabel.setText("Device connected.")
+            WKInterfaceDevice.current().play(.success)
+        }
+        else {
+            statusLabel.setText("Device disconnected.")
+            WKInterfaceDevice.current().play(.failure)
+        }
         print("App moved to background!")
     }
     
     deinit {
-        //NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func willActivate() {
@@ -80,39 +88,41 @@ class MainInterfaceController: WKInterfaceController, TestDataProvider, SessionC
         // For .updateAppContext, retrieve the receieved app context if any and update the UI.
         // For .transferFile and .transferUserInfo, log the outstanding transfers if any.
         //
-        if command == .updateAppContext {
+//        if command == .updateAppContext {
+//            let timedColor = WCSession.default.receivedApplicationContext
+//            if timedColor.isEmpty == false {
+//                var commandStatus = CommandStatus(command: command, phrase: .received)
+//                commandStatus.timedColor = TimedColor(timedColor)
+//                updateUI(with: commandStatus)
+//            }
+        //} else
+        if command == .updateAppConnection {
             let timedColor = WCSession.default.receivedApplicationContext
             if timedColor.isEmpty == false {
                 var commandStatus = CommandStatus(command: command, phrase: .received)
                 commandStatus.timedColor = TimedColor(timedColor)
                 updateUI(with: commandStatus)
             }
-        } else if command == .updateAppConnection {
-            let timedColor = WCSession.default.receivedApplicationContext
-            if timedColor.isEmpty == false {
-                var commandStatus = CommandStatus(command: command, phrase: .received)
-                commandStatus.timedColor = TimedColor(timedColor)
-                updateUI(with: commandStatus)
-            }
-        } else if command == .transferFile {
-            let transferCount = WCSession.default.outstandingFileTransfers.count
-            if transferCount > 0 {
-                let commandStatus = CommandStatus(command: .transferFile, phrase: .finished)
-                logOutstandingTransfers(for: commandStatus, outstandingCount: transferCount)
-            }
-        } else if command == .transferUserInfo {
-            let transferCount = WCSession.default.outstandingUserInfoTransfers.count
-            if transferCount > 0 {
-                let commandStatus = CommandStatus(command: .transferUserInfo, phrase: .finished)
-                logOutstandingTransfers(for: commandStatus, outstandingCount: transferCount)
-            }
-        }
+        } //else
+//            if command == .transferFile {
+//            let transferCount = WCSession.default.outstandingFileTransfers.count
+//            if transferCount > 0 {
+//                let commandStatus = CommandStatus(command: .transferFile, phrase: .finished)
+//                logOutstandingTransfers(for: commandStatus, outstandingCount: transferCount)
+//            }
+//        } else if command == .transferUserInfo {
+//            let transferCount = WCSession.default.outstandingUserInfoTransfers.count
+//            if transferCount > 0 {
+//                let commandStatus = CommandStatus(command: .transferUserInfo, phrase: .finished)
+//                logOutstandingTransfers(for: commandStatus, outstandingCount: transferCount)
+//            }
+//        }
         
         // Update the status group background color.
         //
-        if command != .transferFile && command != .transferUserInfo {
+        //if command != .transferFile && command != .transferUserInfo {
             statusGroup.setBackgroundColor(.black)
-        }
+        //}
     }
     
     // Load paged-based UI.
@@ -189,28 +199,27 @@ class MainInterfaceController: WKInterfaceController, TestDataProvider, SessionC
         guard let command = command else { return }
         
         switch command {
-        case .updateAppContext: updateAppContext(appContext)
+        //case .updateAppContext: updateAppContext(appContext)
+        case .updateAppConnection: updateAppConnection(appConnection)
         case .sendMessage: sendMessage(message)
         case .sendMessageData: sendMessageData(messageData)
-        case .transferUserInfo: transferUserInfo(userInfo)
-        case .transferFile: transferFile(file, metadata: fileMetaData)
-        case .transferCurrentComplicationUserInfo: transferCurrentComplicationUserInfo(currentComplicationInfo)
-        case .updateAppConnection: updateAppConnection(appConnection)
-        }
+        //case .transferUserInfo: transferUserInfo(userInfo)
+        //case .transferFile: transferFile(file, metadata: fileMetaData)
+        //case .transferCurrentComplicationUserInfo: transferCurrentComplicationUserInfo(currentComplicationInfo)
     }
     
     // Show outstanding transfer UI for .transferFile and .transferUserInfo.
     //
-    @IBAction func statusAction() {
-        if command == .transferFile {
-            presentController(withName: ControllerID.fileTransfersController, context: command)
-        } else if command == .transferUserInfo {
-            presentController(withName: ControllerID.userInfoTransfersController, context: command)
+    //@IBAction func statusAction() {
+//        if command == .transferFile {
+//            presentController(withName: ControllerID.fileTransfersController, context: command)
+//        } else if command == .transferUserInfo {
+//            presentController(withName: ControllerID.userInfoTransfersController, context: command)
         }
-    }
+    //}
 }
 
-extension MainInterfaceController { // MARK: - Update status view.
+    extension MainInterfaceController { // MARK: - Update status view.
     
     // Update the user interface with the command status.
     // Note that there isn't a timed color when the interface controller is initially loaded.
@@ -237,35 +246,46 @@ extension MainInterfaceController { // MARK: - Update status view.
         // Observe the file transfer if it's phrase is "transferring".
         // Unobserve a file transfer if it's phrase is "finished".
         //
-        if let fileTransfer = commandStatus.fileTransfer, commandStatus.command == .transferFile {
-            if commandStatus.phrase == .finished {
-                fileTransferObservers.unobserve(fileTransfer)
-            } else if commandStatus.phrase == .transferring {
-                fileTransferObservers.observe(fileTransfer) { _ in
-                    self.logProgress(for: commandStatus)
-                }
-            }
-        }
+//        if let fileTransfer = commandStatus.fileTransfer, commandStatus.command == .transferFile {
+//            if commandStatus.phrase == .finished {
+//                fileTransferObservers.unobserve(fileTransfer)
+//            } else if commandStatus.phrase == .transferring {
+//                fileTransferObservers.observe(fileTransfer) { _ in
+//                    self.logProgress(for: commandStatus)
+//                }
+//            }
+//        }
         
         // Log the outstanding file transfers if any.
         //
-        if commandStatus.command == .transferFile {
-            let transferCount = WCSession.default.outstandingFileTransfers.count
-            if transferCount > 0 {
-                return logOutstandingTransfers(for: commandStatus, outstandingCount: transferCount)
-            }
-        }
+//        if commandStatus.command == .transferFile {
+//            let transferCount = WCSession.default.outstandingFileTransfers.count
+//            if transferCount > 0 {
+//                return logOutstandingTransfers(for: commandStatus, outstandingCount: transferCount)
+//            }
+//        }
         
         // Log the outstanding UserInfo transfers if any.
         //
-        if commandStatus.command == .transferUserInfo {
-            let transferCount = WCSession.default.outstandingUserInfoTransfers.count
-            if transferCount > 0 {
-                return logOutstandingTransfers(for: commandStatus, outstandingCount: transferCount)
+//        if commandStatus.command == .transferUserInfo {
+//            let transferCount = WCSession.default.outstandingUserInfoTransfers.count
+//            if transferCount > 0 {
+//                return logOutstandingTransfers(for: commandStatus, outstandingCount: transferCount)
+//            }
+//        }
+        if commandStatus.command == .updateAppConnection
+        {
+            if (WCSession.default.isReachable) {
+                statusLabel.setText("Device connected.")
+                WKInterfaceDevice.current().play(.success)
             }
+            else {
+                statusLabel.setText("Device disconnected.")
+                WKInterfaceDevice.current().play(.failure)
+            }
+        } else {
+            statusLabel.setText( commandStatus.phrase.rawValue + " at\n" + timedColor.timeStamp)
         }
-        
-        statusLabel.setText( commandStatus.phrase.rawValue + " at\n" + timedColor.timeStamp)
     }
     
     // Log the outstanding transfer information if any.

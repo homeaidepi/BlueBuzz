@@ -14,7 +14,6 @@
 		407607861E81A7F000A6A8EA /* TestDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407607851E81A7F000A6A8EA /* TestDataProvider.swift */; };
 		407607871E81A7F000A6A8EA /* TestDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407607851E81A7F000A6A8EA /* TestDataProvider.swift */; };
 		4084B0231EA057EF00ACA046 /* SessionCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4076077C1E8183AF00A6A8EA /* SessionCommands.swift */; };
-		408978FE20A66EFC00BD8B08 /* FileTransfersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408978FD20A66EFC00BD8B08 /* FileTransfersController.swift */; };
 		40AF22991F29236300E6D1A8 /* SessionDelegater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AF22981F29236300E6D1A8 /* SessionDelegater.swift */; };
 		40AF229A1F29236300E6D1A8 /* SessionDelegater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AF22981F29236300E6D1A8 /* SessionDelegater.swift */; };
 		40C02A9A20A27F28006F07AE /* CommandsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C02A9920A27F28006F07AE /* CommandsViewController.swift */; };
@@ -34,12 +33,9 @@
 		40D8B77A20A554A5005F7D76 /* CommandStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8B77820A554A5005F7D76 /* CommandStatus.swift */; };
 		40D8B77C20A554B6005F7D76 /* SessionTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8B77B20A554B5005F7D76 /* SessionTransfer.swift */; };
 		40D8B77D20A554B6005F7D76 /* SessionTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8B77B20A554B5005F7D76 /* SessionTransfer.swift */; };
-		40D8B78120A5FD29005F7D76 /* FileTransfersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8B78020A5FD29005F7D76 /* FileTransfersViewController.swift */; };
-		40D8B78720A6375D005F7D76 /* UserInfoTransfersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8B78620A6375C005F7D76 /* UserInfoTransfersViewController.swift */; };
 		40DC7D0F1EA8186200A93AFB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DC7D0E1EA8186200A93AFB /* Logger.swift */; };
 		40DC7D101EA8186200A93AFB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DC7D0E1EA8186200A93AFB /* Logger.swift */; };
 		40DD4D8E1EA6B7510074E73F /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
-		40DE15CF20A682980064532A /* UserInfoTransfersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DE15CE20A682980064532A /* UserInfoTransfersController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,7 +85,6 @@
 		4047836620ACE3F700E04A72 /* FileTransferObservers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileTransferObservers.swift; path = Shared/FileTransferObservers.swift; sourceTree = "<group>"; };
 		4076077C1E8183AF00A6A8EA /* SessionCommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionCommands.swift; path = Shared/SessionCommands.swift; sourceTree = "<group>"; };
 		407607851E81A7F000A6A8EA /* TestDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestDataProvider.swift; path = Shared/TestDataProvider.swift; sourceTree = "<group>"; };
-		408978FD20A66EFC00BD8B08 /* FileTransfersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTransfersController.swift; sourceTree = "<group>"; };
 		40AF22981F29236300E6D1A8 /* SessionDelegater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SessionDelegater.swift; path = Shared/SessionDelegater.swift; sourceTree = "<group>"; };
 		40C02A9920A27F28006F07AE /* CommandsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsViewController.swift; sourceTree = "<group>"; };
 		40D46F4B1E8065200077A7B7 /* SimpleWatchConnectivity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleWatchConnectivity.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,15 +105,12 @@
 		40D46F771E8065200077A7B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40D8B77820A554A5005F7D76 /* CommandStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommandStatus.swift; path = Shared/CommandStatus.swift; sourceTree = "<group>"; };
 		40D8B77B20A554B5005F7D76 /* SessionTransfer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionTransfer.swift; path = Shared/SessionTransfer.swift; sourceTree = "<group>"; };
-		40D8B78020A5FD29005F7D76 /* FileTransfersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTransfersViewController.swift; sourceTree = "<group>"; };
-		40D8B78620A6375C005F7D76 /* UserInfoTransfersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoTransfersViewController.swift; sourceTree = "<group>"; };
 		40DC7D0E1EA8186200A93AFB /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Logger.swift; path = Shared/Logger.swift; sourceTree = "<group>"; };
 		40DC7D141EA81D8100A93AFB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		40DD4D8A1EA6B6E20074E73F /* SimpleWatchConnectivity.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimpleWatchConnectivity.entitlements; sourceTree = "<group>"; };
 		40DD4D8B1EA6B6FB0074E73F /* SimpleWatchConnectivity WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimpleWatchConnectivity WatchKit App.entitlements"; sourceTree = "<group>"; };
 		40DD4D8C1EA6B7010074E73F /* SimpleWatchConnectivity WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimpleWatchConnectivity WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "Settings-Watch.bundle"; sourceTree = "<group>"; };
-		40DE15CE20A682980064532A /* UserInfoTransfersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoTransfersController.swift; sourceTree = "<group>"; };
 		C9DA6BB0C9DA6B8000000001 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
 		C9DDD1E0C9DDC50000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -186,8 +178,6 @@
 				40D46F4E1E8065200077A7B7 /* AppDelegate.swift */,
 				40D46F501E8065200077A7B7 /* MainViewController.swift */,
 				40C02A9920A27F28006F07AE /* CommandsViewController.swift */,
-				40D8B78620A6375C005F7D76 /* UserInfoTransfersViewController.swift */,
-				40D8B78020A5FD29005F7D76 /* FileTransfersViewController.swift */,
 				40D46F521E8065200077A7B7 /* Main.storyboard */,
 				40D46F551E8065200077A7B7 /* Assets.xcassets */,
 				40D46F571E8065200077A7B7 /* LaunchScreen.storyboard */,
@@ -214,8 +204,6 @@
 				40DD4D8C1EA6B7010074E73F /* SimpleWatchConnectivity WatchKit Extension.entitlements */,
 				40D46F731E8065200077A7B7 /* ExtensionDelegate.swift */,
 				40D46F711E8065200077A7B7 /* MainInterfaceController.swift */,
-				40DE15CE20A682980064532A /* UserInfoTransfersController.swift */,
-				408978FD20A66EFC00BD8B08 /* FileTransfersController.swift */,
 				400DB0961EA005A000F637F0 /* ComplicationController.swift */,
 				40D46F751E8065200077A7B7 /* Assets.xcassets */,
 				40D46F771E8065200077A7B7 /* Info.plist */,
@@ -314,7 +302,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -442,9 +430,7 @@
 				40C02A9A20A27F28006F07AE /* CommandsViewController.swift in Sources */,
 				40AF22991F29236300E6D1A8 /* SessionDelegater.swift in Sources */,
 				4084B0231EA057EF00ACA046 /* SessionCommands.swift in Sources */,
-				40D8B78720A6375D005F7D76 /* UserInfoTransfersViewController.swift in Sources */,
 				4047836720ACE3F700E04A72 /* FileTransferObservers.swift in Sources */,
-				40D8B78120A5FD29005F7D76 /* FileTransfersViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,9 +442,7 @@
 				40AF229A1F29236300E6D1A8 /* SessionDelegater.swift in Sources */,
 				40D8B77A20A554A5005F7D76 /* CommandStatus.swift in Sources */,
 				40D46F741E8065200077A7B7 /* ExtensionDelegate.swift in Sources */,
-				408978FE20A66EFC00BD8B08 /* FileTransfersController.swift in Sources */,
 				407607871E81A7F000A6A8EA /* TestDataProvider.swift in Sources */,
-				40DE15CF20A682980064532A /* UserInfoTransfersController.swift in Sources */,
 				400DB0971EA005A000F637F0 /* ComplicationController.swift in Sources */,
 				40DC7D101EA8186200A93AFB /* Logger.swift in Sources */,
 				4076077E1E8183AF00A6A8EA /* SessionCommands.swift in Sources */,
@@ -726,7 +710,6 @@
 			baseConfigurationReference = C9DA6BB0C9DA6B8000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = SimpleWatchConnectivity/SimpleWatchConnectivity.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
@@ -748,7 +731,6 @@
 			baseConfigurationReference = C9DA6BB0C9DA6B8000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = SimpleWatchConnectivity/SimpleWatchConnectivity.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;

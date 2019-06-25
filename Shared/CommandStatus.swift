@@ -11,13 +11,13 @@ import WatchConnectivity
 // Constants to identify the Watch Connectivity methods, also used as user-visible strings in UI.
 //
 enum Command: String {
+    //case updateAppContext = "Check Device"
     case updateAppConnection = "Check Connection"
-    case updateAppContext = "Check Device"
     case sendMessage = "Message Device"
     case sendMessageData = "Send Data"
-    case transferUserInfo = "Transfer User Info"
-    case transferFile = "Transfer File"
-    case transferCurrentComplicationUserInfo = "Transfer Complication User Info"
+    //case transferUserInfo = "Transfer User Info"
+    //case transferFile = "Transfer File"
+    //case transferCurrentComplicationUserInfo = "Transfer Complication User Info"
 }
 
 // Constants to identify the phrases of a Watch Connectivity communication.
