@@ -187,7 +187,7 @@ extension SessionCommands {
     private func handleSessionUnactivated(with commandStatus: CommandStatus) {
         var mutableStatus = commandStatus
         mutableStatus.phrase = .failed
-        mutableStatus.errorMessage =  "WCSession is not activated yet!"
+        mutableStatus.errorMessage =  "Session is not activated yet!"
         postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
     }
 }

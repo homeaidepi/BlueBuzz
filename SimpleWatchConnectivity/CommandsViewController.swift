@@ -31,7 +31,7 @@ class CommandsViewController: UITableViewController, TestDataProvider, SessionCo
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        //NotificationCenter.default.removeObserver(self)
     }
 
     // .dataDidFlow notification handler. Update the UI with the notification object.
@@ -97,7 +97,7 @@ extension CommandsViewController { // MARK: - UITableViewDelegate and UITableVie
         if command == .transferFile {
             let viewController = storyboard.instantiateViewController(withIdentifier: "FileTransfersViewController")
             guard let transfersViewController = viewController as? FileTransfersViewController else {
-                fatalError("View controller (FileTransfersViewController) deson't have a right class!")
+                fatalError("View controller (FileTransfersViewController) doesn't have a right class!")
             }
             transfersViewController.command = command
             childViewController = transfersViewController
@@ -106,7 +106,7 @@ extension CommandsViewController { // MARK: - UITableViewDelegate and UITableVie
             
             let viewController = storyboard.instantiateViewController(withIdentifier: "UserInfoTransfersViewController")
             guard let transfersViewController = viewController as? UserInfoTransfersViewController else {
-                fatalError("View controller (UserInfoTransfersViewController) deson't have a right class!")
+                fatalError("View controller (UserInfoTransfersViewController) doesn't have a right class!")
             }
             transfersViewController.command = command
             childViewController = transfersViewController

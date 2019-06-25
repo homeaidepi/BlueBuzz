@@ -74,10 +74,6 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     // Compelete the background tasks, and schedule a snapshot refresh.
     //
     func completeBackgroundTasks() {
-        WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: Date(timeIntervalSinceNow: 3), userInfo: nil) {
-            (error) in
-            
-        }
         guard !wcBackgroundTasks.isEmpty else { return }
 
         guard WCSession.default.activationState == .activated,
@@ -92,7 +88,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
         // Schedule a snapshot refresh if the UI is updated by background tasks.
         //
-        wcBackgroundTasks.removeAll()
+        //wcBackgroundTasks.removeAll()
         
         let date = Date(timeIntervalSinceNow: 3)
         WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: date, userInfo: nil) { error in

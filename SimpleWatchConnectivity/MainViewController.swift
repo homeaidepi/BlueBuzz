@@ -72,7 +72,7 @@ class MainViewController: UIViewController {
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        //NotificationCenter.default.removeObserver(self)
     }
     
     // Append the message to the end of the text view and make sure it is visiable.

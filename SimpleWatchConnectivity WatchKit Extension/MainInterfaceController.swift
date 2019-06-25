@@ -70,7 +70,7 @@ class MainInterfaceController: WKInterfaceController, TestDataProvider, SessionC
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        //NotificationCenter.default.removeObserver(self)
     }
     
     override func willActivate() {
@@ -81,6 +81,13 @@ class MainInterfaceController: WKInterfaceController, TestDataProvider, SessionC
         // For .transferFile and .transferUserInfo, log the outstanding transfers if any.
         //
         if command == .updateAppContext {
+            let timedColor = WCSession.default.receivedApplicationContext
+            if timedColor.isEmpty == false {
+                var commandStatus = CommandStatus(command: command, phrase: .received)
+                commandStatus.timedColor = TimedColor(timedColor)
+                updateUI(with: commandStatus)
+            }
+        } else if command == .updateAppConnection {
             let timedColor = WCSession.default.receivedApplicationContext
             if timedColor.isEmpty == false {
                 var commandStatus = CommandStatus(command: command, phrase: .received)
