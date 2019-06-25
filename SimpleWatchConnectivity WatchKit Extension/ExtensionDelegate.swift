@@ -74,12 +74,16 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     // Compelete the background tasks, and schedule a snapshot refresh.
     //
     func completeBackgroundTasks() {
+        WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: Date(timeIntervalSinceNow: 3), userInfo: nil) {
+            (error) in
+            
+        }
         guard !wcBackgroundTasks.isEmpty else { return }
 
         guard WCSession.default.activationState == .activated,
             WCSession.default.hasContentPending == false else { return }
         
-        wcBackgroundTasks.forEach { $0.setTaskCompleted() }
+        wcBackgroundTasks.forEach { $0.setTaskCompletedWithSnapshot(false) }
         
         // Use Logger to log the tasks for debug purpose. A real app may remove the log
         // to save the precious background time.
@@ -90,9 +94,10 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         //
         wcBackgroundTasks.removeAll()
         
-        let date = Date(timeIntervalSinceNow: 10)
+        let date = Date(timeIntervalSinceNow: 3)
         WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: date, userInfo: nil) { error in
-            self.applicationDidEnterBackground();
+            WCSession.default.delegate = self.sessionDelegater
+            WCSession.default.activate()
         }
     }
     
@@ -120,7 +125,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
                 wcBackgroundTasks.append(wcTask)
                 Logger.shared.append(line: "\(#function):\(wcTask.description) was appended!")
             } else {
-                task.setTaskCompleted()
+                task.setTaskCompletedWithSnapshot(true)
                 Logger.shared.append(line: "\(#function):\(task.description) was completed!")
             }
         }

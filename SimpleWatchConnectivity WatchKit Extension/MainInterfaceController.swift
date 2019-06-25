@@ -59,10 +59,18 @@ class MainInterfaceController: WKInterfaceController, TestDataProvider, SessionC
             self, selector: #selector(type(of: self).reachabilityDidChange(_:)),
             name: .reachabilityDidChange, object: nil
         )
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(type(of: self).appDidEnterBackground(_:)),
+            name: .appDidEnterBackground, object: nil)
+    }
+    
+    @objc
+    func appDidEnterBackground(_ notification: Notification) {
+        print("App moved to background!")
     }
     
     deinit {
-        //NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func willActivate() {
@@ -107,7 +115,7 @@ class MainInterfaceController: WKInterfaceController, TestDataProvider, SessionC
         //let commands: [Command] = [.updateAppContext, .sendMessage, .sendMessageData,
         //                           .transferFile, .transferUserInfo,
         //                           .transferCurrentComplicationUserInfo]
-        let commands: [Command] = [.updateAppContext, .sendMessage]
+        let commands: [Command] = [.updateAppConnection, .sendMessage]
         var contexts = [CommandStatus]()
         for aCommand in commands {
             var commandStatus = CommandStatus(command: aCommand, phrase: .finished)
@@ -180,6 +188,7 @@ class MainInterfaceController: WKInterfaceController, TestDataProvider, SessionC
         case .transferUserInfo: transferUserInfo(userInfo)
         case .transferFile: transferFile(file, metadata: fileMetaData)
         case .transferCurrentComplicationUserInfo: transferCurrentComplicationUserInfo(currentComplicationInfo)
+        case .updateAppConnection: updateAppConnection(appConnection)
         }
     }
     

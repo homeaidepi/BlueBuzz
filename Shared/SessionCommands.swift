@@ -9,11 +9,13 @@ SessionCommands protocol defines an interface to wrap Watch Connectivity APIs an
 
 import UIKit
 import WatchConnectivity
+import UserNotifications
 
 // Define an interface to wrap Watch Connectivity APIs and
 // bridge the UI. Shared by the iOS app and watchOS app.
 //
 protocol SessionCommands {
+    func updateAppConnection(_ context: [String: Any])
     func updateAppContext(_ context: [String: Any])
     func sendMessage(_ message: [String: Any])
     func sendMessageData(_ messageData: Data)
@@ -26,6 +28,29 @@ protocol SessionCommands {
 // when WCSession status changes or data flows. Shared by the iOS app and watchOS app.
 //
 extension SessionCommands {
+    
+    // Update app connection if the session is activated and update UI with the command status.
+    //
+    func updateAppConnection(_ context: [String: Any]) {
+        var commandStatus = CommandStatus(command: .updateAppConnection, phrase: .updated)
+        commandStatus.timedColor = TimedColor(context)
+        
+        guard WCSession.default.activationState == .activated else {
+            return handleSessionUnactivated(with: commandStatus)
+        }
+        do {
+            let center = UNUserNotificationCenter.current()
+            
+            center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+                if granted {
+                    commandStatus.phrase = .authorized
+                } else {
+                    commandStatus.phrase = .unauthorized
+                }
+            }
+        }
+        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
+    }
     
     // Update app context if the session is activated and update UI with the command status.
     //

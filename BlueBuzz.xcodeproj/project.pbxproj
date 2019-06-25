@@ -337,6 +337,9 @@
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
 							};
+							com.apple.BackgroundModes.watchos.extension = {
+								enabled = 1;
+							};
 						};
 					};
 				};
@@ -628,9 +631,11 @@
 				CODE_SIGN_ENTITLEMENTS = "SimpleWatchConnectivity WatchKit Extension/SimpleWatchConnectivity WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
 				INFOPLIST_FILE = "SimpleWatchConnectivity WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.homeaidepi.bluebuzz1.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -650,9 +655,11 @@
 				CODE_SIGN_ENTITLEMENTS = "SimpleWatchConnectivity WatchKit Extension/SimpleWatchConnectivity WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
 				INFOPLIST_FILE = "SimpleWatchConnectivity WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.homeaidepi.bluebuzz1.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -673,9 +680,11 @@
 				CODE_SIGN_ENTITLEMENTS = "SimpleWatchConnectivity WatchKit App/SimpleWatchConnectivity WatchKit App.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
 				IBSC_MODULE = SimpleWatchConnectivity_WatchKit_Extension;
 				INFOPLIST_FILE = "SimpleWatchConnectivity WatchKit App/Info.plist";
+				MARKETING_VERSION = 2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.homeaidepi.bluebuzz1.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -696,9 +705,11 @@
 				CODE_SIGN_ENTITLEMENTS = "SimpleWatchConnectivity WatchKit App/SimpleWatchConnectivity WatchKit App.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
 				IBSC_MODULE = SimpleWatchConnectivity_WatchKit_Extension;
 				INFOPLIST_FILE = "SimpleWatchConnectivity WatchKit App/Info.plist";
+				MARKETING_VERSION = 2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.homeaidepi.bluebuzz1.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -718,10 +729,12 @@
 				CODE_SIGN_ENTITLEMENTS = SimpleWatchConnectivity/SimpleWatchConnectivity.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
 				INFOPLIST_FILE = SimpleWatchConnectivity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.homeaidepi.bluebuzz1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -738,10 +751,12 @@
 				CODE_SIGN_ENTITLEMENTS = SimpleWatchConnectivity/SimpleWatchConnectivity.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
 				INFOPLIST_FILE = SimpleWatchConnectivity/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.homeaidepi.bluebuzz1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

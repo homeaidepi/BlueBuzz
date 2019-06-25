@@ -15,7 +15,7 @@ class CommandsViewController: UITableViewController, TestDataProvider, SessionCo
     //let commands: [Command] = [.updateAppContext, .sendMessage, .sendMessageData,
     //                           .transferFile, .transferUserInfo,
     //                           .transferCurrentComplicationUserInfo]
-    let commands: [Command] = [.updateAppContext, .sendMessage]
+    let commands: [Command] = [.updateAppConnection, .sendMessage]
     
     var currentCommand: Command = .updateAppContext // Default to .updateAppContext.
     var currentColor: UIColor?
@@ -150,6 +150,7 @@ extension CommandsViewController { // MARK: - UITableViewDelegate and UITableVie
         
         currentCommand = commands[indexPath.row]
         switch currentCommand {
+        case .updateAppConnection: updateAppConnection(appConnection)
         case .updateAppContext: updateAppContext(appContext)
         case .sendMessage: sendMessage(message)
         case .sendMessageData: sendMessageData(messageData)

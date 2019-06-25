@@ -20,6 +20,7 @@ extension Notification.Name {
     static let dataDidFlow = Notification.Name("DataDidFlow")
     static let activationDidComplete = Notification.Name("ActivationDidComplete")
     static let reachabilityDidChange = Notification.Name("ReachabilityDidChange")
+    static let appDidEnterBackground = Notification.Name("didEnterBackgroundNotification")
 }
 
 // Implement WCSessionDelegate methods to receive Watch Connectivity data and notify clients.

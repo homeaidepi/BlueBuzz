@@ -66,6 +66,12 @@ extension TestDataProvider {
         return [PayloadKey.timeStamp: timeString, PayloadKey.colorData: colorData]
     }
     
+    // Generate an app connection, used as the payload for updateApplicationConnection.
+    //
+    var appConnection: [String: Any] {
+        return timedColor()
+    }
+    
     // Generate an app context, used as the payload for updateApplicationContext.
     //
     var appContext: [String: Any] {

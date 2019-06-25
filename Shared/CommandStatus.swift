@@ -11,6 +11,7 @@ import WatchConnectivity
 // Constants to identify the Watch Connectivity methods, also used as user-visible strings in UI.
 //
 enum Command: String {
+    case updateAppConnection = "Check Connection"
     case updateAppContext = "Check Device"
     case sendMessage = "Message Device"
     case sendMessageData = "Send Data"
@@ -22,14 +23,18 @@ enum Command: String {
 // Constants to identify the phrases of a Watch Connectivity communication.
 //
 enum Phrase: String {
+    case connected = "Device Connected"
+    case disconnected = "Device Disconnected"
     case updated = "Device Checked"
     case sent = "Sent"
-    case received = "Device Connected"
+    case received = "Received"
     case replied = "Replied"
     case transferring = "Transferring"
     case canceled = "Canceled"
     case finished = "Finished"
     case failed = "Failed"
+    case authorized = "Authorized"
+    case unauthorized = "Unauthorized"
 }
 
 // Wrap a timed color payload dictionary with a stronger type.

@@ -1,5 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
+   uuid = "867E46A7-0A76-4371-B95E-1CC3D8C709B8"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1D0F4233-6E0C-4E25-A227-8576EB385C70"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SimpleWatchConnectivity WatchKit Extension/ExtensionDelegate.swift"
+            timestampString = "583098959.254107"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "completeBackgroundTasks()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1AF5F36D-F6CA-45BD-8358-085A4BD413B8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SimpleWatchConnectivity WatchKit Extension/ExtensionDelegate.swift"
+            timestampString = "583109292.258067"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "completeBackgroundTasks()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1AF5F36D-F6CA-45BD-8358-085A4BD413B8 - 4e27f43a476b773e"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SimpleWatchConnectivity_WatchKit_Extension.ExtensionDelegate.completeBackgroundTasks() -&gt; ()"
+                  moduleName = "SimpleWatchConnectivity WatchKit Extension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/matthew.vandergrift.ibm.com/source/homeaidepi/BlueBuzz/SimpleWatchConnectivity%20WatchKit%20Extension/ExtensionDelegate.swift"
+                  timestampString = "0"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "128">
+               </Location>
+               <Location
+                  uuid = "1AF5F36D-F6CA-45BD-8358-085A4BD413B8 - c79c31b8cb22e6b1"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in SimpleWatchConnectivity_WatchKit_Extension.ExtensionDelegate.completeBackgroundTasks() -&gt; ()"
+                  moduleName = "SimpleWatchConnectivity WatchKit Extension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/matthew.vandergrift.ibm.com/source/homeaidepi/BlueBuzz/SimpleWatchConnectivity%20WatchKit%20Extension/ExtensionDelegate.swift"
+                  timestampString = "0"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "80"
+                  endingLineNumber = "80"
+                  offsetFromSymbolStart = "17">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F60EF593-3DC1-48DB-A122-B327984BBCDE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SimpleWatchConnectivity WatchKit Extension/MainInterfaceController.swift"
+            timestampString = "583167667.178653"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "appDidEnterBackground(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
