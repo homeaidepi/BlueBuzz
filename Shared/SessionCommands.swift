@@ -16,9 +16,9 @@ import UserNotifications
 //
 protocol SessionCommands {
     func updateAppConnection(_ context: [String: Any])
-    //func updateAppContext(_ context: [String: Any])
     func sendMessage(_ message: [String: Any])
     func sendMessageData(_ messageData: Data)
+//    func updateAppContext(_ context: [String: Any])
 //    func transferUserInfo(_ userInfo: [String: Any])
 //    func transferFile(_ file: URL, metadata: [String: Any])
 //    func transferCurrentComplicationUserInfo(_ userInfo: [String: Any])
@@ -43,7 +43,7 @@ extension SessionCommands {
         else {
             let center = UNUserNotificationCenter.current()
             
-            center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+            center.requestAuthorization(options: [.sound]) { (granted, error) in
                 if granted {
                     commandStatus.phrase = .authorized
                 } else {
@@ -53,7 +53,21 @@ extension SessionCommands {
         }
         
         postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
+        
+        //let ibmBlueColor = UIColor(red: 70, green: 107, blue: 176);
+        let newRed = CGFloat(70)/255
+        let newGreen = CGFloat(107)/255
+        let newBlue = CGFloat(176)/255
+        
+        let ibmBlueColor = UIColor(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
+        
+        commandStatus = CommandStatus(command: .updateAppConnection,
+                                      phrase: .sent)
+        commandStatus.timedColor = TimedColor(ibmBlueColor);
+        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
     }
+    
+    
     
     // Update app context if the session is activated and update UI with the command status.
     //

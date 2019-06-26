@@ -62,7 +62,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     }
     
     func applicationDidEnterBackground() {
-        let date = Date(timeIntervalSinceNow: 3)
+        let date = Date(timeIntervalSinceNow: 10)
         WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: date, userInfo: nil) { error in
             if let error = error {
                 print("scheduleSnapshotRefresh error: \(error)!")
@@ -89,11 +89,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         // Schedule a snapshot refresh if the UI is updated by background tasks.
         //
         wcBackgroundTasks.removeAll()
-        
-        let date = Date(timeIntervalSinceNow: 3)
-        WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: date, userInfo: nil) { error in
-            self.applicationDidEnterBackground()
-        }
+    
     }
     
     // Be sure to complete all the tasks - otherwise they will keep consuming the background executing

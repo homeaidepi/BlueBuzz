@@ -42,16 +42,37 @@ enum Phrase: String {
 struct TimedColor {
     var timeStamp: String
     var colorData: Data
+    var defaultValue: Bool
+    var defaultColor: UIColor
     
     var color: UIColor {
+        
+        if (defaultValue == true)
+        {
+            return defaultColor
+        }
+        
         let optional = ((try? NSKeyedUnarchiver.unarchivedObject(ofClasses: [UIColor.self], from: colorData)) as Any??)
         guard let color = optional as? UIColor else {
             fatalError("Failed to unarchive a UIColor object!")
         }
         return color
     }
+    
     var timedColor: [String: Any] {
         return [PayloadKey.timeStamp: timeStamp, PayloadKey.colorData: colorData]
+    }
+    
+    init(_ timedColor: UIColor)
+    {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hh:mm:ss a"
+        let someDateTime = formatter.string(from: Date())
+        
+        self.timeStamp = someDateTime
+        self.colorData = Data()
+        self.defaultValue = true
+        self.defaultColor = timedColor
     }
     
     init(_ timedColor: [String: Any]) {
@@ -61,6 +82,8 @@ struct TimedColor {
         }
         self.timeStamp = timeStamp
         self.colorData = colorData
+        self.defaultValue = false
+        self.defaultColor = UIColor()
     }
     
     init(_ timedColor: Data) {

@@ -151,9 +151,9 @@ extension CommandsViewController { // MARK: - UITableViewDelegate and UITableVie
         currentCommand = commands[indexPath.row]
         switch currentCommand {
             case .updateAppConnection: updateAppConnection(appConnection)
-            //case .updateAppContext: updateAppContext(appContext)
             case .sendMessage: sendMessage(message)
             case .sendMessageData: sendMessageData(messageData)
+    //case .updateAppContext: updateAppContext(appContext)
     //        case .transferUserInfo: transferUserInfo(userInfo)
     //        case .transferFile: transferFile(file, metadata: fileMetaData)
     //        case .transferCurrentComplicationUserInfo: transferCurrentComplicationUserInfo(currentComplicationInfo)

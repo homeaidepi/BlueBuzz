@@ -46,9 +46,9 @@ class SessionDelegater: NSObject, WCSessionDelegate {
     
     // Called when an app context is received.
     //
-    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
+    func session(_ session: WCSession, didReceiveApplicationContext applicationConnection: [String: Any]) {
         var commandStatus = CommandStatus(command: .updateAppConnection, phrase: .received)
-        commandStatus.timedColor = TimedColor(applicationContext)
+        commandStatus.timedColor = TimedColor(applicationConnection)
         postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
     }
     
