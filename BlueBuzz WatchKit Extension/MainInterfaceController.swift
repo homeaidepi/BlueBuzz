@@ -27,7 +27,7 @@ class MainInterfaceController: WKInterfaceController, TestDataProvider, SessionC
     static var instances = [MainInterfaceController]()
     private var command: Command!
     
-    private let fileTransferObservers = FileTransferObservers()
+    //private let fileTransferObservers = FileTransferObservers()
     
     // Context == nil: the fist-time loading, load pages with reloadRootController then
     // Context != nil: Loading the pages, save the controller instances so that we can
@@ -97,12 +97,16 @@ class MainInterfaceController: WKInterfaceController, TestDataProvider, SessionC
 //            }
         //} else
         if command == .updateAppConnection {
-            let timedColor = WCSession.default.receivedApplicationContext
-            if timedColor.isEmpty == false {
-                var commandStatus = CommandStatus(command: command, phrase: .received)
-                commandStatus.timedColor = TimedColor(timedColor)
-                updateUI(with: commandStatus)
-            }
+            let newRed = CGFloat(70)/255
+            let newGreen = CGFloat(107)/255
+            let newBlue = CGFloat(176)/255
+            
+            let ibmBlueColor = UIColor(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
+            
+            var commandStatus = CommandStatus(command: command, phrase: .received)
+            commandStatus.timedColor = TimedColor(ibmBlueColor)
+            updateUI(with: commandStatus)
+            
         } //else
 //            if command == .transferFile {
 //            let transferCount = WCSession.default.outstandingFileTransfers.count

@@ -51,9 +51,6 @@ extension SessionCommands {
                 }
             }
         }
-        
-        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
-        
         //let ibmBlueColor = UIColor(red: 70, green: 107, blue: 176);
         let newRed = CGFloat(70)/255
         let newGreen = CGFloat(107)/255
@@ -61,9 +58,27 @@ extension SessionCommands {
         
         let ibmBlueColor = UIColor(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
         
+        let timedColor = TimedColor(ibmBlueColor)
+        
+        let message: [String:Any] = [
+            PayloadKey.timeStamp : timedColor.timeStamp,
+            PayloadKey.colorData : timedColor.colorData
+        ]
+        
+        WCSession.default.sendMessage(message, replyHandler: { replyMessage in
+            commandStatus.phrase = .replied
+            commandStatus.timedColor = TimedColor(replyMessage)
+            self.postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
+            
+        }, errorHandler: { error in
+            commandStatus.phrase = .failed
+            commandStatus.errorMessage = error.localizedDescription
+            self.postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
+        })
+        
         commandStatus = CommandStatus(command: .updateAppConnection,
                                       phrase: .sent)
-        commandStatus.timedColor = TimedColor(ibmBlueColor);
+        commandStatus.timedColor = timedColor;
         postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
     }
     

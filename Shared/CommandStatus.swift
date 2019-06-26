@@ -42,7 +42,7 @@ enum Phrase: String {
 struct TimedColor {
     var timeStamp: String
     var colorData: Data
-    var defaultValue: Bool
+    var defaultValue: Bool = true
     var defaultColor: UIColor
     
     var color: UIColor {
@@ -54,7 +54,10 @@ struct TimedColor {
         
         let optional = ((try? NSKeyedUnarchiver.unarchivedObject(ofClasses: [UIColor.self], from: colorData)) as Any??)
         guard let color = optional as? UIColor else {
-            fatalError("Failed to unarchive a UIColor object!")
+            let newRed = CGFloat(70)/255
+            let newGreen = CGFloat(107)/255
+            let newBlue = CGFloat(176)/255
+            return UIColor(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
         }
         return color
     }
