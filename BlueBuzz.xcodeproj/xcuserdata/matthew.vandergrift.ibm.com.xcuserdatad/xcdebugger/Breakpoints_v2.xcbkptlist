@@ -17,8 +17,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "77"
             endingLineNumber = "77"
-            landmarkName = "appDidEnterBackground(_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -33,8 +33,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "155"
             endingLineNumber = "155"
-            landmarkName = "dataDidFlow(_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

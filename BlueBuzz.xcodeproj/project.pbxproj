@@ -107,9 +107,9 @@
 		40D8B77B20A554B5005F7D76 /* SessionTransfer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionTransfer.swift; path = Shared/SessionTransfer.swift; sourceTree = "<group>"; };
 		40DC7D0E1EA8186200A93AFB /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Logger.swift; path = Shared/Logger.swift; sourceTree = "<group>"; };
 		40DC7D141EA81D8100A93AFB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		40DD4D8A1EA6B6E20074E73F /* SimpleWatchConnectivity.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimpleWatchConnectivity.entitlements; sourceTree = "<group>"; };
-		40DD4D8B1EA6B6FB0074E73F /* SimpleWatchConnectivity WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimpleWatchConnectivity WatchKit App.entitlements"; sourceTree = "<group>"; };
-		40DD4D8C1EA6B7010074E73F /* SimpleWatchConnectivity WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SimpleWatchConnectivity WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		40DD4D8A1EA6B6E20074E73F /* BlueBuzz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BlueBuzz.entitlements; sourceTree = "<group>"; };
+		40DD4D8B1EA6B6FB0074E73F /* BlueBuzz WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BlueBuzz WatchKit App.entitlements"; sourceTree = "<group>"; };
+		40DD4D8C1EA6B7010074E73F /* BlueBuzz WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BlueBuzz WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "Settings-Watch.bundle"; sourceTree = "<group>"; };
 		C9DA6BB0C9DA6B8000000001 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
 		C9DDD1E0C9DDC50000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
@@ -152,9 +152,9 @@
 			children = (
 				40DC7D141EA81D8100A93AFB /* README.md */,
 				4076077B1E81834B00A6A8EA /* Shared */,
-				40D46F4D1E8065200077A7B7 /* SimpleWatchConnectivity */,
-				40D46F611E8065200077A7B7 /* SimpleWatchConnectivity WatchKit App */,
-				40D46F701E8065200077A7B7 /* SimpleWatchConnectivity WatchKit Extension */,
+				40D46F4D1E8065200077A7B7 /* BlueBuzz */,
+				40D46F611E8065200077A7B7 /* BlueBuzz WatchKit App */,
+				40D46F701E8065200077A7B7 /* BlueBuzz WatchKit Extension */,
 				40D46F4C1E8065200077A7B7 /* Products */,
 				C9D96D30C9DA425000000001 /* Configuration */,
 				C9DCFAF0C9DCFAC000000001 /* LICENSE */,
@@ -171,10 +171,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		40D46F4D1E8065200077A7B7 /* SimpleWatchConnectivity */ = {
+		40D46F4D1E8065200077A7B7 /* BlueBuzz */ = {
 			isa = PBXGroup;
 			children = (
-				40DD4D8A1EA6B6E20074E73F /* SimpleWatchConnectivity.entitlements */,
+				40DD4D8A1EA6B6E20074E73F /* BlueBuzz.entitlements */,
 				40D46F4E1E8065200077A7B7 /* AppDelegate.swift */,
 				40D46F501E8065200077A7B7 /* MainViewController.swift */,
 				40C02A9920A27F28006F07AE /* CommandsViewController.swift */,
@@ -184,31 +184,31 @@
 				40D46F5A1E8065200077A7B7 /* Info.plist */,
 				40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */,
 			);
-			path = SimpleWatchConnectivity;
+			path = BlueBuzz;
 			sourceTree = "<group>";
 		};
-		40D46F611E8065200077A7B7 /* SimpleWatchConnectivity WatchKit App */ = {
+		40D46F611E8065200077A7B7 /* BlueBuzz WatchKit App */ = {
 			isa = PBXGroup;
 			children = (
-				40DD4D8B1EA6B6FB0074E73F /* SimpleWatchConnectivity WatchKit App.entitlements */,
+				40DD4D8B1EA6B6FB0074E73F /* BlueBuzz WatchKit App.entitlements */,
 				40D46F621E8065200077A7B7 /* Interface.storyboard */,
 				40D46F651E8065200077A7B7 /* Assets.xcassets */,
 				40D46F671E8065200077A7B7 /* Info.plist */,
 			);
-			path = "SimpleWatchConnectivity WatchKit App";
+			path = "BlueBuzz WatchKit App";
 			sourceTree = "<group>";
 		};
-		40D46F701E8065200077A7B7 /* SimpleWatchConnectivity WatchKit Extension */ = {
+		40D46F701E8065200077A7B7 /* BlueBuzz WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				40DD4D8C1EA6B7010074E73F /* SimpleWatchConnectivity WatchKit Extension.entitlements */,
+				40DD4D8C1EA6B7010074E73F /* BlueBuzz WatchKit Extension.entitlements */,
 				40D46F731E8065200077A7B7 /* ExtensionDelegate.swift */,
 				40D46F711E8065200077A7B7 /* MainInterfaceController.swift */,
 				400DB0961EA005A000F637F0 /* ComplicationController.swift */,
 				40D46F751E8065200077A7B7 /* Assets.xcassets */,
 				40D46F771E8065200077A7B7 /* Info.plist */,
 			);
-			path = "SimpleWatchConnectivity WatchKit Extension";
+			path = "BlueBuzz WatchKit Extension";
 			sourceTree = "<group>";
 		};
 		C9D96D30C9DA425000000001 /* Configuration */ = {
@@ -612,12 +612,12 @@
 			baseConfigurationReference = C9DA6BB0C9DA6B8000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CODE_SIGN_ENTITLEMENTS = "SimpleWatchConnectivity WatchKit Extension/SimpleWatchConnectivity WatchKit Extension.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "BlueBuzz WatchKit Extension/BlueBuzz WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
-				INFOPLIST_FILE = "SimpleWatchConnectivity WatchKit Extension/Info.plist";
+				INFOPLIST_FILE = "BlueBuzz WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.homeaidepi.bluebuzz1.watchkitapp.watchkitextension;
@@ -636,12 +636,12 @@
 			baseConfigurationReference = C9DA6BB0C9DA6B8000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CODE_SIGN_ENTITLEMENTS = "SimpleWatchConnectivity WatchKit Extension/SimpleWatchConnectivity WatchKit Extension.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "BlueBuzz WatchKit Extension/BlueBuzz WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
-				INFOPLIST_FILE = "SimpleWatchConnectivity WatchKit Extension/Info.plist";
+				INFOPLIST_FILE = "BlueBuzz WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.homeaidepi.bluebuzz1.watchkitapp.watchkitextension;
@@ -661,14 +661,15 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "SimpleWatchConnectivity WatchKit App/SimpleWatchConnectivity WatchKit App.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "BlueBuzz WatchKit App/BlueBuzz WatchKit App.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
 				IBSC_MODULE = SimpleWatchConnectivity_WatchKit_Extension;
-				INFOPLIST_FILE = "SimpleWatchConnectivity WatchKit App/Info.plist";
+				INFOPLIST_FILE = "BlueBuzz WatchKit App/Info.plist";
 				MARKETING_VERSION = 2.3;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.homeaidepi.bluebuzz1.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -686,14 +687,15 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "SimpleWatchConnectivity WatchKit App/SimpleWatchConnectivity WatchKit App.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "BlueBuzz WatchKit App/BlueBuzz WatchKit App.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
 				IBSC_MODULE = SimpleWatchConnectivity_WatchKit_Extension;
-				INFOPLIST_FILE = "SimpleWatchConnectivity WatchKit App/Info.plist";
+				INFOPLIST_FILE = "BlueBuzz WatchKit App/Info.plist";
 				MARKETING_VERSION = 2.3;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.homeaidepi.bluebuzz1.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -714,7 +716,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
-				INFOPLIST_FILE = SimpleWatchConnectivity/Info.plist;
+				INFOPLIST_FILE = BlueBuzz/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 2.3;
@@ -735,7 +737,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
-				INFOPLIST_FILE = SimpleWatchConnectivity/Info.plist;
+				INFOPLIST_FILE = BlueBuzz/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 2.3;

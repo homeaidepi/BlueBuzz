@@ -89,7 +89,8 @@ class MainViewController: UIViewController {
         if WCSession.default.activationState == .activated {
             isReachable = WCSession.default.isReachable
         }
-        reachableLabel.backgroundColor = isReachable ? .green : .red
+        reachableLabel.textColor = isReachable ? .green : .red
+        reachableLabel.text = isReachable ? "Device Connected" : "Device Disconnected"
     }
     
     // .activationDidComplete notification handler.
