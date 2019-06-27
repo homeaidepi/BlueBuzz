@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
+	<string>Blue Buzz</string>
 	<key>CFBundlePackageType</key>
 	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
@@ -36,6 +36,8 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.watchkit</string>
 	</dict>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>This app will notify you when your phone is out of range</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

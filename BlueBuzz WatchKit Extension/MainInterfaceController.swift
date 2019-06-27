@@ -8,6 +8,7 @@ The main interface controller of the WatchKit extension.
 import Foundation
 import WatchKit
 import WatchConnectivity
+import CoreLocation
 
 // identifier: page Interface Controller identifier.
 // Context: page context, a string used as the action button title.
@@ -16,25 +17,32 @@ struct ControllerID {
     static let mainInterfaceController = "MainInterfaceController"
 }
 
-class MainInterfaceController: WKInterfaceController, TestDataProvider, SessionCommands {
+class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate, TestDataProvider, SessionCommands {
     
     @IBOutlet weak var statusGroup: WKInterfaceGroup!
     @IBOutlet var statusLabel: WKInterfaceLabel!
     @IBOutlet var commandButton: WKInterfaceButton!
+    @IBOutlet var mapObject: WKInterfaceMap!
 
     // Retain the controllers so that we don't have to reload root controllers for every switch.
     //
     static var instances = [MainInterfaceController]()
     private var command: Command!
     
-    //private let fileTransferObservers = FileTransferObservers()
+    private var locationManager: CLLocationManager = CLLocationManager()
+    private var mapLocation: CLLocationCoordinate2D?
     
     // Context == nil: the fist-time loading, load pages with reloadRootController then
     // Context != nil: Loading the pages, save the controller instances so that we can
-    // swtich pages more smoothly.
+    // switch pages more smoothly.
     //
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
+        
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
+        locationManager.requestLocation()
         
         if let context = context as? CommandStatus {
             command = context.command
@@ -62,6 +70,33 @@ class MainInterfaceController: WKInterfaceController, TestDataProvider, SessionC
         NotificationCenter.default.addObserver(
             self, selector: #selector(type(of: self).appDidEnterBackground(_:)),
             name: .appDidEnterBackground, object: nil)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        let currentLocation = locations[0]
+        let lat = currentLocation.coordinate.latitude
+        let long = currentLocation.coordinate.longitude
+        
+        self.mapLocation = CLLocationCoordinate2DMake(lat, long)
+        
+        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        
+        let region = MKCoordinateRegion(center: self.mapLocation!, span: span)
+        self.mapObject.setRegion(region)
+        
+        mapObject.addAnnotation(self.mapLocation!,
+                                with: .red)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        //print(error)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            locationManager.requestLocation()
+        }
     }
     
     @objc
