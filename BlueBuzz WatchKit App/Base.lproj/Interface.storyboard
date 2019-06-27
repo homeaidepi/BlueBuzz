@@ -13,10 +13,17 @@
             <objects>
                 <controller identifier="MainInterfaceController" title="Blue Buzz" hidesWhenLoading="NO" fullScreen="YES" id="AgC-eL-Hgc" userLabel="Blue Buzz" customClass="MainInterfaceController" customModule="SimpleWatchConnectivity_WatchKit_Extension" colorLabel="IBBuiltInLabel-Red">
                     <items>
+                        <button width="1" alignment="center" title="Command" id="k6l-Dc-fO2">
+                            <connections>
+                                <action selector="commandAction" destination="AgC-eL-Hgc" id="gVg-0V-6QU"/>
+                            </connections>
+                        </button>
                         <button alignment="left" id="xiq-oY-ZAR">
-                            <group key="contentGroup" width="1" height="34" alignment="left" id="oNu-Qr-7VR">
+                            <group key="contentGroup" width="1" height="41" alignment="left" id="oNu-Qr-7VR">
                                 <items>
-                                    <label width="1" height="1" alignment="left" text="Label" textAlignment="center" numberOfLines="0" id="foZ-nr-7kp"/>
+                                    <label width="1" height="1" alignment="left" text="Label" textAlignment="center" numberOfLines="0" id="foZ-nr-7kp">
+                                        <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                    </label>
                                 </items>
                                 <color key="backgroundColor" red="0.1333333333" green="0.1333333333" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </group>
@@ -26,14 +33,9 @@
                         </button>
                         <group width="1" alignment="left" radius="0.0" id="eEP-ld-0Ut">
                             <items>
-                                <button width="1" height="1" alignment="center" verticalAlignment="center" title="Command" id="k6l-Dc-fO2">
-                                    <connections>
-                                        <action selector="commandAction" destination="AgC-eL-Hgc" id="gVg-0V-6QU"/>
-                                    </connections>
-                                </button>
+                                <map height="100" alignment="left" id="6Zn-v2-YN2" userLabel="mapObject"/>
                             </items>
                         </group>
-                        <map height="100" alignment="left" id="6Zn-v2-YN2" userLabel="mapObject"/>
                     </items>
                     <connections>
                         <outlet property="commandButton" destination="k6l-Dc-fO2" id="BEH-lz-Rcd"/>
@@ -43,7 +45,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="34" y="-20"/>
+            <point key="canvasLocation" x="34" y="-19.5"/>
         </scene>
     </scenes>
 </document>
