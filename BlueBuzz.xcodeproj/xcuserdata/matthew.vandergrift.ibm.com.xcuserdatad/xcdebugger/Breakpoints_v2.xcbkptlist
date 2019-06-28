@@ -108,12 +108,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BlueBuzz WatchKit Extension/MainInterfaceController.swift"
-            timestampString = "583308378.426661"
+            timestampString = "583380513.9299459"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "267"
-            endingLineNumber = "267"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
             landmarkName = "updateUI(with:errorMessage:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BlueBuzz WatchKit Extension/MainInterfaceController.swift"
+            timestampString = "583380811.080853"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "deinit"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -29,7 +29,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     static var instances = [MainInterfaceController]()
     private var command: Command!
     
-    private var locationManager: CLLocationManager = CLLocationManager()
+    private var locationManager: CLLocationManager?
     private var mapLocation: CLLocationCoordinate2D?
     
     // Context == nil: the fist-time loading, load pages with reloadRootController then
@@ -38,11 +38,6 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     //
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.delegate = self
-        locationManager.requestLocation()
         
         if let context = context as? CommandStatus {
             command = context.command
@@ -76,7 +71,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         
         let currentLocation = locations[0]
         let lat = currentLocation.coordinate.latitude
-        let long = currentLocation.coordinate.longitude
+        let long = currentLocation.coordinate.longitude + 50
         
         self.mapLocation = CLLocationCoordinate2DMake(lat, long)
         
@@ -90,12 +85,12 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        //print(error)
+        print(error)
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedWhenInUse {
-            locationManager.requestLocation()
+            locationManager?.requestLocation()
         }
     }
     
@@ -112,25 +107,27 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         print("App moved to background!")
     }
     
+    @objc private func deinitLocationManager() {
+        locationManager = nil
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
+        self.performSelector(onMainThread: #selector(deinitLocationManager), with: nil, waitUntilDone: true)
     }
     
     override func willActivate() {
         super.willActivate()
         guard command != nil else { return } // For first-time loading do nothing.
         
+        locationManager = CLLocationManager();
+        locationManager?.requestWhenInUseAuthorization()
+        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager?.delegate = self
+        locationManager?.allowsBackgroundLocationUpdates = true
+        locationManager?.requestLocation()
+        
         // For .updateAppContext, retrieve the receieved app context if any and update the UI.
-        // For .transferFile and .transferUserInfo, log the outstanding transfers if any.
-        //
-//        if command == .updateAppContext {
-//            let timedColor = WCSession.default.receivedApplicationContext
-//            if timedColor.isEmpty == false {
-//                var commandStatus = CommandStatus(command: command, phrase: .received)
-//                commandStatus.timedColor = TimedColor(timedColor)
-//                updateUI(with: commandStatus)
-//            }
-        //} else
         if command == .updateAppConnection {
             let newRed = CGFloat(70)/255
             let newGreen = CGFloat(107)/255
@@ -142,35 +139,17 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
             commandStatus.timedColor = TimedColor(ibmBlueColor)
             updateUI(with: commandStatus)
             
-        } //else
-//            if command == .transferFile {
-//            let transferCount = WCSession.default.outstandingFileTransfers.count
-//            if transferCount > 0 {
-//                let commandStatus = CommandStatus(command: .transferFile, phrase: .finished)
-//                logOutstandingTransfers(for: commandStatus, outstandingCount: transferCount)
-//            }
-//        } else if command == .transferUserInfo {
-//            let transferCount = WCSession.default.outstandingUserInfoTransfers.count
-//            if transferCount > 0 {
-//                let commandStatus = CommandStatus(command: .transferUserInfo, phrase: .finished)
-//                logOutstandingTransfers(for: commandStatus, outstandingCount: transferCount)
-//            }
-//        }
+        }
         
         // Update the status group background color.
         //
-        //if command != .transferFile && command != .transferUserInfo {
-            statusGroup.setBackgroundColor(.black)
-        //}
+        statusGroup.setBackgroundColor(.black)
     }
     
     // Load paged-based UI.
     // If a current context is specified, use the timed color it provided.
     //
     private func reloadRootController(with currentContext: CommandStatus? = nil) {
-        //let commands: [Command] = [.updateAppContext, .sendMessage, .sendMessageData,
-        //                           .transferFile, .transferUserInfo,
-        //                           .transferCurrentComplicationUserInfo]
         let commands: [Command] = [.updateAppConnection, .sendMessage]
         var contexts = [CommandStatus]()
         for aCommand in commands {
@@ -238,24 +217,11 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         guard let command = command else { return }
         
         switch command {
-        //case .updateAppContext: updateAppContext(appContext)
         case .updateAppConnection: updateAppConnection(appConnection)
         case .sendMessage: sendMessage(message)
         case .sendMessageData: sendMessageData(messageData)
-        //case .transferUserInfo: transferUserInfo(userInfo)
-        //case .transferFile: transferFile(file, metadata: fileMetaData)
-        //case .transferCurrentComplicationUserInfo: transferCurrentComplicationUserInfo(currentComplicationInfo)
-    }
-    
-    // Show outstanding transfer UI for .transferFile and .transferUserInfo.
-    //
-    //@IBAction func statusAction() {
-//        if command == .transferFile {
-//            presentController(withName: ControllerID.fileTransfersController, context: command)
-//        } else if command == .transferUserInfo {
-//            presentController(withName: ControllerID.userInfoTransfersController, context: command)
         }
-    //}
+    }
 }
 
     extension MainInterfaceController { // MARK: - Update status view.
@@ -282,36 +248,6 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
             return
         }
         
-        // Observe the file transfer if it's phrase is "transferring".
-        // Unobserve a file transfer if it's phrase is "finished".
-        //
-//        if let fileTransfer = commandStatus.fileTransfer, commandStatus.command == .transferFile {
-//            if commandStatus.phrase == .finished {
-//                fileTransferObservers.unobserve(fileTransfer)
-//            } else if commandStatus.phrase == .transferring {
-//                fileTransferObservers.observe(fileTransfer) { _ in
-//                    self.logProgress(for: commandStatus)
-//                }
-//            }
-//        }
-        
-        // Log the outstanding file transfers if any.
-        //
-//        if commandStatus.command == .transferFile {
-//            let transferCount = WCSession.default.outstandingFileTransfers.count
-//            if transferCount > 0 {
-//                return logOutstandingTransfers(for: commandStatus, outstandingCount: transferCount)
-//            }
-//        }
-        
-        // Log the outstanding UserInfo transfers if any.
-        //
-//        if commandStatus.command == .transferUserInfo {
-//            let transferCount = WCSession.default.outstandingUserInfoTransfers.count
-//            if transferCount > 0 {
-//                return logOutstandingTransfers(for: commandStatus, outstandingCount: transferCount)
-//            }
-//        }
         if commandStatus.command == .updateAppConnection
         {
             if (WCSession.default.isReachable) {
