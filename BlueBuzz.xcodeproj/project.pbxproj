@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		400DB0971EA005A000F637F0 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400DB0961EA005A000F637F0 /* ComplicationController.swift */; };
-		4047836720ACE3F700E04A72 /* FileTransferObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4047836620ACE3F700E04A72 /* FileTransferObservers.swift */; };
-		4047836820ACE3F700E04A72 /* FileTransferObservers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4047836620ACE3F700E04A72 /* FileTransferObservers.swift */; };
 		4076077E1E8183AF00A6A8EA /* SessionCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4076077C1E8183AF00A6A8EA /* SessionCommands.swift */; };
 		407607861E81A7F000A6A8EA /* TestDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407607851E81A7F000A6A8EA /* TestDataProvider.swift */; };
 		407607871E81A7F000A6A8EA /* TestDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407607851E81A7F000A6A8EA /* TestDataProvider.swift */; };
@@ -31,8 +29,6 @@
 		40D46F761E8065200077A7B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40D46F751E8065200077A7B7 /* Assets.xcassets */; };
 		40D8B77920A554A5005F7D76 /* CommandStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8B77820A554A5005F7D76 /* CommandStatus.swift */; };
 		40D8B77A20A554A5005F7D76 /* CommandStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8B77820A554A5005F7D76 /* CommandStatus.swift */; };
-		40D8B77C20A554B6005F7D76 /* SessionTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8B77B20A554B5005F7D76 /* SessionTransfer.swift */; };
-		40D8B77D20A554B6005F7D76 /* SessionTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8B77B20A554B5005F7D76 /* SessionTransfer.swift */; };
 		40DC7D0F1EA8186200A93AFB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DC7D0E1EA8186200A93AFB /* Logger.swift */; };
 		40DC7D101EA8186200A93AFB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DC7D0E1EA8186200A93AFB /* Logger.swift */; };
 		40DD4D8E1EA6B7510074E73F /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
@@ -82,7 +78,6 @@
 
 /* Begin PBXFileReference section */
 		400DB0961EA005A000F637F0 /* ComplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
-		4047836620ACE3F700E04A72 /* FileTransferObservers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileTransferObservers.swift; path = Shared/FileTransferObservers.swift; sourceTree = "<group>"; };
 		4076077C1E8183AF00A6A8EA /* SessionCommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionCommands.swift; path = Shared/SessionCommands.swift; sourceTree = "<group>"; };
 		407607851E81A7F000A6A8EA /* TestDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestDataProvider.swift; path = Shared/TestDataProvider.swift; sourceTree = "<group>"; };
 		40AF22981F29236300E6D1A8 /* SessionDelegater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SessionDelegater.swift; path = Shared/SessionDelegater.swift; sourceTree = "<group>"; };
@@ -104,7 +99,6 @@
 		40D46F751E8065200077A7B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40D46F771E8065200077A7B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40D8B77820A554A5005F7D76 /* CommandStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommandStatus.swift; path = Shared/CommandStatus.swift; sourceTree = "<group>"; };
-		40D8B77B20A554B5005F7D76 /* SessionTransfer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionTransfer.swift; path = Shared/SessionTransfer.swift; sourceTree = "<group>"; };
 		40DC7D0E1EA8186200A93AFB /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Logger.swift; path = Shared/Logger.swift; sourceTree = "<group>"; };
 		40DC7D141EA81D8100A93AFB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		40DD4D8A1EA6B6E20074E73F /* BlueBuzz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BlueBuzz.entitlements; sourceTree = "<group>"; };
@@ -140,8 +134,6 @@
 				40D8B77820A554A5005F7D76 /* CommandStatus.swift */,
 				4076077C1E8183AF00A6A8EA /* SessionCommands.swift */,
 				40AF22981F29236300E6D1A8 /* SessionDelegater.swift */,
-				40D8B77B20A554B5005F7D76 /* SessionTransfer.swift */,
-				4047836620ACE3F700E04A72 /* FileTransferObservers.swift */,
 				40DC7D0E1EA8186200A93AFB /* Logger.swift */,
 			);
 			name = Shared;
@@ -428,12 +420,10 @@
 				40D8B77920A554A5005F7D76 /* CommandStatus.swift in Sources */,
 				407607861E81A7F000A6A8EA /* TestDataProvider.swift in Sources */,
 				40D46F4F1E8065200077A7B7 /* AppDelegate.swift in Sources */,
-				40D8B77C20A554B6005F7D76 /* SessionTransfer.swift in Sources */,
 				40DC7D0F1EA8186200A93AFB /* Logger.swift in Sources */,
 				40C02A9A20A27F28006F07AE /* CommandsViewController.swift in Sources */,
 				40AF22991F29236300E6D1A8 /* SessionDelegater.swift in Sources */,
 				4084B0231EA057EF00ACA046 /* SessionCommands.swift in Sources */,
-				4047836720ACE3F700E04A72 /* FileTransferObservers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,7 +431,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40D8B77D20A554B6005F7D76 /* SessionTransfer.swift in Sources */,
 				40AF229A1F29236300E6D1A8 /* SessionDelegater.swift in Sources */,
 				40D8B77A20A554A5005F7D76 /* CommandStatus.swift in Sources */,
 				40D46F741E8065200077A7B7 /* ExtensionDelegate.swift in Sources */,
@@ -449,7 +438,6 @@
 				400DB0971EA005A000F637F0 /* ComplicationController.swift in Sources */,
 				40DC7D101EA8186200A93AFB /* Logger.swift in Sources */,
 				4076077E1E8183AF00A6A8EA /* SessionCommands.swift in Sources */,
-				4047836820ACE3F700E04A72 /* FileTransferObservers.swift in Sources */,
 				40D46F721E8065200077A7B7 /* MainInterfaceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -31,6 +31,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     
     private var locationManager: CLLocationManager?
     private var mapLocation: CLLocationCoordinate2D?
+    private var i = 0;
     
     // Context == nil: the fist-time loading, load pages with reloadRootController then
     // Context != nil: Loading the pages, save the controller instances so that we can
@@ -71,40 +72,49 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         
         let currentLocation = locations[0]
         let lat = currentLocation.coordinate.latitude
-        let long = currentLocation.coordinate.longitude + 50
+        let long = currentLocation.coordinate.longitude
         
         self.mapLocation = CLLocationCoordinate2DMake(lat, long)
         
         let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-        
         let region = MKCoordinateRegion(center: self.mapLocation!, span: span)
+        
         self.mapObject.setRegion(region)
         
-        mapObject.addAnnotation(self.mapLocation!,
-                                with: .red)
+        mapObject.addAnnotation(self.mapLocation!, with: .purple)
+        
+        i+=1
+        if let location = locations.last {
+            statusLabel.setText("i:\(i) New location is \(location)" )
+        }
+        else {
+            statusLabel.setText("i:\(i) Lat-\(lat):Long-\(long)")
+        }
+        
+        var commandStatus = CommandStatus(command: .sendMessageData, phrase: .sent)
+        commandStatus.location = currentLocation
+        
+        guard let data = try? NSKeyedArchiver.archivedData(withRootObject: commandStatus, requiringSecureCoding: false) else { return }
+        
+        WCSession.default.sendMessageData(data, replyHandler: { replyHandler in
+        self.statusLabel.setText("reply")}, errorHandler: { error in
+        self.statusLabel.setText("error")})
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
+        statusLabel.setText(error.localizedDescription)
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse {
+        if status == .authorizedAlways {
             locationManager?.requestLocation()
         }
     }
     
     @objc
     func appDidEnterBackground(_ notification: Notification) {
-        if (WCSession.default.isReachable) {
-            statusLabel.setText("Device connected.")
-            WKInterfaceDevice.current().play(.success)
-        }
-        else {
-            statusLabel.setText("Device disconnected.")
-            WKInterfaceDevice.current().play(.failure)
-        }
-        print("App moved to background!")
+        notifyUI();
+        locationManager?.requestLocation()
     }
     
     @objc private func deinitLocationManager() {
@@ -120,14 +130,14 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         super.willActivate()
         guard command != nil else { return } // For first-time loading do nothing.
         
-        locationManager = CLLocationManager();
-        locationManager?.requestWhenInUseAuthorization()
+        locationManager = CLLocationManager()
+        locationManager?.requestAlwaysAuthorization()
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.delegate = self
         locationManager?.allowsBackgroundLocationUpdates = true
         locationManager?.requestLocation()
         
-        // For .updateAppContext, retrieve the receieved app context if any and update the UI.
+        // For .updateAppConnection, retrieve the receieved app context if any and update the UI.
         if command == .updateAppConnection {
             let newRed = CGFloat(70)/255
             let newGreen = CGFloat(107)/255
@@ -150,7 +160,8 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     // If a current context is specified, use the timed color it provided.
     //
     private func reloadRootController(with currentContext: CommandStatus? = nil) {
-        let commands: [Command] = [.updateAppConnection, .sendMessage]
+        let commands: [Command] = [.updateAppConnection, .sendMessage, .sendMessageData]
+        
         var contexts = [CommandStatus]()
         for aCommand in commands {
             var commandStatus = CommandStatus(command: aCommand, phrase: .finished)
@@ -192,23 +203,16 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     //
     @objc
     func activationDidComplete(_ notification: Notification) {
-        print("\(#function): activationState:\(WCSession.default.activationState.rawValue)")
+        //print("\(#function): activationState:\(WCSession.default.activationState.rawValue)")
     }
     
     // .reachabilityDidChange notification handler.
     //
     @objc
     func reachabilityDidChange(_ notification: Notification) {
-        if (WCSession.default.isReachable) {
-            statusLabel.setText("Device connected.")
-            WKInterfaceDevice.current().play(.success)
-        }
-        else {
-            statusLabel.setText("Device disconnected.")
-            WKInterfaceDevice.current().play(.failure)
-        }
+        notifyUI();
         
-        print("\(#function): isReachable:\(WCSession.default.isReachable)")
+        //print("\(#function): isReachable:\(WCSession.default.isReachable)")
     }
     
     // Do the command associated with the current page.
@@ -219,13 +223,27 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         switch command {
         case .updateAppConnection: updateAppConnection(appConnection)
         case .sendMessage: sendMessage(message)
-        case .sendMessageData: sendMessageData(messageData)
+        case .sendMessageData: sendMessageData(messageData, location: location)
         }
     }
 }
 
     extension MainInterfaceController { // MARK: - Update status view.
     
+    //Play haptic notifications to the user and display some updated data
+    //
+    private func notifyUI() {
+        if (WCSession.default.isReachable) {
+            statusLabel.setText("Device connected.")
+            WKInterfaceDevice.current().play(.success)
+        }
+        else {
+            statusLabel.setText("Device disconnected.")
+            WKInterfaceDevice.current().play(.failure)
+            WKInterfaceDevice.current().play(.notification)
+        }
+    }
+        
     // Update the user interface with the command status.
     // Note that there isn't a timed color when the interface controller is initially loaded.
     //
@@ -250,41 +268,9 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         
         if commandStatus.command == .updateAppConnection
         {
-            if (WCSession.default.isReachable) {
-                statusLabel.setText("Device connected.")
-                WKInterfaceDevice.current().play(.success)
-            }
-            else {
-                statusLabel.setText("Device disconnected.")
-                WKInterfaceDevice.current().play(.failure)
-            }
+            notifyUI();
         } else {
             statusLabel.setText( commandStatus.phrase.rawValue + " at\n" + timedColor.timeStamp)
         }
-    }
-    
-    // Log the outstanding transfer information if any.
-    //
-    private func logOutstandingTransfers(for commandStatus: CommandStatus, outstandingCount: Int) {
-        if commandStatus.phrase == .transferring {
-            var text = commandStatus.phrase.rawValue + " at\n" + commandStatus.timedColor!.timeStamp
-            text += "\nOutstanding: \(outstandingCount)\n Tap to view"
-            return statusLabel.setText(text)
-        }
-        
-        if commandStatus.phrase == .finished {
-            return statusLabel.setText("Outstanding: \(outstandingCount)\n Tap to view")
-        }
-    }
-    
-    // Log the file transfer progress. The command status is captured at the momment when
-    // the file transfer is observed.
-    //
-    private func logProgress(for commandStatus: CommandStatus) {
-        guard let fileTransfer = commandStatus.fileTransfer else { return }
-        
-        let fileName = fileTransfer.file.fileURL.lastPathComponent
-        let progress = fileTransfer.progress.localizedDescription ?? "No progress"
-        statusLabel.setText(commandStatus.phrase.rawValue + "\n" + fileName + "\n" + progress)
     }
 }

@@ -16,11 +16,6 @@ class MainViewController: UIViewController {
     @IBOutlet weak var noteLabel: UILabel!
     @IBOutlet weak var tablePlaceholderView: UIView!
     
-    // We log the file transfer progress on the log view, so need to
-    // oberve the file transfer progress.
-    //
-    private let fileTransferObservers = FileTransferObservers()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -123,48 +118,19 @@ class MainViewController: UIViewController {
         // If an error occurs, show the error message and returns.
         //
         if let errorMessage = commandStatus.errorMessage {
-            log("! \(commandStatus.command.rawValue)...\(errorMessage)")
+            log("! \(commandStatus.command.rawValue): \(errorMessage)")
             return
         }
         
         guard let timedColor = commandStatus.timedColor else { return }
         
-        log("#\(commandStatus.command.rawValue)...\n\(commandStatus.phrase.rawValue) at \(timedColor.timeStamp)")
-        
-//        if let fileURL = commandStatus.file?.fileURL {
-//
-//            if fileURL.pathExtension == "log",
-//                let content = try? String(contentsOf: fileURL, encoding: .utf8), !content.isEmpty {
-//                log("\(fileURL.lastPathComponent)\n\(content)")
-//            } else {
-//                log("\(fileURL.lastPathComponent)\n")
-//            }
-//        }
-        
-//        if let fileTransfer = commandStatus.fileTransfer, commandStatus.command == .transferFile {
-//
-//            if commandStatus.phrase == .finished {
-//                fileTransferObservers.unobserve(fileTransfer)
-//                
-//            } else if commandStatus.phrase == .transferring {
-//                fileTransferObservers.observe(fileTransfer) { _ in
-//                    self.logProgress(for: fileTransfer)
-//                }
-//            }
-//        }
-    }
-    
-    // Log the file transfer progress.
-    //
-    private func logProgress(for fileTransfer: WCSessionFileTransfer) {
-        DispatchQueue.main.async {
-            let dateFormatter = DateFormatter()
-            dateFormatter.timeStyle = .medium
-            let timeString = dateFormatter.string(from: Date())
-            let fileName = fileTransfer.file.fileURL.lastPathComponent
-            
-            let progress = fileTransfer.progress.localizedDescription ?? "No progress"
-            self.log("- \(fileName): \(progress) at \(timeString)")
+        //log the messageData i.e location to the screen else show command
+        //
+        if let location = commandStatus.location {
+            log("-> \(location)")
+        }
+        else {
+            log("-> \(commandStatus.command.rawValue): \(commandStatus.phrase.rawValue) at \(timedColor.timeStamp)")
         }
     }
 }

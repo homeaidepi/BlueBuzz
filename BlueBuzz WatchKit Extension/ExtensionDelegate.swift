@@ -27,9 +27,9 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         super.init()
         assert(WCSession.isSupported(), "BlueBuzz requires Apple Watch!")
         
-        //if WatchSettings.sharedContainerID.isEmpty {
-        //    print("Specify shared container ID for WatchSettings.sharedContainerID to use watch settings!")
-        //}
+        if WatchSettings.sharedContainerID.isEmpty {
+            print("Specify shared container ID for WatchSettings.sharedContainerID to use watch settings!")
+        }
         
         // WKWatchConnectivityRefreshBackgroundTask should be completed – Otherwise they will keep consuming
         // the background executing time and eventually causes an app crash.

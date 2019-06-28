@@ -12,10 +12,7 @@ class CommandsViewController: UITableViewController, TestDataProvider, SessionCo
 
     // List the supported methods, shown in the main table.
     //
-    //let commands: [Command] = [.updateAppContext, .sendMessage, .sendMessageData,
-    //                           .transferFile, .transferUserInfo,
-    //                           .transferCurrentComplicationUserInfo]
-    let commands: [Command] = [.updateAppConnection, .sendMessage]
+    let commands: [Command] = [.updateAppConnection, .sendMessage, .sendMessageData]
     
     var currentCommand: Command = .updateAppConnection // Default to .updateAppConnection.
     var currentColor: UIColor?
@@ -46,31 +43,12 @@ class CommandsViewController: UITableViewController, TestDataProvider, SessionCo
     }
 }
 
-extension CommandsViewController { // MARK: - UITableViewDelegate and UITableViewDataSoruce.
+extension CommandsViewController { // MARK: - UITableViewDelegate and UITableViewDataSource.
     
     // Create a button for the specified command and with the title color.
     // The button is used as the accessory view of the table cell.
     //
     private func newAccessoryView(cellCommand: Command, titleColor: UIColor?) -> UIButton {
-        //var transferCount = 0
-        
-        // Retrieve the transfer count for the command.
-        //
-//        if cellCommand == .transferFile {
-//            transferCount = WCSession.default.outstandingFileTransfers.count
-//
-//        } else if cellCommand == .transferUserInfo {
-//            let transfers = WCSession.default.outstandingUserInfoTransfers.filter {
-//                $0.isCurrentComplicationInfo == false
-//            }
-//            transferCount = transfers.count
-//
-//        } else if cellCommand == .transferCurrentComplicationUserInfo {
-//            let transfers = WCSession.default.outstandingUserInfoTransfers.filter {
-//                $0.isCurrentComplicationInfo == true
-//            }
-//            transferCount = transfers.count
-//        }
         
         // Create and configure the button.
         //
@@ -82,41 +60,6 @@ extension CommandsViewController { // MARK: - UITableViewDelegate and UITableVie
         return button
     }
     
-    // Action handler of the accessory view. Present the view controller for the current command.
-    //
-//    @objc
-//    private func showTransfers(_ sender: UIButton) {
-//        let buttonPosition = sender.convert(CGPoint.zero, to: tableView)
-//        guard let indexPath = tableView.indexPathForRow(at: buttonPosition) else { return }
-//
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let command = commands[indexPath.row]
-//
-//        var childViewController: UIViewController
-//
-//        if command == .transferFile {
-//            let viewController = storyboard.instantiateViewController(withIdentifier: "FileTransfersViewController")
-//            guard let transfersViewController = viewController as? FileTransfersViewController else {
-//                fatalError("View controller (FileTransfersViewController) doesn't have a right class!")
-//            }
-//            transfersViewController.command = command
-//            childViewController = transfersViewController
-//
-//        } else if command == .transferUserInfo || command == .transferCurrentComplicationUserInfo {
-//
-//            let viewController = storyboard.instantiateViewController(withIdentifier: "UserInfoTransfersViewController")
-//            guard let transfersViewController = viewController as? UserInfoTransfersViewController else {
-//                fatalError("View controller (UserInfoTransfersViewController) doesn't have a right class!")
-//            }
-//            transfersViewController.command = command
-//            childViewController = transfersViewController
-//        }
-//
-//        addChild(childViewController)
-//        childViewController.view.frame = view.convert(tableView.bounds, from: tableView)
-//        view.addSubview(childViewController.view)
-//        childViewController.didMove(toParent: self)
-//    }
 
     // UITableViewDelegate and UITableViewDataSource.
     //
@@ -133,13 +76,8 @@ extension CommandsViewController { // MARK: - UITableViewDelegate and UITableVie
         let textColor: UIColor? = cellCommand == currentCommand ? currentColor : nil
         cell.textLabel?.textColor = textColor
         cell.detailTextLabel?.textColor = textColor
-        
         cell.detailTextLabel?.text = nil
         cell.accessoryView = nil
-        
-//        if [.transferFile, .transferCurrentComplicationUserInfo, .transferUserInfo].contains(cellCommand) {
-//            cell.accessoryView = newAccessoryView(cellCommand: cellCommand, titleColor: textColor)
-//        }
         
         return cell
     }
@@ -152,11 +90,7 @@ extension CommandsViewController { // MARK: - UITableViewDelegate and UITableVie
         switch currentCommand {
             case .updateAppConnection: updateAppConnection(appConnection)
             case .sendMessage: sendMessage(message)
-            case .sendMessageData: sendMessageData(messageData)
-    //case .updateAppContext: updateAppContext(appContext)
-    //        case .transferUserInfo: transferUserInfo(userInfo)
-    //        case .transferFile: transferFile(file, metadata: fileMetaData)
-    //        case .transferCurrentComplicationUserInfo: transferCurrentComplicationUserInfo(currentComplicationInfo)
+            case .sendMessageData: sendMessageData(messageData, location: location)
         }
     }
 }

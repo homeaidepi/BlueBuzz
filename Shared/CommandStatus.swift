@@ -7,17 +7,14 @@ CommandStatus struct wraps the command status. Used on both iOS and watchOS.
 
 import UIKit
 import WatchConnectivity
+import CoreLocation
 
 // Constants to identify the Watch Connectivity methods, also used as user-visible strings in UI.
 //
 enum Command: String {
-    //case updateAppContext = "Check Device"
     case updateAppConnection = "Check Connection"
     case sendMessage = "Message Device"
     case sendMessageData = "Send Data"
-    //case transferUserInfo = "Transfer User Info"
-    //case transferFile = "Transfer File"
-    //case transferCurrentComplicationUserInfo = "Transfer Complication User Info"
 }
 
 // Constants to identify the phrases of a Watch Connectivity communication.
@@ -104,9 +101,7 @@ struct CommandStatus {
     var command: Command
     var phrase: Phrase
     var timedColor: TimedColor?
-    var fileTransfer: WCSessionFileTransfer?
-    var file: WCSessionFile?
-    var userInfoTranser: WCSessionUserInfoTransfer?
+    var location: CLLocation?
     var errorMessage: String?
     
     init(command: Command, phrase: Phrase) {
