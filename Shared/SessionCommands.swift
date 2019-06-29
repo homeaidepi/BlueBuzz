@@ -25,24 +25,19 @@ protocol SessionCommands {
 // when WCSession status changes or data flows. Shared by the iOS app and watchOS app.
 //
 extension SessionCommands {
-    
     // Update app connection if the session is activated and update UI with the command status.
     //
     func updateAppConnection(_ context: [String: Any]) {
 
         var command = CommandMessage(command: .updateAppConnection,
                                           phrase: .unauthorized,
-                                          location: CLLocation(latitude: 0, longitude: 0),
-                                          timedColor: TimedColor(UIColor.blue),
-                                          errorMessage: "")
+                                          location: emptyLocation,
+                                          timedColor: defaultColor,
+                                          errorMessage: emptyError)
         
         if (WCSession.default.activationState == .activated)
         {
-            command = CommandMessage(command: .updateAppConnection,
-                                    phrase: .authorized,
-                                    location: nil!,
-                                    timedColor: TimedColor(context),
-                                    errorMessage: nil!)
+            command.phrase = .authorized
         }
         else {
             let center = UNUserNotificationCenter.current()
@@ -52,41 +47,12 @@ extension SessionCommands {
                     command.phrase = .authorized
                 } else {
                     command.phrase = .unauthorized
+                    command.errorMessage = "You have not accepted location services."
                 }
             }
         }
 
-        let newRed = CGFloat(70)/255
-        let newGreen = CGFloat(107)/255
-        let newBlue = CGFloat(176)/255
-        
-        let ibmBlueColor = UIColor(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
-        
-        let timedColor = TimedColor(ibmBlueColor)
-        
-        let message: [String:Any] = [
-            PayloadKey.timeStamp : timedColor.timeStamp,
-            PayloadKey.colorData : timedColor.colorData
-        ]
-        
-        WCSession.default.sendMessage(message, replyHandler: { replyMessage in
-            command.phrase = .replied
-            command.timedColor = TimedColor(replyMessage)
-            self.postNotificationOnMainQueueAsync(name: .dataDidFlow, object: command)
-            
-        }, errorHandler: { error in
-            command.phrase = .failed
-            command.errorMessage = error.localizedDescription
-            self.postNotificationOnMainQueueAsync(name: .dataDidFlow, object: command)
-        })
-        
-        let commandStatus = CommandMessage(command: .updateAppConnection,
-                                      phrase: .sent,
-                                      location: CLLocation(latitude: 0, longitude: 0),
-                                      timedColor: timedColor,
-                                      errorMessage: "")
-
-        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
+        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: command)
     }
     
     // Send a message if the session is activated and update UI with the command status.

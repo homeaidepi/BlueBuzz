@@ -9,12 +9,18 @@ import UIKit
 import WatchConnectivity
 import CoreLocation
 
+// shared constants
+//
+var emptyLocation = CLLocation(latitude:0, longitude: 0)
+var emptyError = String("")
+var defaultColor = TimedColor(UIColor(red: CGFloat(70)/255, green: CGFloat(107)/255, blue: CGFloat(176)/255, alpha: 1.0)) //IBM Blue
+
 // Constants to identify the Watch Connectivity methods, also used as user-visible strings in UI.
 //
 enum Command: String, Codable {
-    case updateAppConnection = "Check Connection"
-    case sendMessage = "Message Device"
-    case sendMessageData = "Send Data"
+    case updateAppConnection = "Check Authorization"
+    case sendMessage = "Send Message"
+    case sendMessageData = "Send Location"
 }
 
 // Constants to identify the phrases of a Watch Connectivity communication.
@@ -63,12 +69,21 @@ class Color:Codable{
         }
     }
 }
+
+extension UIColor {
+    func data() -> Data {
+        return NSKeyedArchiver.archivedData(withRootObject: self)
+    }
+    class func color(withData data: Data) -> UIColor? {
+        return NSKeyedUnarchiver.unarchiveObject(with: data) as? UIColor
+    }
+}
 // Wrap a timed color payload dictionary with a stronger type.
 //
 struct TimedColor: Codable {
     var timeStamp: String
     var colorData: Data
-    var defaultValue: Bool = true
+    var defaultValue: Bool = false
     var defaultColor: Color
     
     private enum CodingKeys: String, CodingKey {
@@ -106,17 +121,17 @@ struct TimedColor: Codable {
         
     }
     
-    var color: UIColor {
+    var color: Color {
         
-        if (defaultValue == true) { return defaultColor.color }
+        if (defaultValue == true) { return Color(color: defaultColor.color) }
         
-        let optional = ((try? NSKeyedUnarchiver.unarchivedObject(ofClasses: [UIColor.self], from: colorData)) as Any??)
-        guard let color = optional as? UIColor else {
-            let newRed = CGFloat(70)/255
-            let newGreen = CGFloat(107)/255
-            let newBlue = CGFloat(176)/255
-            return UIColor(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
+        var color = Color(color: UIColor.green)
+        do {
+            color = try JSONDecoder().decode(Color.self, from: colorData)
         }
+        catch {
+        }
+        
         return color
     }
     
@@ -131,9 +146,9 @@ struct TimedColor: Codable {
         let someDateTime = formatter.string(from: Date())
         
         self.timeStamp = someDateTime
-        self.colorData = Data()
-        self.defaultValue = true
-        self.defaultColor = Color(color: timedColor)
+        self.colorData = timedColor.data()
+        self.defaultValue = false
+        self.defaultColor = Color(color: UIColor.yellow)
     }
     
     init(_ timedColor: [String: Any]) {
@@ -144,12 +159,12 @@ struct TimedColor: Codable {
         self.timeStamp = timeStamp
         self.colorData = colorData
         self.defaultValue = false
-        self.defaultColor = Color(color: TimedColor(colorData).color)
+        self.defaultColor = Color(color: UIColor.orange)
     }
     
     init(_ timedColor: Data) {
         
-        var color = TimedColor(UIColor.blue)
+        var color = TimedColor(UIColor.red)
         do {
             color = try JSONDecoder().decode(TimedColor.self, from: timedColor)
         }

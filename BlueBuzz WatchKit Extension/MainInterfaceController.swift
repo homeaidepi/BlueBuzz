@@ -32,10 +32,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     private var locationManager: CLLocationManager?
     private var location: CLLocation?
     private var mapLocation: CLLocationCoordinate2D?
-    private var defaultColor: TimedColor?
-    
-    private var i = 0;
-    
+
     // Context == nil: the fist-time loading, load pages with reloadRootController then
     // Context != nil: Loading the pages, save the controller instances so that we can
     // switch pages more smoothly.
@@ -43,17 +40,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
-        //perform one-time operations
-        let newRed = CGFloat(70)/255
-        let newGreen = CGFloat(107)/255
-        let newBlue = CGFloat(176)/255
-        
-        let ibmBlueColor = UIColor(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
-        
-        defaultColor = TimedColor(ibmBlueColor)
-        
         if let command = context as? CommandMessage {
-            updateUI(with: command)
             type(of: self).instances.append(self)
         } else {
             statusLabel.setText("Connecting...")
@@ -99,21 +86,21 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         mapObject.addAnnotation(self.mapLocation!, with: .purple)
         
         //update status labels
-        i+=1
-        statusLabel.setText("i:\(i) Lat-\(lat):Long-\(long)")
+        //i+=1
+        //statusLabel.setText("i:\(i) Lat-\(lat):Long-\(long)")
         
         //send the companion phone app the location data if in range
         let commandStatus = CommandMessage(command: .sendMessageData,
                                           phrase: .sent,
                                           location: currentLocation as CLLocation,
-                                          timedColor: defaultColor ?? TimedColor(UIColor.blue),
+                                          timedColor: defaultColor,
                                           errorMessage: "")
         
         do {
             let data = try JSONEncoder().encode(commandStatus)
             
             WCSession.default.sendMessageData(data, replyHandler: { replyHandler in
-            self.statusLabel.setText("reply")}, errorHandler: { error in
+            }, errorHandler: { error in
             self.statusLabel.setText("error")})
         } catch {
             self.statusLabel.setText("Send Message Data")
@@ -142,6 +129,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+        //cant deinit the location manager as we run in the background
 //        self.performSelector(onMainThread: #selector(deinitLocationManager), with: nil, waitUntilDone: true)
     }
     
@@ -156,13 +144,14 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         locationManager?.requestLocation()
         
         // For .updateAppConnection, retrieve the receieved app context if any and update the UI.
-//        if command == .updateAppConnection {
-//            var commandStatus = CommandMessage(command: .updateAppConnection,
-//                                              phrase: .received,
-//                                              timedColor: defaultColor)
-//            updateUI(with: commandStatus)
-//
-//        }
+        if command == .updateAppConnection {
+            let commandStatus = CommandMessage(command: .updateAppConnection,
+                                              phrase: .received,
+                                              location: emptyLocation,
+                                              timedColor: defaultColor,
+                                              errorMessage: emptyError)
+            updateUI(with: commandStatus)
+        }
 
         // Update the status group background color.
         //
@@ -179,9 +168,9 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         for aCommand in commands {
             var command = CommandMessage(command: aCommand,
                                         phrase: .finished,
-                                        location: CLLocation(latitude:0, longitude: 0),
-                                        timedColor: defaultColor ?? TimedColor(UIColor.blue),
-                                        errorMessage: "")
+                                        location: emptyLocation,
+                                        timedColor: defaultColor,
+                                        errorMessage: emptyError)
             
             if let currentContext = currentContext, aCommand == currentContext.command {
                 command.phrase = currentContext.phrase
@@ -203,10 +192,10 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         
         // If the data is from current channel, simple update color and time stamp, then return.
         //
-        if commandStatus.command == command {
-            updateUI(with: commandStatus)
-            return
-        }
+//        if commandStatus.command == command {
+//            updateUI(with: commandStatus)
+//            return
+//        }
         
         // Move the screen to the page matching the data channel, then update the color and time stamp.
         //
@@ -236,12 +225,15 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     // Do the command associated with the current page.
     //
     @IBAction func commandAction() {
-        guard let command = command else { return }
+        guard let command = command
+        else {
+            return
+        }
         
         switch command {
         case .updateAppConnection: updateAppConnection(appConnection)
         case .sendMessage: sendMessage(message)
-        case .sendMessageData: sendMessageData(messageData, location: self.location)
+        case .sendMessageData: sendMessageData(messageData, location: location)
         }
     }
 }
@@ -268,9 +260,9 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     private func updateUI(with commandStatus: CommandMessage) {
         let timedColor = commandStatus.timedColor
         let title = NSAttributedString(string: commandStatus.command.rawValue,
-                                       attributes: [.foregroundColor: timedColor.color])
+                                       attributes: [.foregroundColor: timedColor.color.color])
         commandButton.setAttributedTitle(title)
-        statusLabel.setTextColor(timedColor.color)
+        statusLabel.setTextColor(timedColor.color.color)
         
         // If there is an error, show the message and return.
         //
@@ -283,7 +275,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         {
             notifyUI();
         } else {
-            statusLabel.setText( commandStatus.phrase.rawValue + " at\n" + timedColor.timeStamp)
+            statusLabel.setText(commandStatus.phrase.rawValue + " at\n" + timedColor.timeStamp)
         }
     }
 }

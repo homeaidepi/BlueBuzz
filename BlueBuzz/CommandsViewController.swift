@@ -37,7 +37,7 @@ class CommandsViewController: UITableViewController, TestDataProvider, SessionCo
     func dataDidFlow(_ notification: Notification) {
         if let commandStatus = notification.object as? CommandMessage {
             currentCommand = commandStatus.command
-            currentColor = commandStatus.timedColor.color
+            currentColor = commandStatus.timedColor.color.color
             tableView.reloadData()
         }
     }
