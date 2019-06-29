@@ -262,7 +262,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     private func updateUI(with commandStatus: CommandMessage) {
         let timedColor = commandStatus.timedColor
         let title = NSAttributedString(string: commandStatus.command.rawValue,
-                                       attributes: [.foregroundColor: timedColor.color.color])
+                                       attributes: [.foregroundColor: timedColor.color])
         commandButton.setAttributedTitle(title)
         statusLabel.setTextColor(timedColor.color.color)
         

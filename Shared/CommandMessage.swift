@@ -13,7 +13,8 @@ import CoreLocation
 //
 var emptyLocation = CLLocation(latitude:0, longitude: 0)
 var emptyError = String("")
-var defaultColor = TimedColor(UIColor(red: CGFloat(70)/255, green: CGFloat(107)/255, blue: CGFloat(176)/255, alpha: 1.0)) //IBM Blue
+var ibmBlueColor = UIColor(red: CGFloat(70)/255, green: CGFloat(107)/255, blue: CGFloat(176)/255, alpha: 1.0)
+var defaultColor = TimedColor(ibmBlueColor)
 
 // Constants to identify the Watch Connectivity methods, also used as user-visible strings in UI.
 //
@@ -84,23 +85,19 @@ struct TimedColor: Codable {
     var timeStamp: String
     var colorData: Data
     var defaultValue: Bool = false
-    var defaultColor: Color
     
     private enum CodingKeys: String, CodingKey {
         case timeStamp
         case colorData
         case defaultValue
-        case defaultColor
     }
     
     init(timeStamp: String,
          colorData: Data,
-         defaultValue: Bool = true,
-         defaultColor: Color) {
+         defaultValue: Bool = true) {
         self.timeStamp = timeStamp
         self.colorData = colorData
         self.defaultValue = defaultValue
-        self.defaultColor = defaultColor
     }
     
     func encode(to encoder: Encoder) throws {
@@ -108,7 +105,6 @@ struct TimedColor: Codable {
         try container.encode(timeStamp, forKey: .timeStamp)
         try container.encode(colorData, forKey: .colorData)
         try container.encode(defaultValue, forKey: .defaultValue)
-        try container.encode(defaultColor, forKey: .defaultColor)
     }
     
     init(from decoder: Decoder) throws {
@@ -117,22 +113,16 @@ struct TimedColor: Codable {
         timeStamp = try container.decode(String.self, forKey: .timeStamp)
         colorData = try container.decode(Data.self, forKey: .colorData)
         defaultValue = try container.decode(Bool.self, forKey: .defaultValue)
-        defaultColor = try container.decode(Color.self, forKey: .defaultColor)
-        
     }
     
     var color: Color {
-        
-        if (defaultValue == true) { return Color(color: defaultColor.color) }
-        
-        var color = Color(color: UIColor.green)
         do {
-            color = try JSONDecoder().decode(Color.self, from: colorData)
+            let color = try JSONDecoder().decode(Color.self, from: colorData)
+            return color
         }
         catch {
+            return Color(color: ibmBlueColor)
         }
-        
-        return color
     }
     
     var timedColor: [String: Any] {
@@ -148,7 +138,6 @@ struct TimedColor: Codable {
         self.timeStamp = someDateTime
         self.colorData = timedColor.data()
         self.defaultValue = false
-        self.defaultColor = Color(color: UIColor.yellow)
     }
     
     init(_ timedColor: [String: Any]) {
@@ -159,7 +148,6 @@ struct TimedColor: Codable {
         self.timeStamp = timeStamp
         self.colorData = colorData
         self.defaultValue = false
-        self.defaultColor = Color(color: UIColor.orange)
     }
     
     init(_ timedColor: Data) {
@@ -174,7 +162,6 @@ struct TimedColor: Codable {
         self.timeStamp = color.timeStamp
         self.colorData = color.colorData
         self.defaultValue = color.defaultValue
-        self.defaultColor = color.defaultColor
     }
 }
 
