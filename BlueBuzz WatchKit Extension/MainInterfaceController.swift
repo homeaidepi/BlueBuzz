@@ -40,7 +40,9 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
-        if let command = context as? CommandMessage {
+        if let context = context as? CommandMessage {
+            command = context.command
+            updateUI(with: context)
             type(of: self).instances.append(self)
         } else {
             statusLabel.setText("Connecting...")

@@ -60,9 +60,9 @@ extension SessionCommands {
     func sendMessage(_ message: [String: Any]) {
         var commandStatus = CommandMessage(command: .sendMessage,
                                           phrase: .sent,
-                                          location: CLLocation(latitude: 0, longitude: 0),
+                                          location: emptyLocation,
                                           timedColor: TimedColor(message),
-                                          errorMessage: "")
+                                          errorMessage: emptyError)
 
         guard WCSession.default.activationState == .activated else {
             return handleSessionUnactivated(with: commandStatus)
@@ -86,7 +86,7 @@ extension SessionCommands {
     func sendMessageData(_ messageData: Data, location: CLLocation?) {
         var commandStatus = CommandMessage(command: .sendMessageData,
                                           phrase: .sent,
-                                          location: CLLocation(latitude: 0, longitude: 0),
+                                          location: location ?? CLLocation(latitude: 0, longitude: 0),
                                           timedColor: TimedColor(messageData),
                                           errorMessage: "")
         
