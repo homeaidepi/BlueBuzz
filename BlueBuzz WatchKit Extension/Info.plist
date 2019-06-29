@@ -38,6 +38,8 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app will notify you when your phone is out of range</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>This app will notify you when your phone is out of range</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

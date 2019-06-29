@@ -75,7 +75,7 @@ extension TestDataProvider {
     // Generate a message, used as the payload for sendMessage.
     //
     var location: CLLocation? {
-        return nil
+        return CLLocation(latitude: 40.7128, longitude: 74.0060)
     }
     
     // Generate a message, used as the payload for sendMessageData.

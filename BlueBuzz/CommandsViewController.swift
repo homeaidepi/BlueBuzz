@@ -35,9 +35,9 @@ class CommandsViewController: UITableViewController, TestDataProvider, SessionCo
     //
     @objc
     func dataDidFlow(_ notification: Notification) {
-        if let commandStatus = notification.object as? CommandStatus {
+        if let commandStatus = notification.object as? CommandMessage {
             currentCommand = commandStatus.command
-            currentColor = commandStatus.timedColor?.color
+            currentColor = commandStatus.timedColor.color
             tableView.reloadData()
         }
     }
@@ -55,7 +55,6 @@ extension CommandsViewController { // MARK: - UITableViewDelegate and UITableVie
         let button = UIButton(type: .roundedRect)
         //button.addTarget(self, action: #selector(type(of: self).showTransfers(_:)), for: .touchUpInside)
         button.setTitleColor(titleColor, for: .normal)
-        //button.setTitle(" \(transferCount) ", for: .normal)
         button.sizeToFit()
         return button
     }
@@ -85,7 +84,6 @@ extension CommandsViewController { // MARK: - UITableViewDelegate and UITableVie
     // Do the command associated with the selected table row.
     //
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         currentCommand = commands[indexPath.row]
         switch currentCommand {
             case .updateAppConnection: updateAppConnection(appConnection)

@@ -47,16 +47,23 @@ class SessionDelegater: NSObject, WCSessionDelegate {
     // Called when an app context is received.
     //
     func session(_ session: WCSession, didReceiveApplicationContext applicationConnection: [String: Any]) {
-        var commandStatus = CommandStatus(command: .updateAppConnection, phrase: .received)
-        commandStatus.timedColor = TimedColor(applicationConnection)
+        let commandStatus = CommandMessage(command: .updateAppConnection,
+                                          phrase: .received,
+                                          location: nil!,
+                                          timedColor: TimedColor(applicationConnection),
+                                          errorMessage: nil!)
         postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
     }
     
     // Called when a message is received and the peer doesn't need a response.
     //
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        var commandStatus = CommandStatus(command: .sendMessage, phrase: .received)
-        commandStatus.timedColor = TimedColor(message)
+        let commandStatus = CommandMessage(command: .sendMessage,
+                                          phrase: .received,
+                                          location: nil!,
+                                          timedColor: TimedColor(message),
+                                          errorMessage: nil!)
+        
         postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
     }
     
@@ -70,8 +77,12 @@ class SessionDelegater: NSObject, WCSessionDelegate {
     // Called when a piece of message data is received and the peer doesn't need a response.
     //
     func session(_ session: WCSession, didReceiveMessageData messageData: Data) {
-        var commandStatus = CommandStatus(command: .sendMessageData, phrase: .received)
-        commandStatus.timedColor = TimedColor(messageData)
+        let commandStatus = CommandMessage(command: .sendMessageData,
+                                          phrase: .received,
+                                          location: nil!,
+                                          timedColor: TimedColor(messageData),
+                                          errorMessage: nil!)
+        
         postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
     }
     
@@ -101,7 +112,7 @@ class SessionDelegater: NSObject, WCSessionDelegate {
     
     // Post a notification on the main thread asynchronously.
     //
-    private func postNotificationOnMainQueueAsync(name: NSNotification.Name, object: CommandStatus? = nil) {
+    private func postNotificationOnMainQueueAsync(name: NSNotification.Name, object: CommandMessage? = nil) {
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: name, object: object)
         }

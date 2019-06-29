@@ -27,10 +27,13 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     // Retain the controllers so that we don't have to reload root controllers for every switch.
     //
     static var instances = [MainInterfaceController]()
-    private var command: Command!
     
+    private var command: Command?
     private var locationManager: CLLocationManager?
+    private var location: CLLocation?
     private var mapLocation: CLLocationCoordinate2D?
+    private var defaultColor: TimedColor?
+    
     private var i = 0;
     
     // Context == nil: the fist-time loading, load pages with reloadRootController then
@@ -40,9 +43,17 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
-        if let context = context as? CommandStatus {
-            command = context.command
-            updateUI(with: context)
+        //perform one-time operations
+        let newRed = CGFloat(70)/255
+        let newGreen = CGFloat(107)/255
+        let newBlue = CGFloat(176)/255
+        
+        let ibmBlueColor = UIColor(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
+        
+        defaultColor = TimedColor(ibmBlueColor)
+        
+        if let command = context as? CommandMessage {
+            updateUI(with: command)
             type(of: self).instances.append(self)
         } else {
             statusLabel.setText("Connecting...")
@@ -70,35 +81,43 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
+        //Step 1 get current location from locationManager return result
         let currentLocation = locations[0]
         let lat = currentLocation.coordinate.latitude
         let long = currentLocation.coordinate.longitude
         
+        //step 2 assign local variables
+        self.location = currentLocation
         self.mapLocation = CLLocationCoordinate2DMake(lat, long)
         
+        //step 3 define map objects
         let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
         let region = MKCoordinateRegion(center: self.mapLocation!, span: span)
         
+        //step 4 locate the region and set the pin in the map
         self.mapObject.setRegion(region)
-        
         mapObject.addAnnotation(self.mapLocation!, with: .purple)
         
+        //update status labels
         i+=1
-        if let location = locations.last {
-            statusLabel.setText("i:\(i) New location is \(location)" )
+        statusLabel.setText("i:\(i) Lat-\(lat):Long-\(long)")
+        
+        //send the companion phone app the location data if in range
+        let commandStatus = CommandMessage(command: .sendMessageData,
+                                          phrase: .sent,
+                                          location: currentLocation as CLLocation,
+                                          timedColor: defaultColor ?? TimedColor(UIColor.blue),
+                                          errorMessage: "")
+        
+        do {
+            let data = try JSONEncoder().encode(commandStatus)
+            
+            WCSession.default.sendMessageData(data, replyHandler: { replyHandler in
+            self.statusLabel.setText("reply")}, errorHandler: { error in
+            self.statusLabel.setText("error")})
+        } catch {
+            self.statusLabel.setText("Send Message Data")
         }
-        else {
-            statusLabel.setText("i:\(i) Lat-\(lat):Long-\(long)")
-        }
-        
-        var commandStatus = CommandStatus(command: .sendMessageData, phrase: .sent)
-        commandStatus.location = currentLocation
-        
-        guard let data = try? NSKeyedArchiver.archivedData(withRootObject: commandStatus, requiringSecureCoding: false) else { return }
-        
-        WCSession.default.sendMessageData(data, replyHandler: { replyHandler in
-        self.statusLabel.setText("reply")}, errorHandler: { error in
-        self.statusLabel.setText("error")})
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -123,13 +142,12 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-        self.performSelector(onMainThread: #selector(deinitLocationManager), with: nil, waitUntilDone: true)
+//        self.performSelector(onMainThread: #selector(deinitLocationManager), with: nil, waitUntilDone: true)
     }
     
     override func willActivate() {
         super.willActivate()
-        guard command != nil else { return } // For first-time loading do nothing.
-        
+
         locationManager = CLLocationManager()
         locationManager?.requestAlwaysAuthorization()
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
@@ -138,19 +156,14 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         locationManager?.requestLocation()
         
         // For .updateAppConnection, retrieve the receieved app context if any and update the UI.
-        if command == .updateAppConnection {
-            let newRed = CGFloat(70)/255
-            let newGreen = CGFloat(107)/255
-            let newBlue = CGFloat(176)/255
-            
-            let ibmBlueColor = UIColor(red: newRed, green: newGreen, blue: newBlue, alpha: 1.0)
-            
-            var commandStatus = CommandStatus(command: command, phrase: .received)
-            commandStatus.timedColor = TimedColor(ibmBlueColor)
-            updateUI(with: commandStatus)
-            
-        }
-        
+//        if command == .updateAppConnection {
+//            var commandStatus = CommandMessage(command: .updateAppConnection,
+//                                              phrase: .received,
+//                                              timedColor: defaultColor)
+//            updateUI(with: commandStatus)
+//
+//        }
+
         // Update the status group background color.
         //
         statusGroup.setBackgroundColor(.black)
@@ -159,18 +172,23 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     // Load paged-based UI.
     // If a current context is specified, use the timed color it provided.
     //
-    private func reloadRootController(with currentContext: CommandStatus? = nil) {
+    private func reloadRootController(with currentContext: CommandMessage? = nil) {
         let commands: [Command] = [.updateAppConnection, .sendMessage, .sendMessageData]
         
-        var contexts = [CommandStatus]()
+        var contexts = [CommandMessage]()
         for aCommand in commands {
-            var commandStatus = CommandStatus(command: aCommand, phrase: .finished)
+            var command = CommandMessage(command: aCommand,
+                                        phrase: .finished,
+                                        location: CLLocation(latitude:0, longitude: 0),
+                                        timedColor: defaultColor ?? TimedColor(UIColor.blue),
+                                        errorMessage: "")
             
             if let currentContext = currentContext, aCommand == currentContext.command {
-                commandStatus.phrase = currentContext.phrase
-                commandStatus.timedColor = currentContext.timedColor
+                command.phrase = currentContext.phrase
+                command.timedColor = currentContext.timedColor
+                command.location = currentContext.location
             }
-            contexts.append(commandStatus)
+            contexts.append(command)
         }
         
         let names = Array(repeating: ControllerID.mainInterfaceController, count: contexts.count)
@@ -181,12 +199,12 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     //
     @objc
     func dataDidFlow(_ notification: Notification) {
-        guard let commandStatus = notification.object as? CommandStatus else { return }
+        guard let commandStatus = notification.object as? CommandMessage else { return }
         
         // If the data is from current channel, simple update color and time stamp, then return.
         //
         if commandStatus.command == command {
-            updateUI(with: commandStatus, errorMessage: commandStatus.errorMessage)
+            updateUI(with: commandStatus)
             return
         }
         
@@ -195,7 +213,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         if let index = type(of: self).instances.firstIndex(where: { $0.command == commandStatus.command }) {
             let controller = MainInterfaceController.instances[index]
             controller.becomeCurrentPage()
-            controller.updateUI(with: commandStatus, errorMessage: commandStatus.errorMessage)
+            controller.updateUI(with: commandStatus)
         }
     }
 
@@ -223,7 +241,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         switch command {
         case .updateAppConnection: updateAppConnection(appConnection)
         case .sendMessage: sendMessage(message)
-        case .sendMessageData: sendMessageData(messageData, location: location)
+        case .sendMessageData: sendMessageData(messageData, location: self.location)
         }
     }
 }
@@ -247,13 +265,8 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     // Update the user interface with the command status.
     // Note that there isn't a timed color when the interface controller is initially loaded.
     //
-    private func updateUI(with commandStatus: CommandStatus, errorMessage: String? = nil) {
-        guard let timedColor = commandStatus.timedColor else {
-            statusLabel.setText("")
-            commandButton.setTitle(commandStatus.command.rawValue)
-            return
-        }
-        
+    private func updateUI(with commandStatus: CommandMessage) {
+        let timedColor = commandStatus.timedColor
         let title = NSAttributedString(string: commandStatus.command.rawValue,
                                        attributes: [.foregroundColor: timedColor.color])
         commandButton.setAttributedTitle(title)
@@ -261,8 +274,8 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         
         // If there is an error, show the message and return.
         //
-        if let errorMessage = errorMessage {
-            statusLabel.setText("! \(errorMessage)")
+        if commandStatus.errorMessage != "" {
+            statusLabel.setText("! \(commandStatus.errorMessage)")
             return
         }
         

@@ -111,26 +111,21 @@ class MainViewController: UIViewController {
     //
     @objc
     func dataDidFlow(_ notification: Notification) {
-        guard let commandStatus = notification.object as? CommandStatus else { return }
+        guard let commandStatus = notification.object as? CommandMessage else { return }
         
         defer { noteLabel.isHidden = logView.text.isEmpty ? false: true }
         
         // If an error occurs, show the error message and returns.
         //
-        if let errorMessage = commandStatus.errorMessage {
-            log("! \(commandStatus.command.rawValue): \(errorMessage)")
+        if commandStatus.errorMessage.count > 0 {
+            log("! \(commandStatus.command.rawValue): \(commandStatus.errorMessage)")
             return
         }
         
-        guard let timedColor = commandStatus.timedColor else { return }
+        let timedColor = commandStatus.timedColor
         
         //log the messageData i.e location to the screen else show command
         //
-        if let location = commandStatus.location {
-            log("-> \(location)")
-        }
-        else {
-            log("-> \(commandStatus.command.rawValue): \(commandStatus.phrase.rawValue) at \(timedColor.timeStamp)")
-        }
+        log("-> \(commandStatus.command.rawValue): \(commandStatus.phrase.rawValue) at \(timedColor.timeStamp)")
     }
 }

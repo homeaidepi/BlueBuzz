@@ -27,8 +27,8 @@
 		40D46F721E8065200077A7B7 /* MainInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D46F711E8065200077A7B7 /* MainInterfaceController.swift */; };
 		40D46F741E8065200077A7B7 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D46F731E8065200077A7B7 /* ExtensionDelegate.swift */; };
 		40D46F761E8065200077A7B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40D46F751E8065200077A7B7 /* Assets.xcassets */; };
-		40D8B77920A554A5005F7D76 /* CommandStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8B77820A554A5005F7D76 /* CommandStatus.swift */; };
-		40D8B77A20A554A5005F7D76 /* CommandStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8B77820A554A5005F7D76 /* CommandStatus.swift */; };
+		40D8B77920A554A5005F7D76 /* CommandMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8B77820A554A5005F7D76 /* CommandMessage.swift */; };
+		40D8B77A20A554A5005F7D76 /* CommandMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8B77820A554A5005F7D76 /* CommandMessage.swift */; };
 		40DC7D0F1EA8186200A93AFB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DC7D0E1EA8186200A93AFB /* Logger.swift */; };
 		40DC7D101EA8186200A93AFB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DC7D0E1EA8186200A93AFB /* Logger.swift */; };
 		40DD4D8E1EA6B7510074E73F /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
@@ -98,7 +98,7 @@
 		40D46F731E8065200077A7B7 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		40D46F751E8065200077A7B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40D46F771E8065200077A7B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		40D8B77820A554A5005F7D76 /* CommandStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommandStatus.swift; path = Shared/CommandStatus.swift; sourceTree = "<group>"; };
+		40D8B77820A554A5005F7D76 /* CommandMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommandMessage.swift; path = Shared/CommandMessage.swift; sourceTree = "<group>"; };
 		40DC7D0E1EA8186200A93AFB /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Logger.swift; path = Shared/Logger.swift; sourceTree = "<group>"; };
 		40DC7D141EA81D8100A93AFB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		40DD4D8A1EA6B6E20074E73F /* BlueBuzz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BlueBuzz.entitlements; sourceTree = "<group>"; };
@@ -131,7 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				407607851E81A7F000A6A8EA /* TestDataProvider.swift */,
-				40D8B77820A554A5005F7D76 /* CommandStatus.swift */,
+				40D8B77820A554A5005F7D76 /* CommandMessage.swift */,
 				4076077C1E8183AF00A6A8EA /* SessionCommands.swift */,
 				40AF22981F29236300E6D1A8 /* SessionDelegater.swift */,
 				40DC7D0E1EA8186200A93AFB /* Logger.swift */,
@@ -417,7 +417,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40D46F511E8065200077A7B7 /* MainViewController.swift in Sources */,
-				40D8B77920A554A5005F7D76 /* CommandStatus.swift in Sources */,
+				40D8B77920A554A5005F7D76 /* CommandMessage.swift in Sources */,
 				407607861E81A7F000A6A8EA /* TestDataProvider.swift in Sources */,
 				40D46F4F1E8065200077A7B7 /* AppDelegate.swift in Sources */,
 				40DC7D0F1EA8186200A93AFB /* Logger.swift in Sources */,
@@ -432,7 +432,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40AF229A1F29236300E6D1A8 /* SessionDelegater.swift in Sources */,
-				40D8B77A20A554A5005F7D76 /* CommandStatus.swift in Sources */,
+				40D8B77A20A554A5005F7D76 /* CommandMessage.swift in Sources */,
 				40D46F741E8065200077A7B7 /* ExtensionDelegate.swift in Sources */,
 				407607871E81A7F000A6A8EA /* TestDataProvider.swift in Sources */,
 				400DB0971EA005A000F637F0 /* ComplicationController.swift in Sources */,

@@ -30,25 +30,32 @@ extension SessionCommands {
     //
     func updateAppConnection(_ context: [String: Any]) {
 
-        var commandStatus = CommandStatus(command: .updateAppConnection, phrase: .unauthorized)
+        var command = CommandMessage(command: .updateAppConnection,
+                                          phrase: .unauthorized,
+                                          location: CLLocation(latitude: 0, longitude: 0),
+                                          timedColor: TimedColor(UIColor.blue),
+                                          errorMessage: "")
         
         if (WCSession.default.activationState == .activated)
         {
-            commandStatus = CommandStatus(command: .updateAppConnection, phrase: .authorized)
-            commandStatus.timedColor = TimedColor(context)
+            command = CommandMessage(command: .updateAppConnection,
+                                    phrase: .authorized,
+                                    location: nil!,
+                                    timedColor: TimedColor(context),
+                                    errorMessage: nil!)
         }
         else {
             let center = UNUserNotificationCenter.current()
             
             center.requestAuthorization(options: [.sound]) { (granted, error) in
                 if granted {
-                    commandStatus.phrase = .authorized
+                    command.phrase = .authorized
                 } else {
-                    commandStatus.phrase = .unauthorized
+                    command.phrase = .unauthorized
                 }
             }
         }
-        //let ibmBlueColor = UIColor(red: 70, green: 107, blue: 176);
+
         let newRed = CGFloat(70)/255
         let newGreen = CGFloat(107)/255
         let newBlue = CGFloat(176)/255
@@ -63,27 +70,33 @@ extension SessionCommands {
         ]
         
         WCSession.default.sendMessage(message, replyHandler: { replyMessage in
-            commandStatus.phrase = .replied
-            commandStatus.timedColor = TimedColor(replyMessage)
-            self.postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
+            command.phrase = .replied
+            command.timedColor = TimedColor(replyMessage)
+            self.postNotificationOnMainQueueAsync(name: .dataDidFlow, object: command)
             
         }, errorHandler: { error in
-            commandStatus.phrase = .failed
-            commandStatus.errorMessage = error.localizedDescription
-            self.postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
+            command.phrase = .failed
+            command.errorMessage = error.localizedDescription
+            self.postNotificationOnMainQueueAsync(name: .dataDidFlow, object: command)
         })
         
-        commandStatus = CommandStatus(command: .updateAppConnection,
-                                      phrase: .sent)
-        commandStatus.timedColor = timedColor;
+        let commandStatus = CommandMessage(command: .updateAppConnection,
+                                      phrase: .sent,
+                                      location: CLLocation(latitude: 0, longitude: 0),
+                                      timedColor: timedColor,
+                                      errorMessage: "")
+
         postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
     }
     
     // Send a message if the session is activated and update UI with the command status.
     //
     func sendMessage(_ message: [String: Any]) {
-        var commandStatus = CommandStatus(command: .sendMessage, phrase: .sent)
-        commandStatus.timedColor = TimedColor(message)
+        var commandStatus = CommandMessage(command: .sendMessage,
+                                          phrase: .sent,
+                                          location: CLLocation(latitude: 0, longitude: 0),
+                                          timedColor: TimedColor(message),
+                                          errorMessage: "")
 
         guard WCSession.default.activationState == .activated else {
             return handleSessionUnactivated(with: commandStatus)
@@ -105,9 +118,11 @@ extension SessionCommands {
     // Send  a piece of message data if the session is activated and update UI with the command status.
     //
     func sendMessageData(_ messageData: Data, location: CLLocation?) {
-        var commandStatus = CommandStatus(command: .sendMessageData, phrase: .sent)
-        commandStatus.timedColor = TimedColor(messageData)
-        commandStatus.location = location
+        var commandStatus = CommandMessage(command: .sendMessageData,
+                                          phrase: .sent,
+                                          location: CLLocation(latitude: 0, longitude: 0),
+                                          timedColor: TimedColor(messageData),
+                                          errorMessage: "")
         
         guard WCSession.default.activationState == .activated else {
             return handleSessionUnactivated(with: commandStatus)
@@ -128,7 +143,7 @@ extension SessionCommands {
     
     // Post a notification on the main thread asynchronously.
     //
-    private func postNotificationOnMainQueueAsync(name: NSNotification.Name, object: CommandStatus) {
+    private func postNotificationOnMainQueueAsync(name: NSNotification.Name, object: CommandMessage) {
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: name, object: object)
         }
@@ -136,7 +151,7 @@ extension SessionCommands {
 
     // Handle the session unactived error. WCSession commands require an activated session.
     //
-    private func handleSessionUnactivated(with commandStatus: CommandStatus) {
+    private func handleSessionUnactivated(with commandStatus: CommandMessage) {
         var mutableStatus = commandStatus
         mutableStatus.phrase = .failed
         mutableStatus.errorMessage =  "Session is not activated yet!"
