@@ -7,6 +7,7 @@ SessionDelegater implemments the WCSessionDelegate methods. Used on both iOS and
 
 import Foundation
 import WatchConnectivity
+import CoreLocation
 
 #if os(watchOS)
 import ClockKit
@@ -37,10 +38,6 @@ class SessionDelegater: NSObject, WCSessionDelegate {
     // Called when WCSession reachability is changed.
     //
     func sessionReachabilityDidChange(_ session: WCSession) {
-        //var commandStatus = CommandStatus(command: .sendMessageData, phrase: .received)
-        //let messageData = Data(base64Encoded: "Session Reachability Changed")
-        //commandStatus.timedColor = TimedColor(messageData!)
-        //postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
         postNotificationOnMainQueueAsync(name: .reachabilityDidChange)
     }
     
@@ -49,9 +46,10 @@ class SessionDelegater: NSObject, WCSessionDelegate {
     func session(_ session: WCSession, didReceiveApplicationContext applicationConnection: [String: Any]) {
         let commandStatus = CommandMessage(command: .updateAppConnection,
                                           phrase: .received,
-                                          location: nil!,
+                                          location: CLLocation(latitude: 0, longitude:0),
                                           timedColor: TimedColor(applicationConnection),
-                                          errorMessage: nil!)
+                                          errorMessage: "")
+        
         postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
     }
     
@@ -60,9 +58,9 @@ class SessionDelegater: NSObject, WCSessionDelegate {
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         let commandStatus = CommandMessage(command: .sendMessage,
                                           phrase: .received,
-                                          location: nil!,
+                                          location: CLLocation(latitude: 0, longitude:0),
                                           timedColor: TimedColor(message),
-                                          errorMessage: nil!)
+                                          errorMessage: "")
         
         postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
     }
@@ -79,9 +77,9 @@ class SessionDelegater: NSObject, WCSessionDelegate {
     func session(_ session: WCSession, didReceiveMessageData messageData: Data) {
         let commandStatus = CommandMessage(command: .sendMessageData,
                                           phrase: .received,
-                                          location: nil!,
+                                          location: CLLocation(latitude: 0, longitude:0),
                                           timedColor: TimedColor(messageData),
-                                          errorMessage: nil!)
+                                          errorMessage: "")
         
         postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
     }

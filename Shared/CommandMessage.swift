@@ -148,11 +148,18 @@ struct TimedColor: Codable {
     }
     
     init(_ timedColor: Data) {
-        let data = ((try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(timedColor)) as Any??)
-        guard let dictionary = data as? [String: Any] else {
-            fatalError("Failed to unarchive a timedColor dictionary!")
+        
+        var color = TimedColor(UIColor.blue)
+        do {
+            color = try JSONDecoder().decode(TimedColor.self, from: timedColor)
         }
-        self.init(dictionary)
+        catch {
+        }
+
+        self.timeStamp = color.timeStamp
+        self.colorData = color.colorData
+        self.defaultValue = color.defaultValue
+        self.defaultColor = color.defaultColor
     }
 }
 
