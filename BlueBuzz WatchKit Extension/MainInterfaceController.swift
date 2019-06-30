@@ -65,7 +65,9 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
             self, selector: #selector(type(of: self).reachabilityDidChange(_:)),
             name: .reachabilityDidChange, object: nil
         )
-        NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground), name: .appDidEnterBackground, object: nil)
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(type(of: self).appDidEnterBackground(_:)),
+            name: .appDidEnterBackground, object: nil)
     }
     
     @objc
@@ -92,10 +94,6 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
         self.mapObject.setRegion(region)
         mapObject.addAnnotation(self.mapLocation!, with: .purple)
         
-        //update status labels
-        //i+=1
-        //statusLabel.setText("i:\(i) Lat-\(lat):Long-\(long)")
-        
         //send the companion phone app the location data if in range
         let commandStatus = CommandMessage(command: .sendMessageData,
                                           phrase: .sent,
@@ -103,15 +101,10 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
                                           timedColor: defaultColor,
                                           errorMessage: "")
         
-        do {
-            let data = try JSONEncoder().encode(commandStatus)
-            
-            WCSession.default.sendMessageData(data, replyHandler: { replyHandler in
-            }, errorHandler: { error in
-            self.statusLabel.setText("error")})
-        } catch {
-            self.statusLabel.setText("Send Message Data")
-        }
+        guard let data = try? JSONEncoder().encode(commandStatus) else { return }
+        
+        WCSession.default.sendMessageData(data, replyHandler: { replyHandler in
+        }, errorHandler: { error in })
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -144,19 +137,19 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
         locationManager?.allowsBackgroundLocationUpdates = true
         locationManager?.requestLocation()
         
-        // For .updateAppConnection, retrieve the receieved app context if any and update the UI.
-        if command == .updateAppConnection {
-            let commandStatus = CommandMessage(command: .updateAppConnection,
-                                              phrase: .received,
-                                              location: emptyLocation,
-                                              timedColor: defaultColor,
-                                              errorMessage: emptyError)
-            updateUI(with: commandStatus)
-        }
-
-        // Update the status group background color.
-        //
-        statusGroup.setBackgroundColor(.black)
+//        // For .updateAppConnection, retrieve the receieved app context if any and update the UI.
+//        if command == .updateAppConnection {
+//            let commandStatus = CommandMessage(command: .updateAppConnection,
+//                                              phrase: .received,
+//                                              location: emptyLocation,
+//                                              timedColor: defaultColor,
+//                                              errorMessage: emptyError)
+//            updateUI(with: commandStatus)
+//        }
+//
+//        // Update the status group background color.
+//        //
+//        statusGroup.setBackgroundColor(.black)
     }
     
     // Load paged-based UI.
@@ -191,13 +184,6 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
     func dataDidFlow(_ notification: Notification) {
         guard let commandStatus = notification.object as? CommandMessage else { return }
         
-        // If the data is from current channel, simple update color and time stamp, then return.
-        //
-//        if commandStatus.command == command {
-//            updateUI(with: commandStatus)
-//            return
-//        }
-        
         // Move the screen to the page matching the data channel, then update the color and time stamp.
         //
         if let index = type(of: self).instances.firstIndex(where: { $0.command == commandStatus.command }) {
@@ -218,8 +204,6 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
     //
     @objc
     func reachabilityDidChange(_ notification: Notification) {
-        notifyUI();
-        
         //print("\(#function): isReachable:\(WCSession.default.isReachable)")
     }
     
@@ -254,7 +238,7 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
                     let backgroundConfigObject = URLSessionConfiguration.background(withIdentifier: urlTask.sessionIdentifier)
                     let backgroundSession = URLSession(configuration: backgroundConfigObject, delegate: self, delegateQueue: nil)
                     
-                    statusLabel.setText("Rejoining session \(backgroundSession)")
+                    print("Rejoining session \(backgroundSession)")
                 }
                 // make sure to complete all tasks, even ones you don't handle
                 task.setTaskCompleted()
@@ -267,7 +251,7 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
         let fireDate = Date()
         WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: fireDate, userInfo: nil) { error in
             if (error == nil) {
-                self.statusLabel.setText("successfully scheduled snapshot.  All background work completed.")
+                print("successfully scheduled snapshot.  All background work completed.")
             }
         }
     }
