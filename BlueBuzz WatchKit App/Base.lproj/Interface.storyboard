@@ -11,7 +11,7 @@
         <!--Blue Buzz-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller identifier="MainInterfaceController" title="Blue Buzz" animationDuration="1" alwaysBounce="YES" fullBounds="YES" fullScreen="YES" id="AgC-eL-Hgc" userLabel="Blue Buzz" customClass="MainInterfaceController" customModule="SimpleWatchConnectivity_WatchKit_Extension" colorLabel="IBBuiltInLabel-Red">
+                <controller identifier="MainInterfaceController" title="Blue Buzz" animationDuration="1" fullScreen="YES" id="AgC-eL-Hgc" userLabel="Blue Buzz" customClass="MainInterfaceController" customModule="SimpleWatchConnectivity_WatchKit_Extension" colorLabel="IBBuiltInLabel-Red">
                     <items>
                         <button width="1" height="35" alignment="center" title="Command" id="k6l-Dc-fO2">
                             <connections>
