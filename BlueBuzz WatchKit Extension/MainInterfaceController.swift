@@ -65,9 +65,12 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
             self, selector: #selector(type(of: self).reachabilityDidChange(_:)),
             name: .reachabilityDidChange, object: nil
         )
-        NotificationCenter.default.addObserver(
-            self, selector: #selector(type(of: self).appDidEnterBackground(_:)),
-            name: .appDidEnterBackground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground), name: .appDidEnterBackground, object: nil)
+    }
+    
+    @objc
+    func appDidEnterBackground(_ notification: Notification) {
+        scheduleRefresh()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -119,12 +122,6 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
         if status == .authorizedAlways {
             locationManager?.requestLocation()
         }
-    }
-    
-    @objc
-    func appDidEnterBackground(_ notification: Notification) {
-        notifyUI();
-        locationManager?.requestLocation()
     }
     
     @objc private func deinitLocationManager() {
@@ -275,14 +272,12 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
         }
     }
     
-    // MARK: URLSession handling
-    
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo url: URL) {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mm:ss a"
         let someDateTime = formatter.string(from: Date())
         
-        statusLabel.setText("\(someDateTime) finished to url: \(url)")
+        print("\(someDateTime) finished session url: \(url)")
         scheduleSnapshot()
     }
     
@@ -295,11 +290,10 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
         downloadTask.resume()
     }
     
-    // MARK: IB actions
-    
-    @IBAction func ScheduleRefreshButtonTapped() {
-        // fire in 20 seconds
-        let fireDate = Date(timeIntervalSinceNow: 20.0)
+    func scheduleRefresh() {
+        print("Scheduling refresh")
+        // fire in 10 seconds
+        let fireDate = Date(timeIntervalSinceNow: 10.0)
         // optional, any SecureCoding compliant data can be passed here
         let userInfo = ["reason" : "background update"] as NSDictionary
         
