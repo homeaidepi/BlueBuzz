@@ -62,13 +62,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     }
     
     func applicationDidEnterBackground() {
-        let date = Date(timeIntervalSinceNow: 10)
-        WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: date, userInfo: nil) { error in
-            if let error = error {
-                print("scheduleSnapshotRefresh error: \(error)!")
-            }
-        }
-        self.completeBackgroundTasks()
+        
     }
     
     // Compelete the background tasks, and schedule a snapshot refresh.
@@ -90,36 +84,5 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         //
         wcBackgroundTasks.removeAll()
     
-    }
-    
-    // Be sure to complete all the tasks - otherwise they will keep consuming the background executing
-    // time until the time is out of budget and the app is killed.
-    //
-    // WKWatchConnectivityRefreshBackgroundTask should be completed after the pending data is received
-    // so retain the tasks first. The retained tasks will be completed at the following cases:
-    // 1. hasContentPending flips to false, meaning all the pending data is received. Pending data means
-    //    the data received by the device prior to the WCSession getting activated.
-    //    More data might arrive, but it isn't pending when the session activated.
-    // 2. The end of the handle method.
-    //    This happens when hasContentPending can flip to false before the tasks are retained.
-    //
-    // If the tasks are completed before the WCSessionDelegate methods are called, the data will be delivered
-    // the app is running next time, so no data lost.
-    //
-    func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
-        for task in backgroundTasks {
-            
-            // Use Logger to log the tasks for debug purpose. A real app may remove the log
-            // to save the precious background time.
-            //
-            if let wcTask = task as? WKWatchConnectivityRefreshBackgroundTask {
-                wcBackgroundTasks.append(wcTask)
-                Logger.shared.append(line: "\(#function):\(wcTask.description) was appended!")
-            } else {
-                task.setTaskCompletedWithSnapshot(true)
-                Logger.shared.append(line: "\(#function):\(task.description) was completed!")
-            }
-        }
-        completeBackgroundTasks()
     }
 }

@@ -17,7 +17,7 @@ struct ControllerID {
     static let mainInterfaceController = "MainInterfaceController"
 }
 
-class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate, TestDataProvider, SessionCommands {
+class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate, CLLocationManagerDelegate, TestDataProvider, SessionCommands {
     
     @IBOutlet weak var statusGroup: WKInterfaceGroup!
     @IBOutlet var statusLabel: WKInterfaceLabel!
@@ -32,6 +32,8 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     private var locationManager: CLLocationManager?
     private var location: CLLocation?
     private var mapLocation: CLLocationCoordinate2D?
+    
+     let sampleDownloadURL = URL(string: "http://devstreaming.apple.com/videos/wwdc/2015/802mpzd3nzovlygpbg/802/802_designing_for_apple_watch.pdf?dl=1")!
 
     // Context == nil: the fist-time loading, load pages with reloadRootController then
     // Context != nil: Loading the pages, save the controller instances so that we can
@@ -224,6 +226,90 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         //print("\(#function): isReachable:\(WCSession.default.isReachable)")
     }
     
+    // Be sure to complete all the tasks - otherwise they will keep consuming the background executing
+    // time until the time is out of budget and the app is killed.
+    //
+    // WKWatchConnectivityRefreshBackgroundTask should be completed after the pending data is received
+    // so retain the tasks first. The retained tasks will be completed at the following cases:
+    // 1. hasContentPending flips to false, meaning all the pending data is received. Pending data means
+    //    the data received by the device prior to the WCSession getting activated.
+    //    More data might arrive, but it isn't pending when the session activated.
+    // 2. The end of the handle method.
+    //    This happens when hasContentPending can flip to false before the tasks are retained.
+    //
+    // If the tasks are completed before the WCSessionDelegate methods are called, the data will be delivered
+    // the app is running next time, so no data lost.
+    //
+    func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
+        for _ in backgroundTasks {
+            
+            for task : WKRefreshBackgroundTask in backgroundTasks {
+                print("received background task: ", task)
+                // only handle these while running in the background
+                if (WKExtension.shared().applicationState == .background) {
+                    if task is WKApplicationRefreshBackgroundTask {
+                        // this task is completed below, our app will then suspend while the download session runs
+                        print("application task received, start URL session")
+                        scheduleURLSession()
+                    }
+                }
+                else if let urlTask = task as? WKURLSessionRefreshBackgroundTask {
+                    let backgroundConfigObject = URLSessionConfiguration.background(withIdentifier: urlTask.sessionIdentifier)
+                    let backgroundSession = URLSession(configuration: backgroundConfigObject, delegate: self, delegateQueue: nil)
+                    
+                    statusLabel.setText("Rejoining session \(backgroundSession)")
+                }
+                // make sure to complete all tasks, even ones you don't handle
+                task.setTaskCompleted()
+            }
+        }
+    }
+    
+    func scheduleSnapshot() {
+        // fire now, we're ready
+        let fireDate = Date()
+        WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: fireDate, userInfo: nil) { error in
+            if (error == nil) {
+                self.statusLabel.setText("successfully scheduled snapshot.  All background work completed.")
+            }
+        }
+    }
+    
+    // MARK: URLSession handling
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo url: URL) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hh:mm:ss a"
+        let someDateTime = formatter.string(from: Date())
+        
+        statusLabel.setText("\(someDateTime) finished to url: \(url)")
+        scheduleSnapshot()
+    }
+    
+    func scheduleURLSession() {
+        let backgroundConfigObject = URLSessionConfiguration.background(withIdentifier: NSUUID().uuidString)
+        backgroundConfigObject.sessionSendsLaunchEvents = true
+        let backgroundSession = URLSession(configuration: backgroundConfigObject, delegate: self, delegateQueue: nil)
+        
+        let downloadTask = backgroundSession.downloadTask(with: sampleDownloadURL)
+        downloadTask.resume()
+    }
+    
+    // MARK: IB actions
+    
+    @IBAction func ScheduleRefreshButtonTapped() {
+        // fire in 20 seconds
+        let fireDate = Date(timeIntervalSinceNow: 20.0)
+        // optional, any SecureCoding compliant data can be passed here
+        let userInfo = ["reason" : "background update"] as NSDictionary
+        
+        WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: fireDate, userInfo: userInfo) { (error) in
+            if (error == nil) {
+                print("successfully scheduled background task, use the crown to send the app to the background and wait for handle:BackgroundTasks to fire.")
+            }
+        }
+    }
+    
     // Do the command associated with the current page.
     //
     @IBAction func commandAction() {
@@ -262,7 +348,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     private func updateUI(with commandStatus: CommandMessage) {
         let timedColor = commandStatus.timedColor
         let title = NSAttributedString(string: commandStatus.command.rawValue,
-                                       attributes: [.foregroundColor: timedColor.color])
+                                       attributes: [.foregroundColor: ibmBlueColor])
         commandButton.setAttributedTitle(title)
         statusLabel.setTextColor(timedColor.color.color)
         
