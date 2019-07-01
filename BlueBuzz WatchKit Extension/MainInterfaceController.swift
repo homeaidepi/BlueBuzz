@@ -33,8 +33,8 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
     private var location: CLLocation?
     private var mapLocation: CLLocationCoordinate2D?
     
-     let sampleDownloadURL = URL(string: "http://devstreaming.apple.com/videos/wwdc/2015/802mpzd3nzovlygpbg/802/802_designing_for_apple_watch.pdf?dl=1")!
-
+    let sampleDownloadURL = URL(string: "http://devstreaming.apple.com/videos/wwdc/2015/802mpzd3nzovlygpbg/802/802_designing_for_apple_watch.pdf?dl=1")!
+   
     // Context == nil: the fist-time loading, load pages with reloadRootController then
     // Context != nil: Loading the pages, save the controller instances so that we can
     // switch pages more smoothly.
@@ -66,13 +66,13 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
             name: .reachabilityDidChange, object: nil
         )
         NotificationCenter.default.addObserver(
-            self, selector: #selector(type(of: self).appDidEnterBackground(_:)),
-            name: .appDidEnterBackground, object: nil)
+            self, selector: #selector(WKExtensionDelegate.applicationDidEnterBackground),
+            name: NSNotification.Name(rawValue: "UIApplicationDidEnterBackgroundNotification"), object: nil)
     }
     
-    @objc
-    func appDidEnterBackground(_ notification: Notification) {
-        scheduleRefresh()
+    @objc func applicationDidEnterBackground(_ notification: Notification)
+    {
+        scheduleRefresh();
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

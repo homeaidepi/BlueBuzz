@@ -54,15 +54,17 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         WCSession.default.delegate = sessionDelegater
         WCSession.default.activate()
     }
+    
+    func applicationWillResignActive() {
+        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+        // Use this method to pause ongoing tasks, disable timers, etc.
+        return
+    }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         DispatchQueue.main.async {
             self.completeBackgroundTasks()
         }
-    }
-    
-    func applicationDidEnterBackground() {
-        
     }
     
     // Compelete the background tasks, and schedule a snapshot refresh.
@@ -86,3 +88,12 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     
     }
 }
+//
+//extension ExtensionDelegate {
+//    static var shared: ExtensionDelegate {
+//        guard let delegate = WKExtension.shared().delegate as? ExtensionDelegate else {
+//            fatalError("ExtensionDelegate")
+//        }
+//        return delegate
+//    }
+//}
