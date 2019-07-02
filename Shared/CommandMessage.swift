@@ -11,7 +11,7 @@ import CoreLocation
 
 // shared constants
 //
-var emptyLocation = CLLocation(latitude:0, longitude: 0)
+var emptyDegrees = CLLocationDegrees(0)
 var emptyError = String("")
 var ibmBlueColor = UIColor(red: CGFloat(70)/255, green: CGFloat(107)/255, blue: CGFloat(176)/255, alpha: 1.0)
 var defaultColor = TimedColor(ibmBlueColor)
@@ -171,26 +171,30 @@ struct CommandMessage: Codable {
     
     var command: Command
     var phrase: Phrase
-    var location: CLLocation
+    var latitude: CLLocationDegrees
+    var longitude: CLLocationDegrees
     var timedColor: TimedColor
     var errorMessage: String
     
     enum CodingKeys: String, CodingKey {
         case command
         case phrase
-        case location
+        case latittude
+        case longitude
         case timedColor
         case errorMessage
     }
     
     init(command: Command,
          phrase: Phrase,
-         location: CLLocation,
+         latitude: CLLocationDegrees,
+         longitude: CLLocationDegrees,
          timedColor: TimedColor,
          errorMessage: String) {
         self.command = command
         self.phrase = phrase
-        self.location = location
+        self.latitude = latitude
+        self.longitude = longitude
         self.timedColor = timedColor
         self.errorMessage = errorMessage
     }
@@ -200,7 +204,8 @@ struct CommandMessage: Codable {
         try container.encode(command, forKey: .command)
         try container.encode(phrase, forKey: .phrase)
         try container.encode(timedColor, forKey: .timedColor)
-        try container.encode(location, forKey: .location)
+        try container.encode(latitude, forKey: .latittude)
+        try container.encode(longitude, forKey: .longitude)
         try container.encode(errorMessage, forKey: .errorMessage)
     }
     
@@ -210,99 +215,49 @@ struct CommandMessage: Codable {
         command = try container.decode(Command.self, forKey: .command)
         phrase = try container.decode(Phrase.self, forKey: .phrase)
         timedColor = try container.decode(TimedColor.self, forKey: .timedColor)
+        latitude = try container.decode(CLLocationDegrees.self, forKey: .latittude)
+        longitude = try container.decode(CLLocationDegrees.self, forKey: .longitude)
         errorMessage = try container.decode(String.self, forKey: .errorMessage)
-        
-        let locationContainer = try decoder.container(keyedBy: LocationWrapper.CodingKeys.self)
-        location = try locationContainer.decode(CLLocation.self, forKey: .location)
-    }
-
-    public struct LocationWrapper: Codable {
-        var latitude: CLLocationDegrees
-        var longitude: CLLocationDegrees
-        var location: CLLocation
-        
-        public enum CodingKeys: String, CodingKey {
-            case latitude
-            case longitude
-        }
-        
-        init(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
-            self.latitude = latitude
-            self.longitude = longitude
-        }
-        
-        init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-            
-            latitude = try container.decode(CLLocationDegrees.self, forKey: .latitude)
-            longitude = try container.decode(CLLocationDegrees.self, forKey: .longitude)
-            location = CLLocation(latitude: latitude, longitude: longitude)
-            
-            //            let altitude = try container.decode(CLLocationDistance.self, forKey: .altitude)
-            //            let horizontalAccuracy = try container.decode(CLLocationAccuracy.self, forKey: .horizontalAccuracy)
-            //            let verticalAccuracy = try container.decode(CLLocationAccuracy.self, forKey: .verticalAccuracy)
-            //            let speed = try container.decode(CLLocationSpeed.self, forKey: .speed)
-            //            let course = try container.decode(CLLocationDirection.self, forKey: .course)
-            //            let timestamp = try container.decode(Date.self, forKey: .timestamp)
-            //           location = CLLocation(coordinate: CLLocationCoordinate2DMake(latitude, longitude), altitude: altitude, horizontalAccuracy: horizontalAccuracy, verticalAccuracy: verticalAccuracy, course: course, speed: speed, timestamp: timestamp)
-            
-            //self.init(location: location)
-        }
-        
-        public func encode(to encoder: Encoder) throws {
-            var container = encoder.container(keyedBy: CodingKeys.self)
-            
-            try container.encode(latitude, forKey: .latitude)
-            try container.encode(longitude, forKey: .longitude)
-//            try container.encode(altitude, forKey: .altitude)
-//            try container.encode(horizontalAccuracy, forKey: .horizontalAccuracy)
-//            try container.encode(verticalAccuracy, forKey: .verticalAccuracy)
-//            try container.encode(speed, forKey: .speed)
-//            try container.encode(course, forKey: .course)
-//            try container.encode(timestamp, forKey: .timestamp)
-            
-            
-        }
     }
 }
 
-extension CLLocation: Encodable {
-    public enum CodingKeys: String, CodingKey {
-        case latitude
-        case longitude
-        case altitude
-        case horizontalAccuracy
-        case verticalAccuracy
-        case speed
-        case course
-        case timestamp
-    }
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(coordinate.latitude, forKey: .latitude)
-        try container.encode(coordinate.longitude, forKey: .longitude)
-        try container.encode(altitude, forKey: .altitude)
-        try container.encode(horizontalAccuracy, forKey: .horizontalAccuracy)
-        try container.encode(verticalAccuracy, forKey: .verticalAccuracy)
-        try container.encode(speed, forKey: .speed)
-        try container.encode(course, forKey: .course)
-        try container.encode(timestamp, forKey: .timestamp)
-    }
-    
-    convenience init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        let latitude = try container.decode(CLLocationDegrees.self, forKey: .latitude)
-        let longitude = try container.decode(CLLocationDegrees.self, forKey: .longitude)
-        let curCoordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        //            let altitude = try container.decode(CLLocationDistance.self, forKey: .altitude)
-        //            let horizontalAccuracy = try container.decode(CLLocationAccuracy.self, forKey: .horizontalAccuracy)
-        //            let verticalAccuracy = try container.decode(CLLocationAccuracy.self, forKey: .verticalAccuracy)
-        //            let speed = try container.decode(CLLocationSpeed.self, forKey: .speed)
-        //            let course = try container.decode(CLLocationDirection.self, forKey: .course)
-        //            let timestamp = try container.decode(Date.self, forKey: .timestamp)
-        //           location = CLLocation(coordinate: CLLocationCoordinate2DMake(latitude, longitude), altitude: altitude, horizontalAccuracy: horizontalAccuracy, verticalAccuracy: verticalAccuracy, course: course, speed: speed, timestamp: timestamp)
-        
-        self.in
-    }
-}
+//extension CLLocation: Encodable {
+//    public enum CodingKeys: String, CodingKey {
+//        case latitude
+//        case longitude
+//        case altitude
+//        case horizontalAccuracy
+//        case verticalAccuracy
+//        case speed
+//        case course
+//        case timestamp
+//    }
+//    public func encode(to encoder: Encoder) throws {
+//        var container = encoder.container(keyedBy: CodingKeys.self)
+//        try container.encode(coordinate.latitude, forKey: .latitude)
+//        try container.encode(coordinate.longitude, forKey: .longitude)
+//        try container.encode(altitude, forKey: .altitude)
+//        try container.encode(horizontalAccuracy, forKey: .horizontalAccuracy)
+//        try container.encode(verticalAccuracy, forKey: .verticalAccuracy)
+//        try container.encode(speed, forKey: .speed)
+//        try container.encode(course, forKey: .course)
+//        try container.encode(timestamp, forKey: .timestamp)
+//    }
+//    
+//    convenience init(from decoder: Decoder) throws {
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//        
+//        let latitude = try container.decode(CLLocationDegrees.self, forKey: .latitude)
+//        let longitude = try container.decode(CLLocationDegrees.self, forKey: .longitude)
+//        let curCoordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+//        //            let altitude = try container.decode(CLLocationDistance.self, forKey: .altitude)
+//        //            let horizontalAccuracy = try container.decode(CLLocationAccuracy.self, forKey: .horizontalAccuracy)
+//        //            let verticalAccuracy = try container.decode(CLLocationAccuracy.self, forKey: .verticalAccuracy)
+//        //            let speed = try container.decode(CLLocationSpeed.self, forKey: .speed)
+//        //            let course = try container.decode(CLLocationDirection.self, forKey: .course)
+//        //            let timestamp = try container.decode(Date.self, forKey: .timestamp)
+//        //           location = CLLocation(coordinate: CLLocationCoordinate2DMake(latitude, longitude), altitude: altitude, horizontalAccuracy: horizontalAccuracy, verticalAccuracy: verticalAccuracy, course: course, speed: speed, timestamp: timestamp)
+//        
+//        self.in
+//    }
+//}

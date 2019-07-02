@@ -31,7 +31,8 @@ extension SessionCommands {
 
         var command = CommandMessage(command: .updateAppConnection,
                                           phrase: .unauthorized,
-                                          location: emptyLocation,
+                                          latitude: emptyDegrees,
+                                          longitude: emptyDegrees,
                                           timedColor: defaultColor,
                                           errorMessage: emptyError)
         
@@ -60,7 +61,8 @@ extension SessionCommands {
     func sendMessage(_ message: [String: Any]) {
         var commandStatus = CommandMessage(command: .sendMessage,
                                           phrase: .sent,
-                                          location: emptyLocation,
+                                          latitude: emptyDegrees,
+                                          longitude: emptyDegrees,
                                           timedColor: TimedColor(message),
                                           errorMessage: emptyError)
 
@@ -86,7 +88,8 @@ extension SessionCommands {
     func sendMessageData(_ messageData: Data, location: CLLocation?) {
         var commandStatus = CommandMessage(command: .sendMessageData,
                                           phrase: .sent,
-                                          location: location ?? CLLocation(latitude: 0, longitude: 0),
+                                          latitude: location?.coordinate.latitude ?? emptyDegrees,
+                                          longitude: location?.coordinate.longitude ?? emptyDegrees,
                                           timedColor: TimedColor(messageData),
                                           errorMessage: "")
         

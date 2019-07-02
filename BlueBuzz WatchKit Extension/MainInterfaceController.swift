@@ -19,19 +19,36 @@ struct ControllerID {
 
 class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate, TestDataProvider, SessionCommands {
     
+    private lazy var sessionDelegater: SessionDelegater = {
+        return SessionDelegater()
+    }()
+    
+    // Retain the controllers so that we don't have to reload root controllers for every switch.
+    //
+    private static var instances = [MainInterfaceController]()
+    
+    private var command: Command?
+    
     @IBOutlet weak var statusGroup: WKInterfaceGroup!
     @IBOutlet var statusLabel: WKInterfaceLabel!
     @IBOutlet var commandButton: WKInterfaceButton!
     @IBOutlet var mapObject: WKInterfaceMap!
+    
+    @IBAction func commandAction() {
+        guard let command = command
+            else {
+                return
+        }
+        
+        switch command {
+        case .updateAppConnection: updateAppConnection(appConnection)
+        case .sendMessage: sendMessage(message)
+        case .sendMessageData: sendMessageData(messageData, location: location)
+        }
+    }
 
-    // Retain the controllers so that we don't have to reload root controllers for every switch.
-    //
-    static var instances = [MainInterfaceController]()
-    
-    private var command: Command?
-    
     deinit {
-        //NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
     // Context == nil: the fist-time loading, load pages with reloadRootController then
@@ -40,6 +57,12 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     //
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
+        
+        // Activate the session asynchronously as early as possible.
+        // In the case of being background launched with a task, this may save some background runtime budget.
+        //
+        WCSession.default.delegate = sessionDelegater
+        WCSession.default.activate()
         
         if let context = context as? CommandMessage {
             command = context.command
@@ -67,6 +90,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         NotificationCenter.default.addObserver(
             self, selector: #selector(type(of: self).applicationDidEnterBackground(_:)),
             name: NSNotification.Name(rawValue: "UIApplicationDidEnterBackgroundNotification"), object: nil)
+    
     }
     
     override func willActivate() {
@@ -76,7 +100,22 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         //
         statusGroup.setBackgroundColor(.black)
         
-        requestLocationFromDelegate();
+        let watchDelegate = WKExtension.shared().delegate as? ExtensionDelegate
+
+        let location = watchDelegate?.getCurrentLocation()
+        
+        if (watchDelegate?.locationAvailable() ?? false)
+        {
+            guard let lat = location?.coordinate.latitude else { return }
+            guard let long = location?.coordinate.longitude else { return }
+            let mapLocation = CLLocationCoordinate2DMake(lat, long)
+            
+            let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+            let region = MKCoordinateRegion(center: mapLocation, span: span)
+            
+            self.mapObject.setRegion(region)
+            mapObject.addAnnotation(mapLocation, with: .purple)
+        }
     }
     
     func requestLocationFromDelegate()
@@ -116,19 +155,6 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         //print("\(#function): isReachable:\(WCSession.default.isReachable)")
     }
     
-    @IBAction func commandAction() {
-        guard let command = command
-            else {
-                return
-        }
-        
-        switch command {
-        case .updateAppConnection: updateAppConnection(appConnection)
-        case .sendMessage: sendMessage(message)
-        case .sendMessageData: sendMessageData(messageData, location: location)
-        }
-    }
-    
     // Load paged-based UI.
     // If a current context is specified, use the timed color it provided.
     //
@@ -139,14 +165,14 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         for aCommand in commands {
             var command = CommandMessage(command: aCommand,
                                         phrase: .finished,
-                                        location: emptyLocation,
+                                        latitude: emptyDegrees,
+                                        longitude: emptyDegrees,
                                         timedColor: defaultColor,
                                         errorMessage: emptyError)
             
             if let currentContext = currentContext, aCommand == currentContext.command {
                 command.phrase = currentContext.phrase
                 command.timedColor = currentContext.timedColor
-                command.location = currentContext.location
             }
             contexts.append(command)
         }
@@ -196,23 +222,5 @@ extension MainInterfaceController { // MARK: - Update status view.
         } else {
             statusLabel.setText(commandStatus.phrase.rawValue + " at\n" + timedColor.timeStamp)
         }
-        
-        //if (commandStatus.location != emptyLocation)
-        //{
-            let location = commandStatus.location
-            let lat = location.coordinate.latitude
-            let long = location.coordinate.longitude
-        
-            if (lat + long != 0)
-            {
-                let mapLocation = CLLocationCoordinate2DMake(lat, long)
-                
-                let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-                let region = MKCoordinateRegion(center: mapLocation, span: span)
-                
-                self.mapObject.setRegion(region)
-                mapObject.addAnnotation(mapLocation, with: .purple)
-            }
-        //}
     }
 }

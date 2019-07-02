@@ -46,7 +46,8 @@ class SessionDelegater: NSObject, WCSessionDelegate {
     func session(_ session: WCSession, didReceiveApplicationContext applicationConnection: [String: Any]) {
         let commandStatus = CommandMessage(command: .updateAppConnection,
                                           phrase: .received,
-                                          location: CLLocation(latitude: 0, longitude:0),
+                                          latitude: emptyDegrees,
+                                          longitude: emptyDegrees,
                                           timedColor: TimedColor(applicationConnection),
                                           errorMessage: "")
         
@@ -58,7 +59,8 @@ class SessionDelegater: NSObject, WCSessionDelegate {
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         let commandStatus = CommandMessage(command: .sendMessage,
                                           phrase: .received,
-                                          location: CLLocation(latitude: 0, longitude:0),
+                                          latitude: emptyDegrees,
+                                          longitude: emptyDegrees,
                                           timedColor: TimedColor(message),
                                           errorMessage: "")
         
@@ -77,7 +79,8 @@ class SessionDelegater: NSObject, WCSessionDelegate {
     func session(_ session: WCSession, didReceiveMessageData messageData: Data) {
         let commandStatus = CommandMessage(command: .sendMessageData,
                                           phrase: .received,
-                                          location: CLLocation(latitude: 0, longitude:0),
+                                          latitude: emptyDegrees,
+                                          longitude: emptyDegrees,
                                           timedColor: TimedColor(messageData),
                                           errorMessage: "")
         

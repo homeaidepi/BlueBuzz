@@ -24,7 +24,10 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
     private var wcBackgroundTasks = [WKWatchConnectivityRefreshBackgroundTask]()
     
     private var command: Command?
+    private var locationIsAvailable: Bool = false
     private var locationManager: CLLocationManager?
+    private var lastLocation: CLLocation?
+    private var currentLocation: CLLocation?
     private var sampleDownloadURL = URL(string: "http://devstreaming.apple.com/videos/wwdc/2015/802mpzd3nzovlygpbg/802/802_designing_for_apple_watch.pdf?dl=1")!
     
     override init() {
@@ -80,6 +83,20 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
     func requestLocation()
     {
         locationManager?.requestLocation()
+    }
+    
+    func getLastLocation() -> CLLocation?
+    {
+        return lastLocation
+    }
+    
+    func getCurrentLocation() -> CLLocation?
+    {
+        return currentLocation
+    }
+    
+    func locationAvailable() -> Bool{
+        return locationIsAvailable
     }
     
     // Be sure to complete all the tasks - otherwise they will keep consuming the background executing
@@ -167,16 +184,22 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         // get current location from locationManager return result
+        self.lastLocation = locations.last ?? CLLocation(latitude: emptyDegrees, longitude: emptyDegrees)
         let currentLocation = locations[0]
+        self.currentLocation = currentLocation
+        self.locationIsAvailable = true;
         
         // send out the location data
         let commandStatus = CommandMessage(command: .sendMessageData,
                                            phrase: .transferring,
-                                           location: currentLocation as CLLocation,
+                                           latitude: currentLocation.coordinate.latitude,
+                                           longitude: currentLocation.coordinate.longitude,
                                            timedColor: defaultColor,
                                            errorMessage: "")
         
         guard let data = try? JSONEncoder().encode(commandStatus) else { return }
+        
+        //let commandMessage = try? JSONDecoder().decode(CommandMessage.self, from: data)
         
         WCSession.default.sendMessageData(data, replyHandler: { replyHandler in
         }, errorHandler: { error in })
@@ -184,9 +207,11 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error.localizedDescription)
+        self.locationIsAvailable = false;
         let commandStatus = CommandMessage(command: .sendMessageData,
                                            phrase: .failed,
-                                           location: emptyLocation,
+                                           latitude: emptyDegrees,
+                                           longitude: emptyDegrees,
                                            timedColor: defaultColor,
                                            errorMessage: error.localizedDescription)
         
