@@ -4,7 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>BMSAnalyticsAPI.xcscheme</key>
+		<key>BMSAnalyticsAPI-iOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>BMSAnalyticsAPI-watchOS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -15,6 +20,16 @@
 			<false/>
 		</dict>
 		<key>BMSPush.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-BlueBuzz WatchOS App Extension.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-BlueBuzz WatchOS App.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
