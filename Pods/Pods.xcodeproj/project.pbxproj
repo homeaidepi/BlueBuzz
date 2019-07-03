@@ -7,99 +7,80 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		09B5693CB3A45B7890CE2F4747DB6A45 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6F012456BB4DC9BFBFB643DE9B4506 /* Foundation.framework */; };
-		0A8E0279698F7855FD2F6FACE2736777 /* Pods-BlueBuzz WatchOS App-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 559965E6772C4136CBE7F41482C6E679 /* Pods-BlueBuzz WatchOS App-dummy.m */; };
+		05C6AED0C3BD9803C162C70DA42203DC /* BMSCore-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A8219A27CEAAAE9950CF442F4C90BF /* BMSCore-dummy.m */; };
+		0974E3BB587FDBAE24BC8D3BF21119CF /* BaseAuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4829ED4B1F26BF9FB84BFADBD5CB0B0B /* BaseAuthorizationManager.swift */; };
+		0B5411B3AE7EAFAFDB2DF6FCA79F2A64 /* DeviceIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B9AE8A6DDF6774151D23ACA80C5FC7 /* DeviceIdentity.swift */; };
 		0C9AB6EF8BB96E2DEB85CEC79709E221 /* BMSPushUrlBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB022281BB16F2DEC10501104E67EACE /* BMSPushUrlBuilder.swift */; };
-		1065F355D905C46D7667F2C4F5EB0368 /* BMSAnalyticsAPI-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FA396742F2E607F8E10016D513AB3293 /* BMSAnalyticsAPI-iOS-dummy.m */; };
-		12AC852DAC7E75506B660E650E1E4F12 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3AC53D1255F37011C4B218378012451 /* Foundation.framework */; };
-		153A90412591F117F1F7EA3E6B87422D /* BMSAnalyticsAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DB3EC94AEA2A15897893EE45F039BC /* BMSAnalyticsAPI.framework */; };
-		196B23359159E7F3F4DA91E3D2547E05 /* BMSCore-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A8219A27CEAAAE9950CF442F4C90BF /* BMSCore-dummy.m */; };
-		1A93B809BB89D7F2B32AEC1EFEE0FA70 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711BDA014C6D15E2A4E31593C06737D2 /* AuthorizationManager.swift */; };
-		1E2CC854628DBF6438C96553FE882108 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F6717AD235C0E1D36B784AB30B388F /* Analytics.swift */; };
-		23DD14F231B7CEA1F065C4F6A02D5B77 /* UserIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2164C40A75F1C41494F74927E40E85EC /* UserIdentity.swift */; };
+		0E9B413CCC2FDE68746E1DB62F26B2A0 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0753BD598A6E0EA454348641842B238 /* NetworkMonitor.swift */; };
+		20B94327186729E43A2C9146E350E0CA /* AppIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E065531042B514E86DC0A4048EE2AF0A /* AppIdentity.swift */; };
 		24E0667356577BA765EBDBB6A7895EE2 /* BMSPush-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 32116BEF6322519DD80B33827B341611 /* BMSPush-dummy.m */; };
-		2507C25CF4ABB431E87E3D6206BE6BDC /* AppIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E065531042B514E86DC0A4048EE2AF0A /* AppIdentity.swift */; };
+		26CEE8DD04C881AA86D5799534A25C94 /* BMSURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD17FCECD3A854779F414CD081B5B /* BMSURLSession.swift */; };
 		2A2D872EE927A6666231DD9DCE301F95 /* BMSPushClientOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C9CD0105F7510472D53E4653CB2B5 /* BMSPushClientOptions.swift */; };
-		2B74805B148A7DA3B04ADA08F3597F6F /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17630507AFC3F8B5FFEB28D33983FBA7 /* Logger.swift */; };
-		3D10D4B543B6EC7FCC8FEF5E569AB093 /* Pods-BlueBuzz WatchOS App Extension-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A4E5D2A701486A2F799D1EE845B5128 /* Pods-BlueBuzz WatchOS App Extension-dummy.m */; };
-		3E41555B1A0E88375F5391D99A54A525 /* BaseAppIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE8D4D4F8B43768384544A11E99E6B /* BaseAppIdentity.swift */; };
-		3E6FEA8B838622E4FCB4E21A756489F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3AC53D1255F37011C4B218378012451 /* Foundation.framework */; };
+		2BBC6A97173A7F9DDBF7EE5263206A23 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADCE37A3B4D34D7A2F51A8BAD2832EA /* Analytics.swift */; };
+		2D902A3004E0D774DA9FC4EBFC7FF64D /* UserIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2164C40A75F1C41494F74927E40E85EC /* UserIdentity.swift */; };
 		41275B63BF8D0237BC9566A1728F79AD /* BMSPushClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CA3A1C01A8504319EDA10B653CB865 /* BMSPushClient.swift */; };
-		43C89D00E56037925DD10ED23C59CFBD /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0753BD598A6E0EA454348641842B238 /* NetworkMonitor.swift */; };
-		47810A67C64D6B9D6E3C34D8B13EB04D /* DeviceIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B9AE8A6DDF6774151D23ACA80C5FC7 /* DeviceIdentity.swift */; };
-		49315F15C5F1499E5E0034B1A2B6164F /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F6717AD235C0E1D36B784AB30B388F /* Analytics.swift */; };
-		4DAA7DB4A58DCC8ED54951A1945F672F /* Pods-BlueBuzz iOS App-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BCA31DB497B64ED782C312AC7B205890 /* Pods-BlueBuzz iOS App-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4E3DE0375A776D72F39FBC664E6FE478 /* BaseAuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4829ED4B1F26BF9FB84BFADBD5CB0B0B /* BaseAuthorizationManager.swift */; };
-		4F7D50C5269105441711855F75B9385A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3AC53D1255F37011C4B218378012451 /* Foundation.framework */; };
 		514BCEE9880835B531F23FEBEAA55DD2 /* BMSLocalPushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1A388713AD14454DF0454125E4BA35 /* BMSLocalPushNotification.swift */; };
 		51B808F5B80449C0FA47C47C9B64C528 /* BMSPushNotificationAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871C731C269D456D7E9A5D261055EFC4 /* BMSPushNotificationAction.swift */; };
-		53111F078E082FB00BFD8D7944EBDA1E /* BMSAnalyticsAPI-iOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1AD4AF97C0AACC059AA5F28E9603B0F3 /* BMSAnalyticsAPI-iOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		547A1D17ADF9E0F812D5039DFC02280E /* BMSResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589CC6F86C1D1DB90CDB59F64A9A1812 /* BMSResponse.swift */; };
-		5D1755F6B45656B805B6D5B94977B36B /* BMSURLSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5D2EE1485E9232791BA3C562C4E69E /* BMSURLSessionDelegate.swift */; };
-		5E2BFE35E625E788AF3714D75987E85C /* BMSAnalyticsAPI-watchOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D1E28147CF78562E7AF9174E2157148 /* BMSAnalyticsAPI-watchOS-dummy.m */; };
-		5FE2B938DBBE4C2BBB6CADAD58D483E1 /* Pods-BlueBuzz WatchOS App-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B6158B3A2FACC260E4753A9BC994B22 /* Pods-BlueBuzz WatchOS App-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6A4D9C307F7555AF9C5A85222353B398 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0C96EE388DAA3C1834E6C079838D5C /* Response.swift */; };
-		6E05604DD799466E157082FFABC3BBBD /* BMSURLSessionUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3412FDF9F6A968528BD52742F884763A /* BMSURLSessionUtility.swift */; };
-		7787C3B2B965DBC4D2612BC9AA0F492E /* RequestMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8489EE2B68720B9E44989987DB7EB4C /* RequestMetadata.swift */; };
-		8E7C3D5534F3BD99AAC419EB5E306667 /* BMSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BC64DAF8DFF204628B167C54A5C1C7 /* BMSCore.framework */; };
+		563F384859AE0C465EA1A3EB5F8E56E7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0DA42521104D7BBF190C20C16B4A265 /* Foundation.framework */; };
+		61A7E3D03FEB2AEE0A44D66E7F835A34 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0DA42521104D7BBF190C20C16B4A265 /* Foundation.framework */; };
+		67C4ADF71D7B7218A4D882471037FE07 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F05F51C6FB977B328243695A5556B9 /* Error.swift */; };
+		7C29D24482BA0D74F70C2597006824F0 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247174D942939E61D5882178DCE0A52A /* Request.swift */; };
+		89D723900C02DADD82FD22A3AB58E735 /* Pods-BlueBuzz iOS App-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F7B10FE402FE4A997CFC90CB6AC9629 /* Pods-BlueBuzz iOS App-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8E7C3D5534F3BD99AAC419EB5E306667 /* BMSCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB1E60C756D72D736E9DD7536035AC54 /* BMSCore.framework */; };
 		9340348CB24C748DF0A288B6234F46DB /* BMSConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521EDF21F1F326AE98B6A3E5C2A3D748 /* BMSConstants.swift */; };
-		A0A72DC73E949EB3E1915C94851F6891 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F05F51C6FB977B328243695A5556B9 /* Error.swift */; };
-		A2BC9400127BFB85D0EAB20F0921C3B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6F012456BB4DC9BFBFB643DE9B4506 /* Foundation.framework */; };
+		941887D5FCCE2ACC78FD0B55438DBE3B /* BMSURLSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5D2EE1485E9232791BA3C562C4E69E /* BMSURLSessionDelegate.swift */; };
+		99BC068F5E8D380668335843D6CD1F1C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0A00827D6E542A84784FDC4BED5A51 /* Logger.swift */; };
+		A10E65C52BC9B8C16B337968444BD81F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0DA42521104D7BBF190C20C16B4A265 /* Foundation.framework */; };
+		A1C10150D497AE73CD7C5911FE53A206 /* BMSAnalyticsAPI-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9246C7D38680CF9C09C4E39AD83190AA /* BMSAnalyticsAPI-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A2BD7B9AE1D14944EB6FF9EE81808825 /* BMSPushNotificationActionCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EA0B622F740100DBB89A9D8734FA47 /* BMSPushNotificationActionCategory.swift */; };
-		A436C25B680421D59F934517795E0EE8 /* Pods-BlueBuzz iOS App-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A2850B3A1D83F6028C3264B95967D29 /* Pods-BlueBuzz iOS App-dummy.m */; };
-		A56545D6874D191720C52C6E7DE6B56D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6F012456BB4DC9BFBFB643DE9B4506 /* Foundation.framework */; };
-		B5ACAF9F5854D32306EA8CC6A17CFABE /* module.modulemap in Sources */ = {isa = PBXBuildFile; fileRef = A424BFE91F243C9C0BF62B4C82C215F4 /* module.modulemap */; };
-		BE02E67B029062108900A1EE86779A9F /* BaseUserIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4E2DF38525BBB0D6E21C70712D0383 /* BaseUserIdentity.swift */; };
+		A4FC9E037E5E47613125D2233655D82A /* Pods-BlueBuzz iOS App-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 662E54B611CB3E033A462774B5368BAC /* Pods-BlueBuzz iOS App-dummy.m */; };
+		B6225881F64C2F99ECB258D12BF7F602 /* BaseDeviceIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760923F4EC5301D6EC660CBFAD991C1 /* BaseDeviceIdentity.swift */; };
+		BCC621FB8B045698D9E2BA4D8F276DFC /* BMSCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A7DC02F679B1D8BADA7E3AF29B70DCF /* BMSCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C16031E18D23D8214BD09C5405CA578D /* RequestMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF50447AC557B2328AE3A247BBA49BDE /* RequestMetadata.swift */; };
 		C50C71E37B7E4F6068C083BFC25FCFD1 /* BMSPushUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADB43BB1ADB0C98DA487D30C3C2E32A /* BMSPushUtils.swift */; };
-		C580A077DEBD478FB18FBBEF3F1C5341 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 247174D942939E61D5882178DCE0A52A /* Request.swift */; };
-		C6F6B8D17C2E4D4026F411E262595725 /* BMSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9746A791F5D51F05C0C7A84E1EB9D37 /* BMSClient.swift */; };
-		C7F0E181B8DC210B861DB9E33758BB5E /* BaseDeviceIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760923F4EC5301D6EC660CBFAD991C1 /* BaseDeviceIdentity.swift */; };
-		CC09FC3A9E2A108FB9298E994869FDA6 /* RequestMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8489EE2B68720B9E44989987DB7EB4C /* RequestMetadata.swift */; };
-		CD703EA245E7C790DBA0B279C49B21AA /* BMSCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A7DC02F679B1D8BADA7E3AF29B70DCF /* BMSCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CED80DC866ABB6247B05133BEB5E36B7 /* Pods-BlueBuzz WatchOS App Extension-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA04CE0E6F3AF1C607F092132053560 /* Pods-BlueBuzz WatchOS App Extension-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CF896782703FBB38F1BFA46C2B5754D7 /* BMSAnalyticsAPI-watchOS-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 923B77672ABA9F0DFC372F2998A43B65 /* BMSAnalyticsAPI-watchOS-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D283A087BA30C3728A169823A6FAF946 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17630507AFC3F8B5FFEB28D33983FBA7 /* Logger.swift */; };
-		DBA72AD9F5CC7FFDE92A526D8D44529F /* BMSURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7BD17FCECD3A854779F414CD081B5B /* BMSURLSession.swift */; };
+		CEEB4E898984CF3086D5F1A12E0D099D /* BaseUserIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB4E2DF38525BBB0D6E21C70712D0383 /* BaseUserIdentity.swift */; };
+		D3B70D2B6081555BC1C59AF0D58B3559 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711BDA014C6D15E2A4E31593C06737D2 /* AuthorizationManager.swift */; };
+		D62FAE523ECF6864C6244903654EF574 /* BMSURLSessionUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3412FDF9F6A968528BD52742F884763A /* BMSURLSessionUtility.swift */; };
+		EB01CE12C2EFB3D9C6C09B11F5CC83E7 /* BMSClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9746A791F5D51F05C0C7A84E1EB9D37 /* BMSClient.swift */; };
+		EF579C5BE737B0824985E6A6072BE366 /* BaseAppIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFE8D4D4F8B43768384544A11E99E6B /* BaseAppIdentity.swift */; };
 		F24A553C3D35E2984724EAAD0FD0F762 /* BMSPush-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B74DB5B04D5ACA9C5677B648D6F52041 /* BMSPush-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FBF4D1544FF46D59E7D12164ED47062E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3AC53D1255F37011C4B218378012451 /* Foundation.framework */; };
+		F380BF2B55E224A5A222A6BD7ED78C67 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0C96EE388DAA3C1834E6C079838D5C /* Response.swift */; };
+		F71646F62CCF8BF64B9B67B3976267A2 /* BMSAnalyticsAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41F8079D9F111980997DAE40D7FFAD1C /* BMSAnalyticsAPI.framework */; };
+		F80350AF6B31A359CBE1AFF0BED6D939 /* BMSAnalyticsAPI-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C02052B10920C11C1BC86B1847D2EA7 /* BMSAnalyticsAPI-dummy.m */; };
+		FBF4D1544FF46D59E7D12164ED47062E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0DA42521104D7BBF190C20C16B4A265 /* Foundation.framework */; };
 		FDE66CB73103366137A5E498DA2EEC9E /* BMSRichPushNotificationOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF118CFEC8AE20672EB35B38E34282A /* BMSRichPushNotificationOptions.swift */; };
+		FFD8798979C3D8F9148923A2A183F23E /* module.modulemap in Sources */ = {isa = PBXBuildFile; fileRef = A424BFE91F243C9C0BF62B4C82C215F4 /* module.modulemap */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0851C3CFC8101D7535E27E9262DD1182 /* PBXContainerItemProxy */ = {
+		151BF8D4B0C0B66F055B717DC78C2709 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FEDA8B2D5269092D51AF272AC59CDB8F;
+			remoteInfo = BMSAnalyticsAPI;
+		};
+		2B7B07D78696DEA3778146C29AC8A907 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6ABA3D02F3CA9345DBFCF795E07BF2FC;
+			remoteInfo = BMSPush;
+		};
+		85FC298B51931E75D11FEF1E8EDF9BF2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = F7775B5F5F5E3CCCD0A1E173154F35ED;
 			remoteInfo = BMSCore;
 		};
-		7870C1E7B45935C67D7EB3065B993B97 /* PBXContainerItemProxy */ = {
+		9146C619AFC3503F09F6B6D05BDEB34F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D8FAA9B625B21A334C385A76FD26E543;
-			remoteInfo = "BMSAnalyticsAPI-iOS";
-		};
-		9F7ABB050980666B97DFE2233B42F413 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9491CA8FB5B1A0184C7751AF14B17BEC;
-			remoteInfo = "BMSAnalyticsAPI-watchOS";
-		};
-		C8FCBAA416E40EF6108ABCC81EE3453E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9491CA8FB5B1A0184C7751AF14B17BEC;
-			remoteInfo = "BMSAnalyticsAPI-watchOS";
-		};
-		CA241C66641D4EAC94A8348B25F61A0F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6ABA3D02F3CA9345DBFCF795E07BF2FC;
-			remoteInfo = BMSPush;
+			remoteGlobalIDString = FEDA8B2D5269092D51AF272AC59CDB8F;
+			remoteInfo = BMSAnalyticsAPI;
 		};
 		E62C6B953E98E7342000BD2944210509 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -108,126 +89,91 @@
 			remoteGlobalIDString = F7775B5F5F5E3CCCD0A1E173154F35ED;
 			remoteInfo = BMSCore;
 		};
-		F40A55F32FE1670EE6A1191A033B5C97 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D8FAA9B625B21A334C385A76FD26E543;
-			remoteInfo = "BMSAnalyticsAPI-iOS";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		04DB3EC94AEA2A15897893EE45F039BC /* BMSAnalyticsAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BMSAnalyticsAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		05B5D6A815EE23220C434AB1B12EA47A /* Pods-BlueBuzz iOS App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BlueBuzz iOS App.release.xcconfig"; sourceTree = "<group>"; };
-		05E9E0BA610F322CD884C398E5D48035 /* Pods-BlueBuzz iOS App.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-BlueBuzz iOS App.modulemap"; sourceTree = "<group>"; };
-		0C262FBE2B54C4C9458E3B776C2868F8 /* Pods_BlueBuzz_WatchOS_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_BlueBuzz_WatchOS_App.framework; path = "Pods-BlueBuzz WatchOS App.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		17630507AFC3F8B5FFEB28D33983FBA7 /* Logger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Logger.swift; path = Source/Logger.swift; sourceTree = "<group>"; };
-		1AD4AF97C0AACC059AA5F28E9603B0F3 /* BMSAnalyticsAPI-iOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BMSAnalyticsAPI-iOS-umbrella.h"; sourceTree = "<group>"; };
-		1D1E28147CF78562E7AF9174E2157148 /* BMSAnalyticsAPI-watchOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "BMSAnalyticsAPI-watchOS-dummy.m"; path = "../BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS-dummy.m"; sourceTree = "<group>"; };
-		210A782FF67CD9F778798BF43B1FB640 /* Pods-BlueBuzz iOS App-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BlueBuzz iOS App-acknowledgements.plist"; sourceTree = "<group>"; };
+		025F3EC838A8F4A4E04CB3355137F4F9 /* BMSAnalyticsAPI-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "BMSAnalyticsAPI-Info.plist"; sourceTree = "<group>"; };
+		0C02052B10920C11C1BC86B1847D2EA7 /* BMSAnalyticsAPI-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BMSAnalyticsAPI-dummy.m"; sourceTree = "<group>"; };
+		0F7B10FE402FE4A997CFC90CB6AC9629 /* Pods-BlueBuzz iOS App-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-BlueBuzz iOS App-umbrella.h"; sourceTree = "<group>"; };
+		13ABEF25FD89F895752D21C5EF413425 /* Pods-BlueBuzz iOS App-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BlueBuzz iOS App-Info.plist"; sourceTree = "<group>"; };
+		15D32C1E60C5375F1F951A6967F166F3 /* Pods-BlueBuzz iOS App-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BlueBuzz iOS App-frameworks.sh"; sourceTree = "<group>"; };
+		19D7C06C6AA490333F9ECA31E957B04A /* BMSAnalyticsAPI.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BMSAnalyticsAPI.xcconfig; sourceTree = "<group>"; };
+		1BB0E073BF4792EA982761F7DD274CF6 /* Pods-BlueBuzz iOS App.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-BlueBuzz iOS App.modulemap"; sourceTree = "<group>"; };
 		2164C40A75F1C41494F74927E40E85EC /* UserIdentity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UserIdentity.swift; path = Source/Security/Identity/UserIdentity.swift; sourceTree = "<group>"; };
-		23BF03E420E88361B88A4E1121D0BB5A /* Pods-BlueBuzz WatchOS App-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BlueBuzz WatchOS App-frameworks.sh"; sourceTree = "<group>"; };
 		247174D942939E61D5882178DCE0A52A /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = "Source/Network Requests/Request.swift"; sourceTree = "<group>"; };
 		273EA53F309E75FAFBB79454AD96A6FD /* BMSPush-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "BMSPush-Info.plist"; sourceTree = "<group>"; };
-		2D55A48837552558D78132C833D371B3 /* Pods-BlueBuzz WatchOS App Extension-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BlueBuzz WatchOS App Extension-Info.plist"; sourceTree = "<group>"; };
+		31E52D6D2B5A894C2D16F56396687999 /* BMSAnalyticsAPI-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BMSAnalyticsAPI-prefix.pch"; sourceTree = "<group>"; };
 		32116BEF6322519DD80B33827B341611 /* BMSPush-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BMSPush-dummy.m"; sourceTree = "<group>"; };
 		3412FDF9F6A968528BD52742F884763A /* BMSURLSessionUtility.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BMSURLSessionUtility.swift; path = "Source/Network Requests/BMSURLSessionUtility.swift"; sourceTree = "<group>"; };
+		36B0DEE3EE7E10AC2578D20C2922789B /* BMSAnalyticsAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BMSAnalyticsAPI.framework; path = BMSAnalyticsAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B1A388713AD14454DF0454125E4BA35 /* BMSLocalPushNotification.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BMSLocalPushNotification.swift; path = Source/BMSLocalPush/BMSLocalPushNotification.swift; sourceTree = "<group>"; };
-		3B471EEB7AB44047748B58A99A6085A2 /* Pods-BlueBuzz WatchOS App Extension.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-BlueBuzz WatchOS App Extension.modulemap"; sourceTree = "<group>"; };
 		3BFE8D4D4F8B43768384544A11E99E6B /* BaseAppIdentity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseAppIdentity.swift; path = Source/Security/Identity/BaseAppIdentity.swift; sourceTree = "<group>"; };
-		3CFB99A44C3940A04336757CAAD5DD76 /* Pods-BlueBuzz WatchOS App Extension-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BlueBuzz WatchOS App Extension-frameworks.sh"; sourceTree = "<group>"; };
-		3DA80F0864204F639F3E19A135E7DDA2 /* BMSAnalyticsAPI-iOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BMSAnalyticsAPI-iOS-prefix.pch"; sourceTree = "<group>"; };
-		3F397E16BFA881BD5D7102581310BCC7 /* BMSAnalyticsAPI-watchOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "BMSAnalyticsAPI-watchOS-Info.plist"; path = "../BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS-Info.plist"; sourceTree = "<group>"; };
-		443842C1D0A69820F01AF56CF2AE7BF8 /* Pods-BlueBuzz WatchOS App.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-BlueBuzz WatchOS App.modulemap"; sourceTree = "<group>"; };
-		45B1C94D8C0DF0FE3E09CEC736F790F7 /* Pods-BlueBuzz iOS App-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BlueBuzz iOS App-frameworks.sh"; sourceTree = "<group>"; };
+		41F8079D9F111980997DAE40D7FFAD1C /* BMSAnalyticsAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BMSAnalyticsAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		44422CC01DF66B04726DFBDE8370FB6A /* Pods-BlueBuzz iOS App-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BlueBuzz iOS App-acknowledgements.plist"; sourceTree = "<group>"; };
 		4829ED4B1F26BF9FB84BFADBD5CB0B0B /* BaseAuthorizationManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseAuthorizationManager.swift; path = Source/Security/BaseAuthorizationManager.swift; sourceTree = "<group>"; };
-		4A4E5D2A701486A2F799D1EE845B5128 /* Pods-BlueBuzz WatchOS App Extension-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BlueBuzz WatchOS App Extension-dummy.m"; sourceTree = "<group>"; };
-		4AD74E9D7A81C97A44CEC2D7CAA4ED57 /* BMSAnalyticsAPI-watchOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "BMSAnalyticsAPI-watchOS.xcconfig"; path = "../BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS.xcconfig"; sourceTree = "<group>"; };
-		4B20982EB42A8CB77EFCB90FFAFEE957 /* Pods-BlueBuzz WatchOS App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BlueBuzz WatchOS App.debug.xcconfig"; sourceTree = "<group>"; };
-		4B6158B3A2FACC260E4753A9BC994B22 /* Pods-BlueBuzz WatchOS App-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-BlueBuzz WatchOS App-umbrella.h"; sourceTree = "<group>"; };
 		521EDF21F1F326AE98B6A3E5C2A3D748 /* BMSConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BMSConstants.swift; path = Source/BMSConstants.swift; sourceTree = "<group>"; };
 		53EA0B622F740100DBB89A9D8734FA47 /* BMSPushNotificationActionCategory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BMSPushNotificationActionCategory.swift; path = Source/BMSPushNotificationActionCategory.swift; sourceTree = "<group>"; };
-		559965E6772C4136CBE7F41482C6E679 /* Pods-BlueBuzz WatchOS App-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BlueBuzz WatchOS App-dummy.m"; sourceTree = "<group>"; };
 		57B9AE8A6DDF6774151D23ACA80C5FC7 /* DeviceIdentity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DeviceIdentity.swift; path = Source/Security/Identity/DeviceIdentity.swift; sourceTree = "<group>"; };
 		589CC6F86C1D1DB90CDB59F64A9A1812 /* BMSResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BMSResponse.swift; path = Source/BMSResponse.swift; sourceTree = "<group>"; };
 		5A7DC02F679B1D8BADA7E3AF29B70DCF /* BMSCore.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = BMSCore.h; path = Source/Resources/BMSCore.h; sourceTree = "<group>"; };
 		5E0C96EE388DAA3C1834E6C079838D5C /* Response.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Response.swift; path = "Source/Network Requests/Response.swift"; sourceTree = "<group>"; };
-		6268D2117BD56FADF25830AD7A2FB5AD /* Pods-BlueBuzz WatchOS App Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BlueBuzz WatchOS App Extension.debug.xcconfig"; sourceTree = "<group>"; };
-		642C24D554ABACAB533215928E7E80CD /* Pods-BlueBuzz WatchOS App Extension-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BlueBuzz WatchOS App Extension-acknowledgements.plist"; sourceTree = "<group>"; };
+		5E6F5C62539387ABBC631591536A01A3 /* Pods-BlueBuzz iOS App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BlueBuzz iOS App.release.xcconfig"; sourceTree = "<group>"; };
+		64A45D326A2E9D94F2932AF61A0B0C4E /* BMSAnalyticsAPI.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = BMSAnalyticsAPI.modulemap; sourceTree = "<group>"; };
+		662E54B611CB3E033A462774B5368BAC /* Pods-BlueBuzz iOS App-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BlueBuzz iOS App-dummy.m"; sourceTree = "<group>"; };
 		711BDA014C6D15E2A4E31593C06737D2 /* AuthorizationManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AuthorizationManager.swift; path = Source/Security/AuthorizationManager.swift; sourceTree = "<group>"; };
 		7284F21D24CA53250202FD8108C7BB37 /* BMSPush.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BMSPush.xcconfig; sourceTree = "<group>"; };
 		7314B8286D8FA5CA9838BC66D3AC05A4 /* BMSCore-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BMSCore-prefix.pch"; sourceTree = "<group>"; };
-		7A59389DF8AFA2E5C60C3BA3DD0DAF0F /* BMSAnalyticsAPI-iOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "BMSAnalyticsAPI-iOS.xcconfig"; sourceTree = "<group>"; };
 		7ADB43BB1ADB0C98DA487D30C3C2E32A /* BMSPushUtils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BMSPushUtils.swift; path = Source/BMSPushUtils.swift; sourceTree = "<group>"; };
 		871C731C269D456D7E9A5D261055EFC4 /* BMSPushNotificationAction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BMSPushNotificationAction.swift; path = Source/BMSPushNotificationAction.swift; sourceTree = "<group>"; };
-		88E421B636210971BFEF929F7A32A954 /* Pods-BlueBuzz WatchOS App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BlueBuzz WatchOS App.release.xcconfig"; sourceTree = "<group>"; };
-		8D57C07DD22C21863E07252C5198E614 /* Pods-BlueBuzz iOS App-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BlueBuzz iOS App-Info.plist"; sourceTree = "<group>"; };
 		8DDD5A995A30538474D9EB5C92F584D4 /* BMSPush.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BMSPush.framework; path = BMSPush.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		913AFA4E46B95E334317945A31C56E4E /* BMSCore.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = BMSCore.modulemap; sourceTree = "<group>"; };
-		923B77672ABA9F0DFC372F2998A43B65 /* BMSAnalyticsAPI-watchOS-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "BMSAnalyticsAPI-watchOS-umbrella.h"; path = "../BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS-umbrella.h"; sourceTree = "<group>"; };
-		95B5EF5CDBB534124283F03C4876854F /* BMSAnalyticsAPI-iOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "BMSAnalyticsAPI-iOS.modulemap"; sourceTree = "<group>"; };
-		97236D28986DB987BFF07589D3EC2984 /* BMSAnalyticsAPI-iOS-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "BMSAnalyticsAPI-iOS-Info.plist"; sourceTree = "<group>"; };
+		9246C7D38680CF9C09C4E39AD83190AA /* BMSAnalyticsAPI-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BMSAnalyticsAPI-umbrella.h"; sourceTree = "<group>"; };
 		9806F6C1D527140C2BA2F8FD3853FE09 /* BMSPush.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = BMSPush.modulemap; sourceTree = "<group>"; };
-		9A2850B3A1D83F6028C3264B95967D29 /* Pods-BlueBuzz iOS App-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BlueBuzz iOS App-dummy.m"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A2F05F51C6FB977B328243695A5556B9 /* Error.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Error.swift; path = Source/Error.swift; sourceTree = "<group>"; };
-		A3AC53D1255F37011C4B218378012451 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		A424BFE91F243C9C0BF62B4C82C215F4 /* module.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; name = module.modulemap; path = Source/Resources/module.modulemap; sourceTree = "<group>"; };
-		A4771250EE05D8FC0A852F8726FAAC6F /* BMSAnalyticsAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BMSAnalyticsAPI.framework; path = "BMSAnalyticsAPI-watchOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A4E9CB2E88DA5A31DBE47CBFA61ED2AC /* Pods-BlueBuzz WatchOS App Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BlueBuzz WatchOS App Extension.release.xcconfig"; sourceTree = "<group>"; };
-		A5BC64DAF8DFF204628B167C54A5C1C7 /* BMSCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BMSCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A86F00EC2E06AA815583D1F4D82D7AAE /* Pods-BlueBuzz WatchOS App-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-BlueBuzz WatchOS App-acknowledgements.markdown"; sourceTree = "<group>"; };
 		A8BF7EFEB8AE97F18D23D4A6FECD52A8 /* Pods_BlueBuzz_iOS_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_BlueBuzz_iOS_App.framework; path = "Pods-BlueBuzz iOS App.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		ABA04CE0E6F3AF1C607F092132053560 /* Pods-BlueBuzz WatchOS App Extension-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-BlueBuzz WatchOS App Extension-umbrella.h"; sourceTree = "<group>"; };
+		AA0A00827D6E542A84784FDC4BED5A51 /* Logger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Logger.swift; path = Source/Logger.swift; sourceTree = "<group>"; };
+		B0DA42521104D7BBF190C20C16B4A265 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		B277FA152A16A34AD05A142BBE04EB05 /* Pods-BlueBuzz iOS App-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-BlueBuzz iOS App-acknowledgements.markdown"; sourceTree = "<group>"; };
 		B2CA3A1C01A8504319EDA10B653CB865 /* BMSPushClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BMSPushClient.swift; path = Source/BMSPushClient.swift; sourceTree = "<group>"; };
-		B35046984E91ACC10F939CB30002F337 /* Pods-BlueBuzz iOS App-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-BlueBuzz iOS App-acknowledgements.markdown"; sourceTree = "<group>"; };
 		B74DB5B04D5ACA9C5677B648D6F52041 /* BMSPush-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BMSPush-umbrella.h"; sourceTree = "<group>"; };
 		BA7BD17FCECD3A854779F414CD081B5B /* BMSURLSession.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BMSURLSession.swift; path = "Source/Network Requests/BMSURLSession.swift"; sourceTree = "<group>"; };
 		BAF118CFEC8AE20672EB35B38E34282A /* BMSRichPushNotificationOptions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BMSRichPushNotificationOptions.swift; path = Source/BMSRichPushNotificationOptions.swift; sourceTree = "<group>"; };
-		BCA31DB497B64ED782C312AC7B205890 /* Pods-BlueBuzz iOS App-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-BlueBuzz iOS App-umbrella.h"; sourceTree = "<group>"; };
 		C0753BD598A6E0EA454348641842B238 /* NetworkMonitor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkMonitor.swift; path = "Source/Network Requests/NetworkMonitor.swift"; sourceTree = "<group>"; };
-		C40673FC5DBF9480C652653DBEC2671A /* Pods-BlueBuzz iOS App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BlueBuzz iOS App.debug.xcconfig"; sourceTree = "<group>"; };
-		C61E81B9DA4A89FC3A5C3D87067807DC /* BMSAnalyticsAPI-watchOS.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; name = "BMSAnalyticsAPI-watchOS.modulemap"; path = "../BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS.modulemap"; sourceTree = "<group>"; };
-		C8489EE2B68720B9E44989987DB7EB4C /* RequestMetadata.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RequestMetadata.swift; path = Source/RequestMetadata.swift; sourceTree = "<group>"; };
 		C9746A791F5D51F05C0C7A84E1EB9D37 /* BMSClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BMSClient.swift; path = Source/BMSClient.swift; sourceTree = "<group>"; };
 		CE8C9CD0105F7510472D53E4653CB2B5 /* BMSPushClientOptions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BMSPushClientOptions.swift; path = Source/BMSPushClientOptions.swift; sourceTree = "<group>"; };
-		CF7A21D54DAA20A4A2B86E21C93A8AD9 /* Pods-BlueBuzz WatchOS App Extension-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-BlueBuzz WatchOS App Extension-acknowledgements.markdown"; sourceTree = "<group>"; };
-		D68C02D8007A38BD1BDC846D0A95D5C3 /* BMSAnalyticsAPI-watchOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "BMSAnalyticsAPI-watchOS-prefix.pch"; path = "../BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS-prefix.pch"; sourceTree = "<group>"; };
 		D6E3E7D66A2E440C7A828D5662B86126 /* BMSPush-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "BMSPush-prefix.pch"; sourceTree = "<group>"; };
-		D7538AD69EE1E34E39B80947B0650469 /* Pods-BlueBuzz WatchOS App-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BlueBuzz WatchOS App-acknowledgements.plist"; sourceTree = "<group>"; };
-		DB5C287F6CD550E1329573096A23BDEC /* BMSAnalyticsAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BMSAnalyticsAPI.framework; path = "BMSAnalyticsAPI-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DADCE37A3B4D34D7A2F51A8BAD2832EA /* Analytics.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Analytics.swift; path = Source/Analytics.swift; sourceTree = "<group>"; };
+		DB1E60C756D72D736E9DD7536035AC54 /* BMSCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BMSCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC5D2EE1485E9232791BA3C562C4E69E /* BMSURLSessionDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BMSURLSessionDelegate.swift; path = "Source/Network Requests/BMSURLSessionDelegate.swift"; sourceTree = "<group>"; };
 		DD30598336EE3490D88A8D284130B81B /* BMSCore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = BMSCore.xcconfig; sourceTree = "<group>"; };
+		DF50447AC557B2328AE3A247BBA49BDE /* RequestMetadata.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RequestMetadata.swift; path = Source/RequestMetadata.swift; sourceTree = "<group>"; };
 		E065531042B514E86DC0A4048EE2AF0A /* AppIdentity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AppIdentity.swift; path = Source/Security/Identity/AppIdentity.swift; sourceTree = "<group>"; };
 		E33CF0AAE11432989D40C6F0DDA4C403 /* BMSCore-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "BMSCore-Info.plist"; sourceTree = "<group>"; };
 		E3A8219A27CEAAAE9950CF442F4C90BF /* BMSCore-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BMSCore-dummy.m"; sourceTree = "<group>"; };
-		EA60C39B5D13FFBA6AC1C2473FF6CF8A /* Pods-BlueBuzz WatchOS App-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BlueBuzz WatchOS App-Info.plist"; sourceTree = "<group>"; };
-		EE6F012456BB4DC9BFBFB643DE9B4506 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS5.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		F255E2C0C9267055CE2B2069D308D165 /* BMSCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = BMSCore.framework; path = BMSCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F41AC4F0D570DA39E7D924A20415F546 /* Pods_BlueBuzz_WatchOS_App_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_BlueBuzz_WatchOS_App_Extension.framework; path = "Pods-BlueBuzz WatchOS App Extension.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F586B0C5984A81478C1E07FF91E5CA17 /* Pods-BlueBuzz iOS App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BlueBuzz iOS App.debug.xcconfig"; sourceTree = "<group>"; };
 		F760923F4EC5301D6EC660CBFAD991C1 /* BaseDeviceIdentity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseDeviceIdentity.swift; path = Source/Security/Identity/BaseDeviceIdentity.swift; sourceTree = "<group>"; };
-		F9F6717AD235C0E1D36B784AB30B388F /* Analytics.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Analytics.swift; path = Source/Analytics.swift; sourceTree = "<group>"; };
-		FA396742F2E607F8E10016D513AB3293 /* BMSAnalyticsAPI-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "BMSAnalyticsAPI-iOS-dummy.m"; sourceTree = "<group>"; };
 		FB022281BB16F2DEC10501104E67EACE /* BMSPushUrlBuilder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BMSPushUrlBuilder.swift; path = Source/BMSPushUrlBuilder.swift; sourceTree = "<group>"; };
 		FB4E2DF38525BBB0D6E21C70712D0383 /* BaseUserIdentity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseUserIdentity.swift; path = Source/Security/Identity/BaseUserIdentity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1BDAF67D846FEDD3639CA1D57F445CB4 /* Frameworks */ = {
+		210BF3827A134FF2D1242AB0EBAB3C93 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				153A90412591F117F1F7EA3E6B87422D /* BMSAnalyticsAPI.framework in Frameworks */,
-				4F7D50C5269105441711855F75B9385A /* Foundation.framework in Frameworks */,
+				F71646F62CCF8BF64B9B67B3976267A2 /* BMSAnalyticsAPI.framework in Frameworks */,
+				61A7E3D03FEB2AEE0A44D66E7F835A34 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		35C4241A694730A57477AB8C92EA03BA /* Frameworks */ = {
+		4D08AAA48D67C096292B11ADDD41DDE0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2BC9400127BFB85D0EAB20F0921C3B1 /* Foundation.framework in Frameworks */,
+				563F384859AE0C465EA1A3EB5F8E56E7 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,35 +186,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		957203047FC0BAA6CA7D688DC10014FE /* Frameworks */ = {
+		B60ADE08F67DDC2298639C029E38084E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E6FEA8B838622E4FCB4E21A756489F2 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		95C2E1FD477E8557EF91B52C1C940535 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				12AC852DAC7E75506B660E650E1E4F12 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CF589407DE5E990220F28770C197A9D6 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A56545D6874D191720C52C6E7DE6B56D /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F8A142F586DAFCBE1993E3C27B573CD4 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				09B5693CB3A45B7890CE2F4747DB6A45 /* Foundation.framework in Frameworks */,
+				A10E65C52BC9B8C16B337968444BD81F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,40 +216,29 @@
 			path = BMSPush;
 			sourceTree = "<group>";
 		};
-		1C3F00F0C6E11C11C3E7D5E0900BA265 /* Pods-BlueBuzz WatchOS App */ = {
+		10C30885E8B5A46A94FC9BD3214ED395 /* Pods-BlueBuzz iOS App */ = {
 			isa = PBXGroup;
 			children = (
-				443842C1D0A69820F01AF56CF2AE7BF8 /* Pods-BlueBuzz WatchOS App.modulemap */,
-				A86F00EC2E06AA815583D1F4D82D7AAE /* Pods-BlueBuzz WatchOS App-acknowledgements.markdown */,
-				D7538AD69EE1E34E39B80947B0650469 /* Pods-BlueBuzz WatchOS App-acknowledgements.plist */,
-				559965E6772C4136CBE7F41482C6E679 /* Pods-BlueBuzz WatchOS App-dummy.m */,
-				23BF03E420E88361B88A4E1121D0BB5A /* Pods-BlueBuzz WatchOS App-frameworks.sh */,
-				EA60C39B5D13FFBA6AC1C2473FF6CF8A /* Pods-BlueBuzz WatchOS App-Info.plist */,
-				4B6158B3A2FACC260E4753A9BC994B22 /* Pods-BlueBuzz WatchOS App-umbrella.h */,
-				4B20982EB42A8CB77EFCB90FFAFEE957 /* Pods-BlueBuzz WatchOS App.debug.xcconfig */,
-				88E421B636210971BFEF929F7A32A954 /* Pods-BlueBuzz WatchOS App.release.xcconfig */,
+				1BB0E073BF4792EA982761F7DD274CF6 /* Pods-BlueBuzz iOS App.modulemap */,
+				B277FA152A16A34AD05A142BBE04EB05 /* Pods-BlueBuzz iOS App-acknowledgements.markdown */,
+				44422CC01DF66B04726DFBDE8370FB6A /* Pods-BlueBuzz iOS App-acknowledgements.plist */,
+				662E54B611CB3E033A462774B5368BAC /* Pods-BlueBuzz iOS App-dummy.m */,
+				15D32C1E60C5375F1F951A6967F166F3 /* Pods-BlueBuzz iOS App-frameworks.sh */,
+				13ABEF25FD89F895752D21C5EF413425 /* Pods-BlueBuzz iOS App-Info.plist */,
+				0F7B10FE402FE4A997CFC90CB6AC9629 /* Pods-BlueBuzz iOS App-umbrella.h */,
+				F586B0C5984A81478C1E07FF91E5CA17 /* Pods-BlueBuzz iOS App.debug.xcconfig */,
+				5E6F5C62539387ABBC631591536A01A3 /* Pods-BlueBuzz iOS App.release.xcconfig */,
 			);
-			name = "Pods-BlueBuzz WatchOS App";
-			path = "Target Support Files/Pods-BlueBuzz WatchOS App";
+			name = "Pods-BlueBuzz iOS App";
+			path = "Target Support Files/Pods-BlueBuzz iOS App";
 			sourceTree = "<group>";
 		};
-		36A2045553B121574C14DA37BD913520 /* Targets Support Files */ = {
+		2D0EE9BD9913B29DF3B8920A5F9EF81B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				50F0DEF6932AB194540652F8122CA223 /* Pods-BlueBuzz iOS App */,
-				1C3F00F0C6E11C11C3E7D5E0900BA265 /* Pods-BlueBuzz WatchOS App */,
-				CC8A619A66EFCDB6166E9F3832DD3253 /* Pods-BlueBuzz WatchOS App Extension */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		3852731313C7D5BAE1DA6491387D522F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				04DB3EC94AEA2A15897893EE45F039BC /* BMSAnalyticsAPI.framework */,
-				A5BC64DAF8DFF204628B167C54A5C1C7 /* BMSCore.framework */,
-				892A0B9A9B4A0AD8B5AFBE7007A47D8C /* iOS */,
-				72335926FCADE761817345E2D1F8A927 /* watchOS */,
+				41F8079D9F111980997DAE40D7FFAD1C /* BMSAnalyticsAPI.framework */,
+				DB1E60C756D72D736E9DD7536035AC54 /* BMSCore.framework */,
+				F5E41D5C145C8B5182452E2C695B1E0C /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -359,37 +270,29 @@
 			path = BMSCore;
 			sourceTree = "<group>";
 		};
-		50F0DEF6932AB194540652F8122CA223 /* Pods-BlueBuzz iOS App */ = {
+		6577BDD169975326693E1A9F8D66F677 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				05E9E0BA610F322CD884C398E5D48035 /* Pods-BlueBuzz iOS App.modulemap */,
-				B35046984E91ACC10F939CB30002F337 /* Pods-BlueBuzz iOS App-acknowledgements.markdown */,
-				210A782FF67CD9F778798BF43B1FB640 /* Pods-BlueBuzz iOS App-acknowledgements.plist */,
-				9A2850B3A1D83F6028C3264B95967D29 /* Pods-BlueBuzz iOS App-dummy.m */,
-				45B1C94D8C0DF0FE3E09CEC736F790F7 /* Pods-BlueBuzz iOS App-frameworks.sh */,
-				8D57C07DD22C21863E07252C5198E614 /* Pods-BlueBuzz iOS App-Info.plist */,
-				BCA31DB497B64ED782C312AC7B205890 /* Pods-BlueBuzz iOS App-umbrella.h */,
-				C40673FC5DBF9480C652653DBEC2671A /* Pods-BlueBuzz iOS App.debug.xcconfig */,
-				05B5D6A815EE23220C434AB1B12EA47A /* Pods-BlueBuzz iOS App.release.xcconfig */,
+				36B0DEE3EE7E10AC2578D20C2922789B /* BMSAnalyticsAPI.framework */,
+				F255E2C0C9267055CE2B2069D308D165 /* BMSCore.framework */,
+				8DDD5A995A30538474D9EB5C92F584D4 /* BMSPush.framework */,
+				A8BF7EFEB8AE97F18D23D4A6FECD52A8 /* Pods_BlueBuzz_iOS_App.framework */,
 			);
-			name = "Pods-BlueBuzz iOS App";
-			path = "Target Support Files/Pods-BlueBuzz iOS App";
+			name = Products;
 			sourceTree = "<group>";
 		};
-		72335926FCADE761817345E2D1F8A927 /* watchOS */ = {
+		7506F79E97A26E06CF85F3851A21503E /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				EE6F012456BB4DC9BFBFB643DE9B4506 /* Foundation.framework */,
+				64A45D326A2E9D94F2932AF61A0B0C4E /* BMSAnalyticsAPI.modulemap */,
+				19D7C06C6AA490333F9ECA31E957B04A /* BMSAnalyticsAPI.xcconfig */,
+				0C02052B10920C11C1BC86B1847D2EA7 /* BMSAnalyticsAPI-dummy.m */,
+				025F3EC838A8F4A4E04CB3355137F4F9 /* BMSAnalyticsAPI-Info.plist */,
+				31E52D6D2B5A894C2D16F56396687999 /* BMSAnalyticsAPI-prefix.pch */,
+				9246C7D38680CF9C09C4E39AD83190AA /* BMSAnalyticsAPI-umbrella.h */,
 			);
-			name = watchOS;
-			sourceTree = "<group>";
-		};
-		892A0B9A9B4A0AD8B5AFBE7007A47D8C /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				A3AC53D1255F37011C4B218378012451 /* Foundation.framework */,
-			);
-			name = iOS;
+			name = "Support Files";
+			path = "../Target Support Files/BMSAnalyticsAPI";
 			sourceTree = "<group>";
 		};
 		A5D8DA5FDBDADFCA5D04493D9950A1CB /* Support Files */ = {
@@ -419,125 +322,58 @@
 			path = "../Target Support Files/BMSPush";
 			sourceTree = "<group>";
 		};
-		B6E655916279507E53E5F80BBFFB4182 /* BMSAnalyticsAPI */ = {
+		BB11D563CA4BA6E5057042814DA42FF7 /* BMSAnalyticsAPI */ = {
 			isa = PBXGroup;
 			children = (
-				F9F6717AD235C0E1D36B784AB30B388F /* Analytics.swift */,
-				17630507AFC3F8B5FFEB28D33983FBA7 /* Logger.swift */,
-				C8489EE2B68720B9E44989987DB7EB4C /* RequestMetadata.swift */,
-				F615767CF0055362AA06E41342F6CD81 /* Support Files */,
+				DADCE37A3B4D34D7A2F51A8BAD2832EA /* Analytics.swift */,
+				AA0A00827D6E542A84784FDC4BED5A51 /* Logger.swift */,
+				DF50447AC557B2328AE3A247BBA49BDE /* RequestMetadata.swift */,
+				7506F79E97A26E06CF85F3851A21503E /* Support Files */,
 			);
 			name = BMSAnalyticsAPI;
 			path = BMSAnalyticsAPI;
-			sourceTree = "<group>";
-		};
-		CC8A619A66EFCDB6166E9F3832DD3253 /* Pods-BlueBuzz WatchOS App Extension */ = {
-			isa = PBXGroup;
-			children = (
-				3B471EEB7AB44047748B58A99A6085A2 /* Pods-BlueBuzz WatchOS App Extension.modulemap */,
-				CF7A21D54DAA20A4A2B86E21C93A8AD9 /* Pods-BlueBuzz WatchOS App Extension-acknowledgements.markdown */,
-				642C24D554ABACAB533215928E7E80CD /* Pods-BlueBuzz WatchOS App Extension-acknowledgements.plist */,
-				4A4E5D2A701486A2F799D1EE845B5128 /* Pods-BlueBuzz WatchOS App Extension-dummy.m */,
-				3CFB99A44C3940A04336757CAAD5DD76 /* Pods-BlueBuzz WatchOS App Extension-frameworks.sh */,
-				2D55A48837552558D78132C833D371B3 /* Pods-BlueBuzz WatchOS App Extension-Info.plist */,
-				ABA04CE0E6F3AF1C607F092132053560 /* Pods-BlueBuzz WatchOS App Extension-umbrella.h */,
-				6268D2117BD56FADF25830AD7A2FB5AD /* Pods-BlueBuzz WatchOS App Extension.debug.xcconfig */,
-				A4E9CB2E88DA5A31DBE47CBFA61ED2AC /* Pods-BlueBuzz WatchOS App Extension.release.xcconfig */,
-			);
-			name = "Pods-BlueBuzz WatchOS App Extension";
-			path = "Target Support Files/Pods-BlueBuzz WatchOS App Extension";
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				3852731313C7D5BAE1DA6491387D522F /* Frameworks */,
+				2D0EE9BD9913B29DF3B8920A5F9EF81B /* Frameworks */,
 				E8B208143442FAEEB6727A8F43F5120A /* Pods */,
-				E74245F987DDEAAE128ECF5AC3600886 /* Products */,
-				36A2045553B121574C14DA37BD913520 /* Targets Support Files */,
+				6577BDD169975326693E1A9F8D66F677 /* Products */,
+				F5FE81A516D8CC953525F6BF86922A3C /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		E74245F987DDEAAE128ECF5AC3600886 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				DB5C287F6CD550E1329573096A23BDEC /* BMSAnalyticsAPI.framework */,
-				A4771250EE05D8FC0A852F8726FAAC6F /* BMSAnalyticsAPI.framework */,
-				F255E2C0C9267055CE2B2069D308D165 /* BMSCore.framework */,
-				8DDD5A995A30538474D9EB5C92F584D4 /* BMSPush.framework */,
-				A8BF7EFEB8AE97F18D23D4A6FECD52A8 /* Pods_BlueBuzz_iOS_App.framework */,
-				0C262FBE2B54C4C9458E3B776C2868F8 /* Pods_BlueBuzz_WatchOS_App.framework */,
-				F41AC4F0D570DA39E7D924A20415F546 /* Pods_BlueBuzz_WatchOS_App_Extension.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		E8B208143442FAEEB6727A8F43F5120A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B6E655916279507E53E5F80BBFFB4182 /* BMSAnalyticsAPI */,
+				BB11D563CA4BA6E5057042814DA42FF7 /* BMSAnalyticsAPI */,
 				47349AD5193A25DB5BE8ECAD7EF79520 /* BMSCore */,
 				0C99229AD86A7153492691D520A3EBEF /* BMSPush */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		F615767CF0055362AA06E41342F6CD81 /* Support Files */ = {
+		F5E41D5C145C8B5182452E2C695B1E0C /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				95B5EF5CDBB534124283F03C4876854F /* BMSAnalyticsAPI-iOS.modulemap */,
-				7A59389DF8AFA2E5C60C3BA3DD0DAF0F /* BMSAnalyticsAPI-iOS.xcconfig */,
-				FA396742F2E607F8E10016D513AB3293 /* BMSAnalyticsAPI-iOS-dummy.m */,
-				97236D28986DB987BFF07589D3EC2984 /* BMSAnalyticsAPI-iOS-Info.plist */,
-				3DA80F0864204F639F3E19A135E7DDA2 /* BMSAnalyticsAPI-iOS-prefix.pch */,
-				1AD4AF97C0AACC059AA5F28E9603B0F3 /* BMSAnalyticsAPI-iOS-umbrella.h */,
-				C61E81B9DA4A89FC3A5C3D87067807DC /* BMSAnalyticsAPI-watchOS.modulemap */,
-				4AD74E9D7A81C97A44CEC2D7CAA4ED57 /* BMSAnalyticsAPI-watchOS.xcconfig */,
-				1D1E28147CF78562E7AF9174E2157148 /* BMSAnalyticsAPI-watchOS-dummy.m */,
-				3F397E16BFA881BD5D7102581310BCC7 /* BMSAnalyticsAPI-watchOS-Info.plist */,
-				D68C02D8007A38BD1BDC846D0A95D5C3 /* BMSAnalyticsAPI-watchOS-prefix.pch */,
-				923B77672ABA9F0DFC372F2998A43B65 /* BMSAnalyticsAPI-watchOS-umbrella.h */,
+				B0DA42521104D7BBF190C20C16B4A265 /* Foundation.framework */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/BMSAnalyticsAPI-iOS";
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		F5FE81A516D8CC953525F6BF86922A3C /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				10C30885E8B5A46A94FC9BD3214ED395 /* Pods-BlueBuzz iOS App */,
+			);
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		013F6A0E828C574236956CE3D155E17C /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CF896782703FBB38F1BFA46C2B5754D7 /* BMSAnalyticsAPI-watchOS-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1F6C1CC10C3B19B5FEEE3E6BBED85273 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CD703EA245E7C790DBA0B279C49B21AA /* BMSCore.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		43378204B87DF8E569955878FB6A2EBE /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5FE2B938DBBE4C2BBB6CADAD58D483E1 /* Pods-BlueBuzz WatchOS App-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		68909AC6A3D1A931A6EDCB13A79D98F5 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CED80DC866ABB6247B05133BEB5E36B7 /* Pods-BlueBuzz WatchOS App Extension-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		849125A0FD8F1E4412387844679B4340 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -546,44 +382,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E2AC9927B25592932C77DD33A7012CAF /* Headers */ = {
+		8DA0B241DD072BB13E90115D8D485BA4 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53111F078E082FB00BFD8D7944EBDA1E /* BMSAnalyticsAPI-iOS-umbrella.h in Headers */,
+				A1C10150D497AE73CD7C5911FE53A206 /* BMSAnalyticsAPI-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FD7678BF984E0C9D191907D9C5774FD3 /* Headers */ = {
+		9C6208B3FF93331FBF6A62B680BF3CBB /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4DAA7DB4A58DCC8ED54951A1945F672F /* Pods-BlueBuzz iOS App-umbrella.h in Headers */,
+				89D723900C02DADD82FD22A3AB58E735 /* Pods-BlueBuzz iOS App-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2B8624CC4941558E892F4B8F175DA2D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BCC621FB8B045698D9E2BA4D8F276DFC /* BMSCore.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		2C1DC13A266072DB45EFB9F88439B16E /* Pods-BlueBuzz WatchOS App Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 552EEC0995E9C0F285007FFD963A9F0C /* Build configuration list for PBXNativeTarget "Pods-BlueBuzz WatchOS App Extension" */;
-			buildPhases = (
-				68909AC6A3D1A931A6EDCB13A79D98F5 /* Headers */,
-				AB4FE355916641F589746A5517F552BE /* Sources */,
-				F8A142F586DAFCBE1993E3C27B573CD4 /* Frameworks */,
-				4720DAA0D173124306F90156DE02CA71 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				23137174237B529DC41E1E1D6F20FDCE /* PBXTargetDependency */,
-			);
-			name = "Pods-BlueBuzz WatchOS App Extension";
-			productName = "Pods-BlueBuzz WatchOS App Extension";
-			productReference = F41AC4F0D570DA39E7D924A20415F546 /* Pods_BlueBuzz_WatchOS_App_Extension.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		6ABA3D02F3CA9345DBFCF795E07BF2FC /* BMSPush */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A818E831C219F270814B82627D1E150A /* Build configuration list for PBXNativeTarget "BMSPush" */;
@@ -603,76 +428,21 @@
 			productReference = 8DDD5A995A30538474D9EB5C92F584D4 /* BMSPush.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		9491CA8FB5B1A0184C7751AF14B17BEC /* BMSAnalyticsAPI-watchOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 48239693303D94066D77CAC130162D31 /* Build configuration list for PBXNativeTarget "BMSAnalyticsAPI-watchOS" */;
-			buildPhases = (
-				013F6A0E828C574236956CE3D155E17C /* Headers */,
-				F2AD3938D9AD47AD230880CC1C409D3F /* Sources */,
-				CF589407DE5E990220F28770C197A9D6 /* Frameworks */,
-				25FFF88C252DDE7BD11A11FBAC22F700 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "BMSAnalyticsAPI-watchOS";
-			productName = "BMSAnalyticsAPI-watchOS";
-			productReference = A4771250EE05D8FC0A852F8726FAAC6F /* BMSAnalyticsAPI.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		BDC20B18123BD6D8ADE582C02A4D3443 /* Pods-BlueBuzz WatchOS App */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C677CB9DAA0EC22621E159E78052A671 /* Build configuration list for PBXNativeTarget "Pods-BlueBuzz WatchOS App" */;
-			buildPhases = (
-				43378204B87DF8E569955878FB6A2EBE /* Headers */,
-				73CD25CADDB18CC55BF5F9C08B2E912F /* Sources */,
-				35C4241A694730A57477AB8C92EA03BA /* Frameworks */,
-				D4293CEB71A1B7020CE922D7ADDEC8A0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				326F6A0396DD96BB496B0F66B0192BF1 /* PBXTargetDependency */,
-			);
-			name = "Pods-BlueBuzz WatchOS App";
-			productName = "Pods-BlueBuzz WatchOS App";
-			productReference = 0C262FBE2B54C4C9458E3B776C2868F8 /* Pods_BlueBuzz_WatchOS_App.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		D8FAA9B625B21A334C385A76FD26E543 /* BMSAnalyticsAPI-iOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1F5EFBAD667FC97ABFC33B55A10801FD /* Build configuration list for PBXNativeTarget "BMSAnalyticsAPI-iOS" */;
-			buildPhases = (
-				E2AC9927B25592932C77DD33A7012CAF /* Headers */,
-				7880F02F7DC0E859F72A09B0E2D54A8B /* Sources */,
-				95C2E1FD477E8557EF91B52C1C940535 /* Frameworks */,
-				DEB0E7713EEE1816A956CB4BB87F1FD5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "BMSAnalyticsAPI-iOS";
-			productName = "BMSAnalyticsAPI-iOS";
-			productReference = DB5C287F6CD550E1329573096A23BDEC /* BMSAnalyticsAPI.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		DB891A8C1EEA859D2FF4B6683E275622 /* Pods-BlueBuzz iOS App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BA53294C3CA25BD7E16D149F568FBB02 /* Build configuration list for PBXNativeTarget "Pods-BlueBuzz iOS App" */;
+			buildConfigurationList = 2E81EF5AB6BE460ECD5EC4906446C85F /* Build configuration list for PBXNativeTarget "Pods-BlueBuzz iOS App" */;
 			buildPhases = (
-				FD7678BF984E0C9D191907D9C5774FD3 /* Headers */,
-				EE86F6961D205C03A668D00D8CE03C6A /* Sources */,
-				957203047FC0BAA6CA7D688DC10014FE /* Frameworks */,
-				E68B84471F117DCA9EFD71D284F1A3FB /* Resources */,
+				9C6208B3FF93331FBF6A62B680BF3CBB /* Headers */,
+				FD57714863757C61820515D61AF8C3EA /* Sources */,
+				B60ADE08F67DDC2298639C029E38084E /* Frameworks */,
+				6489581A1103EE095F3CC19CE0D7D477 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				E9F90289F3A652D9A7E2B16AC9DB010F /* PBXTargetDependency */,
-				036ACB1D2FA04C9B95F6DC372911A028 /* PBXTargetDependency */,
-				33CE929A4578A6A1E36BA605CC261185 /* PBXTargetDependency */,
+				6076A180BF3D8D76AAC37C71C1DB05E5 /* PBXTargetDependency */,
+				FF60BB0B8E4574A7A33BCBC42736658D /* PBXTargetDependency */,
+				E8D42ED6237EC62DD70431980D6EEE50 /* PBXTargetDependency */,
 			);
 			name = "Pods-BlueBuzz iOS App";
 			productName = "Pods-BlueBuzz iOS App";
@@ -681,21 +451,39 @@
 		};
 		F7775B5F5F5E3CCCD0A1E173154F35ED /* BMSCore */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DA22DFD0A5A00739257B4196A7C77C8A /* Build configuration list for PBXNativeTarget "BMSCore" */;
+			buildConfigurationList = 277539A99277488D16527E728697B4D2 /* Build configuration list for PBXNativeTarget "BMSCore" */;
 			buildPhases = (
-				1F6C1CC10C3B19B5FEEE3E6BBED85273 /* Headers */,
-				5832301D6BA9785BC66D4C66499F9721 /* Sources */,
-				1BDAF67D846FEDD3639CA1D57F445CB4 /* Frameworks */,
-				640DC7D34E7DC3FF6B8CAA5517439070 /* Resources */,
+				A2B8624CC4941558E892F4B8F175DA2D /* Headers */,
+				D4E4C2D31F222247682179CB78802EDD /* Sources */,
+				210BF3827A134FF2D1242AB0EBAB3C93 /* Frameworks */,
+				CD5ADE52DA0C547F188E2D139FA6ECF8 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C9A3883C8CB95CB74EC75DC6B81ED6CD /* PBXTargetDependency */,
+				7EEDD3E613161580EB01361C4E781B91 /* PBXTargetDependency */,
 			);
 			name = BMSCore;
 			productName = BMSCore;
 			productReference = F255E2C0C9267055CE2B2069D308D165 /* BMSCore.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		FEDA8B2D5269092D51AF272AC59CDB8F /* BMSAnalyticsAPI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 785F405462C2C5E661FF8A95F4F25FE6 /* Build configuration list for PBXNativeTarget "BMSAnalyticsAPI" */;
+			buildPhases = (
+				8DA0B241DD072BB13E90115D8D485BA4 /* Headers */,
+				66DC956C6F3E271EE797DA0B545BA77F /* Sources */,
+				4D08AAA48D67C096292B11ADDD41DDE0 /* Frameworks */,
+				117EDE542F2F60D344FCED5709A97CFD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BMSAnalyticsAPI;
+			productName = BMSAnalyticsAPI;
+			productReference = 36B0DEE3EE7E10AC2578D20C2922789B /* BMSAnalyticsAPI.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -715,23 +503,20 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = E74245F987DDEAAE128ECF5AC3600886 /* Products */;
+			productRefGroup = 6577BDD169975326693E1A9F8D66F677 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D8FAA9B625B21A334C385A76FD26E543 /* BMSAnalyticsAPI-iOS */,
-				9491CA8FB5B1A0184C7751AF14B17BEC /* BMSAnalyticsAPI-watchOS */,
+				FEDA8B2D5269092D51AF272AC59CDB8F /* BMSAnalyticsAPI */,
 				F7775B5F5F5E3CCCD0A1E173154F35ED /* BMSCore */,
 				6ABA3D02F3CA9345DBFCF795E07BF2FC /* BMSPush */,
 				DB891A8C1EEA859D2FF4B6683E275622 /* Pods-BlueBuzz iOS App */,
-				BDC20B18123BD6D8ADE582C02A4D3443 /* Pods-BlueBuzz WatchOS App */,
-				2C1DC13A266072DB45EFB9F88439B16E /* Pods-BlueBuzz WatchOS App Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		25FFF88C252DDE7BD11A11FBAC22F700 /* Resources */ = {
+		117EDE542F2F60D344FCED5709A97CFD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -745,35 +530,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4720DAA0D173124306F90156DE02CA71 /* Resources */ = {
+		6489581A1103EE095F3CC19CE0D7D477 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		640DC7D34E7DC3FF6B8CAA5517439070 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D4293CEB71A1B7020CE922D7ADDEC8A0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DEB0E7713EEE1816A956CB4BB87F1FD5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E68B84471F117DCA9EFD71D284F1A3FB /* Resources */ = {
+		CD5ADE52DA0C547F188E2D139FA6ECF8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -783,31 +547,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		5832301D6BA9785BC66D4C66499F9721 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2507C25CF4ABB431E87E3D6206BE6BDC /* AppIdentity.swift in Sources */,
-				1A93B809BB89D7F2B32AEC1EFEE0FA70 /* AuthorizationManager.swift in Sources */,
-				3E41555B1A0E88375F5391D99A54A525 /* BaseAppIdentity.swift in Sources */,
-				4E3DE0375A776D72F39FBC664E6FE478 /* BaseAuthorizationManager.swift in Sources */,
-				C7F0E181B8DC210B861DB9E33758BB5E /* BaseDeviceIdentity.swift in Sources */,
-				BE02E67B029062108900A1EE86779A9F /* BaseUserIdentity.swift in Sources */,
-				C6F6B8D17C2E4D4026F411E262595725 /* BMSClient.swift in Sources */,
-				196B23359159E7F3F4DA91E3D2547E05 /* BMSCore-dummy.m in Sources */,
-				DBA72AD9F5CC7FFDE92A526D8D44529F /* BMSURLSession.swift in Sources */,
-				5D1755F6B45656B805B6D5B94977B36B /* BMSURLSessionDelegate.swift in Sources */,
-				6E05604DD799466E157082FFABC3BBBD /* BMSURLSessionUtility.swift in Sources */,
-				47810A67C64D6B9D6E3C34D8B13EB04D /* DeviceIdentity.swift in Sources */,
-				A0A72DC73E949EB3E1915C94851F6891 /* Error.swift in Sources */,
-				B5ACAF9F5854D32306EA8CC6A17CFABE /* module.modulemap in Sources */,
-				43C89D00E56037925DD10ED23C59CFBD /* NetworkMonitor.swift in Sources */,
-				C580A077DEBD478FB18FBBEF3F1C5341 /* Request.swift in Sources */,
-				6A4D9C307F7555AF9C5A85222353B398 /* Response.swift in Sources */,
-				23DD14F231B7CEA1F065C4F6A02D5B77 /* UserIdentity.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		5C991E0B3CB6C692C2D146EE1FB5EE3D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -826,430 +565,89 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		73CD25CADDB18CC55BF5F9C08B2E912F /* Sources */ = {
+		66DC956C6F3E271EE797DA0B545BA77F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A8E0279698F7855FD2F6FACE2736777 /* Pods-BlueBuzz WatchOS App-dummy.m in Sources */,
+				2BBC6A97173A7F9DDBF7EE5263206A23 /* Analytics.swift in Sources */,
+				F80350AF6B31A359CBE1AFF0BED6D939 /* BMSAnalyticsAPI-dummy.m in Sources */,
+				99BC068F5E8D380668335843D6CD1F1C /* Logger.swift in Sources */,
+				C16031E18D23D8214BD09C5405CA578D /* RequestMetadata.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7880F02F7DC0E859F72A09B0E2D54A8B /* Sources */ = {
+		D4E4C2D31F222247682179CB78802EDD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49315F15C5F1499E5E0034B1A2B6164F /* Analytics.swift in Sources */,
-				1065F355D905C46D7667F2C4F5EB0368 /* BMSAnalyticsAPI-iOS-dummy.m in Sources */,
-				2B74805B148A7DA3B04ADA08F3597F6F /* Logger.swift in Sources */,
-				7787C3B2B965DBC4D2612BC9AA0F492E /* RequestMetadata.swift in Sources */,
+				20B94327186729E43A2C9146E350E0CA /* AppIdentity.swift in Sources */,
+				D3B70D2B6081555BC1C59AF0D58B3559 /* AuthorizationManager.swift in Sources */,
+				EF579C5BE737B0824985E6A6072BE366 /* BaseAppIdentity.swift in Sources */,
+				0974E3BB587FDBAE24BC8D3BF21119CF /* BaseAuthorizationManager.swift in Sources */,
+				B6225881F64C2F99ECB258D12BF7F602 /* BaseDeviceIdentity.swift in Sources */,
+				CEEB4E898984CF3086D5F1A12E0D099D /* BaseUserIdentity.swift in Sources */,
+				EB01CE12C2EFB3D9C6C09B11F5CC83E7 /* BMSClient.swift in Sources */,
+				05C6AED0C3BD9803C162C70DA42203DC /* BMSCore-dummy.m in Sources */,
+				26CEE8DD04C881AA86D5799534A25C94 /* BMSURLSession.swift in Sources */,
+				941887D5FCCE2ACC78FD0B55438DBE3B /* BMSURLSessionDelegate.swift in Sources */,
+				D62FAE523ECF6864C6244903654EF574 /* BMSURLSessionUtility.swift in Sources */,
+				0B5411B3AE7EAFAFDB2DF6FCA79F2A64 /* DeviceIdentity.swift in Sources */,
+				67C4ADF71D7B7218A4D882471037FE07 /* Error.swift in Sources */,
+				FFD8798979C3D8F9148923A2A183F23E /* module.modulemap in Sources */,
+				0E9B413CCC2FDE68746E1DB62F26B2A0 /* NetworkMonitor.swift in Sources */,
+				7C29D24482BA0D74F70C2597006824F0 /* Request.swift in Sources */,
+				F380BF2B55E224A5A222A6BD7ED78C67 /* Response.swift in Sources */,
+				2D902A3004E0D774DA9FC4EBFC7FF64D /* UserIdentity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AB4FE355916641F589746A5517F552BE /* Sources */ = {
+		FD57714863757C61820515D61AF8C3EA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D10D4B543B6EC7FCC8FEF5E569AB093 /* Pods-BlueBuzz WatchOS App Extension-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EE86F6961D205C03A668D00D8CE03C6A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A436C25B680421D59F934517795E0EE8 /* Pods-BlueBuzz iOS App-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F2AD3938D9AD47AD230880CC1C409D3F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1E2CC854628DBF6438C96553FE882108 /* Analytics.swift in Sources */,
-				5E2BFE35E625E788AF3714D75987E85C /* BMSAnalyticsAPI-watchOS-dummy.m in Sources */,
-				D283A087BA30C3728A169823A6FAF946 /* Logger.swift in Sources */,
-				CC09FC3A9E2A108FB9298E994869FDA6 /* RequestMetadata.swift in Sources */,
+				A4FC9E037E5E47613125D2233655D82A /* Pods-BlueBuzz iOS App-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		036ACB1D2FA04C9B95F6DC372911A028 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = BMSCore;
-			target = F7775B5F5F5E3CCCD0A1E173154F35ED /* BMSCore */;
-			targetProxy = 0851C3CFC8101D7535E27E9262DD1182 /* PBXContainerItemProxy */;
-		};
-		23137174237B529DC41E1E1D6F20FDCE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "BMSAnalyticsAPI-watchOS";
-			target = 9491CA8FB5B1A0184C7751AF14B17BEC /* BMSAnalyticsAPI-watchOS */;
-			targetProxy = C8FCBAA416E40EF6108ABCC81EE3453E /* PBXContainerItemProxy */;
-		};
 		282E686A169242BF9BC2589623680A02 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = BMSCore;
 			target = F7775B5F5F5E3CCCD0A1E173154F35ED /* BMSCore */;
 			targetProxy = E62C6B953E98E7342000BD2944210509 /* PBXContainerItemProxy */;
 		};
-		326F6A0396DD96BB496B0F66B0192BF1 /* PBXTargetDependency */ = {
+		6076A180BF3D8D76AAC37C71C1DB05E5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "BMSAnalyticsAPI-watchOS";
-			target = 9491CA8FB5B1A0184C7751AF14B17BEC /* BMSAnalyticsAPI-watchOS */;
-			targetProxy = 9F7ABB050980666B97DFE2233B42F413 /* PBXContainerItemProxy */;
+			name = BMSAnalyticsAPI;
+			target = FEDA8B2D5269092D51AF272AC59CDB8F /* BMSAnalyticsAPI */;
+			targetProxy = 9146C619AFC3503F09F6B6D05BDEB34F /* PBXContainerItemProxy */;
 		};
-		33CE929A4578A6A1E36BA605CC261185 /* PBXTargetDependency */ = {
+		7EEDD3E613161580EB01361C4E781B91 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = BMSAnalyticsAPI;
+			target = FEDA8B2D5269092D51AF272AC59CDB8F /* BMSAnalyticsAPI */;
+			targetProxy = 151BF8D4B0C0B66F055B717DC78C2709 /* PBXContainerItemProxy */;
+		};
+		E8D42ED6237EC62DD70431980D6EEE50 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = BMSPush;
 			target = 6ABA3D02F3CA9345DBFCF795E07BF2FC /* BMSPush */;
-			targetProxy = CA241C66641D4EAC94A8348B25F61A0F /* PBXContainerItemProxy */;
+			targetProxy = 2B7B07D78696DEA3778146C29AC8A907 /* PBXContainerItemProxy */;
 		};
-		C9A3883C8CB95CB74EC75DC6B81ED6CD /* PBXTargetDependency */ = {
+		FF60BB0B8E4574A7A33BCBC42736658D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "BMSAnalyticsAPI-iOS";
-			target = D8FAA9B625B21A334C385A76FD26E543 /* BMSAnalyticsAPI-iOS */;
-			targetProxy = 7870C1E7B45935C67D7EB3065B993B97 /* PBXContainerItemProxy */;
-		};
-		E9F90289F3A652D9A7E2B16AC9DB010F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "BMSAnalyticsAPI-iOS";
-			target = D8FAA9B625B21A334C385A76FD26E543 /* BMSAnalyticsAPI-iOS */;
-			targetProxy = F40A55F32FE1670EE6A1191A033B5C97 /* PBXContainerItemProxy */;
+			name = BMSCore;
+			target = F7775B5F5F5E3CCCD0A1E173154F35ED /* BMSCore */;
+			targetProxy = 85FC298B51931E75D11FEF1E8EDF9BF2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		06AE2EE28A1C543069F3A9DA7B5F4801 /* Debug */ = {
+		0E9134406A6CC263DBDF75547C641C11 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6268D2117BD56FADF25830AD7A2FB5AD /* Pods-BlueBuzz WatchOS App Extension.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-BlueBuzz WatchOS App Extension/Pods-BlueBuzz WatchOS App Extension-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-BlueBuzz WatchOS App Extension/Pods-BlueBuzz WatchOS App Extension.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-				WATCHOS_DEPLOYMENT_TARGET = 5.0;
-			};
-			name = Debug;
-		};
-		26951B541077FDFA988F258FF8F8DF45 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A4E9CB2E88DA5A31DBE47CBFA61ED2AC /* Pods-BlueBuzz WatchOS App Extension.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-BlueBuzz WatchOS App Extension/Pods-BlueBuzz WatchOS App Extension-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-BlueBuzz WatchOS App Extension/Pods-BlueBuzz WatchOS App Extension.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-				WATCHOS_DEPLOYMENT_TARGET = 5.0;
-			};
-			name = Release;
-		};
-		26BAFB39F3BEC31EB264396DC0910FCE /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7A59389DF8AFA2E5C60C3BA3DD0DAF0F /* BMSAnalyticsAPI-iOS.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/BMSAnalyticsAPI-iOS/BMSAnalyticsAPI-iOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BMSAnalyticsAPI-iOS/BMSAnalyticsAPI-iOS-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BMSAnalyticsAPI-iOS/BMSAnalyticsAPI-iOS.modulemap";
-				PRODUCT_MODULE_NAME = BMSAnalyticsAPI;
-				PRODUCT_NAME = BMSAnalyticsAPI;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		43D6410F58C9F30813508322AD2EC155 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DD30598336EE3490D88A8D284130B81B /* BMSCore.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/BMSCore/BMSCore-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BMSCore/BMSCore-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BMSCore/BMSCore.modulemap";
-				PRODUCT_MODULE_NAME = BMSCore;
-				PRODUCT_NAME = BMSCore;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		46D7873B8D657B96E93E6A71CDFD5BF0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4AD74E9D7A81C97A44CEC2D7CAA4ED57 /* BMSAnalyticsAPI-watchOS.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS.modulemap";
-				PRODUCT_MODULE_NAME = BMSAnalyticsAPI;
-				PRODUCT_NAME = BMSAnalyticsAPI;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Release;
-		};
-		70935CF2E36B60E36DE5DCDE00BB0F3C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7284F21D24CA53250202FD8108C7BB37 /* BMSPush.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/BMSPush/BMSPush-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BMSPush/BMSPush-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BMSPush/BMSPush.modulemap";
-				PRODUCT_MODULE_NAME = BMSPush;
-				PRODUCT_NAME = BMSPush;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		794B861C1E90FB7DFA7524583D37D9AD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7A59389DF8AFA2E5C60C3BA3DD0DAF0F /* BMSAnalyticsAPI-iOS.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/BMSAnalyticsAPI-iOS/BMSAnalyticsAPI-iOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BMSAnalyticsAPI-iOS/BMSAnalyticsAPI-iOS-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BMSAnalyticsAPI-iOS/BMSAnalyticsAPI-iOS.modulemap";
-				PRODUCT_MODULE_NAME = BMSAnalyticsAPI;
-				PRODUCT_NAME = BMSAnalyticsAPI;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		87155EE25BBA5FB83FCE2A629C7462CB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				SYMROOT = "${SRCROOT}/../build";
-				WATCHOS_DEPLOYMENT_TARGET = 5.0;
-			};
-			name = Release;
-		};
-		ADD51B76B58BB54EFC8F0B0B291ED11C /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 88E421B636210971BFEF929F7A32A954 /* Pods-BlueBuzz WatchOS App.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-BlueBuzz WatchOS App/Pods-BlueBuzz WatchOS App-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-BlueBuzz WatchOS App/Pods-BlueBuzz WatchOS App.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-				WATCHOS_DEPLOYMENT_TARGET = 5.0;
-			};
-			name = Release;
-		};
-		B14F6D4D2E61724C6A1E3E8379DCB2D8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 05B5D6A815EE23220C434AB1B12EA47A /* Pods-BlueBuzz iOS App.release.xcconfig */;
+			baseConfigurationReference = F586B0C5984A81478C1E07FF91E5CA17 /* Pods-BlueBuzz iOS App.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
@@ -1277,78 +675,12 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		B26CE9DA3780D627212F492C40AF7879 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4AD74E9D7A81C97A44CEC2D7CAA4ED57 /* BMSAnalyticsAPI-watchOS.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BMSAnalyticsAPI-watchOS/BMSAnalyticsAPI-watchOS.modulemap";
-				PRODUCT_MODULE_NAME = BMSAnalyticsAPI;
-				PRODUCT_NAME = BMSAnalyticsAPI;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
-		D02C1AFD4026F880AF3C03D9AD0ABC27 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7284F21D24CA53250202FD8108C7BB37 /* BMSPush.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/BMSPush/BMSPush-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/BMSPush/BMSPush-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/BMSPush/BMSPush.modulemap";
-				PRODUCT_MODULE_NAME = BMSPush;
-				PRODUCT_NAME = BMSPush;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		DD5A2AF1B5B568BD6A1224DDA5287430 /* Debug */ = {
+		131356BE54884448CA49C07BEDF4BB2A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1409,11 +741,268 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
-				WATCHOS_DEPLOYMENT_TARGET = 5.0;
 			};
 			name = Debug;
 		};
-		E477D890D710D0B7C222C6FFBEB32555 /* Release */ = {
+		54621727B5AA62347B466F9FDF0FD8ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 19D7C06C6AA490333F9ECA31E957B04A /* BMSAnalyticsAPI.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/BMSAnalyticsAPI/BMSAnalyticsAPI-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BMSAnalyticsAPI/BMSAnalyticsAPI-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/BMSAnalyticsAPI/BMSAnalyticsAPI.modulemap";
+				PRODUCT_MODULE_NAME = BMSAnalyticsAPI;
+				PRODUCT_NAME = BMSAnalyticsAPI;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		67089151C6CFBDDD14330D1E496F2FE4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5E6F5C62539387ABBC631591536A01A3 /* Pods-BlueBuzz iOS App.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-BlueBuzz iOS App/Pods-BlueBuzz iOS App-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-BlueBuzz iOS App/Pods-BlueBuzz iOS App.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		70935CF2E36B60E36DE5DCDE00BB0F3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7284F21D24CA53250202FD8108C7BB37 /* BMSPush.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/BMSPush/BMSPush-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BMSPush/BMSPush-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/BMSPush/BMSPush.modulemap";
+				PRODUCT_MODULE_NAME = BMSPush;
+				PRODUCT_NAME = BMSPush;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		AC947304DADBE54220D9449F798D007B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 19D7C06C6AA490333F9ECA31E957B04A /* BMSAnalyticsAPI.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/BMSAnalyticsAPI/BMSAnalyticsAPI-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BMSAnalyticsAPI/BMSAnalyticsAPI-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/BMSAnalyticsAPI/BMSAnalyticsAPI.modulemap";
+				PRODUCT_MODULE_NAME = BMSAnalyticsAPI;
+				PRODUCT_NAME = BMSAnalyticsAPI;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		D02C1AFD4026F880AF3C03D9AD0ABC27 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7284F21D24CA53250202FD8108C7BB37 /* BMSPush.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/BMSPush/BMSPush-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BMSPush/BMSPush-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/BMSPush/BMSPush.modulemap";
+				PRODUCT_MODULE_NAME = BMSPush;
+				PRODUCT_NAME = BMSPush;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		E984A680FF8B7501A05193D75F54919F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD30598336EE3490D88A8D284130B81B /* BMSCore.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/BMSCore/BMSCore-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/BMSCore/BMSCore-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/BMSCore/BMSCore.modulemap";
+				PRODUCT_MODULE_NAME = BMSCore;
+				PRODUCT_NAME = BMSCore;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F090CD07A80273D5A73C8EA19224ADDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		F330684B86A3CA91DBEE725F4EA2531D /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DD30598336EE3490D88A8D284130B81B /* BMSCore.xcconfig */;
 			buildSettings = {
@@ -1446,83 +1035,23 @@
 			};
 			name = Release;
 		};
-		E7AA9739731D025C7AD596498A8AFD0E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4B20982EB42A8CB77EFCB90FFAFEE957 /* Pods-BlueBuzz WatchOS App.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-BlueBuzz WatchOS App/Pods-BlueBuzz WatchOS App-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-BlueBuzz WatchOS App/Pods-BlueBuzz WatchOS App.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-				WATCHOS_DEPLOYMENT_TARGET = 5.0;
-			};
-			name = Debug;
-		};
-		FE77899796FDA230F94888F60F7D67FA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C40673FC5DBF9480C652653DBEC2671A /* Pods-BlueBuzz iOS App.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-BlueBuzz iOS App/Pods-BlueBuzz iOS App-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-BlueBuzz iOS App/Pods-BlueBuzz iOS App.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1F5EFBAD667FC97ABFC33B55A10801FD /* Build configuration list for PBXNativeTarget "BMSAnalyticsAPI-iOS" */ = {
+		277539A99277488D16527E728697B4D2 /* Build configuration list for PBXNativeTarget "BMSCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				794B861C1E90FB7DFA7524583D37D9AD /* Debug */,
-				26BAFB39F3BEC31EB264396DC0910FCE /* Release */,
+				E984A680FF8B7501A05193D75F54919F /* Debug */,
+				F330684B86A3CA91DBEE725F4EA2531D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2E81EF5AB6BE460ECD5EC4906446C85F /* Build configuration list for PBXNativeTarget "Pods-BlueBuzz iOS App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E9134406A6CC263DBDF75547C641C11 /* Debug */,
+				67089151C6CFBDDD14330D1E496F2FE4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1530,26 +1059,17 @@
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DD5A2AF1B5B568BD6A1224DDA5287430 /* Debug */,
-				87155EE25BBA5FB83FCE2A629C7462CB /* Release */,
+				131356BE54884448CA49C07BEDF4BB2A /* Debug */,
+				F090CD07A80273D5A73C8EA19224ADDB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		48239693303D94066D77CAC130162D31 /* Build configuration list for PBXNativeTarget "BMSAnalyticsAPI-watchOS" */ = {
+		785F405462C2C5E661FF8A95F4F25FE6 /* Build configuration list for PBXNativeTarget "BMSAnalyticsAPI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B26CE9DA3780D627212F492C40AF7879 /* Debug */,
-				46D7873B8D657B96E93E6A71CDFD5BF0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		552EEC0995E9C0F285007FFD963A9F0C /* Build configuration list for PBXNativeTarget "Pods-BlueBuzz WatchOS App Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				06AE2EE28A1C543069F3A9DA7B5F4801 /* Debug */,
-				26951B541077FDFA988F258FF8F8DF45 /* Release */,
+				54621727B5AA62347B466F9FDF0FD8ED /* Debug */,
+				AC947304DADBE54220D9449F798D007B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1559,33 +1079,6 @@
 			buildConfigurations = (
 				70935CF2E36B60E36DE5DCDE00BB0F3C /* Debug */,
 				D02C1AFD4026F880AF3C03D9AD0ABC27 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BA53294C3CA25BD7E16D149F568FBB02 /* Build configuration list for PBXNativeTarget "Pods-BlueBuzz iOS App" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FE77899796FDA230F94888F60F7D67FA /* Debug */,
-				B14F6D4D2E61724C6A1E3E8379DCB2D8 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C677CB9DAA0EC22621E159E78052A671 /* Build configuration list for PBXNativeTarget "Pods-BlueBuzz WatchOS App" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E7AA9739731D025C7AD596498A8AFD0E /* Debug */,
-				ADD51B76B58BB54EFC8F0B0B291ED11C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DA22DFD0A5A00739257B4196A7C77C8A /* Build configuration list for PBXNativeTarget "BMSCore" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				43D6410F58C9F30813508322AD2EC155 /* Debug */,
-				E477D890D710D0B7C222C6FFBEB32555 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
