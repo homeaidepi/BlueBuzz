@@ -32,6 +32,7 @@
 		40DC7D0F1EA8186200A93AFB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DC7D0E1EA8186200A93AFB /* Logger.swift */; };
 		40DC7D101EA8186200A93AFB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DC7D0E1EA8186200A93AFB /* Logger.swift */; };
 		40DD4D8E1EA6B7510074E73F /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
+		E623E77F22CC6CEE004692AD /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = E623E77E22CC6CED004692AD /* data.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,7 @@
 		40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "Settings-Watch.bundle"; sourceTree = "<group>"; };
 		C9DA6BB0C9DA6B8000000001 /* BlueBuzzConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = BlueBuzzConfig.xcconfig; path = Configuration/BlueBuzzConfig.xcconfig; sourceTree = "<group>"; };
 		C9DDD1E0C9DDC50000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		E623E77E22CC6CED004692AD /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = data.json; path = Shared/data.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 		4076077B1E81834B00A6A8EA /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				E623E77E22CC6CED004692AD /* data.json */,
 				407607851E81A7F000A6A8EA /* TestDataProvider.swift */,
 				40D8B77820A554A5005F7D76 /* CommandMessage.swift */,
 				4076077C1E8183AF00A6A8EA /* SessionCommands.swift */,
@@ -355,6 +358,7 @@
 				40D46F591E8065200077A7B7 /* LaunchScreen.storyboard in Resources */,
 				40D46F561E8065200077A7B7 /* Assets.xcassets in Resources */,
 				40DD4D8E1EA6B7510074E73F /* Settings-Watch.bundle in Resources */,
+				E623E77F22CC6CEE004692AD /* data.json in Resources */,
 				40D46F541E8065200077A7B7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

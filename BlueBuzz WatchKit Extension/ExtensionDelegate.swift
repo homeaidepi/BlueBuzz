@@ -28,7 +28,8 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
     private var locationManager: CLLocationManager?
     private var lastLocation: CLLocation?
     private var currentLocation: CLLocation?
-    private var sampleDownloadURL = URL(string: "http://devstreaming.apple.com/videos/wwdc/2015/802mpzd3nzovlygpbg/802/802_designing_for_apple_watch.pdf?dl=1")!
+    private var blueBuzzWebActionApiKey = "97fefa7a-d1bd-49dd-92fe-704f0c9ba744:SbEAqeqWoz5kD8oiH8qSTcNzoOpzhKuxBIZFMz7BKVobLP7b5sqTi16Ek8SpKDeS"
+    private var blueBuzzWebActionGetLocation = URL(string: "https://us-south.functions.cloud.ibm.com/api/v1/namespaces/matthew.vandergrift%40ibm.com_dev/actions/BlueBuzz/GetWatchOSLocation")!
     
     override init() {
         super.init()
@@ -66,6 +67,8 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.delegate = self
         locationManager?.allowsBackgroundLocationUpdates = true
+        
+        requestLocation()
     }
     
     deinit {
@@ -76,8 +79,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
     func applicationWillResignActive() {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, etc.
-        //scheduleRefresh()
-        requestLocation()
+        scheduleRefresh()
     }
     
     func requestLocation()
@@ -132,6 +134,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
                     
                     print("Rejoining session \(backgroundSession)")
                 }
+                
                 // make sure to complete all tasks, even ones you don't handle
                 task.setTaskCompleted()
             }
@@ -140,8 +143,9 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
     
     func scheduleRefresh() {
         print("Scheduling refresh")
-        // fire in 10 seconds
-        let fireDate = Date(timeIntervalSinceNow: 10.0)
+        
+        // fire in 3 seconds
+        let fireDate = Date(timeIntervalSinceNow: 3.0)
         // optional, any SecureCoding compliant data can be passed here
         let userInfo = ["reason" : "background update"] as NSDictionary
         
@@ -158,7 +162,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
         
         let backgroundSession = URLSession(configuration: backgroundConfigObject, delegate: self, delegateQueue: nil)
         
-        let downloadTask = backgroundSession.downloadTask(with: sampleDownloadURL)
+        let downloadTask = backgroundSession.downloadTask(with: blueBuzzWebActionGetLocation)
         downloadTask.resume()
     }
     
@@ -199,6 +203,10 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
         
         guard let data = try? JSONEncoder().encode(commandStatus) else { return }
         
+        guard let jsonData = try? JSONEncoder().encode(commandStatus) else { return }
+        
+        let jsonString = String(data: jsonData, encoding: .utf8)
+        print(jsonString)
         //let commandMessage = try? JSONDecoder().decode(CommandMessage.self, from: data)
         
         WCSession.default.sendMessageData(data, replyHandler: { replyHandler in
@@ -254,12 +262,3 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
     
     }
 }
-//
-//extension ExtensionDelegate {
-//    static var shared: ExtensionDelegate {
-//        guard let delegate = WKExtension.shared().delegate as? ExtensionDelegate else {
-//            fatalError("ExtensionDelegate")
-//        }
-//        return delegate
-//    }
-//}
