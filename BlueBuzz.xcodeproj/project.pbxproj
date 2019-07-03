@@ -32,7 +32,9 @@
 		40DC7D0F1EA8186200A93AFB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DC7D0E1EA8186200A93AFB /* Logger.swift */; };
 		40DC7D101EA8186200A93AFB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DC7D0E1EA8186200A93AFB /* Logger.swift */; };
 		40DD4D8E1EA6B7510074E73F /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
+		C26983FBFAD8B1962967A936 /* Pods_BlueBuzz_iOS_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5620E7BFC1C35E10B04FE06 /* Pods_BlueBuzz_iOS_App.framework */; };
 		E623E77F22CC6CEE004692AD /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = E623E77E22CC6CED004692AD /* data.json */; };
+		E6BC3C8C22CD174100A70399 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E6BC3C8B22CD174100A70399 /* Podfile */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,9 +108,13 @@
 		40DD4D8B1EA6B6FB0074E73F /* BlueBuzz WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BlueBuzz WatchKit App.entitlements"; sourceTree = "<group>"; };
 		40DD4D8C1EA6B7010074E73F /* BlueBuzz WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BlueBuzz WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "Settings-Watch.bundle"; sourceTree = "<group>"; };
+		675F6F2E2F085CD9FF16B87C /* Pods-BlueBuzz iOS App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlueBuzz iOS App.debug.xcconfig"; path = "Target Support Files/Pods-BlueBuzz iOS App/Pods-BlueBuzz iOS App.debug.xcconfig"; sourceTree = "<group>"; };
 		C9DA6BB0C9DA6B8000000001 /* BlueBuzzConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = BlueBuzzConfig.xcconfig; path = Configuration/BlueBuzzConfig.xcconfig; sourceTree = "<group>"; };
 		C9DDD1E0C9DDC50000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		CBCAB34D36660523D5F17D55 /* Pods-BlueBuzz iOS App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlueBuzz iOS App.release.xcconfig"; path = "Target Support Files/Pods-BlueBuzz iOS App/Pods-BlueBuzz iOS App.release.xcconfig"; sourceTree = "<group>"; };
 		E623E77E22CC6CED004692AD /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = data.json; path = Shared/data.json; sourceTree = "<group>"; };
+		E6BC3C8B22CD174100A70399 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		F5620E7BFC1C35E10B04FE06 /* Pods_BlueBuzz_iOS_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BlueBuzz_iOS_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,10 +122,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C26983FBFAD8B1962967A936 /* Pods_BlueBuzz_iOS_App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		40D46F691E8065200077A7B7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6E99D24DE21CFA90C449A51 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -145,6 +159,7 @@
 		40D46F421E8065200077A7B7 = {
 			isa = PBXGroup;
 			children = (
+				E6BC3C8B22CD174100A70399 /* Podfile */,
 				40DC7D141EA81D8100A93AFB /* README.md */,
 				4076077B1E81834B00A6A8EA /* Shared */,
 				40D46F4D1E8065200077A7B7 /* BlueBuzz */,
@@ -153,6 +168,8 @@
 				40D46F4C1E8065200077A7B7 /* Products */,
 				C9D96D30C9DA425000000001 /* Configuration */,
 				C9DCFAF0C9DCFAC000000001 /* LICENSE */,
+				759C2F09768FEA4D6FF97060 /* Pods */,
+				9B37E38EEB0E008107763A8B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -206,6 +223,23 @@
 			path = "BlueBuzz WatchKit Extension";
 			sourceTree = "<group>";
 		};
+		759C2F09768FEA4D6FF97060 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				675F6F2E2F085CD9FF16B87C /* Pods-BlueBuzz iOS App.debug.xcconfig */,
+				CBCAB34D36660523D5F17D55 /* Pods-BlueBuzz iOS App.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		9B37E38EEB0E008107763A8B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F5620E7BFC1C35E10B04FE06 /* Pods_BlueBuzz_iOS_App.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C9D96D30C9DA425000000001 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,11 +263,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 40D46F821E8065200077A7B7 /* Build configuration list for PBXNativeTarget "BlueBuzz iOS App" */;
 			buildPhases = (
+				B504EC0CCA38A8ABDA5C23B4 /* [CP] Check Pods Manifest.lock */,
 				40D46F471E8065200077A7B7 /* Sources */,
 				40D46F481E8065200077A7B7 /* Frameworks */,
 				40D46F491E8065200077A7B7 /* Resources */,
 				40D46F811E8065200077A7B7 /* Embed Watch Content */,
 				40F176CA1EAE798400D9AC9F /* ShellScript */,
+				CB01EA48A11DC5E1F5B5393C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -251,6 +287,7 @@
 			buildPhases = (
 				40D46F5B1E8065200077A7B7 /* Resources */,
 				40D46F7D1E8065200077A7B7 /* Embed App Extensions */,
+				E6E99D24DE21CFA90C449A51 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -355,6 +392,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6BC3C8C22CD174100A70399 /* Podfile in Resources */,
 				40D46F591E8065200077A7B7 /* LaunchScreen.storyboard in Resources */,
 				40D46F561E8065200077A7B7 /* Assets.xcassets in Resources */,
 				40DD4D8E1EA6B7510074E73F /* Settings-Watch.bundle in Resources */,
@@ -411,6 +449,50 @@
 			shellPath = /bin/sh;
 			shellScript = "
 ";
+			showEnvVarsInLog = 0;
+		};
+		B504EC0CCA38A8ABDA5C23B4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BlueBuzz iOS App-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CB01EA48A11DC5E1F5B5393C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BlueBuzz iOS App/Pods-BlueBuzz iOS App-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BMSAnalyticsAPI/BMSAnalyticsAPI.framework",
+				"${BUILT_PRODUCTS_DIR}/BMSCore/BMSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/BMSPush/BMSPush.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BMSAnalyticsAPI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BMSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BMSPush.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BlueBuzz iOS App/Pods-BlueBuzz iOS App-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -622,7 +704,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 5.2;
 			};
 			name = Debug;
 		};
@@ -646,7 +728,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 5.2;
 			};
 			name = Release;
 		};
@@ -672,7 +754,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 5.2;
 			};
 			name = Debug;
 		};
@@ -698,13 +780,13 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 5.2;
 			};
 			name = Release;
 		};
 		40D46F831E8065200077A7B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9DA6BB0C9DA6B8000000001 /* BlueBuzzConfig.xcconfig */;
+			baseConfigurationReference = 675F6F2E2F085CD9FF16B87C /* Pods-BlueBuzz iOS App.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -712,7 +794,7 @@
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
 				INFOPLIST_FILE = BlueBuzz/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.homeaidepi.bluebuzz1;
@@ -725,7 +807,7 @@
 		};
 		40D46F841E8065200077A7B7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9DA6BB0C9DA6B8000000001 /* BlueBuzzConfig.xcconfig */;
+			baseConfigurationReference = CBCAB34D36660523D5F17D55 /* Pods-BlueBuzz iOS App.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -733,7 +815,7 @@
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
 				INFOPLIST_FILE = BlueBuzz/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.homeaidepi.bluebuzz1;

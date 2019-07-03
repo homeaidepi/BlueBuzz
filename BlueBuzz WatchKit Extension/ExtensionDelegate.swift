@@ -7,6 +7,8 @@ The extension delegate of the WatchKit extension.
 
 import WatchKit
 import WatchConnectivity
+import BMSCore
+import BMSPush
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegate, URLSessionDownloadDelegate {
 
@@ -38,6 +40,9 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
         if WatchSettings.sharedContainerID.isEmpty {
             print("Specify shared container ID for WatchSettings.sharedContainerID to use watch settings!")
         }
+        
+        //BMSClient.sharedInstance.initialize(bluemixRegion: "Location where your app Hosted")
+        //BMSPushClient.sharedInstance.initializeWithAppGUID(appGUID: "your push appGUID", clientSecret:"your push client secret")
         
         // Activate the session asynchronously as early as possible.
         // In the case of being background launched with a task, this may save some background runtime budget.
@@ -203,11 +208,9 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
         
         guard let data = try? JSONEncoder().encode(commandStatus) else { return }
         
-        guard let jsonData = try? JSONEncoder().encode(commandStatus) else { return }
-        
-        let jsonString = String(data: jsonData, encoding: .utf8)
-        print(jsonString)
-        //let commandMessage = try? JSONDecoder().decode(CommandMessage.self, from: data)
+//        guard let jsonData = try? JSONEncoder().encode(commandStatus) else { return }
+//        let jsonString = String(data: jsonData, encoding: .utf8)
+//        print(jsonString)
         
         WCSession.default.sendMessageData(data, replyHandler: { replyHandler in
         }, errorHandler: { error in })
