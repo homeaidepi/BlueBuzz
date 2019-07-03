@@ -1,8 +1,4 @@
 
-def shared_pod
-pod 'BMSAnalyticsAPI', '~> 2.3'
-end
-
 # Pods for BlueBuzz iOS App
     use_frameworks!
 
@@ -13,17 +9,19 @@ end
     end
 
 # Pods for BlueBuzz WatchOS App
-    use_frameworks!
+#   use_frameworks!
 
-    target 'BlueBuzz WatchOS App' do
-        platform :watchos, '5.0'
-        shared_pod
-    end
+#   target 'BlueBuzz WatchOS App' do
+#   platform :watchos, '4.0'
+#        pod 'BMSCore'
+#       pod 'BMSPush'
+#    end
 
 # Pods for BlueBuzz WatchOS App Extension
-    use_frameworks!
-
-    target 'BlueBuzz WatchOS App Extension' do
-        platform :watchos, '5.0'
-        shared_pod
-    end
+#    use_frameworks!
+#
+#    target 'BlueBuzz WatchOS App Extension' do
+#    platform :watchos, '5.0'
+#        pod 'BMSCore', '~> 2.0'
+#        pod 'BMSPush', '~> 3.0'
+#    end

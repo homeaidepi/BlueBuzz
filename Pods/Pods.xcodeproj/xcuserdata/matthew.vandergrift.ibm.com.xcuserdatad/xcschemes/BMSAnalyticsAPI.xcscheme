@@ -14,9 +14,9 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9491CA8FB5B1A0184C7751AF14B17BEC"
-               BuildableName = "BMSAnalyticsAPI-watchOS.framework"
-               BlueprintName = "BMSAnalyticsAPI-watchOS"
+               BlueprintIdentifier = "FEDA8B2D5269092D51AF272AC59CDB8F"
+               BuildableName = "BMSAnalyticsAPI.framework"
+               BlueprintName = "BMSAnalyticsAPI"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
