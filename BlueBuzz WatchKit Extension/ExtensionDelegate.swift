@@ -7,8 +7,8 @@ The extension delegate of the WatchKit extension.
 
 import WatchKit
 import WatchConnectivity
-import BMSCore
-import BMSPush
+//import BMSCore
+//import BMSPush
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegate, URLSessionDownloadDelegate {
 
