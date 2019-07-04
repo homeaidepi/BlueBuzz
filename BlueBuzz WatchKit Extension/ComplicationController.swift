@@ -5,7 +5,9 @@ Abstract:
 The complication controller class for the complication.
 */
 
+#if os(watchOS)
 import ClockKit
+#endif
 
 // The complication simply supports the Modular Large (tall body) family and
 // shows a random number for the current timeline entry.

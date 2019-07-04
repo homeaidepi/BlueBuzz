@@ -9,8 +9,13 @@ import WatchKit
 import WatchConnectivity
 import UserNotifications
 
+let CurrentModeKey = "CurrentMode"
+
 class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegate, URLSessionDownloadDelegate {
 
+    private(set) var connectivityManager: ConnectivityManager?
+    private(set) var notificationProcessor: NotificationProcessor!
+    
     private lazy var sessionDelegater: SessionDelegater = {
         return SessionDelegater()
     }()
@@ -32,6 +37,82 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
     private var blueBuzzWebActionApiKey = "97fefa7a-d1bd-49dd-92fe-704f0c9ba744:SbEAqeqWoz5kD8oiH8qSTcNzoOpzhKuxBIZFMz7BKVobLP7b5sqTi16Ek8SpKDeS"
     private var blueBuzzWebActionGetLocation = URL(string: "https://us-south.functions.cloud.ibm.com/api/v1/namespaces/matthew.vandergrift%40ibm.com_dev/actions/BlueBuzz/GetWatchOSLocation")!
     
+    func applicationDidFinishLaunching() {
+        UserDefaults.standard.register(defaults: [CurrentModeKey: Mode.undefined.rawValue])
+        
+        self.connectivityManager = try? ConnectivityManager()
+        self.connectivityManager?.sessionBehavior = WatchSessionBehavior()
+        
+        self.notificationProcessor = NotificationProcessor(connectivityManager: self.connectivityManager)
+        self.notificationProcessor.registerNotifications()
+        UNUserNotificationCenter.current().delegate = self.notificationProcessor
+    }
+    
+    func applicationDidBecomeActive() {
+        let replyHandler = { (response: [String: Any]) -> Void in
+            print ("Received Mode Response")
+            guard let receivedMode = Mode(messageRepresentation: response) else { return }
+            UserDefaults.standard.set(receivedMode.rawValue, forKey:CurrentModeKey)
+            
+            DispatchQueue.main.async {
+                guard let interfaceController = WKExtension.shared().rootInterfaceController as? InterfaceController else { return }
+                
+                interfaceController.mode = receivedMode
+            }
+            
+            self.locationManager = CLLocationManager()
+            
+            self.locationManager?.requestAlwaysAuthorization()
+            self.locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+            self.locationManager?.delegate = self
+            self.locationManager?.allowsBackgroundLocationUpdates = true
+            
+            self.requestLocation()
+            self.scheduleNotifications()
+        }
+        
+        connectivityManager?.send(message: CommandMessage(command: .requestMode), queueIfNecessary: true, replyHandler: replyHandler) { (error: Error) in
+            print ("Mode Request error \(error)")
+        }
+    }
+    
+    func applicationWillResignActive() {
+        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+        // Use this method to pause ongoing tasks, disable timers, etc.
+        scheduleRefresh()
+    }
+    
+    func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
+        // Sent when the system needs to launch the application in the background to process tasks. Tasks arrive in a set, so loop through and process each one.
+        for task in backgroundTasks {
+            // Use a switch statement to check the task type
+            switch task {
+            case let backgroundTask as WKApplicationRefreshBackgroundTask:
+                // Be sure to complete the background task once you’re done.
+                // this task is completed below, our app will then suspend while the download session runs
+                print("application task received, start URL session")
+                scheduleURLSession()
+                backgroundTask.setTaskCompleted()
+            case let snapshotTask as WKSnapshotRefreshBackgroundTask:
+                // Snapshot tasks have a unique completion call, make sure to set your expiration date
+                snapshotTask.setTaskCompleted(restoredDefaultState: true, estimatedSnapshotExpiration: Date.distantFuture, userInfo: nil)
+            case let connectivityTask as WKWatchConnectivityRefreshBackgroundTask:
+                // Be sure to complete the connectivity task once you’re done.
+                connectivityTask.setTaskCompleted()
+            case let urlSessionTask as WKURLSessionRefreshBackgroundTask:
+                // Be sure to complete the URL session task once you’re done.
+                let backgroundConfigObject = URLSessionConfiguration.background(withIdentifier: urlSessionTask.sessionIdentifier)
+                let backgroundSession = URLSession(configuration: backgroundConfigObject, delegate: self, delegateQueue: nil)
+                
+                print("Rejoining session \(backgroundSession)")
+                urlSessionTask.setTaskCompleted()
+            default:
+                // make sure to complete unhandled task types
+                task.setTaskCompleted()
+            }
+        }
+    }
+    
     override init() {
         super.init()
         assert(WCSession.isSupported(), "BlueBuzz requires Apple Watch!")
@@ -52,25 +133,16 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
         // hasContentPending flipped to false (see completeBackgroundTasks), so KVO is set up here to observe
         // the changes if the two properties.
         //
-//        activationStateObservation = WCSession.default.observe(\.activationState) { _, _ in
-//            DispatchQueue.main.async {
-//                self.completeBackgroundTasks()
-//            }
-//        }
-//        hasContentPendingObservation = WCSession.default.observe(\.hasContentPending) { _, _ in
-//            DispatchQueue.main.async {
-//                self.completeBackgroundTasks()
-//            }
-//        }
-        
-        locationManager = CLLocationManager()
-        locationManager?.requestAlwaysAuthorization()
-        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager?.delegate = self
-        locationManager?.allowsBackgroundLocationUpdates = true
-        
-        requestLocation()
-        
+        activationStateObservation = WCSession.default.observe(\.activationState) { _, _ in
+            DispatchQueue.main.async {
+                self.completeBackgroundTasks()
+            }
+        }
+        hasContentPendingObservation = WCSession.default.observe(\.hasContentPending) { _, _ in
+            DispatchQueue.main.async {
+                self.completeBackgroundTasks()
+            }
+        }
     }
     
     deinit {
@@ -78,16 +150,11 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
         //        self.performSelector(onMainThread: #selector(deinitLocationManager), with: nil, waitUntilDone: true)
     }
     
-    func applicationWillResignActive() {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, etc.
-        //scheduleRefresh()
-        scheduleNotifications()
-    }
-    
     func requestLocation()
     {
-        locationManager?.requestLocation()
+        if CLLocationManager.authorizationStatus() == .authorizedAlways {
+            locationManager?.requestLocation()
+        }
     }
     
     func getLastLocation() -> CLLocation?
@@ -104,46 +171,6 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
         return locationIsAvailable
     }
     
-    // Be sure to complete all the tasks - otherwise they will keep consuming the background executing
-    // time until the time is out of budget and the app is killed.
-    //
-    // WKWatchConnectivityRefreshBackgroundTask should be completed after the pending data is received
-    // so retain the tasks first. The retained tasks will be completed at the following cases:
-    // 1. hasContentPending flips to false, meaning all the pending data is received. Pending data means
-    //    the data received by the device prior to the WCSession getting activated.
-    //    More data might arrive, but it isn't pending when the session activated.
-    // 2. The end of the handle method.
-    //    This happens when hasContentPending can flip to false before the tasks are retained.
-    //
-    // If the tasks are completed before the WCSessionDelegate methods are called, the data will be delivered
-    // the app is running next time, so no data lost.
-    //
-    func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
-        for _ in backgroundTasks {
-            
-            for task : WKRefreshBackgroundTask in backgroundTasks {
-                print("received background task: ", task)
-                // only handle these while running in the background
-                if (WKExtension.shared().applicationState == .background) {
-                    if task is WKApplicationRefreshBackgroundTask {
-                        // this task is completed below, our app will then suspend while the download session runs
-                        print("application task received, start URL session")
-                        scheduleURLSession()
-                    }
-                }
-                else if let urlTask = task as? WKURLSessionRefreshBackgroundTask {
-                    let backgroundConfigObject = URLSessionConfiguration.background(withIdentifier: urlTask.sessionIdentifier)
-                    let backgroundSession = URLSession(configuration: backgroundConfigObject, delegate: self, delegateQueue: nil)
-                    
-                    print("Rejoining session \(backgroundSession)")
-                }
-                
-                // make sure to complete all tasks, even ones you don't handle
-                task.setTaskCompleted()
-            }
-        }
-    }
-    
     func scheduleNotifications() {
         print("Scheduling notifications")
         
@@ -151,18 +178,18 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
         content.title = "Checking Location"
         content.body = "Click here for more info"
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
+        //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
         
         // Create the trigger as a repeating event.
-        //var dateComponents = DateComponents()
-        //dateComponents.calendar = Calendar.current
-        //dateComponents.second = 30
-        //let trigger = UNCalendarNotificationTrigger(
-        //    dateMatching: dateComponents, repeats: true)
+        var dateComponents = DateComponents()
+        dateComponents.calendar = Calendar.current
+        dateComponents.second = 30
+        let trigger = UNCalendarNotificationTrigger(
+            dateMatching: dateComponents, repeats: true)
         
         // Create the request
-        //let uuidString = UUID().uuidString
-        let identifier = "Local Notification"
+        let identifier = UUID().uuidString
+        //let identifier = "Local Notification"
         let request = UNNotificationRequest(identifier: identifier,
                                             content: content, trigger: trigger)
         
@@ -172,9 +199,10 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
             if error != nil {
                 // Handle any errors.
             } else {
-                self.locationManager?.requestLocation()
+                self.scheduleRefresh()
+                self.requestLocation()
             }
-            notificationCenter.removeAllDeliveredNotifications()
+            //notificationCenter.removeAllDeliveredNotifications()
         }
     }
     
@@ -219,6 +247,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo url: URL) {
         print("url Session Start")
+        
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mm:ss a"
         let someDateTime = formatter.string(from: Date())
@@ -236,27 +265,27 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
         self.locationIsAvailable = true;
         
         // send out the location data
-        //let commandStatus = CommandMessage(command: .sendMessageData,
-//                                           phrase: .transferring,
-//                                           latitude: currentLocation.coordinate.latitude,
-//                                           longitude: currentLocation.coordinate.longitude,
-//                                           timedColor: defaultColor,
-//                                           errorMessage: "")
+        let commandStatus = CommandStatus(command: .sendMessageData,
+                                           phrase: .transferring,
+                                           latitude: currentLocation.coordinate.latitude,
+                                           longitude: currentLocation.coordinate.longitude,
+                                           timedColor: defaultColor,
+                                           errorMessage: "")
   
-//      guard let jsonData = try? JSONEncoder().encode(commandStatus) else { return }
-//
+        guard let jsonData = try? JSONEncoder().encode(commandStatus) else { return }
+
 //      let jsonString = String(data: jsonData, encoding: .utf8)
 //      print(jsonString)
         
-//        WCSession.default.sendMessageData(data, replyHandler: { replyHandler in
-//        }, errorHandler: { error in })
+        WCSession.default.sendMessageData(jsonData, replyHandler: { replyHandler in
+        }, errorHandler: { error in })
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error.localizedDescription)
         
         self.locationIsAvailable = false;
-        let commandStatus = CommandMessage(command: .sendMessageData,
+        let commandStatus = CommandStatus(command: .sendMessageData,
                                            phrase: .failed,
                                            latitude: emptyDegrees,
                                            longitude: emptyDegrees,
@@ -271,34 +300,34 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedAlways {
-            locationManager?.requestLocation()
+            requestLocation()
         }
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         DispatchQueue.main.async {
-            //self.completeBackgroundTasks()
+            self.completeBackgroundTasks()
         }
     }
 
     // Compelete the background tasks, and schedule a snapshot refresh.
     //
-//    func completeBackgroundTasks() {
-//        guard !wcBackgroundTasks.isEmpty else { return }
-//
-//        guard WCSession.default.activationState == .activated,
-//            WCSession.default.hasContentPending == false else { return }
-//
-//        wcBackgroundTasks.forEach { $0.setTaskCompletedWithSnapshot(false) }
-//
-//        // Use Logger to log the tasks for debug purpose. A real app may remove the log
-//        // to save the precious background time.
-//        //
-//        Logger.shared.append(line: "\(#function):\(wcBackgroundTasks) was completed!")
-//
-//        // Schedule a snapshot refresh if the UI is updated by background tasks.
-//        //
-//        wcBackgroundTasks.removeAll()
-//
-//    }
+    func completeBackgroundTasks() {
+        guard !wcBackgroundTasks.isEmpty else { return }
+
+        guard WCSession.default.activationState == .activated,
+            WCSession.default.hasContentPending == false else { return }
+
+        wcBackgroundTasks.forEach { $0.setTaskCompletedWithSnapshot(false) }
+
+        // Use Logger to log the tasks for debug purpose. A real app may remove the log
+        // to save the precious background time.
+        //
+        Logger.shared.append(line: "\(#function):\(wcBackgroundTasks) was completed!")
+
+        // Schedule a snapshot refresh if the UI is updated by background tasks.
+        //
+        wcBackgroundTasks.removeAll()
+
+    }
 }

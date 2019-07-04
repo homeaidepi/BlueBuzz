@@ -111,7 +111,7 @@ class MainViewController: UIViewController {
     //
     @objc
     func dataDidFlow(_ notification: Notification) {
-        guard let commandStatus = notification.object as? CommandMessage else { return }
+        guard let commandStatus = notification.object as? CommandStatus else { return }
         
         defer { noteLabel.isHidden = logView.text.isEmpty ? false: true }
         

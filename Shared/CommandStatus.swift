@@ -167,7 +167,7 @@ struct TimedColor: Codable {
 
 // Wrap the command status to bridge the commands status and UI.
 //
-struct CommandMessage: Codable {
+struct CommandStatus: Codable {
     
     var command: Command
     var phrase: Phrase

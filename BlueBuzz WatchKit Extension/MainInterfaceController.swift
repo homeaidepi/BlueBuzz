@@ -64,9 +64,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         WCSession.default.delegate = sessionDelegater
         WCSession.default.activate()
         
-        requestLocationFromDelegate()
-        
-        if let context = context as? CommandMessage {
+        if let context = context as? CommandStatus {
             command = context.command
             updateUI(with: context)
             type(of: self).instances.append(self)
@@ -130,7 +128,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     //
     @objc
     func dataDidFlow(_ notification: Notification) {
-        guard let commandStatus = notification.object as? CommandMessage else { return }
+        guard let commandStatus = notification.object as? CommandStatus else { return }
         
         // Move the screen to the page matching the data channel, then update the color and time stamp.
         //
@@ -160,12 +158,12 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     // Load paged-based UI.
     // If a current context is specified, use the timed color it provided.
     //
-    private func reloadRootController(with currentContext: CommandMessage? = nil) {
+    private func reloadRootController(with currentContext: CommandStatus? = nil) {
         let commands: [Command] = [.updateAppConnection, .sendMessage, .sendMessageData]
         
-        var contexts = [CommandMessage]()
+        var contexts = [CommandStatus]()
         for aCommand in commands {
-            var command = CommandMessage(command: aCommand,
+            var command = CommandStatus(command: aCommand,
                                         phrase: .finished,
                                         latitude: emptyDegrees,
                                         longitude: emptyDegrees,
@@ -203,7 +201,7 @@ extension MainInterfaceController { // MARK: - Update status view.
     // Update the user interface with the command status.
     // Note that there isn't a timed color when the interface controller is initially loaded.
     //
-    private func updateUI(with commandStatus: CommandMessage) {
+    private func updateUI(with commandStatus: CommandStatus) {
         
         // If there is an error, show the message and return.
         //
