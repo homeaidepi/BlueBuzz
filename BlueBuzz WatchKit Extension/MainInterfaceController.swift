@@ -64,6 +64,8 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         WCSession.default.delegate = sessionDelegater
         WCSession.default.activate()
         
+        requestLocationFromDelegate()
+        
         if let context = context as? CommandMessage {
             command = context.command
             updateUI(with: context)

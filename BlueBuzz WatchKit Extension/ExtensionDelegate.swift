@@ -7,6 +7,7 @@ The extension delegate of the WatchKit extension.
 
 import WatchKit
 import WatchConnectivity
+import UserNotifications
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegate, URLSessionDownloadDelegate {
 
@@ -51,16 +52,16 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
         // hasContentPending flipped to false (see completeBackgroundTasks), so KVO is set up here to observe
         // the changes if the two properties.
         //
-        activationStateObservation = WCSession.default.observe(\.activationState) { _, _ in
-            DispatchQueue.main.async {
-                self.completeBackgroundTasks()
-            }
-        }
-        hasContentPendingObservation = WCSession.default.observe(\.hasContentPending) { _, _ in
-            DispatchQueue.main.async {
-                self.completeBackgroundTasks()
-            }
-        }
+//        activationStateObservation = WCSession.default.observe(\.activationState) { _, _ in
+//            DispatchQueue.main.async {
+//                self.completeBackgroundTasks()
+//            }
+//        }
+//        hasContentPendingObservation = WCSession.default.observe(\.hasContentPending) { _, _ in
+//            DispatchQueue.main.async {
+//                self.completeBackgroundTasks()
+//            }
+//        }
         
         locationManager = CLLocationManager()
         locationManager?.requestAlwaysAuthorization()
@@ -69,6 +70,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
         locationManager?.allowsBackgroundLocationUpdates = true
         
         requestLocation()
+        
     }
     
     deinit {
@@ -79,7 +81,8 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
     func applicationWillResignActive() {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, etc.
-        scheduleRefresh()
+        //scheduleRefresh()
+        scheduleNotifications()
     }
     
     func requestLocation()
@@ -141,6 +144,40 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
         }
     }
     
+    func scheduleNotifications() {
+        print("Scheduling notifications")
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Checking Location"
+        content.body = "Click here for more info"
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
+        
+        // Create the trigger as a repeating event.
+        //var dateComponents = DateComponents()
+        //dateComponents.calendar = Calendar.current
+        //dateComponents.second = 30
+        //let trigger = UNCalendarNotificationTrigger(
+        //    dateMatching: dateComponents, repeats: true)
+        
+        // Create the request
+        //let uuidString = UUID().uuidString
+        let identifier = "Local Notification"
+        let request = UNNotificationRequest(identifier: identifier,
+                                            content: content, trigger: trigger)
+        
+        // Schedule the request with the system.
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.add(request) { (error) in
+            if error != nil {
+                // Handle any errors.
+            } else {
+                self.locationManager?.requestLocation()
+            }
+            notificationCenter.removeAllDeliveredNotifications()
+        }
+    }
+    
     func scheduleRefresh() {
         print("Scheduling refresh")
         
@@ -157,6 +194,8 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
     }
     
     func scheduleURLSession() {
+        print("Scheduling URL Session")
+        
         let backgroundConfigObject = URLSessionConfiguration.background(withIdentifier: NSUUID().uuidString)
         backgroundConfigObject.sessionSendsLaunchEvents = true
         
@@ -167,6 +206,8 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
     }
     
     func scheduleSnapshot() {
+        print("Scheduling Snapshot")
+        
         // fire now, we're ready
         let fireDate = Date()
         WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: fireDate, userInfo: nil) { error in
@@ -177,11 +218,12 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
     }
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo url: URL) {
+        print("url Session Start")
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mm:ss a"
         let someDateTime = formatter.string(from: Date())
         
-        print("\(someDateTime) finished session url: \(url)")
+        print("\(someDateTime) End session url: \(url)")
         scheduleSnapshot()
     }
     
@@ -194,27 +236,25 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
         self.locationIsAvailable = true;
         
         // send out the location data
-        let commandStatus = CommandMessage(command: .sendMessageData,
-                                           phrase: .transferring,
-                                           latitude: currentLocation.coordinate.latitude,
-                                           longitude: currentLocation.coordinate.longitude,
-                                           timedColor: defaultColor,
-                                           errorMessage: "")
+        //let commandStatus = CommandMessage(command: .sendMessageData,
+//                                           phrase: .transferring,
+//                                           latitude: currentLocation.coordinate.latitude,
+//                                           longitude: currentLocation.coordinate.longitude,
+//                                           timedColor: defaultColor,
+//                                           errorMessage: "")
+  
+//      guard let jsonData = try? JSONEncoder().encode(commandStatus) else { return }
+//
+//      let jsonString = String(data: jsonData, encoding: .utf8)
+//      print(jsonString)
         
-        guard let data = try? JSONEncoder().encode(commandStatus) else { return }
-        
-        guard let jsonData = try? JSONEncoder().encode(commandStatus) else { return }
-        
-        let jsonString = String(data: jsonData, encoding: .utf8)
-        print(jsonString)
-        //let commandMessage = try? JSONDecoder().decode(CommandMessage.self, from: data)
-        
-        WCSession.default.sendMessageData(data, replyHandler: { replyHandler in
-        }, errorHandler: { error in })
+//        WCSession.default.sendMessageData(data, replyHandler: { replyHandler in
+//        }, errorHandler: { error in })
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error.localizedDescription)
+        
         self.locationIsAvailable = false;
         let commandStatus = CommandMessage(command: .sendMessageData,
                                            phrase: .failed,
@@ -237,28 +277,28 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, CLLocationManagerDelegat
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         DispatchQueue.main.async {
-            self.completeBackgroundTasks()
+            //self.completeBackgroundTasks()
         }
     }
-    
+
     // Compelete the background tasks, and schedule a snapshot refresh.
     //
-    func completeBackgroundTasks() {
-        guard !wcBackgroundTasks.isEmpty else { return }
-
-        guard WCSession.default.activationState == .activated,
-            WCSession.default.hasContentPending == false else { return }
-        
-        wcBackgroundTasks.forEach { $0.setTaskCompletedWithSnapshot(false) }
-        
-        // Use Logger to log the tasks for debug purpose. A real app may remove the log
-        // to save the precious background time.
-        //
-        Logger.shared.append(line: "\(#function):\(wcBackgroundTasks) was completed!")
-
-        // Schedule a snapshot refresh if the UI is updated by background tasks.
-        //
-        wcBackgroundTasks.removeAll()
-    
-    }
+//    func completeBackgroundTasks() {
+//        guard !wcBackgroundTasks.isEmpty else { return }
+//
+//        guard WCSession.default.activationState == .activated,
+//            WCSession.default.hasContentPending == false else { return }
+//
+//        wcBackgroundTasks.forEach { $0.setTaskCompletedWithSnapshot(false) }
+//
+//        // Use Logger to log the tasks for debug purpose. A real app may remove the log
+//        // to save the precious background time.
+//        //
+//        Logger.shared.append(line: "\(#function):\(wcBackgroundTasks) was completed!")
+//
+//        // Schedule a snapshot refresh if the UI is updated by background tasks.
+//        //
+//        wcBackgroundTasks.removeAll()
+//
+//    }
 }

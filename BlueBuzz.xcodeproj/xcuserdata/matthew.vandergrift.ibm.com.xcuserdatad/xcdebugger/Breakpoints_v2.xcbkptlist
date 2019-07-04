@@ -107,54 +107,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlueBuzz WatchKit Extension/ExtensionDelegate.swift"
-            timestampString = "583821981.294962"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "252"
-            endingLineNumber = "252"
-            landmarkName = "completeBackgroundTasks()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BlueBuzz_WatchOS_App_Extension.ExtensionDelegate.completeBackgroundTasks() -&gt; ()"
-                  moduleName = "BlueBuzz WatchOS App Extension"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/matthew.vandergrift.ibm.com/source/homeaidepi/BlueBuzz/BlueBuzz%20WatchKit%20Extension/ExtensionDelegate.swift"
-                  timestampString = "583821981.619457"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "252"
-                  endingLineNumber = "252"
-                  offsetFromSymbolStart = "532">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.WKWatchConnectivityRefreshBackgroundTask) -&gt; () in BlueBuzz_WatchOS_App_Extension.ExtensionDelegate.completeBackgroundTasks() -&gt; ()"
-                  moduleName = "BlueBuzz WatchOS App Extension"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/matthew.vandergrift.ibm.com/source/homeaidepi/BlueBuzz/BlueBuzz%20WatchKit%20Extension/ExtensionDelegate.swift"
-                  timestampString = "583821981.622471"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "252"
-                  endingLineNumber = "252"
-                  offsetFromSymbolStart = "64">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "BlueBuzz/MainViewController.swift"
             timestampString = "583604182.01257"
             startingColumnNumber = "9223372036854775807"
@@ -236,11 +188,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BlueBuzz WatchKit Extension/MainInterfaceController.swift"
-            timestampString = "583737954.714283"
+            timestampString = "583899488.5006911"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
             landmarkName = "updateUI(with:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -259,54 +211,6 @@
             endingLineNumber = "60"
             landmarkName = "session(_:didReceiveMessage:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BlueBuzz WatchKit Extension/ExtensionDelegate.swift"
-            timestampString = "583821981.295434"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "212"
-            endingLineNumber = "212"
-            landmarkName = "locationManager(_:didUpdateLocations:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BlueBuzz_WatchOS_App_Extension.ExtensionDelegate.locationManager(_: __C.CLLocationManager, didUpdateLocations: Swift.Array&lt;__C.CLLocation&gt;) -&gt; ()"
-                  moduleName = "BlueBuzz WatchOS App Extension"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/matthew.vandergrift.ibm.com/source/homeaidepi/BlueBuzz/BlueBuzz%20WatchKit%20Extension/ExtensionDelegate.swift"
-                  timestampString = "583821981.6554331"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "212"
-                  endingLineNumber = "212"
-                  offsetFromSymbolStart = "2028">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Foundation.Data) -&gt; () in BlueBuzz_WatchOS_App_Extension.ExtensionDelegate.locationManager(_: __C.CLLocationManager, didUpdateLocations: Swift.Array&lt;__C.CLLocation&gt;) -&gt; ()"
-                  moduleName = "BlueBuzz WatchOS App Extension"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/matthew.vandergrift.ibm.com/source/homeaidepi/BlueBuzz/BlueBuzz%20WatchKit%20Extension/ExtensionDelegate.swift"
-                  timestampString = "583821981.6583019"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "213"
-                  endingLineNumber = "213"
-                  offsetFromSymbolStart = "84">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
