@@ -129,13 +129,18 @@ struct TimedColor: Codable {
         return [PayloadKey.timeStamp: timeStamp, PayloadKey.colorData: colorData]
     }
     
-    init(_ timedColor: UIColor)
+    static func getSomeDateTime() -> String
     {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mm:ss a"
         let someDateTime = formatter.string(from: Date())
         
-        self.timeStamp = someDateTime
+        return someDateTime
+    }
+    
+    init(_ timedColor: UIColor)
+    {
+        self.timeStamp = TimedColor.getSomeDateTime()
         self.colorData = timedColor.data()
         self.defaultValue = false
     }
@@ -143,7 +148,11 @@ struct TimedColor: Codable {
     init(_ timedColor: [String: Any]) {
         guard let timeStamp = timedColor[PayloadKey.timeStamp] as? String,
             let colorData = timedColor[PayloadKey.colorData] as? Data else {
-                fatalError("Timed color dictionary doesn't have right keys!")
+                let someDateTime = TimedColor.getSomeDateTime()
+                self.timeStamp = someDateTime
+                self.colorData = UIColor.black.data()
+                self.defaultValue = false
+                return
         }
         self.timeStamp = timeStamp
         self.colorData = colorData
