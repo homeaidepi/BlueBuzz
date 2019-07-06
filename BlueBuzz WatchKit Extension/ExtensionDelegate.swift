@@ -7,8 +7,9 @@ The extension delegate of the WatchKit extension.
 
 import WatchKit
 import WatchConnectivity
+import UserNotifications
 
-class ExtensionDelegate: NSObject, WKExtensionDelegate {
+class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate {
 
     private lazy var sessionDelegater: SessionDelegater = {
         return SessionDelegater()
@@ -22,6 +23,9 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     // An array to keep the background tasks.
     //
     private var wcBackgroundTasks = [WKWatchConnectivityRefreshBackgroundTask]()
+    
+    private var blueBuzzWebActionApiKey = "97fefa7a-d1bd-49dd-92fe-704f0c9ba744:SbEAqeqWoz5kD8oiH8qSTcNzoOpzhKuxBIZFMz7BKVobLP7b5sqTi16Ek8SpKDeS"
+    private var blueBuzzWebActionGetLocation = URL(string: "https://us-south.functions.cloud.ibm.com/api/v1/namespaces/matthew.vandergrift%40ibm.com_dev/actions/BlueBuzz/GetWatchOSLocation")!
     
     override init() {
         super.init()
@@ -54,6 +58,48 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         WCSession.default.delegate = sessionDelegater
         WCSession.default.activate()
     }
+    
+    func applicationWillResignActive() {
+        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+        // Use this method to pause ongoing tasks, disable timers, etc.
+        //scheduleRefresh()
+        scheduleNotifications()
+    }
+    
+    func scheduleNotifications() {
+        print("Scheduling notifications")
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Checking Location"
+        content.body = "Click here for more info"
+        
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
+        
+        // Create the trigger as a repeating event.
+        var dateComponents = DateComponents()
+        dateComponents.calendar = Calendar.current
+        dateComponents.second = 30
+        let trigger = UNCalendarNotificationTrigger(
+            dateMatching: dateComponents, repeats: true)
+        
+        // Create the request
+        let identifier = UUID().uuidString
+        //let identifier = "Local Notification"
+        let request = UNNotificationRequest(identifier: identifier,
+                                            content: content, trigger: trigger)
+        
+        // Schedule the request with the system.
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.add(request) { (error) in
+            if error != nil {
+                // Handle any errors.
+            } else {
+                self.scheduleURLSession()
+            }
+            notificationCenter.removeAllDeliveredNotifications()
+        }
+    }
+
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         DispatchQueue.main.async {
@@ -61,8 +107,53 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         }
     }
     
-    func applicationDidEnterBackground() {
+    func scheduleRefresh() {
+        print("Scheduling refresh")
         
+        // fire in 3 seconds
+        let fireDate = Date(timeIntervalSinceNow: 3.0)
+        // optional, any SecureCoding compliant data can be passed here
+        let userInfo = ["reason" : "background update"] as NSDictionary
+        
+        WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: fireDate, userInfo: userInfo) { (error) in
+            if (error == nil) {
+                print("successfully scheduled background task, use the crown to send the app to the background and wait for handle:BackgroundTasks to fire.")
+            }
+        }
+    }
+    
+    func scheduleURLSession() {
+        print("Scheduling URL Session")
+        
+        let backgroundConfigObject = URLSessionConfiguration.background(withIdentifier: NSUUID().uuidString)
+        backgroundConfigObject.sessionSendsLaunchEvents = true
+        
+        let backgroundSession = URLSession(configuration: backgroundConfigObject, delegate: self as? URLSessionDelegate, delegateQueue: nil)
+        
+        let downloadTask = backgroundSession.downloadTask(with: blueBuzzWebActionGetLocation)
+        downloadTask.resume()
+    }
+    
+    func scheduleSnapshot() {
+        print("Scheduling Snapshot")
+        
+        // fire now, we're ready
+        let fireDate = Date()
+        WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: fireDate, userInfo: nil) { error in
+            if (error == nil) {
+                print("successfully scheduled snapshot.  All background work completed.")
+            }
+        }
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo url: URL) {
+        print("url Session Start")
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hh:mm:ss a"
+        let someDateTime = formatter.string(from: Date())
+        
+        print("\(someDateTime) End session url: \(url)")
+        scheduleSnapshot()
     }
     
     // Compelete the background tasks, and schedule a snapshot refresh.

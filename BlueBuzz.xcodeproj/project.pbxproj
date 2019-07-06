@@ -323,6 +323,12 @@
 							com.apple.BackgroundModes.watchos.extension = {
 								enabled = 1;
 							};
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
 						};
 					};
 				};

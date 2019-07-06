@@ -76,7 +76,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Shared/SessionDelegater.swift"
-            timestampString = "584076597.264149"
+            timestampString = "584080481.953938"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "47"
@@ -108,11 +108,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BlueBuzz WatchKit Extension/ExtensionDelegate.swift"
-            timestampString = "584067554.969101"
+            timestampString = "584080481.954033"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
             landmarkName = "completeBackgroundTasks()"
             landmarkType = "7">
             <Locations>
@@ -124,11 +124,11 @@
                   moduleName = "SimpleWatchConnectivity WatchKit Extension"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/matthew.vandergrift.ibm.com/source/homeaidepi/BlueBuzz/BlueBuzz%20WatchKit%20Extension/ExtensionDelegate.swift"
-                  timestampString = "584076597.528419"
+                  timestampString = "584080482.177016"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "76"
-                  endingLineNumber = "76"
+                  startingLineNumber = "167"
+                  endingLineNumber = "167"
                   offsetFromSymbolStart = "532">
                </Location>
                <Location
@@ -139,11 +139,11 @@
                   moduleName = "SimpleWatchConnectivity WatchKit Extension"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/matthew.vandergrift.ibm.com/source/homeaidepi/BlueBuzz/BlueBuzz%20WatchKit%20Extension/ExtensionDelegate.swift"
-                  timestampString = "584076597.530026"
+                  timestampString = "584080482.17872"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "76"
-                  endingLineNumber = "76"
+                  startingLineNumber = "167"
+                  endingLineNumber = "167"
                   offsetFromSymbolStart = "64">
                </Location>
             </Locations>
@@ -156,7 +156,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Shared/SessionCommands.swift"
-            timestampString = "584076597.264645"
+            timestampString = "584080481.9544261"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "80"
@@ -172,11 +172,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BlueBuzz WatchKit Extension/MainInterfaceController.swift"
-            timestampString = "584076597.264889"
+            timestampString = "584080481.954507"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "246"
-            endingLineNumber = "246"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
             landmarkName = "MainInterfaceController"
             landmarkType = "3">
          </BreakpointContent>
