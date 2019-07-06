@@ -226,7 +226,7 @@ struct CommandStatus: Codable {
         latitude = try container.decode(CLLocationDegrees.self, forKey: .latitude)
         longitude = try container.decode(CLLocationDegrees.self, forKey: .longitude)
         timedColor = try container.decode(TimedColor.self, forKey: .timedColor)
-        latitude = try container.decode(CLLocationDegrees.self, forKey: .latittude)
+        latitude = try container.decode(CLLocationDegrees.self, forKey: .latitude)
         longitude = try container.decode(CLLocationDegrees.self, forKey: .longitude)
         errorMessage = try container.decode(String.self, forKey: .errorMessage)
         

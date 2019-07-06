@@ -77,9 +77,9 @@ class SessionDelegater: NSObject, WCSessionDelegate {
     // Called when a piece of message data is received and the peer doesn't need a response.
     //
     func session(_ session: WCSession, didReceiveMessageData messageData: Data) {
-        let commandMessage = try? JSONDecoder().decode(CommandMessage.self, from: messageData)
+        let commandStatus = try? JSONDecoder().decode(CommandStatus.self, from: messageData)
         
-        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandMessage)
+        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
     }
     
     // Called when a piece of message data is received and the peer needs a response.

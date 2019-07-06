@@ -87,7 +87,7 @@ extension SessionCommands {
     //
     func sendMessageData(_ messageData: Data, location: CLLocation?) {
         
-        var commandMessage =  CommandMessage(command: .sendMessageData,
+        var commandStatus =  CommandStatus(command: .sendMessageData,
                                          phrase: .sent,
                                          latitude: location?.coordinate.latitude ?? emptyDegrees,
                                          longitude: location?.coordinate.longitude ?? emptyDegrees,
@@ -95,25 +95,25 @@ extension SessionCommands {
                                          errorMessage: emptyError)
         
         guard WCSession.default.activationState == .activated else {
-            return handleSessionUnactivated(with: commandMessage)
+            return handleSessionUnactivated(with: commandStatus)
         }
         
         do {
-            let data = try JSONEncoder().encode(commandMessage)
+            let data = try JSONEncoder().encode(commandStatus)
 
             WCSession.default.sendMessageData(data, replyHandler: { replyData in
-                commandMessage.phrase = .replied
-                commandMessage.timedColor = TimedColor(replyData)
-                self.postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandMessage)
+                commandStatus.phrase = .replied
+                commandStatus.timedColor = TimedColor(replyData)
+                self.postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
 
             }, errorHandler: { error in
-                commandMessage.phrase = .failed
-                commandMessage.errorMessage = error.localizedDescription
-                self.postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandMessage)
+                commandStatus.phrase = .failed
+                commandStatus.errorMessage = error.localizedDescription
+                self.postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
             })
         } catch { return }
         
-        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandMessage)
+        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
     }
     
     // Post a notification on the main thread asynchronously.
