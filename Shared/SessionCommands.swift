@@ -31,7 +31,8 @@ extension SessionCommands {
 
         var command = CommandMessage(command: .updateAppConnection,
                                           phrase: .unauthorized,
-                                          location: emptyLocation,
+                                          latitude: emptyDegrees,
+                                          longitude: emptyDegrees,
                                           timedColor: defaultColor,
                                           errorMessage: emptyError)
         
@@ -60,7 +61,8 @@ extension SessionCommands {
     func sendMessage(_ message: [String: Any]) {
         var commandStatus = CommandMessage(command: .sendMessage,
                                           phrase: .sent,
-                                          location: emptyLocation,
+                                          latitude: emptyDegrees,
+                                          longitude: emptyDegrees,
                                           timedColor: TimedColor(message),
                                           errorMessage: emptyError)
 
@@ -84,27 +86,34 @@ extension SessionCommands {
     // Send  a piece of message data if the session is activated and update UI with the command status.
     //
     func sendMessageData(_ messageData: Data, location: CLLocation?) {
-        var commandStatus = CommandMessage(command: .sendMessageData,
-                                          phrase: .sent,
-                                          location: location ?? CLLocation(latitude: 0, longitude: 0),
-                                          timedColor: TimedColor(messageData),
-                                          errorMessage: "")
+        
+        var commandMessage =  CommandMessage(command: .sendMessageData,
+                                         phrase: .sent,
+                                         latitude: location?.coordinate.latitude ?? emptyDegrees,
+                                         longitude: location?.coordinate.longitude ?? emptyDegrees,
+                                         timedColor: TimedColor(messageData),
+                                         errorMessage: emptyError)
         
         guard WCSession.default.activationState == .activated else {
-            return handleSessionUnactivated(with: commandStatus)
+            return handleSessionUnactivated(with: commandMessage)
         }
+        
+        do {
+            let data = try JSONEncoder().encode(commandMessage)
 
-        WCSession.default.sendMessageData(messageData, replyHandler: { replyData in
-            commandStatus.phrase = .replied
-            commandStatus.timedColor = TimedColor(replyData)
-            self.postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
+            WCSession.default.sendMessageData(data, replyHandler: { replyData in
+                commandMessage.phrase = .replied
+                commandMessage.timedColor = TimedColor(replyData)
+                self.postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandMessage)
 
-        }, errorHandler: { error in
-            commandStatus.phrase = .failed
-            commandStatus.errorMessage = error.localizedDescription
-            self.postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
-        })
-        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
+            }, errorHandler: { error in
+                commandMessage.phrase = .failed
+                commandMessage.errorMessage = error.localizedDescription
+                self.postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandMessage)
+            })
+        } catch { return }
+        
+        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandMessage)
     }
     
     // Post a notification on the main thread asynchronously.

@@ -96,12 +96,16 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
         //send the companion phone app the location data if in range
         let commandStatus = CommandMessage(command: .sendMessageData,
                                           phrase: .sent,
-                                          location: currentLocation as CLLocation,
+                                          latitude: currentLocation.coordinate.latitude,
+                                          longitude: currentLocation.coordinate.longitude,
                                           timedColor: defaultColor,
                                           errorMessage: "")
         
         do {
             let data = try JSONEncoder().encode(commandStatus)
+            
+            let jsonString = String(data: data, encoding: .utf8)!
+            print(jsonString)
             
             WCSession.default.sendMessageData(data, replyHandler: { replyHandler in
             }, errorHandler: { error in
@@ -151,7 +155,8 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
         if command == .updateAppConnection {
             let commandStatus = CommandMessage(command: .updateAppConnection,
                                               phrase: .received,
-                                              location: emptyLocation,
+                                              latitude: emptyDegrees,
+                                              longitude: emptyDegrees,
                                               timedColor: defaultColor,
                                               errorMessage: emptyError)
             updateUI(with: commandStatus)
@@ -172,14 +177,16 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
         for aCommand in commands {
             var command = CommandMessage(command: aCommand,
                                         phrase: .finished,
-                                        location: emptyLocation,
+                                        latitude: emptyDegrees,
+                                        longitude: emptyDegrees,
                                         timedColor: defaultColor,
                                         errorMessage: emptyError)
             
             if let currentContext = currentContext, aCommand == currentContext.command {
                 command.phrase = currentContext.phrase
                 command.timedColor = currentContext.timedColor
-                command.location = currentContext.location
+                command.latitude = currentContext.latitude
+                command.longitude = currentContext.longitude
             }
             contexts.append(command)
         }
@@ -193,13 +200,6 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
     @objc
     func dataDidFlow(_ notification: Notification) {
         guard let commandStatus = notification.object as? CommandMessage else { return }
-        
-        // If the data is from current channel, simple update color and time stamp, then return.
-        //
-//        if commandStatus.command == command {
-//            updateUI(with: commandStatus)
-//            return
-//        }
         
         // Move the screen to the page matching the data channel, then update the color and time stamp.
         //

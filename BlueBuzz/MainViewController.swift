@@ -111,6 +111,7 @@ class MainViewController: UIViewController {
     //
     @objc
     func dataDidFlow(_ notification: Notification) {
+        
         guard let commandStatus = notification.object as? CommandMessage else { return }
         
         defer { noteLabel.isHidden = logView.text.isEmpty ? false: true }
@@ -123,9 +124,17 @@ class MainViewController: UIViewController {
         }
         
         let timedColor = commandStatus.timedColor
+        let lat = commandStatus.latitude
+        let long = commandStatus.longitude
         
         //log the messageData i.e location to the screen else show command
         //
-        log("-> \(commandStatus.command.rawValue): \(commandStatus.phrase.rawValue) at \(timedColor.timeStamp)")
+        if (lat != emptyDegrees && long != emptyDegrees)
+        {
+            log("-> \(lat):\(long) \(commandStatus.command.rawValue): \(commandStatus.phrase.rawValue) at \(timedColor.timeStamp)")
+        }
+        else {
+            log("-> \(commandStatus.command.rawValue): \(commandStatus.phrase.rawValue) at \(timedColor.timeStamp)")
+        }
     }
 }
