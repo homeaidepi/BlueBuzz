@@ -8,6 +8,8 @@ The app delegate class of the iOS app.
 import UIKit
 import WatchConnectivity
 
+let CurrentModeKey = "CurrentMode"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
