@@ -88,10 +88,6 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
         self.mapObject.setRegion(region)
         mapObject.addAnnotation(self.mapLocation!, with: .purple)
         
-        //update status labels
-        //i+=1
-        //statusLabel.setText("i:\(i) Lat-\(lat):Long-\(long)")
-        
         //send the companion phone app the location data if in range
         let commandStatus = CommandMessage(command: .sendMessageData,
                                            phrase: .sent,
@@ -103,8 +99,8 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
         do {
             let data = try JSONEncoder().encode(commandStatus)
             
-            let jsonString = String(data: data, encoding: .utf8)!
-            print(jsonString)
+            //let jsonString = String(data: data, encoding: .utf8)!
+            //print(jsonString)
             
             WCSession.default.sendMessageData(data, replyHandler: { replyHandler in
             }, errorHandler: { error in
@@ -143,13 +139,6 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
     override func willActivate() {
         super.willActivate()
 
-        locationManager = CLLocationManager()
-        locationManager?.requestAlwaysAuthorization()
-        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager?.delegate = self
-        locationManager?.allowsBackgroundLocationUpdates = true
-        locationManager?.requestLocation()
-        
         locationManager = CLLocationManager()
         locationManager?.requestAlwaysAuthorization()
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
