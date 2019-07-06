@@ -17,6 +17,7 @@ struct ControllerID {
 }
 
 class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate, CLLocationManagerDelegate, TestDataProvider, SessionCommands {
+<<<<<<< HEAD
     
     @IBOutlet weak var statusGroup: WKInterfaceGroup!
     @IBOutlet var statusLabel: WKInterfaceLabel!
@@ -34,6 +35,25 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
     
     let sampleDownloadURL = URL(string: "http://devstreaming.apple.com/videos/wwdc/2015/802mpzd3nzovlygpbg/802/802_designing_for_apple_watch.pdf?dl=1")!
     
+=======
+    
+    @IBOutlet weak var statusGroup: WKInterfaceGroup!
+    @IBOutlet var statusLabel: WKInterfaceLabel!
+    @IBOutlet var commandButton: WKInterfaceButton!
+    @IBOutlet var mapObject: WKInterfaceMap!
+
+    // Retain the controllers so that we don't have to reload root controllers for every switch.
+    //
+    static var instances = [MainInterfaceController]()
+    
+    private var command: Command?
+    private var locationManager: CLLocationManager?
+    private var location: CLLocation?
+    private var mapLocation: CLLocationCoordinate2D?
+    
+     let sampleDownloadURL = URL(string: "http://devstreaming.apple.com/videos/wwdc/2015/802mpzd3nzovlygpbg/802/802_designing_for_apple_watch.pdf?dl=1")!
+
+>>>>>>> parent of 4e905d7... Merge branch 'master' of https://github.com/matthewvandergrift/BlueBuzz
     // Context == nil: the fist-time loading, load pages with reloadRootController then
     // Context != nil: Loading the pages, save the controller instances so that we can
     // switch pages more smoothly.
@@ -41,7 +61,11 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
+<<<<<<< HEAD
         if let context = context as? CommandStatus {
+=======
+        if let context = context as? CommandMessage {
+>>>>>>> parent of 4e905d7... Merge branch 'master' of https://github.com/matthewvandergrift/BlueBuzz
             command = context.command
             updateUI(with: context)
             type(of: self).instances.append(self)
@@ -137,11 +161,22 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
     deinit {
         NotificationCenter.default.removeObserver(self)
         //cant deinit the location manager as we run in the background
+<<<<<<< HEAD
         //        self.performSelector(onMainThread: #selector(deinitLocationManager), with: nil, waitUntilDone: true)
+=======
+//        self.performSelector(onMainThread: #selector(deinitLocationManager), with: nil, waitUntilDone: true)
+>>>>>>> parent of 4e905d7... Merge branch 'master' of https://github.com/matthewvandergrift/BlueBuzz
     }
     
     override func willActivate() {
         super.willActivate()
+
+        locationManager = CLLocationManager()
+        locationManager?.requestAlwaysAuthorization()
+        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager?.delegate = self
+        locationManager?.allowsBackgroundLocationUpdates = true
+        locationManager?.requestLocation()
         
         locationManager = CLLocationManager()
         locationManager?.requestAlwaysAuthorization()
@@ -208,7 +243,11 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
             controller.updateUI(with: commandStatus)
         }
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> parent of 4e905d7... Merge branch 'master' of https://github.com/matthewvandergrift/BlueBuzz
     // .activationDidComplete notification handler.
     //
     @objc
@@ -260,6 +299,8 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
                 }
                 // make sure to complete all tasks, even ones you don't handle
                 task.setTaskCompleted()
+<<<<<<< HEAD
+=======
             }
         }
     }
@@ -270,10 +311,24 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
         WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: fireDate, userInfo: nil) { error in
             if (error == nil) {
                 self.statusLabel.setText("successfully scheduled snapshot.  All background work completed.")
+>>>>>>> parent of 4e905d7... Merge branch 'master' of https://github.com/matthewvandergrift/BlueBuzz
             }
         }
     }
     
+<<<<<<< HEAD
+    func scheduleSnapshot() {
+        // fire now, we're ready
+        let fireDate = Date()
+        WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: fireDate, userInfo: nil) { error in
+            if (error == nil) {
+                self.statusLabel.setText("successfully scheduled snapshot.  All background work completed.")
+            }
+        }
+    }
+    
+=======
+>>>>>>> parent of 4e905d7... Merge branch 'master' of https://github.com/matthewvandergrift/BlueBuzz
     // MARK: URLSession handling
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo url: URL) {
@@ -313,8 +368,13 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
     //
     @IBAction func commandAction() {
         guard let command = command
+<<<<<<< HEAD
             else {
                 return
+=======
+        else {
+            return
+>>>>>>> parent of 4e905d7... Merge branch 'master' of https://github.com/matthewvandergrift/BlueBuzz
         }
         
         switch command {
@@ -325,7 +385,7 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
     }
 }
 
-extension MainInterfaceController { // MARK: - Update status view.
+    extension MainInterfaceController { // MARK: - Update status view.
     
     //Play haptic notifications to the user and display some updated data
     //

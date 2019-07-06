@@ -29,7 +29,7 @@ extension SessionCommands {
     //
     func updateAppConnection(_ context: [String: Any]) {
 
-        var command = CommandStatus(command: .updateAppConnection,
+        var command = CommandMessage(command: .updateAppConnection,
                                           phrase: .unauthorized,
                                           latitude: emptyDegrees,
                                           longitude: emptyDegrees,
@@ -59,7 +59,7 @@ extension SessionCommands {
     // Send a message if the session is activated and update UI with the command status.
     //
     func sendMessage(_ message: [String: Any]) {
-        var commandStatus = CommandStatus(command: .sendMessage,
+        var commandStatus = CommandMessage(command: .sendMessage,
                                           phrase: .sent,
                                           latitude: emptyDegrees,
                                           longitude: emptyDegrees,
@@ -118,7 +118,7 @@ extension SessionCommands {
     
     // Post a notification on the main thread asynchronously.
     //
-    private func postNotificationOnMainQueueAsync(name: NSNotification.Name, object: CommandStatus) {
+    private func postNotificationOnMainQueueAsync(name: NSNotification.Name, object: CommandMessage) {
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: name, object: object)
         }
@@ -126,7 +126,7 @@ extension SessionCommands {
 
     // Handle the session unactived error. WCSession commands require an activated session.
     //
-    private func handleSessionUnactivated(with commandStatus: CommandStatus) {
+    private func handleSessionUnactivated(with commandStatus: CommandMessage) {
         var mutableStatus = commandStatus
         mutableStatus.phrase = .failed
         mutableStatus.errorMessage =  "Session is not activated yet!"

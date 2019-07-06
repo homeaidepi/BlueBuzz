@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
-	<string>4.2</string>
+	<string>3.2</string>
 	<key>CFBundleVersion</key>
 	<string>2</string>
 	<key>CLKComplicationPrincipalClass</key>
@@ -36,10 +36,10 @@
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.watchkit</string>
 	</dict>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>This app will notify you when your phone is out of range</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app will notify you when your phone is out of range</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>This app will notify you when your phone is out of range</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

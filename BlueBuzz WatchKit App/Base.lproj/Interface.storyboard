@@ -8,26 +8,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14490.21"/>
     </dependencies>
     <scenes>
-        <!--DetailInterfaceController-->
-        <scene sceneID="lrF-Gj-jq0">
-            <objects>
-                <controller identifier="DetailInterfaceController" id="IZS-z5-Ji6" customClass="DetailInterfaceController" customModule="BlueBuzz_WatchOS_App_Extension">
-                    <items>
-                        <label width="1" alignment="center" verticalAlignment="center" text="Label" textAlignment="center" numberOfLines="0" id="Ghi-lV-wW6"/>
-                        <label width="1" alignment="center" verticalAlignment="center" text="Date Label" textAlignment="center" numberOfLines="0" id="8C1-qv-ySV"/>
-                    </items>
-                    <connections>
-                        <outlet property="descriptionLabel" destination="Ghi-lV-wW6" id="7hD-Xv-s5k"/>
-                        <outlet property="detailLabel" destination="8C1-qv-ySV" id="aDe-sy-P6D"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="275" y="-28"/>
-        </scene>
         <!--Blue Buzz-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller identifier="MainInterfaceController" title="Blue Buzz" animationDuration="1" fullScreen="YES" id="AgC-eL-Hgc" userLabel="Blue Buzz" customClass="MainInterfaceController" customModule="BlueBuzz_WatchOS_App_Extension" colorLabel="IBBuiltInLabel-Red">
+                <controller identifier="MainInterfaceController" title="Blue Buzz" animationDuration="1" fullScreen="YES" id="AgC-eL-Hgc" userLabel="Blue Buzz" customClass="MainInterfaceController" customModule="SimpleWatchConnectivity_WatchKit_Extension" colorLabel="IBBuiltInLabel-Red">
                     <items>
                         <button width="1" height="35" alignment="center" title="Command" id="k6l-Dc-fO2">
                             <connections>

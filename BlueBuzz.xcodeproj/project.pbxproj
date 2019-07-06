@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		400DB0971EA005A000F637F0 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400DB0961EA005A000F637F0 /* ComplicationController.swift */; };
 		4076077E1E8183AF00A6A8EA /* SessionCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4076077C1E8183AF00A6A8EA /* SessionCommands.swift */; };
 		407607861E81A7F000A6A8EA /* TestDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407607851E81A7F000A6A8EA /* TestDataProvider.swift */; };
 		407607871E81A7F000A6A8EA /* TestDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407607851E81A7F000A6A8EA /* TestDataProvider.swift */; };
@@ -19,36 +20,18 @@
 		40D46F541E8065200077A7B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40D46F521E8065200077A7B7 /* Main.storyboard */; };
 		40D46F561E8065200077A7B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40D46F551E8065200077A7B7 /* Assets.xcassets */; };
 		40D46F591E8065200077A7B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40D46F571E8065200077A7B7 /* LaunchScreen.storyboard */; };
-		40D46F5E1E8065200077A7B7 /* BlueBuzz WatchOS App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 40D46F5D1E8065200077A7B7 /* BlueBuzz WatchOS App.app */; };
+		40D46F5E1E8065200077A7B7 /* SimpleWatchConnectivity WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 40D46F5D1E8065200077A7B7 /* SimpleWatchConnectivity WatchKit App.app */; };
 		40D46F641E8065200077A7B7 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40D46F621E8065200077A7B7 /* Interface.storyboard */; };
 		40D46F661E8065200077A7B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40D46F651E8065200077A7B7 /* Assets.xcassets */; };
-		40D46F6D1E8065200077A7B7 /* BlueBuzz WatchOS App Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 40D46F6C1E8065200077A7B7 /* BlueBuzz WatchOS App Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		40D46F6D1E8065200077A7B7 /* SimpleWatchConnectivity WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 40D46F6C1E8065200077A7B7 /* SimpleWatchConnectivity WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		40D46F721E8065200077A7B7 /* MainInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D46F711E8065200077A7B7 /* MainInterfaceController.swift */; };
 		40D46F741E8065200077A7B7 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D46F731E8065200077A7B7 /* ExtensionDelegate.swift */; };
 		40D46F761E8065200077A7B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40D46F751E8065200077A7B7 /* Assets.xcassets */; };
-		40D8B77920A554A5005F7D76 /* CommandStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8B77820A554A5005F7D76 /* CommandStatus.swift */; };
-		40D8B77A20A554A5005F7D76 /* CommandStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8B77820A554A5005F7D76 /* CommandStatus.swift */; };
+		40D8B77920A554A5005F7D76 /* CommandMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8B77820A554A5005F7D76 /* CommandMessage.swift */; };
+		40D8B77A20A554A5005F7D76 /* CommandMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D8B77820A554A5005F7D76 /* CommandMessage.swift */; };
 		40DC7D0F1EA8186200A93AFB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DC7D0E1EA8186200A93AFB /* Logger.swift */; };
 		40DC7D101EA8186200A93AFB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DC7D0E1EA8186200A93AFB /* Logger.swift */; };
 		40DD4D8E1EA6B7510074E73F /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
-		E623E77F22CC6CEE004692AD /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = E623E77E22CC6CED004692AD /* data.json */; };
-		E6CF5BDE22CE1522009BD7D4 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400DB0961EA005A000F637F0 /* ComplicationController.swift */; };
-		E6CF5BDF22CE152F009BD7D4 /* MainInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D46F711E8065200077A7B7 /* MainInterfaceController.swift */; };
-		E6CF5BE822CE1658009BD7D4 /* WCSessionSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CF5BE322CE1658009BD7D4 /* WCSessionSupport.swift */; };
-		E6CF5BE922CE1658009BD7D4 /* UserNotificationCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CF5BE422CE1658009BD7D4 /* UserNotificationCategory.swift */; };
-		E6CF5BEA22CE1658009BD7D4 /* ConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CF5BE522CE1658009BD7D4 /* ConnectivityManager.swift */; };
-		E6CF5BEB22CE1658009BD7D4 /* NotificationProcessor+LocalRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CF5BE622CE1658009BD7D4 /* NotificationProcessor+LocalRequests.swift */; };
-		E6CF5BEC22CE1658009BD7D4 /* ConnectivityDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CF5BE722CE1658009BD7D4 /* ConnectivityDefinitions.swift */; };
-		E6CF5BF322CE1E44009BD7D4 /* ConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CF5BE522CE1658009BD7D4 /* ConnectivityManager.swift */; };
-		E6CF5BF422CE1E49009BD7D4 /* ConnectivityDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CF5BE722CE1658009BD7D4 /* ConnectivityDefinitions.swift */; };
-		E6CF5BF522CE1E4F009BD7D4 /* NotificationProcessor+LocalRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CF5BE622CE1658009BD7D4 /* NotificationProcessor+LocalRequests.swift */; };
-		E6CF5BF622CE1E52009BD7D4 /* UserNotificationCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CF5BE422CE1658009BD7D4 /* UserNotificationCategory.swift */; };
-		E6CF5BF722CE1E54009BD7D4 /* WCSessionSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CF5BE322CE1658009BD7D4 /* WCSessionSupport.swift */; };
-		E6CF5BF922CE1EE3009BD7D4 /* NotificationProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CF5BF822CE1EE3009BD7D4 /* NotificationProcessor.swift */; };
-		E6CF5BFA22CE1F01009BD7D4 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CF5BED22CE1A45009BD7D4 /* InterfaceController.swift */; };
-		E6CF5BFB22CE1F0E009BD7D4 /* NotificationHandleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CF5BEF22CE1B07009BD7D4 /* NotificationHandleable.swift */; };
-		E6CF5BFC22CE1F11009BD7D4 /* WatchSessionBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CF5BF022CE1B07009BD7D4 /* WatchSessionBehavior.swift */; };
-		E6CF5BFD22CE1F15009BD7D4 /* NotificationProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CF5BE022CE15B3009BD7D4 /* NotificationProcessor.swift */; };
-		E6CF5BFE22CE1F17009BD7D4 /* DetailInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6CF5BD922CE14AB009BD7D4 /* DetailInterfaceController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,7 +58,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				40D46F6D1E8065200077A7B7 /* BlueBuzz WatchOS App Extension.appex in Embed App Extensions */,
+				40D46F6D1E8065200077A7B7 /* SimpleWatchConnectivity WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,7 +69,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				40D46F5E1E8065200077A7B7 /* BlueBuzz WatchOS App.app in Embed Watch Content */,
+				40D46F5E1E8065200077A7B7 /* SimpleWatchConnectivity WatchKit App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,43 +82,31 @@
 		407607851E81A7F000A6A8EA /* TestDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestDataProvider.swift; path = Shared/TestDataProvider.swift; sourceTree = "<group>"; };
 		40AF22981F29236300E6D1A8 /* SessionDelegater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SessionDelegater.swift; path = Shared/SessionDelegater.swift; sourceTree = "<group>"; };
 		40C02A9920A27F28006F07AE /* CommandsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsViewController.swift; sourceTree = "<group>"; };
-		40D46F4B1E8065200077A7B7 /* BlueBuzz iOS App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BlueBuzz iOS App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		40D46F4B1E8065200077A7B7 /* SimpleWatchConnectivity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleWatchConnectivity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40D46F4E1E8065200077A7B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40D46F501E8065200077A7B7 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		40D46F531E8065200077A7B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		40D46F551E8065200077A7B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40D46F581E8065200077A7B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40D46F5A1E8065200077A7B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		40D46F5D1E8065200077A7B7 /* BlueBuzz WatchOS App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BlueBuzz WatchOS App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		40D46F5D1E8065200077A7B7 /* SimpleWatchConnectivity WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SimpleWatchConnectivity WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		40D46F631E8065200077A7B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		40D46F651E8065200077A7B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40D46F671E8065200077A7B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		40D46F6C1E8065200077A7B7 /* BlueBuzz WatchOS App Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "BlueBuzz WatchOS App Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		40D46F6C1E8065200077A7B7 /* SimpleWatchConnectivity WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SimpleWatchConnectivity WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		40D46F711E8065200077A7B7 /* MainInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInterfaceController.swift; sourceTree = "<group>"; };
 		40D46F731E8065200077A7B7 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		40D46F751E8065200077A7B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40D46F771E8065200077A7B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		40D8B77820A554A5005F7D76 /* CommandStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommandStatus.swift; path = Shared/CommandStatus.swift; sourceTree = "<group>"; };
+		40D8B77820A554A5005F7D76 /* CommandMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommandMessage.swift; path = Shared/CommandMessage.swift; sourceTree = "<group>"; };
 		40DC7D0E1EA8186200A93AFB /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Logger.swift; path = Shared/Logger.swift; sourceTree = "<group>"; };
 		40DC7D141EA81D8100A93AFB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		40DD4D8A1EA6B6E20074E73F /* BlueBuzz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BlueBuzz.entitlements; sourceTree = "<group>"; };
 		40DD4D8B1EA6B6FB0074E73F /* BlueBuzz WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BlueBuzz WatchKit App.entitlements"; sourceTree = "<group>"; };
 		40DD4D8C1EA6B7010074E73F /* BlueBuzz WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BlueBuzz WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "Settings-Watch.bundle"; sourceTree = "<group>"; };
-		C9DA6BB0C9DA6B8000000001 /* BlueBuzzConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = BlueBuzzConfig.xcconfig; path = Configuration/BlueBuzzConfig.xcconfig; sourceTree = "<group>"; };
+		C9DA6BB0C9DA6B8000000001 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
 		C9DDD1E0C9DDC50000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		E623E77E22CC6CED004692AD /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = data.json; path = Shared/data.json; sourceTree = "<group>"; };
-		E6CF5BD922CE14AB009BD7D4 /* DetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailInterfaceController.swift; sourceTree = "<group>"; };
-		E6CF5BE022CE15B3009BD7D4 /* NotificationProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationProcessor.swift; sourceTree = "<group>"; };
-		E6CF5BE322CE1658009BD7D4 /* WCSessionSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WCSessionSupport.swift; path = Shared/WCSessionSupport.swift; sourceTree = "<group>"; };
-		E6CF5BE422CE1658009BD7D4 /* UserNotificationCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserNotificationCategory.swift; path = Shared/UserNotificationCategory.swift; sourceTree = "<group>"; };
-		E6CF5BE522CE1658009BD7D4 /* ConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectivityManager.swift; path = Shared/ConnectivityManager.swift; sourceTree = "<group>"; };
-		E6CF5BE622CE1658009BD7D4 /* NotificationProcessor+LocalRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NotificationProcessor+LocalRequests.swift"; path = "Shared/NotificationProcessor+LocalRequests.swift"; sourceTree = "<group>"; };
-		E6CF5BE722CE1658009BD7D4 /* ConnectivityDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectivityDefinitions.swift; path = Shared/ConnectivityDefinitions.swift; sourceTree = "<group>"; };
-		E6CF5BED22CE1A45009BD7D4 /* InterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
-		E6CF5BEF22CE1B07009BD7D4 /* NotificationHandleable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHandleable.swift; sourceTree = "<group>"; };
-		E6CF5BF022CE1B07009BD7D4 /* WatchSessionBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchSessionBehavior.swift; sourceTree = "<group>"; };
-		E6CF5BF822CE1EE3009BD7D4 /* NotificationProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationProcessor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,10 +130,8 @@
 		4076077B1E81834B00A6A8EA /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				E6CF5BE222CE1614009BD7D4 /* Notifications */,
-				E623E77E22CC6CED004692AD /* data.json */,
 				407607851E81A7F000A6A8EA /* TestDataProvider.swift */,
-				40D8B77820A554A5005F7D76 /* CommandStatus.swift */,
+				40D8B77820A554A5005F7D76 /* CommandMessage.swift */,
 				4076077C1E8183AF00A6A8EA /* SessionCommands.swift */,
 				40AF22981F29236300E6D1A8 /* SessionDelegater.swift */,
 				40DC7D0E1EA8186200A93AFB /* Logger.swift */,
@@ -187,9 +156,9 @@
 		40D46F4C1E8065200077A7B7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				40D46F4B1E8065200077A7B7 /* BlueBuzz iOS App.app */,
-				40D46F5D1E8065200077A7B7 /* BlueBuzz WatchOS App.app */,
-				40D46F6C1E8065200077A7B7 /* BlueBuzz WatchOS App Extension.appex */,
+				40D46F4B1E8065200077A7B7 /* SimpleWatchConnectivity.app */,
+				40D46F5D1E8065200077A7B7 /* SimpleWatchConnectivity WatchKit App.app */,
+				40D46F6C1E8065200077A7B7 /* SimpleWatchConnectivity WatchKit Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -197,7 +166,6 @@
 		40D46F4D1E8065200077A7B7 /* BlueBuzz */ = {
 			isa = PBXGroup;
 			children = (
-				E6CF5BF822CE1EE3009BD7D4 /* NotificationProcessor.swift */,
 				40DD4D8A1EA6B6E20074E73F /* BlueBuzz.entitlements */,
 				40D46F4E1E8065200077A7B7 /* AppDelegate.swift */,
 				40D46F501E8065200077A7B7 /* MainViewController.swift */,
@@ -225,7 +193,6 @@
 		40D46F701E8065200077A7B7 /* BlueBuzz WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				E6CF5BDB22CE14B2009BD7D4 /* Notifications */,
 				40DD4D8C1EA6B7010074E73F /* BlueBuzz WatchKit Extension.entitlements */,
 				40D46F731E8065200077A7B7 /* ExtensionDelegate.swift */,
 				40D46F711E8065200077A7B7 /* MainInterfaceController.swift */,
@@ -239,7 +206,7 @@
 		C9D96D30C9DA425000000001 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				C9DA6BB0C9DA6B8000000001 /* BlueBuzzConfig.xcconfig */,
+				C9DA6BB0C9DA6B8000000001 /* SampleCode.xcconfig */,
 			);
 			name = Configuration;
 			sourceTree = "<group>";
@@ -252,36 +219,12 @@
 			path = LICENSE;
 			sourceTree = "<group>";
 		};
-		E6CF5BDB22CE14B2009BD7D4 /* Notifications */ = {
-			isa = PBXGroup;
-			children = (
-				E6CF5BEF22CE1B07009BD7D4 /* NotificationHandleable.swift */,
-				E6CF5BF022CE1B07009BD7D4 /* WatchSessionBehavior.swift */,
-				E6CF5BED22CE1A45009BD7D4 /* InterfaceController.swift */,
-				E6CF5BE022CE15B3009BD7D4 /* NotificationProcessor.swift */,
-				E6CF5BD922CE14AB009BD7D4 /* DetailInterfaceController.swift */,
-			);
-			path = Notifications;
-			sourceTree = "<group>";
-		};
-		E6CF5BE222CE1614009BD7D4 /* Notifications */ = {
-			isa = PBXGroup;
-			children = (
-				E6CF5BE722CE1658009BD7D4 /* ConnectivityDefinitions.swift */,
-				E6CF5BE522CE1658009BD7D4 /* ConnectivityManager.swift */,
-				E6CF5BE622CE1658009BD7D4 /* NotificationProcessor+LocalRequests.swift */,
-				E6CF5BE422CE1658009BD7D4 /* UserNotificationCategory.swift */,
-				E6CF5BE322CE1658009BD7D4 /* WCSessionSupport.swift */,
-			);
-			name = Notifications;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		40D46F4A1E8065200077A7B7 /* BlueBuzz iOS App */ = {
+		40D46F4A1E8065200077A7B7 /* SimpleWatchConnectivity */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 40D46F821E8065200077A7B7 /* Build configuration list for PBXNativeTarget "BlueBuzz iOS App" */;
+			buildConfigurationList = 40D46F821E8065200077A7B7 /* Build configuration list for PBXNativeTarget "SimpleWatchConnectivity" */;
 			buildPhases = (
 				40D46F471E8065200077A7B7 /* Sources */,
 				40D46F481E8065200077A7B7 /* Frameworks */,
@@ -294,14 +237,14 @@
 			dependencies = (
 				40D46F601E8065200077A7B7 /* PBXTargetDependency */,
 			);
-			name = "BlueBuzz iOS App";
+			name = SimpleWatchConnectivity;
 			productName = SimpleWatchConnectivity;
-			productReference = 40D46F4B1E8065200077A7B7 /* BlueBuzz iOS App.app */;
+			productReference = 40D46F4B1E8065200077A7B7 /* SimpleWatchConnectivity.app */;
 			productType = "com.apple.product-type.application";
 		};
-		40D46F5C1E8065200077A7B7 /* BlueBuzz WatchOS App */ = {
+		40D46F5C1E8065200077A7B7 /* SimpleWatchConnectivity WatchKit App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 40D46F7E1E8065200077A7B7 /* Build configuration list for PBXNativeTarget "BlueBuzz WatchOS App" */;
+			buildConfigurationList = 40D46F7E1E8065200077A7B7 /* Build configuration list for PBXNativeTarget "SimpleWatchConnectivity WatchKit App" */;
 			buildPhases = (
 				40D46F5B1E8065200077A7B7 /* Resources */,
 				40D46F7D1E8065200077A7B7 /* Embed App Extensions */,
@@ -311,14 +254,14 @@
 			dependencies = (
 				40D46F6F1E8065200077A7B7 /* PBXTargetDependency */,
 			);
-			name = "BlueBuzz WatchOS App";
+			name = "SimpleWatchConnectivity WatchKit App";
 			productName = "SimpleWatchConnectivity WatchKit App";
-			productReference = 40D46F5D1E8065200077A7B7 /* BlueBuzz WatchOS App.app */;
+			productReference = 40D46F5D1E8065200077A7B7 /* SimpleWatchConnectivity WatchKit App.app */;
 			productType = "com.apple.product-type.application.watchapp2";
 		};
-		40D46F6B1E8065200077A7B7 /* BlueBuzz WatchOS App Extension */ = {
+		40D46F6B1E8065200077A7B7 /* SimpleWatchConnectivity WatchKit Extension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 40D46F7A1E8065200077A7B7 /* Build configuration list for PBXNativeTarget "BlueBuzz WatchOS App Extension" */;
+			buildConfigurationList = 40D46F7A1E8065200077A7B7 /* Build configuration list for PBXNativeTarget "SimpleWatchConnectivity WatchKit Extension" */;
 			buildPhases = (
 				40D46F681E8065200077A7B7 /* Sources */,
 				40D46F691E8065200077A7B7 /* Frameworks */,
@@ -329,9 +272,9 @@
 			);
 			dependencies = (
 			);
-			name = "BlueBuzz WatchOS App Extension";
+			name = "SimpleWatchConnectivity WatchKit Extension";
 			productName = "SimpleWatchConnectivity WatchKit Extension";
-			productReference = 40D46F6C1E8065200077A7B7 /* BlueBuzz WatchOS App Extension.appex */;
+			productReference = 40D46F6C1E8065200077A7B7 /* SimpleWatchConnectivity WatchKit Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
 		};
 /* End PBXNativeTarget section */
@@ -397,9 +340,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				40D46F4A1E8065200077A7B7 /* BlueBuzz iOS App */,
-				40D46F5C1E8065200077A7B7 /* BlueBuzz WatchOS App */,
-				40D46F6B1E8065200077A7B7 /* BlueBuzz WatchOS App Extension */,
+				40D46F4A1E8065200077A7B7 /* SimpleWatchConnectivity */,
+				40D46F5C1E8065200077A7B7 /* SimpleWatchConnectivity WatchKit App */,
+				40D46F6B1E8065200077A7B7 /* SimpleWatchConnectivity WatchKit Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -412,7 +355,6 @@
 				40D46F591E8065200077A7B7 /* LaunchScreen.storyboard in Resources */,
 				40D46F561E8065200077A7B7 /* Assets.xcassets in Resources */,
 				40DD4D8E1EA6B7510074E73F /* Settings-Watch.bundle in Resources */,
-				E623E77F22CC6CEE004692AD /* data.json in Resources */,
 				40D46F541E8065200077A7B7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -474,16 +416,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6CF5BE822CE1658009BD7D4 /* WCSessionSupport.swift in Sources */,
 				40D46F511E8065200077A7B7 /* MainViewController.swift in Sources */,
-				E6CF5BF922CE1EE3009BD7D4 /* NotificationProcessor.swift in Sources */,
-				40D8B77920A554A5005F7D76 /* CommandStatus.swift in Sources */,
+				40D8B77920A554A5005F7D76 /* CommandMessage.swift in Sources */,
 				407607861E81A7F000A6A8EA /* TestDataProvider.swift in Sources */,
-				E6CF5BEC22CE1658009BD7D4 /* ConnectivityDefinitions.swift in Sources */,
 				40D46F4F1E8065200077A7B7 /* AppDelegate.swift in Sources */,
-				E6CF5BEB22CE1658009BD7D4 /* NotificationProcessor+LocalRequests.swift in Sources */,
-				E6CF5BE922CE1658009BD7D4 /* UserNotificationCategory.swift in Sources */,
-				E6CF5BEA22CE1658009BD7D4 /* ConnectivityManager.swift in Sources */,
 				40DC7D0F1EA8186200A93AFB /* Logger.swift in Sources */,
 				40C02A9A20A27F28006F07AE /* CommandsViewController.swift in Sources */,
 				40AF22991F29236300E6D1A8 /* SessionDelegater.swift in Sources */,
@@ -495,24 +431,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6CF5BFC22CE1F11009BD7D4 /* WatchSessionBehavior.swift in Sources */,
-				E6CF5BF322CE1E44009BD7D4 /* ConnectivityManager.swift in Sources */,
-				E6CF5BFB22CE1F0E009BD7D4 /* NotificationHandleable.swift in Sources */,
 				40AF229A1F29236300E6D1A8 /* SessionDelegater.swift in Sources */,
-				40D8B77A20A554A5005F7D76 /* CommandStatus.swift in Sources */,
-				E6CF5BFA22CE1F01009BD7D4 /* InterfaceController.swift in Sources */,
-				E6CF5BFE22CE1F17009BD7D4 /* DetailInterfaceController.swift in Sources */,
-				E6CF5BF522CE1E4F009BD7D4 /* NotificationProcessor+LocalRequests.swift in Sources */,
-				E6CF5BF722CE1E54009BD7D4 /* WCSessionSupport.swift in Sources */,
-				E6CF5BDF22CE152F009BD7D4 /* MainInterfaceController.swift in Sources */,
-				E6CF5BF622CE1E52009BD7D4 /* UserNotificationCategory.swift in Sources */,
+				40D8B77A20A554A5005F7D76 /* CommandMessage.swift in Sources */,
 				40D46F741E8065200077A7B7 /* ExtensionDelegate.swift in Sources */,
 				407607871E81A7F000A6A8EA /* TestDataProvider.swift in Sources */,
-				E6CF5BDE22CE1522009BD7D4 /* ComplicationController.swift in Sources */,
+				400DB0971EA005A000F637F0 /* ComplicationController.swift in Sources */,
 				40DC7D101EA8186200A93AFB /* Logger.swift in Sources */,
 				4076077E1E8183AF00A6A8EA /* SessionCommands.swift in Sources */,
-				E6CF5BF422CE1E49009BD7D4 /* ConnectivityDefinitions.swift in Sources */,
-				E6CF5BFD22CE1F15009BD7D4 /* NotificationProcessor.swift in Sources */,
+				40D46F721E8065200077A7B7 /* MainInterfaceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,12 +447,12 @@
 /* Begin PBXTargetDependency section */
 		40D46F601E8065200077A7B7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 40D46F5C1E8065200077A7B7 /* BlueBuzz WatchOS App */;
+			target = 40D46F5C1E8065200077A7B7 /* SimpleWatchConnectivity WatchKit App */;
 			targetProxy = 40D46F5F1E8065200077A7B7 /* PBXContainerItemProxy */;
 		};
 		40D46F6F1E8065200077A7B7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 40D46F6B1E8065200077A7B7 /* BlueBuzz WatchOS App Extension */;
+			target = 40D46F6B1E8065200077A7B7 /* SimpleWatchConnectivity WatchKit Extension */;
 			targetProxy = 40D46F6E1E8065200077A7B7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -561,7 +487,7 @@
 /* Begin XCBuildConfiguration section */
 		40D46F781E8065200077A7B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9DA6BB0C9DA6B8000000001 /* BlueBuzzConfig.xcconfig */;
+			baseConfigurationReference = C9DA6BB0C9DA6B8000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -621,7 +547,7 @@
 		};
 		40D46F791E8065200077A7B7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9DA6BB0C9DA6B8000000001 /* BlueBuzzConfig.xcconfig */;
+			baseConfigurationReference = C9DA6BB0C9DA6B8000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -674,7 +600,7 @@
 		};
 		40D46F7B1E8065200077A7B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9DA6BB0C9DA6B8000000001 /* BlueBuzzConfig.xcconfig */;
+			baseConfigurationReference = C9DA6BB0C9DA6B8000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "BlueBuzz WatchKit Extension/BlueBuzz WatchKit Extension.entitlements";
@@ -698,7 +624,7 @@
 		};
 		40D46F7C1E8065200077A7B7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9DA6BB0C9DA6B8000000001 /* BlueBuzzConfig.xcconfig */;
+			baseConfigurationReference = C9DA6BB0C9DA6B8000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "BlueBuzz WatchKit Extension/BlueBuzz WatchKit Extension.entitlements";
@@ -722,7 +648,7 @@
 		};
 		40D46F7F1E8065200077A7B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9DA6BB0C9DA6B8000000001 /* BlueBuzzConfig.xcconfig */;
+			baseConfigurationReference = C9DA6BB0C9DA6B8000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -748,7 +674,7 @@
 		};
 		40D46F801E8065200077A7B7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9DA6BB0C9DA6B8000000001 /* BlueBuzzConfig.xcconfig */;
+			baseConfigurationReference = C9DA6BB0C9DA6B8000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -774,7 +700,7 @@
 		};
 		40D46F831E8065200077A7B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9DA6BB0C9DA6B8000000001 /* BlueBuzzConfig.xcconfig */;
+			baseConfigurationReference = C9DA6BB0C9DA6B8000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -795,7 +721,7 @@
 		};
 		40D46F841E8065200077A7B7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9DA6BB0C9DA6B8000000001 /* BlueBuzzConfig.xcconfig */;
+			baseConfigurationReference = C9DA6BB0C9DA6B8000000001 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -826,7 +752,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		40D46F7A1E8065200077A7B7 /* Build configuration list for PBXNativeTarget "BlueBuzz WatchOS App Extension" */ = {
+		40D46F7A1E8065200077A7B7 /* Build configuration list for PBXNativeTarget "SimpleWatchConnectivity WatchKit Extension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				40D46F7B1E8065200077A7B7 /* Debug */,
@@ -835,7 +761,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		40D46F7E1E8065200077A7B7 /* Build configuration list for PBXNativeTarget "BlueBuzz WatchOS App" */ = {
+		40D46F7E1E8065200077A7B7 /* Build configuration list for PBXNativeTarget "SimpleWatchConnectivity WatchKit App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				40D46F7F1E8065200077A7B7 /* Debug */,
@@ -844,7 +770,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		40D46F821E8065200077A7B7 /* Build configuration list for PBXNativeTarget "BlueBuzz iOS App" */ = {
+		40D46F821E8065200077A7B7 /* Build configuration list for PBXNativeTarget "SimpleWatchConnectivity" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				40D46F831E8065200077A7B7 /* Debug */,

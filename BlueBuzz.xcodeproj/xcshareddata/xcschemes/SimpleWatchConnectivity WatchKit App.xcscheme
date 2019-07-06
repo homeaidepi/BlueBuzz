@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "40D46F5C1E8065200077A7B7"
-               BuildableName = "BlueBuzz WatchOS App.app"
-               BlueprintName = "BlueBuzz WatchOS App"
+               BuildableName = "SimpleWatchConnectivity WatchKit App.app"
+               BlueprintName = "SimpleWatchConnectivity WatchKit App"
                ReferencedContainer = "container:BlueBuzz.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,8 +29,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "40D46F4A1E8065200077A7B7"
-               BuildableName = "BlueBuzz iOS App.app"
-               BlueprintName = "BlueBuzz iOS App"
+               BuildableName = "SimpleWatchConnectivity.app"
+               BlueprintName = "SimpleWatchConnectivity"
                ReferencedContainer = "container:BlueBuzz.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,8 +47,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "40D46F5C1E8065200077A7B7"
-            BuildableName = "BlueBuzz WatchOS App.app"
-            BlueprintName = "BlueBuzz WatchOS App"
+            BuildableName = "SimpleWatchConnectivity WatchKit App.app"
+            BlueprintName = "SimpleWatchConnectivity WatchKit App"
             ReferencedContainer = "container:BlueBuzz.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -72,8 +72,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "40D46F5C1E8065200077A7B7"
-            BuildableName = "BlueBuzz WatchOS App.app"
-            BlueprintName = "BlueBuzz WatchOS App"
+            BuildableName = "SimpleWatchConnectivity WatchKit App.app"
+            BlueprintName = "SimpleWatchConnectivity WatchKit App"
             ReferencedContainer = "container:BlueBuzz.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
@@ -81,8 +81,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "40D46F5C1E8065200077A7B7"
-            BuildableName = "BlueBuzz WatchOS App.app"
-            BlueprintName = "BlueBuzz WatchOS App"
+            BuildableName = "SimpleWatchConnectivity WatchKit App.app"
+            BlueprintName = "SimpleWatchConnectivity WatchKit App"
             ReferencedContainer = "container:BlueBuzz.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -106,8 +106,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "40D46F5C1E8065200077A7B7"
-            BuildableName = "BlueBuzz WatchOS App.app"
-            BlueprintName = "BlueBuzz WatchOS App"
+            BuildableName = "SimpleWatchConnectivity WatchKit App.app"
+            BlueprintName = "SimpleWatchConnectivity WatchKit App"
             ReferencedContainer = "container:BlueBuzz.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
@@ -115,8 +115,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "40D46F5C1E8065200077A7B7"
-            BuildableName = "BlueBuzz WatchOS App.app"
-            BlueprintName = "BlueBuzz WatchOS App"
+            BuildableName = "SimpleWatchConnectivity WatchKit App.app"
+            BlueprintName = "SimpleWatchConnectivity WatchKit App"
             ReferencedContainer = "container:BlueBuzz.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

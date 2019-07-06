@@ -11,7 +11,7 @@ import CoreLocation
 
 // shared constants
 //
-var emptyDegrees = CLLocationDegrees(0)
+var emptyDegrees = Double(0)
 var emptyError = String("")
 var ibmBlueColor = UIColor(red: CGFloat(70)/255, green: CGFloat(107)/255, blue: CGFloat(176)/255, alpha: 1.0)
 var defaultColor = TimedColor(ibmBlueColor)
@@ -129,18 +129,13 @@ struct TimedColor: Codable {
         return [PayloadKey.timeStamp: timeStamp, PayloadKey.colorData: colorData]
     }
     
-    static func getSomeDateTime() -> String
+    init(_ timedColor: UIColor)
     {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mm:ss a"
         let someDateTime = formatter.string(from: Date())
         
-        return someDateTime
-    }
-    
-    init(_ timedColor: UIColor)
-    {
-        self.timeStamp = TimedColor.getSomeDateTime()
+        self.timeStamp = someDateTime
         self.colorData = timedColor.data()
         self.defaultValue = false
     }
@@ -148,11 +143,7 @@ struct TimedColor: Codable {
     init(_ timedColor: [String: Any]) {
         guard let timeStamp = timedColor[PayloadKey.timeStamp] as? String,
             let colorData = timedColor[PayloadKey.colorData] as? Data else {
-                let someDateTime = TimedColor.getSomeDateTime()
-                self.timeStamp = someDateTime
-                self.colorData = UIColor.black.data()
-                self.defaultValue = false
-                return
+                fatalError("Timed color dictionary doesn't have right keys!")
         }
         self.timeStamp = timeStamp
         self.colorData = colorData
@@ -176,7 +167,7 @@ struct TimedColor: Codable {
 
 // Wrap the command status to bridge the commands status and UI.
 //
-struct CommandStatus: Codable {
+struct CommandMessage: Codable {
     
     var command: Command
     var phrase: Phrase
@@ -226,8 +217,11 @@ struct CommandStatus: Codable {
         latitude = try container.decode(CLLocationDegrees.self, forKey: .latitude)
         longitude = try container.decode(CLLocationDegrees.self, forKey: .longitude)
         timedColor = try container.decode(TimedColor.self, forKey: .timedColor)
+<<<<<<< HEAD:Shared/CommandStatus.swift
         latitude = try container.decode(CLLocationDegrees.self, forKey: .latitude)
         longitude = try container.decode(CLLocationDegrees.self, forKey: .longitude)
+=======
+>>>>>>> parent of 4e905d7... Merge branch 'master' of https://github.com/matthewvandergrift/BlueBuzz:Shared/CommandMessage.swift
         errorMessage = try container.decode(String.self, forKey: .errorMessage)
         
     }
