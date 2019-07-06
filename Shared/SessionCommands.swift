@@ -87,7 +87,7 @@ extension SessionCommands {
     //
     func sendMessageData(_ messageData: Data, location: CLLocation?) {
         
-        var commandStatus =  CommandStatus(command: .sendMessageData,
+        var commandStatus =  CommandMessage(command: .sendMessageData,
                                          phrase: .sent,
                                          latitude: location?.coordinate.latitude ?? emptyDegrees,
                                          longitude: location?.coordinate.longitude ?? emptyDegrees,

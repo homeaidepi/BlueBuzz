@@ -217,6 +217,11 @@ struct CommandMessage: Codable {
         latitude = try container.decode(CLLocationDegrees.self, forKey: .latitude)
         longitude = try container.decode(CLLocationDegrees.self, forKey: .longitude)
         timedColor = try container.decode(TimedColor.self, forKey: .timedColor)
+<<<<<<< HEAD:Shared/CommandStatus.swift
+        latitude = try container.decode(CLLocationDegrees.self, forKey: .latitude)
+        longitude = try container.decode(CLLocationDegrees.self, forKey: .longitude)
+=======
+>>>>>>> parent of 4e905d7... Merge branch 'master' of https://github.com/matthewvandergrift/BlueBuzz:Shared/CommandMessage.swift
         errorMessage = try container.decode(String.self, forKey: .errorMessage)
         
     }
