@@ -17,23 +17,39 @@ struct ControllerID {
     static let mainInterfaceController = "MainInterfaceController"
 }
 
-class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate, CLLocationManagerDelegate, TestDataProvider, SessionCommands {
+class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate, TestDataProvider, SessionCommands {
+    
+    private lazy var sessionDelegater: SessionDelegater = {
+        return SessionDelegater()
+    }()
+    
+    // Retain the controllers so that we don't have to reload root controllers for every switch.
+    //
+    private static var instances = [MainInterfaceController]()
+    
+    private var command: Command?
     
     @IBOutlet weak var statusGroup: WKInterfaceGroup!
     @IBOutlet var statusLabel: WKInterfaceLabel!
     @IBOutlet var commandButton: WKInterfaceButton!
     @IBOutlet var mapObject: WKInterfaceMap!
+    
+    @IBAction func commandAction() {
+        guard let command = command
+            else {
+                return
+        }
+        
+        switch command {
+        case .updateAppConnection: updateAppConnection(appConnection)
+        case .sendMessage: sendMessage(message)
+        case .sendMessageData: sendMessageData(messageData, location: location)
+        }
+    }
 
-    // Retain the controllers so that we don't have to reload root controllers for every switch.
-    //
-    static var instances = [MainInterfaceController]()
-    
-    private var command: Command?
-    private var locationManager: CLLocationManager?
-    private var location: CLLocation?
-    private var mapLocation: CLLocationCoordinate2D?
-    
-     let sampleDownloadURL = URL(string: "http://devstreaming.apple.com/videos/wwdc/2015/802mpzd3nzovlygpbg/802/802_designing_for_apple_watch.pdf?dl=1")!
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
     // Context == nil: the fist-time loading, load pages with reloadRootController then
     // Context != nil: Loading the pages, save the controller instances so that we can
@@ -42,7 +58,13 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
-        if let context = context as? CommandMessage {
+        // Activate the session asynchronously as early as possible.
+        // In the case of being background launched with a task, this may save some background runtime budget.
+        //
+        WCSession.default.delegate = sessionDelegater
+        WCSession.default.activate()
+        
+        if let context = context as? CommandStatus {
             command = context.command
             updateUI(with: context)
             type(of: self).instances.append(self)
@@ -50,7 +72,7 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
             statusLabel.setText("Connecting...")
             reloadRootController()
         }
-        
+
         // Install notification observer.
         //
         NotificationCenter.default.addObserver(
@@ -119,37 +141,10 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
         statusLabel.setText(error.localizedDescription)
     }
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedAlways {
-            locationManager?.requestLocation()
-        }
-    }
-    
-    @objc
-    func appDidEnterBackground(_ notification: Notification) {
-        notifyUI();
-        locationManager?.requestLocation()
-    }
-    
-    @objc private func deinitLocationManager() {
-        locationManager = nil
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-        //cant deinit the location manager as we run in the background
-//        self.performSelector(onMainThread: #selector(deinitLocationManager), with: nil, waitUntilDone: true)
     }
     
     override func willActivate() {
         super.willActivate()
-
-        locationManager = CLLocationManager()
-        locationManager?.requestAlwaysAuthorization()
-        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager?.delegate = self
-        locationManager?.allowsBackgroundLocationUpdates = true
-        locationManager?.requestLocation()
         
         // For .updateAppConnection, retrieve the receieved app context if any and update the UI.
         if command == .updateAppConnection {
@@ -165,13 +160,6 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
         // Update the status group background color.
         //
         statusGroup.setBackgroundColor(.black)
-    }
-    
-    // Load paged-based UI.
-    // If a current context is specified, use the timed color it provided.
-    //
-    private func reloadRootController(with currentContext: CommandMessage? = nil) {
-        let commands: [Command] = [.updateAppConnection, .sendMessage, .sendMessageData]
         
         var contexts = [CommandMessage]()
         for aCommand in commands {
@@ -190,9 +178,12 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
             }
             contexts.append(command)
         }
-        
-        let names = Array(repeating: ControllerID.mainInterfaceController, count: contexts.count)
-        WKInterfaceController.reloadRootControllers(withNames: names, contexts: contexts)
+    }
+    
+    func requestLocationFromDelegate()
+    {
+        let watchDelegate = WKExtension.shared().delegate as? ExtensionDelegate
+        watchDelegate?.requestLocation()
     }
     
     // .dataDidFlow notification handler. Update the UI based on the command status.
@@ -209,124 +200,51 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
             controller.updateUI(with: commandStatus)
         }
     }
-
-    // .activationDidComplete notification handler.
-    //
+    
+    @objc
+    func applicationDidEnterBackground(_ notification: Notification)
+    {
+        //here if need be
+    }
+    
     @objc
     func activationDidComplete(_ notification: Notification) {
         //print("\(#function): activationState:\(WCSession.default.activationState.rawValue)")
     }
     
-    // .reachabilityDidChange notification handler.
-    //
     @objc
     func reachabilityDidChange(_ notification: Notification) {
-        notifyUI();
-        
         //print("\(#function): isReachable:\(WCSession.default.isReachable)")
     }
     
-    // Be sure to complete all the tasks - otherwise they will keep consuming the background executing
-    // time until the time is out of budget and the app is killed.
+    // Load paged-based UI.
+    // If a current context is specified, use the timed color it provided.
     //
-    // WKWatchConnectivityRefreshBackgroundTask should be completed after the pending data is received
-    // so retain the tasks first. The retained tasks will be completed at the following cases:
-    // 1. hasContentPending flips to false, meaning all the pending data is received. Pending data means
-    //    the data received by the device prior to the WCSession getting activated.
-    //    More data might arrive, but it isn't pending when the session activated.
-    // 2. The end of the handle method.
-    //    This happens when hasContentPending can flip to false before the tasks are retained.
-    //
-    // If the tasks are completed before the WCSessionDelegate methods are called, the data will be delivered
-    // the app is running next time, so no data lost.
-    //
-    func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
-        for _ in backgroundTasks {
+    private func reloadRootController(with currentContext: CommandStatus? = nil) {
+        let commands: [Command] = [.updateAppConnection, .sendMessage, .sendMessageData]
+        
+        var contexts = [CommandStatus]()
+        for aCommand in commands {
+            var command = CommandStatus(command: aCommand,
+                                        phrase: .finished,
+                                        latitude: emptyDegrees,
+                                        longitude: emptyDegrees,
+                                        timedColor: defaultColor,
+                                        errorMessage: emptyError)
             
-            for task : WKRefreshBackgroundTask in backgroundTasks {
-                print("received background task: ", task)
-                // only handle these while running in the background
-                if (WKExtension.shared().applicationState == .background) {
-                    if task is WKApplicationRefreshBackgroundTask {
-                        // this task is completed below, our app will then suspend while the download session runs
-                        print("application task received, start URL session")
-                        scheduleURLSession()
-                    }
-                }
-                else if let urlTask = task as? WKURLSessionRefreshBackgroundTask {
-                    let backgroundConfigObject = URLSessionConfiguration.background(withIdentifier: urlTask.sessionIdentifier)
-                    let backgroundSession = URLSession(configuration: backgroundConfigObject, delegate: self, delegateQueue: nil)
-                    
-                    statusLabel.setText("Rejoining session \(backgroundSession)")
-                }
-                // make sure to complete all tasks, even ones you don't handle
-                task.setTaskCompleted()
+            if let currentContext = currentContext, aCommand == currentContext.command {
+                command.phrase = currentContext.phrase
+                command.timedColor = currentContext.timedColor
             }
-        }
-    }
-    
-    func scheduleSnapshot() {
-        // fire now, we're ready
-        let fireDate = Date()
-        WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: fireDate, userInfo: nil) { error in
-            if (error == nil) {
-                self.statusLabel.setText("successfully scheduled snapshot.  All background work completed.")
-            }
-        }
-    }
-    
-    // MARK: URLSession handling
-    
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo url: URL) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "hh:mm:ss a"
-        let someDateTime = formatter.string(from: Date())
-        
-        statusLabel.setText("\(someDateTime) finished to url: \(url)")
-        scheduleSnapshot()
-    }
-    
-    func scheduleURLSession() {
-        let backgroundConfigObject = URLSessionConfiguration.background(withIdentifier: NSUUID().uuidString)
-        backgroundConfigObject.sessionSendsLaunchEvents = true
-        let backgroundSession = URLSession(configuration: backgroundConfigObject, delegate: self, delegateQueue: nil)
-        
-        let downloadTask = backgroundSession.downloadTask(with: sampleDownloadURL)
-        downloadTask.resume()
-    }
-    
-    // MARK: IB actions
-    
-    @IBAction func ScheduleRefreshButtonTapped() {
-        // fire in 20 seconds
-        let fireDate = Date(timeIntervalSinceNow: 20.0)
-        // optional, any SecureCoding compliant data can be passed here
-        let userInfo = ["reason" : "background update"] as NSDictionary
-        
-        WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: fireDate, userInfo: userInfo) { (error) in
-            if (error == nil) {
-                print("successfully scheduled background task, use the crown to send the app to the background and wait for handle:BackgroundTasks to fire.")
-            }
-        }
-    }
-    
-    // Do the command associated with the current page.
-    //
-    @IBAction func commandAction() {
-        guard let command = command
-        else {
-            return
+            contexts.append(command)
         }
         
-        switch command {
-        case .updateAppConnection: updateAppConnection(appConnection)
-        case .sendMessage: sendMessage(message)
-        case .sendMessageData: sendMessageData(messageData, location: location)
-        }
+        let names = Array(repeating: ControllerID.mainInterfaceController, count: contexts.count)
+        WKInterfaceController.reloadRootControllers(withNames: names, contexts: contexts)
     }
 }
 
-    extension MainInterfaceController { // MARK: - Update status view.
+extension MainInterfaceController { // MARK: - Update status view.
     
     //Play haptic notifications to the user and display some updated data
     //
@@ -345,12 +263,7 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
     // Update the user interface with the command status.
     // Note that there isn't a timed color when the interface controller is initially loaded.
     //
-    private func updateUI(with commandStatus: CommandMessage) {
-        let timedColor = commandStatus.timedColor
-        let title = NSAttributedString(string: commandStatus.command.rawValue,
-                                       attributes: [.foregroundColor: ibmBlueColor])
-        commandButton.setAttributedTitle(title)
-        statusLabel.setTextColor(timedColor.color.color)
+    private func updateUI(with commandStatus: CommandStatus) {
         
         // If there is an error, show the message and return.
         //
@@ -358,6 +271,12 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
             statusLabel.setText("! \(commandStatus.errorMessage)")
             return
         }
+        
+        let timedColor = commandStatus.timedColor
+        let title = NSAttributedString(string: commandStatus.command.rawValue,
+                                       attributes: [.foregroundColor: ibmBlueColor])
+        commandButton.setAttributedTitle(title)
+        statusLabel.setTextColor(timedColor.color.color)
         
         if commandStatus.command == .updateAppConnection
         {

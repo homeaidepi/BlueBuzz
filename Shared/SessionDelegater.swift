@@ -21,7 +21,7 @@ extension Notification.Name {
     static let dataDidFlow = Notification.Name("DataDidFlow")
     static let activationDidComplete = Notification.Name("ActivationDidComplete")
     static let reachabilityDidChange = Notification.Name("ReachabilityDidChange")
-    static let appDidEnterBackground = Notification.Name("didEnterBackgroundNotification")
+    static let applicationWillResignActive = Notification.Name("willResignActiveNotification")
 }
 
 // Implement WCSessionDelegate methods to receive Watch Connectivity data and notify clients.
@@ -44,7 +44,7 @@ class SessionDelegater: NSObject, WCSessionDelegate {
     // Called when an app context is received.
     //
     func session(_ session: WCSession, didReceiveApplicationContext applicationConnection: [String: Any]) {
-        let commandStatus = CommandMessage(command: .updateAppConnection,
+        let commandStatus = CommandStatus(command: .updateAppConnection,
                                           phrase: .received,
                                           latitude: emptyDegrees,
                                           longitude: emptyDegrees,
@@ -57,7 +57,7 @@ class SessionDelegater: NSObject, WCSessionDelegate {
     // Called when a message is received and the peer doesn't need a response.
     //
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        let commandStatus = CommandMessage(command: .sendMessage,
+        let commandStatus = CommandStatus(command: .sendMessage,
                                           phrase: .received,
                                           latitude: emptyDegrees,
                                           longitude: emptyDegrees,
@@ -108,7 +108,7 @@ class SessionDelegater: NSObject, WCSessionDelegate {
     
     // Post a notification on the main thread asynchronously.
     //
-    private func postNotificationOnMainQueueAsync(name: NSNotification.Name, object: CommandMessage? = nil) {
+    private func postNotificationOnMainQueueAsync(name: NSNotification.Name, object: CommandStatus? = nil) {
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: name, object: object)
         }
