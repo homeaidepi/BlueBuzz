@@ -33,7 +33,9 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
     private var location: CLLocation?
     private var mapLocation: CLLocationCoordinate2D?
     
-     let sampleDownloadURL = URL(string: "http://devstreaming.apple.com/videos/wwdc/2015/802mpzd3nzovlygpbg/802/802_designing_for_apple_watch.pdf?dl=1")!
+    let sampleDownloadURL = URL(string: "http://devstreaming.apple.com/videos/wwdc/2015/802mpzd3nzovlygpbg/802/802_designing_for_apple_watch.pdf?dl=1")!
+    
+    let myDelegate = WKExtension.shared().delegate as! ExtensionDelegate
 
     // Context == nil: the fist-time loading, load pages with reloadRootController then
     // Context != nil: Loading the pages, save the controller instances so that we can
@@ -68,8 +70,6 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
         NotificationCenter.default.addObserver(
             self, selector: #selector(type(of: self).appDidEnterBackground(_:)),
             name: .appDidEnterBackground, object: nil)
-        
-        UNUserNotificationCenter.current()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -78,6 +78,9 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
         let currentLocation = locations[0]
         let lat = currentLocation.coordinate.latitude
         let long = currentLocation.coordinate.longitude
+        
+        //set the current location in the extension delegate
+        myDelegate.setCurrentLocation(location: currentLocation)
         
         //step 2 assign local variables
         self.location = currentLocation
@@ -114,7 +117,8 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        statusLabel.setText(error.localizedDescription)
+        print(error.localizedDescription)
+        //myDelegate.setCurrentLocation(location: emptyLocation)
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -134,7 +138,7 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        // NotificationCenter.default.removeObserver(self)
         //cant deinit the location manager as we run in the background
 //        self.performSelector(onMainThread: #selector(deinitLocationManager), with: nil, waitUntilDone: true)
     }
@@ -143,9 +147,10 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
         super.willActivate()
 
         locationManager = CLLocationManager()
+        locationManager?.delegate = self
+        //locationManager?.requestWhenInUseAuthorization()
         locationManager?.requestAlwaysAuthorization()
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager?.delegate = self
         locationManager?.allowsBackgroundLocationUpdates = true
         locationManager?.requestLocation()
         

@@ -16,6 +16,8 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
     private lazy var sessionDelegater: SessionDelegater = {
         return SessionDelegater()
     }()
+    
+    private var currentLocation: CLLocation = emptyLocation
 
     private var blueBuzzWebActionApiKey = "97fefa7a-d1bd-49dd-92fe-704f0c9ba744:SbEAqeqWoz5kD8oiH8qSTcNzoOpzhKuxBIZFMz7BKVobLP7b5sqTi16Ek8SpKDeS"
     private var blueBuzzWebActionGetLocation = URL(string: "https://us-south.functions.cloud.ibm.com/api/v1/namespaces/matthew.vandergrift%40ibm.com_dev/actions/BlueBuzz/GetWatchOSLocation")!
@@ -33,6 +35,10 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
         // Use this method to pause ongoing tasks, disable timers, etc.
         scheduleRefresh()
         scheduleNotifications()
+    }
+    
+    func setCurrentLocation(location: CLLocation) {
+        self.currentLocation = location
     }
     
     func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
@@ -91,9 +97,18 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
                 
                 // Schedule the request with the system.
                 let notificationCenter = UNUserNotificationCenter.current()
-                content.title = NSLocalizedString("Checking Location", comment: "")
-                content.body =  NSLocalizedString("Phone location info", comment: "")
-                content.sound = UNNotificationSound.default
+                
+                if (self.currentLocation == emptyLocation)
+                {
+                    content.title = NSLocalizedString("Location Warning", comment: "")
+                    content.body =  NSLocalizedString("Cant find location", comment: "")
+                    content.sound = UNNotificationSound.defaultCritical
+                } else {
+                    content.title = NSLocalizedString("Location Notice", comment: "")
+                    content.body =  NSLocalizedString("Location found", comment: "")
+                    content.sound = UNNotificationSound.default
+                }
+                
                 //content.userInfo = userInfo
 //                let trigger = UNTimeIntervalNotificationTrigger.init(
 //                    timeInterval: 60,
@@ -105,6 +120,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
                     content: content,
                     trigger: trigger
                 )
+                notificationCenter.removeAllDeliveredNotifications()
                 notificationCenter.add(request, withCompletionHandler: { (error) in
                     if error != nil {
                         // Handle any errors.
@@ -116,6 +132,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
                     }
                 })
             }
+            self.currentLocation = emptyLocation
         }
     }
 

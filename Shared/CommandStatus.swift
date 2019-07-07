@@ -12,6 +12,7 @@ import CoreLocation
 // shared constants
 //
 var emptyDegrees = Double(0)
+var emptyLocation = CLLocation(latitude: emptyDegrees, longitude: emptyDegrees)
 var emptyError = String("")
 var ibmBlueColor = UIColor(red: CGFloat(70)/255, green: CGFloat(107)/255, blue: CGFloat(176)/255, alpha: 1.0)
 var defaultColor = TimedColor(ibmBlueColor)
