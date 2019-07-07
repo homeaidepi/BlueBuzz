@@ -13,8 +13,6 @@ let CurrentModeKey = "CurrentMode"
 
 class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate {
 
-    private(set) var connectivityManager: ConnectivityManager?
-    private(set) var notificationProcessor: NotificationProcessor!
     private lazy var sessionDelegater: SessionDelegater = {
         return SessionDelegater()
     }()
@@ -32,32 +30,11 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
     private var blueBuzzWebActionGetLocation = URL(string: "https://us-south.functions.cloud.ibm.com/api/v1/namespaces/matthew.vandergrift%40ibm.com_dev/actions/BlueBuzz/GetWatchOSLocation")!
     
     func applicationDidFinishLaunching() {
-        UserDefaults.standard.register(defaults: [CurrentModeKey: Mode.undefined.rawValue])
-        
-        self.connectivityManager = try? ConnectivityManager()
-        self.connectivityManager?.sessionBehavior = WatchSessionBehavior()
-        
-        self.notificationProcessor = NotificationProcessor(connectivityManager: self.connectivityManager)
-        self.notificationProcessor.registerNotifications()
-        UNUserNotificationCenter.current().delegate = self.notificationProcessor
+        return
     }
     
     func applicationDidBecomeActive() {
-        let replyHandler = { (response: [String: Any]) -> Void in
-            print ("Received Mode Response")
-            guard let receivedMode = Mode(messageRepresentation: response) else { return }
-            UserDefaults.standard.set(receivedMode.rawValue, forKey:CurrentModeKey)
-            
-            DispatchQueue.main.async {
-                guard let interfaceController = WKExtension.shared().rootInterfaceController as? InterfaceController else { return }
-                
-                interfaceController.mode = receivedMode
-            }
-        }
-        
-        connectivityManager?.send(message: CommandMessage(command: .requestMode), queueIfNecessary: true, replyHandler: replyHandler) { (error: Error) in
-            print ("Mode Request error \(error)")
-        }
+       return
     }
     
     func applicationWillResignActive() {
@@ -105,16 +82,16 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
         // hasContentPending flipped to false (see completeBackgroundTasks), so KVO is set up here to observe
         // the changes if the two properties.
         //
-        activationStateObservation = WCSession.default.observe(\.activationState) { _, _ in
-            DispatchQueue.main.async {
-                self.completeBackgroundTasks()
-            }
-        }
-        hasContentPendingObservation = WCSession.default.observe(\.hasContentPending) { _, _ in
-            DispatchQueue.main.async {
-                self.completeBackgroundTasks()
-            }
-        }
+//        activationStateObservation = WCSession.default.observe(\.activationState) { _, _ in
+//            DispatchQueue.main.async {
+//                self.completeBackgroundTasks()
+//            }
+//        }
+//        hasContentPendingObservation = WCSession.default.observe(\.hasContentPending) { _, _ in
+//            DispatchQueue.main.async {
+//                self.completeBackgroundTasks()
+//            }
+//        }
 
         // Activate the session asynchronously as early as possible.
         // In the case of being background launched with a task, this may save some background runtime budget.
@@ -125,44 +102,51 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
  
     func scheduleNotifications() {
         print("Scheduling notifications")
-        
-        let content = UNMutableNotificationContent()
-        content.title = "Checking Location"
-        content.body = "Click here for more info"
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60, repeats: true)
-        
-        // Create the trigger as a repeating event.
-//        var dateComponents = DateComponents()
-//        dateComponents.calendar = Calendar.current
-//        dateComponents.second = 30
-//        let trigger = UNCalendarNotificationTrigger(
-//            dateMatching: dateComponents, repeats: true)
-        
-        // Create the request
-        //let identifier = UUID().uuidString
-        let identifier = "Local Notification"
-        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-        
-        // Schedule the request with the system.
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.add(request) { (error) in
-            if error != nil {
-                // Handle any errors.
-            } else {
-                //self.scheduleURLSession()
+
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+            // Enable or disable features based on authorization.
+            if granted {
+                let content = UNMutableNotificationContent()
+                
+                // Create the trigger as a repeating event.
+                //        var dateComponents = DateComponents()
+                //        dateComponents.calendar = Calendar.current
+                //        dateComponents.second = 30
+                //        let trigger = UNCalendarNotificationTrigger(
+                //            dateMatching: dateComponents, repeats: true)
+                
+                // Schedule the request with the system.
+                let notificationCenter = UNUserNotificationCenter.current()
+                content.title = NSLocalizedString("notificationTitle", comment: "")
+                content.body =  NSLocalizedString("notificationText", comment: "")
+                content.sound = UNNotificationSound.default
+                //content.userInfo = userInfo
+                let trigger = UNTimeIntervalNotificationTrigger.init(
+                    timeInterval: 60,
+                    repeats: true)
+                
+                let identifier = UUID().uuidString
+                let request = UNNotificationRequest.init(
+                    identifier: identifier,
+                    content: content,
+                    trigger: trigger
+                )
+                notificationCenter.add(request, withCompletionHandler: nil)
+                
+                notificationCenter.removeAllDeliveredNotifications()
+            }
+            else {
                 return
             }
-            //notificationCenter.removeAllDeliveredNotifications()
         }
     }
 
 
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        DispatchQueue.main.async {
-            self.completeBackgroundTasks()
-        }
-    }
+//    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+//        DispatchQueue.main.async {
+//            self.completeBackgroundTasks()
+//        }
+//    }
     
     func scheduleRefresh() {
         print("Scheduling refresh")
@@ -215,22 +199,22 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
     
     // Compelete the background tasks, and schedule a snapshot refresh.
     //
-    func completeBackgroundTasks() {
-        guard !wcBackgroundTasks.isEmpty else { return }
-
-        guard WCSession.default.activationState == .activated,
-            WCSession.default.hasContentPending == false else { return }
-        
-        wcBackgroundTasks.forEach { $0.setTaskCompletedWithSnapshot(false) }
-        
-        // Use Logger to log the tasks for debug purpose. A real app may remove the log
-        // to save the precious background time.
-        //
-        Logger.shared.append(line: "\(#function):\(wcBackgroundTasks) was completed!")
-
-        // Schedule a snapshot refresh if the UI is updated by background tasks.
-        //
-        wcBackgroundTasks.removeAll()
-    
-    }
+//    func completeBackgroundTasks() {
+//        guard !wcBackgroundTasks.isEmpty else { return }
+//
+//        guard WCSession.default.activationState == .activated,
+//            WCSession.default.hasContentPending == false else { return }
+//
+//        wcBackgroundTasks.forEach { $0.setTaskCompletedWithSnapshot(false) }
+//
+//        // Use Logger to log the tasks for debug purpose. A real app may remove the log
+//        // to save the precious background time.
+//        //
+//        //Logger.shared.append(line: "\(#function):\(wcBackgroundTasks) was completed!")
+//
+//        // Schedule a snapshot refresh if the UI is updated by background tasks.
+//        //
+//        wcBackgroundTasks.removeAll()
+//
+//    }
 }

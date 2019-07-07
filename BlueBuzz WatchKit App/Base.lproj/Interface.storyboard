@@ -19,9 +19,9 @@
                             </connections>
                         </button>
                         <button alignment="left" id="xiq-oY-ZAR">
-                            <group key="contentGroup" width="1" height="56" alignment="left" id="oNu-Qr-7VR">
+                            <group key="contentGroup" width="1" height="48" alignment="left" id="oNu-Qr-7VR">
                                 <items>
-                                    <label width="1" height="1" alignment="left" text="Label" textAlignment="center" numberOfLines="0" id="foZ-nr-7kp">
+                                    <label width="1" height="51" alignment="left" text="Label" textAlignment="center" numberOfLines="0" id="foZ-nr-7kp">
                                         <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
                                     </label>
                                 </items>
@@ -45,22 +45,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="34" y="-26"/>
-        </scene>
-        <!--Primary Notification-->
-        <scene sceneID="uYe-y2-ni7">
-            <objects>
-                <notificationController id="S4K-Wr-BQC" userLabel="Primary Notification" customClass="PrimaryNotificationController" customModule="SimpleWatchConnectivity_WatchKit_Extension" colorLabel="IBBuiltInLabel-Blue">
-                    <items>
-                        <label alignment="left" text="Alert Label" id="uHC-LF-IxW"/>
-                    </items>
-                    <notificationCategory key="notificationCategory" id="xfN-oi-0J6"/>
-                    <connections>
-                        <outlet property="notificationAlertLabel" destination="uHC-LF-IxW" id="2lx-5r-UDF"/>
-                    </connections>
-                </notificationController>
-            </objects>
-            <point key="canvasLocation" x="34" y="278"/>
+            <point key="canvasLocation" x="34" y="-28"/>
         </scene>
     </scenes>
 </document>

@@ -8,6 +8,7 @@ import Foundation
 import WatchKit
 import WatchConnectivity
 import CoreLocation
+import UserNotifications
 
 // identifier: page Interface Controller identifier.
 // Context: page context, a string used as the action button title.
@@ -160,6 +161,7 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
         // Update the status group background color.
         //
         statusGroup.setBackgroundColor(.black)
+        
     }
     
     // Load paged-based UI.

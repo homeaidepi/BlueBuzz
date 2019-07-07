@@ -32,22 +32,7 @@
 		40DC7D0F1EA8186200A93AFB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DC7D0E1EA8186200A93AFB /* Logger.swift */; };
 		40DC7D101EA8186200A93AFB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DC7D0E1EA8186200A93AFB /* Logger.swift */; };
 		40DD4D8E1EA6B7510074E73F /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
-		E64DFAE722D0EF5800C91B3D /* WCSessionSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DFAE422D0EF5800C91B3D /* WCSessionSupport.swift */; };
-		E64DFAE922D0EF5800C91B3D /* UserNotificationCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DFAE622D0EF5800C91B3D /* UserNotificationCategory.swift */; };
-		E64DFAEA22D0EF5F00C91B3D /* NotificationProcessor+LocalRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DFAE522D0EF5800C91B3D /* NotificationProcessor+LocalRequests.swift */; };
-		E64DFAEB22D0EF6100C91B3D /* UserNotificationCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DFAE622D0EF5800C91B3D /* UserNotificationCategory.swift */; };
-		E64DFAEC22D0EF6300C91B3D /* WCSessionSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DFAE422D0EF5800C91B3D /* WCSessionSupport.swift */; };
-		E64DFAEF22D0EF8900C91B3D /* ConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DFAED22D0EF8900C91B3D /* ConnectivityManager.swift */; };
-		E64DFAF022D0EF8900C91B3D /* ConnectivityDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DFAEE22D0EF8900C91B3D /* ConnectivityDefinitions.swift */; };
-		E64DFAF122D0EF8C00C91B3D /* ConnectivityDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DFAEE22D0EF8900C91B3D /* ConnectivityDefinitions.swift */; };
-		E64DFAF222D0EF8E00C91B3D /* ConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DFAED22D0EF8900C91B3D /* ConnectivityManager.swift */; };
-		E64DFAF322D0EFA100C91B3D /* NotificationHandleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DFADB22D0EEBD00C91B3D /* NotificationHandleable.swift */; };
-		E64DFAF422D0EFA100C91B3D /* NotificationProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DFADD22D0EEBD00C91B3D /* NotificationProcessor.swift */; };
-		E64DFAF522D0EFA100C91B3D /* PrimaryNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DFADC22D0EEBD00C91B3D /* PrimaryNotificationController.swift */; };
-		E64DFAF622D0EFA100C91B3D /* WatchSessionBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DFADE22D0EEBD00C91B3D /* WatchSessionBehavior.swift */; };
-		E64DFAF922D0F1A500C91B3D /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DFAF722D0F12400C91B3D /* InterfaceController.swift */; };
-		E64DFAFC22D0F50F00C91B3D /* NotificationProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DFAFB22D0F50F00C91B3D /* NotificationProcessor.swift */; };
-		E64DFAFD22D0F62D00C91B3D /* NotificationProcessor+LocalRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64DFAE522D0EF5800C91B3D /* NotificationProcessor+LocalRequests.swift */; };
+		E64DFB0022D1A65B00C91B3D /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E64DFAFF22D1A65B00C91B3D /* UserNotifications.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,17 +108,7 @@
 		40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "Settings-Watch.bundle"; sourceTree = "<group>"; };
 		C9DA6BB0C9DA6B8000000001 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
 		C9DDD1E0C9DDC50000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		E64DFADB22D0EEBD00C91B3D /* NotificationHandleable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHandleable.swift; sourceTree = "<group>"; };
-		E64DFADC22D0EEBD00C91B3D /* PrimaryNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryNotificationController.swift; sourceTree = "<group>"; };
-		E64DFADD22D0EEBD00C91B3D /* NotificationProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationProcessor.swift; sourceTree = "<group>"; };
-		E64DFADE22D0EEBD00C91B3D /* WatchSessionBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchSessionBehavior.swift; sourceTree = "<group>"; };
-		E64DFAE422D0EF5800C91B3D /* WCSessionSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WCSessionSupport.swift; path = Shared/Notifications/WCSessionSupport.swift; sourceTree = "<group>"; };
-		E64DFAE522D0EF5800C91B3D /* NotificationProcessor+LocalRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NotificationProcessor+LocalRequests.swift"; path = "Shared/Notifications/NotificationProcessor+LocalRequests.swift"; sourceTree = "<group>"; };
-		E64DFAE622D0EF5800C91B3D /* UserNotificationCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserNotificationCategory.swift; path = Shared/Notifications/UserNotificationCategory.swift; sourceTree = "<group>"; };
-		E64DFAED22D0EF8900C91B3D /* ConnectivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectivityManager.swift; path = Shared/Notifications/ConnectivityManager.swift; sourceTree = "<group>"; };
-		E64DFAEE22D0EF8900C91B3D /* ConnectivityDefinitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectivityDefinitions.swift; path = Shared/Notifications/ConnectivityDefinitions.swift; sourceTree = "<group>"; };
-		E64DFAF722D0F12400C91B3D /* InterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
-		E64DFAFB22D0F50F00C91B3D /* NotificationProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationProcessor.swift; sourceTree = "<group>"; };
+		E64DFAFF22D1A65B00C91B3D /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS5.2.sdk/System/Library/Frameworks/UserNotifications.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E64DFB0022D1A65B00C91B3D /* UserNotifications.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,7 +133,6 @@
 		4076077B1E81834B00A6A8EA /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				E64DFAE322D0EF1600C91B3D /* Notifications */,
 				407607851E81A7F000A6A8EA /* TestDataProvider.swift */,
 				40D8B77820A554A5005F7D76 /* CommandStatus.swift */,
 				4076077C1E8183AF00A6A8EA /* SessionCommands.swift */,
@@ -178,6 +153,7 @@
 				40D46F4C1E8065200077A7B7 /* Products */,
 				C9D96D30C9DA425000000001 /* Configuration */,
 				C9DCFAF0C9DCFAC000000001 /* LICENSE */,
+				E64DFAFE22D1A65B00C91B3D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -197,7 +173,6 @@
 				40DD4D8A1EA6B6E20074E73F /* BlueBuzz.entitlements */,
 				40D46F4E1E8065200077A7B7 /* AppDelegate.swift */,
 				40D46F501E8065200077A7B7 /* MainViewController.swift */,
-				E64DFAFB22D0F50F00C91B3D /* NotificationProcessor.swift */,
 				40C02A9920A27F28006F07AE /* CommandsViewController.swift */,
 				40D46F521E8065200077A7B7 /* Main.storyboard */,
 				40D46F551E8065200077A7B7 /* Assets.xcassets */,
@@ -222,11 +197,9 @@
 		40D46F701E8065200077A7B7 /* BlueBuzz WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				E64DFADA22D0EE6900C91B3D /* Notifications */,
 				40DD4D8C1EA6B7010074E73F /* BlueBuzz WatchKit Extension.entitlements */,
 				40D46F731E8065200077A7B7 /* ExtensionDelegate.swift */,
 				40D46F711E8065200077A7B7 /* MainInterfaceController.swift */,
-				E64DFAF722D0F12400C91B3D /* InterfaceController.swift */,
 				400DB0961EA005A000F637F0 /* ComplicationController.swift */,
 				40D46F751E8065200077A7B7 /* Assets.xcassets */,
 				40D46F771E8065200077A7B7 /* Info.plist */,
@@ -250,27 +223,12 @@
 			path = LICENSE;
 			sourceTree = "<group>";
 		};
-		E64DFADA22D0EE6900C91B3D /* Notifications */ = {
+		E64DFAFE22D1A65B00C91B3D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E64DFADB22D0EEBD00C91B3D /* NotificationHandleable.swift */,
-				E64DFADD22D0EEBD00C91B3D /* NotificationProcessor.swift */,
-				E64DFADC22D0EEBD00C91B3D /* PrimaryNotificationController.swift */,
-				E64DFADE22D0EEBD00C91B3D /* WatchSessionBehavior.swift */,
+				E64DFAFF22D1A65B00C91B3D /* UserNotifications.framework */,
 			);
-			path = Notifications;
-			sourceTree = "<group>";
-		};
-		E64DFAE322D0EF1600C91B3D /* Notifications */ = {
-			isa = PBXGroup;
-			children = (
-				E64DFAEE22D0EF8900C91B3D /* ConnectivityDefinitions.swift */,
-				E64DFAED22D0EF8900C91B3D /* ConnectivityManager.swift */,
-				E64DFAE522D0EF5800C91B3D /* NotificationProcessor+LocalRequests.swift */,
-				E64DFAE622D0EF5800C91B3D /* UserNotificationCategory.swift */,
-				E64DFAE422D0EF5800C91B3D /* WCSessionSupport.swift */,
-			);
-			name = Notifications;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -478,17 +436,11 @@
 			files = (
 				40D46F511E8065200077A7B7 /* MainViewController.swift in Sources */,
 				40D8B77920A554A5005F7D76 /* CommandStatus.swift in Sources */,
-				E64DFAF022D0EF8900C91B3D /* ConnectivityDefinitions.swift in Sources */,
 				407607861E81A7F000A6A8EA /* TestDataProvider.swift in Sources */,
-				E64DFAFC22D0F50F00C91B3D /* NotificationProcessor.swift in Sources */,
-				E64DFAFD22D0F62D00C91B3D /* NotificationProcessor+LocalRequests.swift in Sources */,
-				E64DFAE722D0EF5800C91B3D /* WCSessionSupport.swift in Sources */,
 				40D46F4F1E8065200077A7B7 /* AppDelegate.swift in Sources */,
 				40DC7D0F1EA8186200A93AFB /* Logger.swift in Sources */,
 				40C02A9A20A27F28006F07AE /* CommandsViewController.swift in Sources */,
-				E64DFAE922D0EF5800C91B3D /* UserNotificationCategory.swift in Sources */,
 				40AF22991F29236300E6D1A8 /* SessionDelegater.swift in Sources */,
-				E64DFAEF22D0EF8900C91B3D /* ConnectivityManager.swift in Sources */,
 				4084B0231EA057EF00ACA046 /* SessionCommands.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -497,22 +449,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E64DFAEC22D0EF6300C91B3D /* WCSessionSupport.swift in Sources */,
 				40AF229A1F29236300E6D1A8 /* SessionDelegater.swift in Sources */,
-				E64DFAEB22D0EF6100C91B3D /* UserNotificationCategory.swift in Sources */,
-				E64DFAF622D0EFA100C91B3D /* WatchSessionBehavior.swift in Sources */,
 				40D8B77A20A554A5005F7D76 /* CommandStatus.swift in Sources */,
-				E64DFAF422D0EFA100C91B3D /* NotificationProcessor.swift in Sources */,
-				E64DFAF522D0EFA100C91B3D /* PrimaryNotificationController.swift in Sources */,
 				40D46F741E8065200077A7B7 /* ExtensionDelegate.swift in Sources */,
 				407607871E81A7F000A6A8EA /* TestDataProvider.swift in Sources */,
-				E64DFAF222D0EF8E00C91B3D /* ConnectivityManager.swift in Sources */,
 				400DB0971EA005A000F637F0 /* ComplicationController.swift in Sources */,
-				E64DFAF322D0EFA100C91B3D /* NotificationHandleable.swift in Sources */,
-				E64DFAF122D0EF8C00C91B3D /* ConnectivityDefinitions.swift in Sources */,
-				E64DFAEA22D0EF5F00C91B3D /* NotificationProcessor+LocalRequests.swift in Sources */,
 				40DC7D101EA8186200A93AFB /* Logger.swift in Sources */,
-				E64DFAF922D0F1A500C91B3D /* InterfaceController.swift in Sources */,
 				4076077E1E8183AF00A6A8EA /* SessionCommands.swift in Sources */,
 				40D46F721E8065200077A7B7 /* MainInterfaceController.swift in Sources */,
 			);
