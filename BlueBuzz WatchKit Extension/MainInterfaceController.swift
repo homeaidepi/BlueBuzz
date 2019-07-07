@@ -68,6 +68,8 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
         NotificationCenter.default.addObserver(
             self, selector: #selector(type(of: self).appDidEnterBackground(_:)),
             name: .appDidEnterBackground, object: nil)
+        
+        UNUserNotificationCenter.current()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -132,7 +134,7 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
     }
     
     deinit {
-        //NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
         //cant deinit the location manager as we run in the background
 //        self.performSelector(onMainThread: #selector(deinitLocationManager), with: nil, waitUntilDone: true)
     }
