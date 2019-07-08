@@ -104,7 +104,6 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
                     content.body =  NSLocalizedString("Cant find location", comment: "")
                     content.sound = UNNotificationSound.defaultCritical
                 } else {
-                    notificationCenter.removeAllDeliveredNotifications()
                     self.scheduleURLSession()
                     return
 //                    content.title = NSLocalizedString("Location Notice", comment: "")
