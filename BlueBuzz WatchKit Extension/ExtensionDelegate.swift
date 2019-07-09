@@ -19,8 +19,8 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
     
     private var currentLocation: CLLocation = emptyLocation
 
-    private var blueBuzzWebActionApiKey = "97fefa7a-d1bd-49dd-92fe-704f0c9ba744:SbEAqeqWoz5kD8oiH8qSTcNzoOpzhKuxBIZFMz7BKVobLP7b5sqTi16Ek8SpKDeS"
-    private var blueBuzzWebActionGetLocation = URL(string: "https://us-south.functions.cloud.ibm.com/api/v1/namespaces/matthew.vandergrift%40ibm.com_dev/actions/BlueBuzz/GetWatchOSLocation")!
+    private var blueBuzzIbmCloudApiKey = "_SAWB6P3_cqu4zYJ1stZQJoZc4LIJyhQ1bcBNhKqdXqE"
+    private var blueBuzzWebServicePostLocation = URL(string: "https://66c51bbf.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/postLocation")!
     
     func applicationDidFinishLaunching() {
         return
@@ -104,7 +104,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
                     content.body =  NSLocalizedString("Cant find location", comment: "")
                     content.sound = UNNotificationSound.defaultCritical
                 } else {
-                    self.scheduleURLSession()
+                    self.postAction("")
                     return
 //                    content.title = NSLocalizedString("Location Notice", comment: "")
 //                    content.body =  NSLocalizedString("Location found", comment: "")
@@ -161,7 +161,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
         
         let backgroundSession = URLSession(configuration: backgroundConfigObject, delegate: self as? URLSessionDelegate, delegateQueue: nil)
         
-        let downloadTask = backgroundSession.downloadTask(with: blueBuzzWebActionGetLocation)
+        let downloadTask = backgroundSession.downloadTask(with: blueBuzzWebServicePostLocation)
         downloadTask.resume()
     }
     
@@ -186,4 +186,36 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
         print("\(someDateTime) End session url: \(url)")
         scheduleSnapshot()
     }
+    
+    func postAction(_ sender: Any) {
+        let serviceUrl = blueBuzzWebServicePostLocation
+        
+        let lat = currentLocation.coordinate.latitude
+        let long = currentLocation.coordinate.longitude
+        
+        let parameterDictionary = ["latitude" : "\(lat)", "longitude" : "\(long)"]
+        var request = URLRequest(url: serviceUrl)
+        request.httpMethod = "POST"
+        request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+        //request.setValue("X-IBM-Cloud-ApiKey", forHTTPHeaderField: blueBuzzIbmCloudApiKey)
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameterDictionary, options: []) else {
+            return
+        }
+        request.httpBody = httpBody
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) { (data, response, error) in
+            if let response = response {
+                print(response)
+            }
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    print(json)
+                } catch {
+                    print(error)
+                }
+            }
+            }.resume()
+        }
 }
