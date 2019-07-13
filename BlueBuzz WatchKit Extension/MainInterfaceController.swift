@@ -277,7 +277,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     private func notifyUI() {
         if (WCSession.default.isReachable) {
             statusLabel.setText("Device connected.")
-            WKInterfaceDevice.current().play(.success)
+            //WKInterfaceDevice.current().play(.success)
         }
         else {
             statusLabel.setText("Device disconnected.")
@@ -294,9 +294,6 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         let title = NSAttributedString(string: commandStatus.command.rawValue,
                                        attributes: [.foregroundColor: ibmBlueColor])
         commandButton.setAttributedTitle(title)
-        
-        notifyUI();
-        
         
         // If there is an error, show the message and return.
         //
