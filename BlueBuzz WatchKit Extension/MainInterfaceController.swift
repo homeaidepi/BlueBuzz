@@ -298,7 +298,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         {
             notifyUI();
         } else {
-            statusLabel.setText(commandStatus.phrase.rawValue + " at\n" + timedColor.timeStamp)
+            statusLabel.setText("id: " + commandStatus.instanceId + " " + commandStatus.phrase.rawValue + " at\n" + timedColor.timeStamp)
         }
     }
 }
