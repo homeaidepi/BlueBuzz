@@ -110,10 +110,13 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
             //let jsonString = String(data: data, encoding: .utf8)!
             //print(jsonString)
             
-            WCSession.default.sendMessageData(data, replyHandler: { replyHandler in
-            }, errorHandler: { error in
+            WCSession.default.sendMessageData(data, replyHandler: {
+              replyHandler in
+                self.locationManager?.requestLocation()},
+              errorHandler: { error in
                 commandStatus.errorMessage = error.localizedDescription
             })
+            
         } catch {
             commandStatus.errorMessage = "Send Location Error"
         }
