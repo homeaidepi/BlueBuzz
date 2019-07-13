@@ -99,7 +99,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
                                            latitude: currentLocation.coordinate.latitude,
                                            longitude: currentLocation.coordinate.longitude,
                                            instanceId: instanceId,
-                                           timedColor: defaultColor,
+                                           timedColor: TimedColor(ibmBlueColor),
                                            errorMessage: emptyError)
         
         do {
@@ -112,7 +112,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
             
             WCSession.default.sendMessageData(data, replyHandler: {
               replyHandler in
-                self.locationManager?.requestLocation()},
+                self.myDelegate.scheduleRefresh()},
               errorHandler: { error in
                 commandStatus.errorMessage = error.localizedDescription
             })
@@ -137,16 +137,16 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     
     @objc
     func appDidEnterBackground(_ notification: Notification) {
-        notifyUI();
-        locationManager?.requestLocation()
+        myDelegate.scheduleRefresh()
+        myDelegate.scheduleNotifications()
     }
     
-    @objc private func deinitLocationManager() {
-        locationManager = nil
-    }
+//    @objc private func deinitLocationManager() {
+//        locationManager = nil
+//    }
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
+        //NotificationCenter.default.removeObserver(self)
         //cant deinit the location manager as we run in the background
 //        self.performSelector(onMainThread: #selector(deinitLocationManager), with: nil, waitUntilDone: true)
     }
@@ -236,23 +236,22 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     @objc
     func reachabilityDidChange(_ notification: Notification) {
         notifyUI();
-        
         //print("\(#function): isReachable:\(WCSession.default.isReachable)")
     }
     // MARK: IB actions
     
-    @IBAction func ScheduleRefreshButtonTapped() {
-        // fire in 10 seconds
-        let fireDate = Date(timeIntervalSinceNow: 10.0)
-        // optional, any SecureCoding compliant data can be passed here
-        let userInfo = ["reason" : "background update"] as NSDictionary
-        
-        WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: fireDate, userInfo: userInfo) { (error) in
-            if (error == nil) {
-                print("successfully scheduled background task, use the crown to send the app to the background and wait for handle:BackgroundTasks to fire.")
-            }
-        }
-    }
+//    @IBAction func ScheduleRefreshButtonTapped() {
+//        // fire in 10 seconds
+//        let fireDate = Date(timeIntervalSinceNow: 10.0)
+//        // optional, any SecureCoding compliant data can be passed here
+//        let userInfo = ["reason" : "background update"] as NSDictionary
+//
+//        WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: fireDate, userInfo: userInfo) { (error) in
+//            if (error == nil) {
+//                print("successfully scheduled background task, use the crown to send the app to the background and wait for handle:BackgroundTasks to fire.")
+//            }
+//        }
+//    }
     
     // Do the command associated with the current page.
     //
@@ -265,7 +264,8 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         switch command {
         //case .updateAppConnection: updateAppConnection(appConnection)
         //case .sendMessage: sendMessage(message)
-        case .sendMessageData: sendMessageData(messageData, location: location, instanceId: instanceId)
+        //case .sendMessageData: sendMessageData(messageData, location: location, instanceId: instanceId)
+        case .sendMessageData:  locationManager?.requestLocation()
         }
     }
 }

@@ -4,22 +4,21 @@ See LICENSE folder for this sample’s licensing information.
 Abstract:
 The extension delegate of the WatchKit extension.
 */
-
 import WatchKit
 import WatchConnectivity
 import UserNotifications
+import CoreLocation
 
-class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate {
+class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDelegate,  WKExtensionDelegate {
 
     private lazy var sessionDelegater: SessionDelegater = {
         return SessionDelegater()
     }()
     
+    private var locationManager: CLLocationManager?
     private var currentLocation: CLLocation = emptyLocation
 
-    private var blueBuzzIbmIamaCloudApiKey = "_SAWB6P3_cqu4zYJ1stZQJoZc4LIJyhQ1bcBNhKqdXqE"
     private var blueBuzzIbmSharingApiKey = "a5e5ee30-1346-4eaf-acdd-e1a7dccdec20"
-    private var blueBuzzCFApiKey = "97fefa7a-d1bd-49dd-92fe-704f0c9ba744:SbEAqeqWoz5kD8oiH8qSTcNzoOpzhKuxBIZFMz7BKVobLP7b5sqTi16Ek8SpKDeS"
     private var blueBuzzWebServiceGetLocationByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/getlocationbyinstanceid")!
     private var blueBuzzWebServicePostLocation = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/PostLocationByInstanceId")!
     
@@ -49,11 +48,13 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
             // Use a switch statement to check the task type
             switch task {
             case let backgroundTask as WKApplicationRefreshBackgroundTask:
+                locationManager?.requestLocation()
+                scheduleRefresh()
+                scheduleNotifications()
+                
                 // Be sure to complete the background task once you’re done.
                 backgroundTask.setTaskCompleted()
                 
-                scheduleRefresh()
-                scheduleNotifications()
             case let snapshotTask as WKSnapshotRefreshBackgroundTask:
                 // Snapshot tasks have a unique completion call, make sure to set your expiration date
                 snapshotTask.setTaskCompleted(restoredDefaultState: true, estimatedSnapshotExpiration: Date.distantFuture, userInfo: nil)
@@ -92,6 +93,56 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
             sendInstanceIdMessage();
         }
     }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        //Step 1 get current location from locationManager return result
+        let location = locations[0]
+        
+        //set the current location in the extension delegate
+        let instanceId = setCurrentLocation(location: location)
+        
+        //send the companion phone app the location data if in range
+        var commandStatus = CommandStatus(command: .sendMessageData,
+                                          phrase: .sent,
+                                          latitude: currentLocation.coordinate.latitude,
+                                          longitude: currentLocation.coordinate.longitude,
+                                          instanceId: instanceId,
+                                          timedColor: defaultColor,
+                                          errorMessage: emptyError)
+        
+        do {
+            //send the cloud the current location information
+            postLocationByInstanceId(commandStatus: commandStatus)
+            
+            let data = try JSONEncoder().encode(commandStatus)
+            
+            //let jsonString = String(data: data, encoding: .utf8)!
+            //print(jsonString)
+            
+            //send the message out of the current command
+            WCSession.default.sendMessageData(data, replyHandler: {
+                replyHandler in
+            },
+                errorHandler: { error in
+                commandStatus.errorMessage = error.localizedDescription
+            })
+            
+        } catch {
+            commandStatus.errorMessage = "Send Location Error"
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
+        //myDelegate.setCurrentLocation(location: emptyLocation)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedAlways {
+            locationManager?.requestLocation()
+        }
+    }
  
     func scheduleNotifications() {
         print("Scheduling notifications")
@@ -104,13 +155,18 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
                 let notificationCenter = UNUserNotificationCenter.current()
                 let content = UNMutableNotificationContent()
                 
+                let formatter = DateFormatter()
+                formatter.dateFormat = "hh:mm:ss a"
+                let now = formatter.string(from: Date())
+                
                 if (self.currentLocation == emptyLocation)
                 {
-                    content.title = NSLocalizedString("Location Warning", comment: "")
-                    content.body =  NSLocalizedString("Cant find location", comment: "")
+                    content.title = NSLocalizedString("Location Warning", comment: now)
+                    content.body =  NSLocalizedString("Cant determine location", comment: now)
                     content.sound = UNNotificationSound.defaultCritical
                 } else {
                     notificationCenter.removeAllDeliveredNotifications()
+                    //self.locationManager?.requestLocation()
                     return
                 }
                 
@@ -146,11 +202,11 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
     func scheduleRefresh() {
         print("Scheduling refresh")
         
-        // fire in 3 seconds
-        let fireDate = Date(timeIntervalSinceNow: 3.0)
+        // fire in 10 seconds
+        let fireDate = Date(timeIntervalSinceNow: 10.0)
         // optional, any SecureCoding compliant data can be passed here
         let userInfo = ["reason" : "background update"] as NSDictionary
-        
+
         WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: fireDate, userInfo: userInfo) { (error) in
             if (error == nil) {
                 print("successfully scheduled background task, use the crown to send the app to the background and wait for handle:BackgroundTasks to fire.")
@@ -158,39 +214,39 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
         }
     }
     
-    func scheduleURLSession() {
-        print("Scheduling URL Session")
-        
-        let backgroundConfigObject = URLSessionConfiguration.background(withIdentifier: NSUUID().uuidString)
-        backgroundConfigObject.sessionSendsLaunchEvents = true
-        
-        let backgroundSession = URLSession(configuration: backgroundConfigObject, delegate: self as? URLSessionDelegate, delegateQueue: nil)
-        
-        let downloadTask = backgroundSession.downloadTask(with: blueBuzzWebServicePostLocation)
-        downloadTask.resume()
-    }
+//    func scheduleURLSession() {
+//        print("Scheduling URL Session")
+//
+//        let backgroundConfigObject = URLSessionConfiguration.background(withIdentifier: NSUUID().uuidString)
+//        backgroundConfigObject.sessionSendsLaunchEvents = true
+//
+//        let backgroundSession = URLSession(configuration: backgroundConfigObject, delegate: self as? URLSessionDelegate, delegateQueue: nil)
+//
+//        let downloadTask = backgroundSession.downloadTask(with: blueBuzzWebServicePostLocation)
+//        downloadTask.resume()
+//    }
+//
+//    func scheduleSnapshot() {
+//        print("Scheduling Snapshot")
+//
+//        // fire now, we're ready
+//        let fireDate = Date()
+//        WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: fireDate, userInfo: nil) { error in
+//            if (error == nil) {
+//                print("successfully scheduled snapshot.  All background work completed.")
+//            }
+//        }
+//    }
     
-    func scheduleSnapshot() {
-        print("Scheduling Snapshot")
-        
-        // fire now, we're ready
-        let fireDate = Date()
-        WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: fireDate, userInfo: nil) { error in
-            if (error == nil) {
-                print("successfully scheduled snapshot.  All background work completed.")
-            }
-        }
-    }
-    
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo url: URL) {
-        print("url Session Start")
-        let formatter = DateFormatter()
-        formatter.dateFormat = "hh:mm:ss a"
-        let someDateTime = formatter.string(from: Date())
-        
-        print("\(someDateTime) End session url: \(url)")
-        scheduleSnapshot()
-    }
+//    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo url: URL) {
+//        print("url Session Start")
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "hh:mm:ss a"
+//        let someDateTime = formatter.string(from: Date())
+//
+//        print("\(someDateTime) End session url: \(url)")
+//        scheduleSnapshot()
+//    }
     
     private func sendInstanceIdMessage()
     {
@@ -265,8 +321,5 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
                 }
             }
             }.resume()
-        
-        scheduleRefresh()
-        scheduleNotifications()
     }
 }

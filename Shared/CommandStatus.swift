@@ -136,9 +136,9 @@ struct TimedColor: Codable {
     {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mm:ss a"
-        let someDateTime = formatter.string(from: Date())
+        let now = formatter.string(from: Date())
         
-        self.timeStamp = someDateTime
+        self.timeStamp = now
         self.colorData = timedColor.data()
         self.defaultValue = false
     }
