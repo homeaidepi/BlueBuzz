@@ -12,9 +12,10 @@ class CommandsViewController: UITableViewController, TestDataProvider, SessionCo
 
     // List the supported methods, shown in the main table.
     //
-    let commands: [Command] = [.updateAppConnection, .sendMessage, .sendMessageData]
+    //let commands: [Command] = [.updateAppConnection, .sendMessage, .sendMessageData]
+    let commands: [Command] = [.sendMessageData]
     
-    var currentCommand: Command = .updateAppConnection // Default to .updateAppConnection.
+    var currentCommand: Command = .sendMessageData // Default to .sendMessageData.
     var currentColor: UIColor?
     
     override func viewDidLoad() {
@@ -86,9 +87,9 @@ extension CommandsViewController { // MARK: - UITableViewDelegate and UITableVie
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         currentCommand = commands[indexPath.row]
         switch currentCommand {
-            case .updateAppConnection: updateAppConnection(appConnection)
-            case .sendMessage: sendMessage(message)
-        case .sendMessageData: sendMessageData(messageData, location: location, instanceId: getInstanceIdentifier())
+            //case .updateAppConnection: updateAppConnection(appConnection)
+            //case .sendMessage: sendMessage(message)
+            case .sendMessageData: sendMessageData(messageData, location: location, instanceId: getInstanceIdentifier())
         }
     }
     

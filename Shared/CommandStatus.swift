@@ -22,8 +22,8 @@ var emptyInstanceIdentifier = String("")
 // Constants to identify the Watch Connectivity methods, also used as user-visible strings in UI.
 //
 enum Command: String, Codable {
-    case updateAppConnection = "Check Authorization"
-    case sendMessage = "Send Message"
+    //case updateAppConnection = "Check Authorization"
+    //case sendMessage = "Send Message"
     case sendMessageData = "Send Location"
 }
 

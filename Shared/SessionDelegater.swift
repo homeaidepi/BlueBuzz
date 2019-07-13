@@ -44,7 +44,7 @@ class SessionDelegater: NSObject, WCSessionDelegate {
     // Called when an app context is received.
     //
     func session(_ session: WCSession, didReceiveApplicationContext applicationConnection: [String: Any]) {
-        let commandStatus = CommandStatus(command: .updateAppConnection,
+        let commandStatus = CommandStatus(command: .sendMessageData,
                                           phrase: .received,
                                           latitude: emptyDegrees,
                                           longitude: emptyDegrees,
@@ -58,7 +58,7 @@ class SessionDelegater: NSObject, WCSessionDelegate {
     // Called when a message is received and the peer doesn't need a response.
     //
     func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
-        let commandStatus = CommandStatus(command: .sendMessage,
+        let commandStatus = CommandStatus(command: .sendMessageData,
                                           phrase: .received,
                                           latitude: emptyDegrees,
                                           longitude: emptyDegrees,

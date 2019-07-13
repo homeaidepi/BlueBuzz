@@ -23,7 +23,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
     private var blueBuzzIbmSharingApiKey = "a5e5ee30-1346-4eaf-acdd-e1a7dccdec20"
     private var blueBuzzCFApiKey = "97fefa7a-d1bd-49dd-92fe-704f0c9ba744:SbEAqeqWoz5kD8oiH8qSTcNzoOpzhKuxBIZFMz7BKVobLP7b5sqTi16Ek8SpKDeS"
     private var blueBuzzWebServiceGetLocationByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/getlocationbyinstanceid")!
-    private var blueBuzzWebServicePostLocation = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/postlocationbyjson")!
+    private var blueBuzzWebServicePostLocation = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/PostLocationByInstanceId")!
     private var instanceId = ""
     private var deviceId = ""
     
@@ -42,12 +42,17 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
         scheduleNotifications()
     }
     
-    func setCurrentLocation(location: CLLocation) {
+    public func setCurrentLocation(location: CLLocation) -> String {
         self.currentLocation = location
+        return getInstanceId()
     }
     
     public func setInstanceId(instanceId: String) {
         self.instanceId = instanceId
+    }
+    
+    public func getInstanceId() -> String {
+        return self.instanceId
     }
     
     func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
@@ -114,7 +119,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
                     content.sound = UNNotificationSound.defaultCritical
                 } else {
                     notificationCenter.removeAllDeliveredNotifications()
-                    self.postAction()
+                    self.postLocationByInstanceId()
                     return
 //                    content.title = NSLocalizedString("Location Notice", comment: "")
 //                    content.body =  NSLocalizedString("Location found", comment: "")
@@ -197,7 +202,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
         scheduleSnapshot()
     }
     
-    public func postAction() {
+    public func postLocationByInstanceId() {
         let serviceUrl = blueBuzzWebServicePostLocation
         
         let lat = currentLocation.coordinate.latitude

@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             saveInstanceIdentifier(identifier: instanceId)
         }
         
-        let commandStatus = CommandStatus(command: .sendMessage,
+        let commandStatus = CommandStatus(command: .sendMessageData,
                                           phrase: .sent,
                                           latitude: emptyDegrees,
                                           longitude: emptyDegrees,

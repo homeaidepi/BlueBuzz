@@ -79,7 +79,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         let long = currentLocation.coordinate.longitude
         
         //set the current location in the extension delegate
-        myDelegate.setCurrentLocation(location: currentLocation)
+        let instanceId = myDelegate.setCurrentLocation(location: currentLocation)
         
         //step 2 assign local variables
         self.location = currentLocation
@@ -98,7 +98,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
                                            phrase: .sent,
                                            latitude: currentLocation.coordinate.latitude,
                                            longitude: currentLocation.coordinate.longitude,
-                                           instanceId: emptyInstanceIdentifier,
+                                           instanceId: instanceId,
                                            timedColor: defaultColor,
                                            errorMessage: emptyError)
         
@@ -112,7 +112,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
             }, errorHandler: { error in
                 self.statusLabel.setText(error.localizedDescription)})
         } catch {
-            self.statusLabel.setText("Send Message Data")
+            self.statusLabel.setText("Send Location Error")
         }
     }
     
@@ -155,16 +155,16 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         locationManager?.requestLocation()
         
         // For .updateAppConnection, retrieve the receieved app context if any and update the UI.
-        if command == .updateAppConnection {
-            let commandStatus = CommandStatus(command: .updateAppConnection,
-                                               phrase: .received,
-                                               latitude: emptyDegrees,
-                                               longitude: emptyDegrees,
-                                               instanceId: emptyInstanceIdentifier,
-                                               timedColor: defaultColor,
-                                               errorMessage: emptyError)
-            updateUI(with: commandStatus)
-        }
+//        if command == .updateAppConnection {
+//            let commandStatus = CommandStatus(command: .updateAppConnection,
+//                                               phrase: .received,
+//                                               latitude: emptyDegrees,
+//                                               longitude: emptyDegrees,
+//                                               instanceId: emptyInstanceIdentifier,
+//                                               timedColor: defaultColor,
+//                                               errorMessage: emptyError)
+//            updateUI(with: commandStatus)
+//        }
         
         // Update the status group background color.
         //
@@ -176,7 +176,8 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     // If a current context is specified, use the timed color it provided.
     //
     private func reloadRootController(with currentContext: CommandStatus? = nil) {
-        let commands: [Command] = [.updateAppConnection, .sendMessage, .sendMessageData]
+        //let commands: [Command] = [.updateAppConnection, .sendMessage, .sendMessageData]
+        let commands: [Command] = [.sendMessageData]
         
         var contexts = [CommandStatus]()
         for aCommand in commands {
@@ -254,8 +255,8 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         }
         
         switch command {
-        case .updateAppConnection: updateAppConnection(appConnection)
-        case .sendMessage: sendMessage(message)
+        //case .updateAppConnection: updateAppConnection(appConnection)
+        //case .sendMessage: sendMessage(message)
         case .sendMessageData: sendMessageData(messageData, location: location, instanceId: instanceId)
         }
     }
@@ -294,13 +295,13 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
             return
         }
         
-        if commandStatus.command == .updateAppConnection
-        {
+//        if commandStatus.command == .updateAppConnection
+//        {
             notifyUI();
-        } else {
+//        } else {
             myDelegate.setInstanceId(instanceId: commandStatus.instanceId)
-            myDelegate.postAction()
+            myDelegate.postLocationByInstanceId()
             statusLabel.setText("id: " + commandStatus.instanceId + " " + commandStatus.phrase.rawValue + " at\n" + timedColor.timeStamp)
-        }
+//        }
     }
 }
