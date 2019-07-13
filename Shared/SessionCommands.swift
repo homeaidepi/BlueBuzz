@@ -18,7 +18,7 @@ import CoreLocation
 protocol SessionCommands {
     func updateAppConnection(_ context: [String: Any])
     func sendMessage(_ message: [String: Any])
-    func sendMessageData(_ messageData: Data, location: CLLocation?)
+    func sendMessageData(_ messageData: Data, location: CLLocation?, instanceId: String)
 }
 
 // Implement the commands. Every command handles the communication and notifies clients
@@ -33,6 +33,7 @@ extension SessionCommands {
                                           phrase: .unauthorized,
                                           latitude: emptyDegrees,
                                           longitude: emptyDegrees,
+                                          instanceId: emptyInstanceIdentifier,
                                           timedColor: defaultColor,
                                           errorMessage: emptyError)
         
@@ -63,6 +64,7 @@ extension SessionCommands {
                                           phrase: .sent,
                                           latitude: emptyDegrees,
                                           longitude: emptyDegrees,
+                                          instanceId: emptyInstanceIdentifier,
                                           timedColor: TimedColor(message),
                                           errorMessage: emptyError)
 
@@ -85,12 +87,13 @@ extension SessionCommands {
     
     // Send  a piece of message data if the session is activated and update UI with the command status.
     //
-    func sendMessageData(_ messageData: Data, location: CLLocation?) {
+    func sendMessageData(_ messageData: Data, location: CLLocation?, instanceId: String) {
         
         var commandStatus =  CommandStatus(command: .sendMessageData,
                                          phrase: .sent,
                                          latitude: location?.coordinate.latitude ?? emptyDegrees,
                                          longitude: location?.coordinate.longitude ?? emptyDegrees,
+                                         instanceId: instanceId,
                                          timedColor: TimedColor(messageData),
                                          errorMessage: emptyError)
         

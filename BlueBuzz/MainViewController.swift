@@ -126,15 +126,16 @@ class MainViewController: UIViewController {
         let timedColor = commandStatus.timedColor
         let lat = commandStatus.latitude
         let long = commandStatus.longitude
+        let instanceId = commandStatus.instanceId
         
         //log the messageData i.e location to the screen else show command
         //
         if (lat != emptyDegrees && long != emptyDegrees)
         {
-            log("-> \(lat):\(long) \(commandStatus.command.rawValue): \(commandStatus.phrase.rawValue) at \(timedColor.timeStamp)")
+            log("-> id:\(instanceId) \(lat):\(long) \(commandStatus.command.rawValue): \(commandStatus.phrase.rawValue) at \(timedColor.timeStamp)")
         }
         else {
-            log("-> \(commandStatus.command.rawValue): \(commandStatus.phrase.rawValue) at \(timedColor.timeStamp)")
+            log("-> id:\(instanceId) \(commandStatus.command.rawValue): \(commandStatus.phrase.rawValue) at \(timedColor.timeStamp)")
         }
     }
 }

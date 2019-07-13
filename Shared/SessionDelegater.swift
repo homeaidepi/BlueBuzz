@@ -48,8 +48,9 @@ class SessionDelegater: NSObject, WCSessionDelegate {
                                           phrase: .received,
                                           latitude: emptyDegrees,
                                           longitude: emptyDegrees,
+                                          instanceId: emptyInstanceIdentifier,
                                           timedColor: TimedColor(applicationConnection),
-                                          errorMessage: "")
+                                          errorMessage: emptyError)
         
         postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
     }
@@ -61,8 +62,9 @@ class SessionDelegater: NSObject, WCSessionDelegate {
                                           phrase: .received,
                                           latitude: emptyDegrees,
                                           longitude: emptyDegrees,
+                                          instanceId: emptyInstanceIdentifier,
                                           timedColor: TimedColor(message),
-                                          errorMessage: "")
+                                          errorMessage: emptyError)
         
         postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
     }

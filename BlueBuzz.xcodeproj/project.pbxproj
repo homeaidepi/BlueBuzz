@@ -33,6 +33,9 @@
 		40DC7D101EA8186200A93AFB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DC7D0E1EA8186200A93AFB /* Logger.swift */; };
 		40DD4D8E1EA6B7510074E73F /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
 		E64DFB0022D1A65B00C91B3D /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E64DFAFF22D1A65B00C91B3D /* UserNotifications.framework */; };
+		E6C25B9822D959A400D9A1FD /* MongoDBConnection.uri in Resources */ = {isa = PBXBuildFile; fileRef = E6C25B9722D959A400D9A1FD /* MongoDBConnection.uri */; };
+		E6C25B9D22D9663600D9A1FD /* BlueBuzzAPI.json in Resources */ = {isa = PBXBuildFile; fileRef = E6C25B9C22D9663600D9A1FD /* BlueBuzzAPI.json */; };
+		E6C25B9F22D9666A00D9A1FD /* BlueBuzzAPI.yaml in Resources */ = {isa = PBXBuildFile; fileRef = E6C25B9E22D9666A00D9A1FD /* BlueBuzzAPI.yaml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +113,9 @@
 		C9DDD1E0C9DDC50000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		E605438722D3E8C9006D121A /* SimpleWatchConnectivity.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimpleWatchConnectivity.entitlements; sourceTree = "<group>"; };
 		E64DFAFF22D1A65B00C91B3D /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS5.2.sdk/System/Library/Frameworks/UserNotifications.framework; sourceTree = DEVELOPER_DIR; };
+		E6C25B9722D959A400D9A1FD /* MongoDBConnection.uri */ = {isa = PBXFileReference; lastKnownFileType = text; name = MongoDBConnection.uri; path = Shared/MongoDBConnection.uri; sourceTree = "<group>"; };
+		E6C25B9C22D9663600D9A1FD /* BlueBuzzAPI.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = BlueBuzzAPI.json; path = Shared/BlueBuzzAPI.json; sourceTree = "<group>"; };
+		E6C25B9E22D9666A00D9A1FD /* BlueBuzzAPI.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = BlueBuzzAPI.yaml; path = Shared/BlueBuzzAPI.yaml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,11 +140,14 @@
 		4076077B1E81834B00A6A8EA /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				E6C25B9E22D9666A00D9A1FD /* BlueBuzzAPI.yaml */,
+				E6C25B9C22D9663600D9A1FD /* BlueBuzzAPI.json */,
 				407607851E81A7F000A6A8EA /* TestDataProvider.swift */,
 				40D8B77820A554A5005F7D76 /* CommandStatus.swift */,
 				4076077C1E8183AF00A6A8EA /* SessionCommands.swift */,
 				40AF22981F29236300E6D1A8 /* SessionDelegater.swift */,
 				40DC7D0E1EA8186200A93AFB /* Logger.swift */,
+				E6C25B9722D959A400D9A1FD /* MongoDBConnection.uri */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -376,8 +385,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				40D46F591E8065200077A7B7 /* LaunchScreen.storyboard in Resources */,
+				E6C25B9D22D9663600D9A1FD /* BlueBuzzAPI.json in Resources */,
+				E6C25B9F22D9666A00D9A1FD /* BlueBuzzAPI.yaml in Resources */,
 				40D46F561E8065200077A7B7 /* Assets.xcassets in Resources */,
 				40DD4D8E1EA6B7510074E73F /* Settings-Watch.bundle in Resources */,
+				E6C25B9822D959A400D9A1FD /* MongoDBConnection.uri in Resources */,
 				40D46F541E8065200077A7B7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

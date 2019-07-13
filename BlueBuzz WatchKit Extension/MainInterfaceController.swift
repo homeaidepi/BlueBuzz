@@ -17,8 +17,8 @@ struct ControllerID {
     static let mainInterfaceController = "MainInterfaceController"
 }
 
-class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate, CLLocationManagerDelegate, TestDataProvider, SessionCommands {
-    
+class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate, TestDataProvider, SessionCommands {
+
     @IBOutlet weak var statusGroup: WKInterfaceGroup!
     @IBOutlet var statusLabel: WKInterfaceLabel!
     @IBOutlet var commandButton: WKInterfaceButton!
@@ -32,8 +32,7 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
     private var locationManager: CLLocationManager?
     private var location: CLLocation?
     private var mapLocation: CLLocationCoordinate2D?
-    
-    let sampleDownloadURL = URL(string: "http://devstreaming.apple.com/videos/wwdc/2015/802mpzd3nzovlygpbg/802/802_designing_for_apple_watch.pdf?dl=1")!
+    private var instanceId: String = ""
     
     let myDelegate = WKExtension.shared().delegate as! ExtensionDelegate
 
@@ -99,8 +98,9 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
                                            phrase: .sent,
                                            latitude: currentLocation.coordinate.latitude,
                                            longitude: currentLocation.coordinate.longitude,
+                                           instanceId: emptyInstanceIdentifier,
                                            timedColor: defaultColor,
-                                           errorMessage: "")
+                                           errorMessage: emptyError)
         
         do {
             let data = try JSONEncoder().encode(commandStatus)
@@ -110,7 +110,7 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
             
             WCSession.default.sendMessageData(data, replyHandler: { replyHandler in
             }, errorHandler: { error in
-                self.statusLabel.setText("error")})
+                self.statusLabel.setText(error.localizedDescription)})
         } catch {
             self.statusLabel.setText("Send Message Data")
         }
@@ -138,7 +138,7 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
     }
     
     deinit {
-        // NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
         //cant deinit the location manager as we run in the background
 //        self.performSelector(onMainThread: #selector(deinitLocationManager), with: nil, waitUntilDone: true)
     }
@@ -160,6 +160,7 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
                                                phrase: .received,
                                                latitude: emptyDegrees,
                                                longitude: emptyDegrees,
+                                               instanceId: emptyInstanceIdentifier,
                                                timedColor: defaultColor,
                                                errorMessage: emptyError)
             updateUI(with: commandStatus)
@@ -183,6 +184,7 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
                                          phrase: .finished,
                                          latitude: emptyDegrees,
                                          longitude: emptyDegrees,
+                                         instanceId: emptyInstanceIdentifier,
                                          timedColor: defaultColor,
                                          errorMessage: emptyError)
             
@@ -228,76 +230,6 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
         
         //print("\(#function): isReachable:\(WCSession.default.isReachable)")
     }
-    
-    // Be sure to complete all the tasks - otherwise they will keep consuming the background executing
-    // time until the time is out of budget and the app is killed.
-    //
-    // WKWatchConnectivityRefreshBackgroundTask should be completed after the pending data is received
-    // so retain the tasks first. The retained tasks will be completed at the following cases:
-    // 1. hasContentPending flips to false, meaning all the pending data is received. Pending data means
-    //    the data received by the device prior to the WCSession getting activated.
-    //    More data might arrive, but it isn't pending when the session activated.
-    // 2. The end of the handle method.
-    //    This happens when hasContentPending can flip to false before the tasks are retained.
-    //
-    // If the tasks are completed before the WCSessionDelegate methods are called, the data will be delivered
-    // the app is running next time, so no data lost.
-    //
-    func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
-        for _ in backgroundTasks {
-            
-            for task : WKRefreshBackgroundTask in backgroundTasks {
-                print("received background task: ", task)
-                // only handle these while running in the background
-                if (WKExtension.shared().applicationState == .background) {
-                    if task is WKApplicationRefreshBackgroundTask {
-                        // this task is completed below, our app will then suspend while the download session runs
-                        print("application task received, start URL session")
-                        scheduleURLSession()
-                    }
-                }
-                else if let urlTask = task as? WKURLSessionRefreshBackgroundTask {
-                    let backgroundConfigObject = URLSessionConfiguration.background(withIdentifier: urlTask.sessionIdentifier)
-                    let backgroundSession = URLSession(configuration: backgroundConfigObject, delegate: self, delegateQueue: nil)
-                    
-                    statusLabel.setText("Rejoining session \(backgroundSession)")
-                }
-                // make sure to complete all tasks, even ones you don't handle
-                task.setTaskCompleted()
-            }
-        }
-    }
-    
-    func scheduleSnapshot() {
-        // fire now, we're ready
-        let fireDate = Date()
-        WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: fireDate, userInfo: nil) { error in
-            if (error == nil) {
-                self.statusLabel.setText("successfully scheduled snapshot.  All background work completed.")
-            }
-        }
-    }
-    
-    // MARK: URLSession handling
-    
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo url: URL) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "hh:mm:ss a"
-        let someDateTime = formatter.string(from: Date())
-        
-        statusLabel.setText("\(someDateTime) finished to url: \(url)")
-        scheduleSnapshot()
-    }
-    
-    func scheduleURLSession() {
-        let backgroundConfigObject = URLSessionConfiguration.background(withIdentifier: NSUUID().uuidString)
-        backgroundConfigObject.sessionSendsLaunchEvents = true
-        let backgroundSession = URLSession(configuration: backgroundConfigObject, delegate: self, delegateQueue: nil)
-        
-        let downloadTask = backgroundSession.downloadTask(with: sampleDownloadURL)
-        downloadTask.resume()
-    }
-    
     // MARK: IB actions
     
     @IBAction func ScheduleRefreshButtonTapped() {
@@ -324,7 +256,7 @@ class MainInterfaceController: WKInterfaceController, URLSessionDownloadDelegate
         switch command {
         case .updateAppConnection: updateAppConnection(appConnection)
         case .sendMessage: sendMessage(message)
-        case .sendMessageData: sendMessageData(messageData, location: location)
+        case .sendMessageData: sendMessageData(messageData, location: location, instanceId: instanceId)
         }
     }
 }

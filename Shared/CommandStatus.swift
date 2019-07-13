@@ -16,6 +16,8 @@ var emptyLocation = CLLocation(latitude: emptyDegrees, longitude: emptyDegrees)
 var emptyError = String("")
 var ibmBlueColor = UIColor(red: CGFloat(70)/255, green: CGFloat(107)/255, blue: CGFloat(176)/255, alpha: 1.0)
 var defaultColor = TimedColor(ibmBlueColor)
+var instanceIdentifierKey = "instanceId"
+var emptyInstanceIdentifier = String("")
 
 // Constants to identify the Watch Connectivity methods, also used as user-visible strings in UI.
 //
@@ -174,6 +176,7 @@ struct CommandStatus: Codable {
     var phrase: Phrase
     var latitude: CLLocationDegrees
     var longitude: CLLocationDegrees
+    var instanceId: String
     var timedColor: TimedColor
     var errorMessage: String
     
@@ -182,6 +185,7 @@ struct CommandStatus: Codable {
         case phrase
         case latitude
         case longitude
+        case instanceId
         case timedColor
         case errorMessage
     }
@@ -190,12 +194,14 @@ struct CommandStatus: Codable {
          phrase: Phrase,
          latitude: CLLocationDegrees,
          longitude: CLLocationDegrees,
+         instanceId: String,
          timedColor: TimedColor,
          errorMessage: String) {
         self.command = command
         self.phrase = phrase
         self.latitude = latitude
         self.longitude = longitude
+        self.instanceId = instanceId
         self.timedColor = timedColor
         self.errorMessage = errorMessage
     }
@@ -207,6 +213,7 @@ struct CommandStatus: Codable {
         try container.encode(timedColor, forKey: .timedColor)
         try container.encode(latitude, forKey: .latitude)
         try container.encode(longitude, forKey: .longitude)
+        try container.encode(instanceId, forKey: .instanceId)
         try container.encode(errorMessage, forKey: .errorMessage)
     }
     
@@ -217,6 +224,7 @@ struct CommandStatus: Codable {
         phrase = try container.decode(Phrase.self, forKey: .phrase)
         latitude = try container.decode(CLLocationDegrees.self, forKey: .latitude)
         longitude = try container.decode(CLLocationDegrees.self, forKey: .longitude)
+        instanceId = try container.decode(String.self, forKey: .instanceId)
         timedColor = try container.decode(TimedColor.self, forKey: .timedColor)
         errorMessage = try container.decode(String.self, forKey: .errorMessage)
         

@@ -19,8 +19,13 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
     
     private var currentLocation: CLLocation = emptyLocation
 
-    private var blueBuzzIbmCloudApiKey = "_SAWB6P3_cqu4zYJ1stZQJoZc4LIJyhQ1bcBNhKqdXqE"
+    private var blueBuzzIbmIamaCloudApiKey = "_SAWB6P3_cqu4zYJ1stZQJoZc4LIJyhQ1bcBNhKqdXqE"
+    private var blueBuzzIbmSharingApiKey = "2c461ca8-8779-433b-8194-4d6145ccaccd"
+    private var blueBuzzCFApiKey = "97fefa7a-d1bd-49dd-92fe-704f0c9ba744:SbEAqeqWoz5kD8oiH8qSTcNzoOpzhKuxBIZFMz7BKVobLP7b5sqTi16Ek8SpKDeS"
+    private var blueBuzzWebServiceGetLocationByInstanceId = URL(string: "https://5e0f516b.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/GetLocationByInstanceId")!
     private var blueBuzzWebServicePostLocation = URL(string: "https://66c51bbf.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/postLocation")!
+    private var instanceId = ""
+    private var deviceId = ""
     
     func applicationDidFinishLaunching() {
         return
@@ -104,6 +109,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
                     content.body =  NSLocalizedString("Cant find location", comment: "")
                     content.sound = UNNotificationSound.defaultCritical
                 } else {
+                    notificationCenter.removeAllDeliveredNotifications()
                     self.postAction("")
                     return
 //                    content.title = NSLocalizedString("Location Notice", comment: "")
@@ -192,13 +198,23 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
         
         let lat = currentLocation.coordinate.latitude
         let long = currentLocation.coordinate.longitude
+        let instanceId = 1
+        let deviceId = 2
         
-        let parameterDictionary = ["latitude" : "\(lat)", "longitude" : "\(long)"]
+        let parameterDictionary = [
+            "latitude" : "\(lat)",
+            "longitude" : "\(long)",
+            "instanceId" : "\(instanceId)",
+            "deviceId" : "\(deviceId)",
+        ]
         var request = URLRequest(url: serviceUrl)
         request.httpMethod = "POST"
         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+        //request.setValue("X-IBM-Cloud-Id", forHTTPHeaderField: blueBuzzCFApiKey)
         //request.setValue("X-IBM-Cloud-ApiKey", forHTTPHeaderField: blueBuzzIbmCloudApiKey)
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameterDictionary, options: []) else {
+        guard let httpBody = try? JSONSerialization.data(
+            withJSONObject: parameterDictionary,
+            options: []) else {
             return
         }
         request.httpBody = httpBody
