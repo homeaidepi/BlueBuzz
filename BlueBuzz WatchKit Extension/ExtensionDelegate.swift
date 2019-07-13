@@ -20,10 +20,10 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
     private var currentLocation: CLLocation = emptyLocation
 
     private var blueBuzzIbmIamaCloudApiKey = "_SAWB6P3_cqu4zYJ1stZQJoZc4LIJyhQ1bcBNhKqdXqE"
-    private var blueBuzzIbmSharingApiKey = "2c461ca8-8779-433b-8194-4d6145ccaccd"
+    private var blueBuzzIbmSharingApiKey = "a5e5ee30-1346-4eaf-acdd-e1a7dccdec20"
     private var blueBuzzCFApiKey = "97fefa7a-d1bd-49dd-92fe-704f0c9ba744:SbEAqeqWoz5kD8oiH8qSTcNzoOpzhKuxBIZFMz7BKVobLP7b5sqTi16Ek8SpKDeS"
-    private var blueBuzzWebServiceGetLocationByInstanceId = URL(string: "https://5e0f516b.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/GetLocationByInstanceId")!
-    private var blueBuzzWebServicePostLocation = URL(string: "https://66c51bbf.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/postLocation")!
+    private var blueBuzzWebServiceGetLocationByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/getlocationbyinstanceid")!
+    private var blueBuzzWebServicePostLocation = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/postlocationbyjson")!
     private var instanceId = ""
     private var deviceId = ""
     
@@ -44,6 +44,10 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
     
     func setCurrentLocation(location: CLLocation) {
         self.currentLocation = location
+    }
+    
+    public func setInstanceId(instanceId: String) {
+        self.instanceId = instanceId
     }
     
     func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
@@ -110,7 +114,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
                     content.sound = UNNotificationSound.defaultCritical
                 } else {
                     notificationCenter.removeAllDeliveredNotifications()
-                    self.postAction("")
+                    self.postAction()
                     return
 //                    content.title = NSLocalizedString("Location Notice", comment: "")
 //                    content.body =  NSLocalizedString("Location found", comment: "")
@@ -193,13 +197,13 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
         scheduleSnapshot()
     }
     
-    func postAction(_ sender: Any) {
+    public func postAction() {
         let serviceUrl = blueBuzzWebServicePostLocation
         
         let lat = currentLocation.coordinate.latitude
         let long = currentLocation.coordinate.longitude
-        let instanceId = 1
-        let deviceId = 2
+        let instanceId = self.instanceId
+        let deviceId = "watchos"
         
         let parameterDictionary = [
             "latitude" : "\(lat)",
@@ -210,8 +214,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
         var request = URLRequest(url: serviceUrl)
         request.httpMethod = "POST"
         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        //request.setValue("X-IBM-Cloud-Id", forHTTPHeaderField: blueBuzzCFApiKey)
-        //request.setValue("X-IBM-Cloud-ApiKey", forHTTPHeaderField: blueBuzzIbmCloudApiKey)
+        request.setValue("a5e5ee30-1346-4eaf-acdd-e1a7dccdec20", forHTTPHeaderField: "X-IBM-Client-Id")
         guard let httpBody = try? JSONSerialization.data(
             withJSONObject: parameterDictionary,
             options: []) else {

@@ -298,6 +298,8 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         {
             notifyUI();
         } else {
+            myDelegate.setInstanceId(instanceId: commandStatus.instanceId)
+            myDelegate.postAction()
             statusLabel.setText("id: " + commandStatus.instanceId + " " + commandStatus.phrase.rawValue + " at\n" + timedColor.timeStamp)
         }
     }
