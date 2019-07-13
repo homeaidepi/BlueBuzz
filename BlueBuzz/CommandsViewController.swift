@@ -89,22 +89,8 @@ extension CommandsViewController { // MARK: - UITableViewDelegate and UITableVie
         switch currentCommand {
             //case .updateAppConnection: updateAppConnection(appConnection)
             //case .sendMessage: sendMessage(message)
-            case .sendMessageData: sendMessageData(messageData, location: location, instanceId: getInstanceIdentifier())
+            case .sendMessageData: sendMessageData(messageData, location: location, instanceId: SessionDelegater().getInstanceIdentifier())
         }
-    }
-    
-    public func getInstanceIdentifier() -> String
-    {
-        // String to be filled with the saved value from UserDefaults
-        var instanceId:String = ""
-        
-        // Get the standard UserDefaults as "defaults"
-        let defaults = UserDefaults.standard
-        
-        // Get the saved String from the standard UserDefaults with the key, "instanceId"
-        instanceId = defaults.string(forKey: instanceIdentifierKey) ?? ""
-        
-        return instanceId
     }
 }
 

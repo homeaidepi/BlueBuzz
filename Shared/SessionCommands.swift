@@ -97,9 +97,9 @@ extension SessionCommands {
                                          timedColor: TimedColor(messageData),
                                          errorMessage: emptyError)
         
-        guard WCSession.default.activationState == .activated else {
-            return handleSessionUnactivated(with: commandStatus)
-        }
+//        guard WCSession.default.activationState == .activated else {
+//            return handleSessionUnactivated(with: commandStatus)
+//        }
         
         do {
             let data = try JSONEncoder().encode(commandStatus)

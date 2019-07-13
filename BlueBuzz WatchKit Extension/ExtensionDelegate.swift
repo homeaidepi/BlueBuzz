@@ -9,8 +9,6 @@ import WatchKit
 import WatchConnectivity
 import UserNotifications
 
-let CurrentModeKey = "CurrentMode"
-
 class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate {
 
     private lazy var sessionDelegater: SessionDelegater = {
@@ -24,8 +22,6 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
     private var blueBuzzCFApiKey = "97fefa7a-d1bd-49dd-92fe-704f0c9ba744:SbEAqeqWoz5kD8oiH8qSTcNzoOpzhKuxBIZFMz7BKVobLP7b5sqTi16Ek8SpKDeS"
     private var blueBuzzWebServiceGetLocationByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/getlocationbyinstanceid")!
     private var blueBuzzWebServicePostLocation = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/PostLocationByInstanceId")!
-    private var instanceId = ""
-    private var deviceId = ""
     
     func applicationDidFinishLaunching() {
         return
@@ -44,15 +40,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
     
     public func setCurrentLocation(location: CLLocation) -> String {
         self.currentLocation = location
-        return getInstanceId()
-    }
-    
-    public func setInstanceId(instanceId: String) {
-        self.instanceId = instanceId
-    }
-    
-    public func getInstanceId() -> String {
-        return self.instanceId
+        return sessionDelegater.getInstanceIdentifier()
     }
     
     func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
@@ -92,6 +80,14 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
         //
         WCSession.default.delegate = sessionDelegater
         WCSession.default.activate()
+        
+        let instanceId = sessionDelegater.getInstanceIdentifier()
+        // we are going to keep a guid that indicates a unique id or (instance) of this shared connection between watch and phone for the purposes of cloud communication
+        //
+        if (instanceId == "")
+        {
+            sendInstanceIdMessage();
+        }
     }
  
     func scheduleNotifications() {
@@ -100,17 +96,10 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (granted, error) in
             // Enable or disable features based on authorization.
             if granted {
-                let content = UNMutableNotificationContent()
-                
-                // Create the trigger as a repeating event.
-                        var dateComponents = DateComponents()
-                        dateComponents.calendar = Calendar.current
-                        dateComponents.second = 30
-                        let trigger = UNCalendarNotificationTrigger(
-                            dateMatching: dateComponents, repeats: true)
                 
                 // Schedule the request with the system.
                 let notificationCenter = UNUserNotificationCenter.current()
+                let content = UNMutableNotificationContent()
                 
                 if (self.currentLocation == emptyLocation)
                 {
@@ -119,18 +108,18 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
                     content.sound = UNNotificationSound.defaultCritical
                 } else {
                     notificationCenter.removeAllDeliveredNotifications()
-                    self.postLocationByInstanceId()
                     return
-//                    content.title = NSLocalizedString("Location Notice", comment: "")
-//                    content.body =  NSLocalizedString("Location found", comment: "")
-//                    content.sound = UNNotificationSound.default
                 }
                 
-                //content.userInfo = userInfo
 //                let trigger = UNTimeIntervalNotificationTrigger.init(
 //                    timeInterval: 60,
 //                    repeats: true)
-//
+                // Create the trigger as a repeating event.
+                var dateComponents = DateComponents()
+                dateComponents.calendar = Calendar.current
+                dateComponents.second = 30
+                let trigger = UNCalendarNotificationTrigger(
+                    dateMatching: dateComponents, repeats: true)
                 let identifier = UUID().uuidString
                 let request = UNNotificationRequest.init(
                     identifier: identifier,
@@ -145,11 +134,9 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
                     }
                     else {
                         notificationCenter.removeAllDeliveredNotifications()
-                        self.scheduleURLSession()
                     }
                 })
             }
-            self.currentLocation = emptyLocation
         }
     }
 
@@ -202,12 +189,46 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, WKExtensionDelegate 
         scheduleSnapshot()
     }
     
-    public func postLocationByInstanceId() {
+    private func sendInstanceIdMessage()
+    {
+        var instanceId = sessionDelegater.getInstanceIdentifier()
+        // we are going to keep a guid that indicates a unique id or (instance) of this shared connection between watch and phone for the purposes of cloud communication
+        //
+        if (instanceId == "")
+        {
+            instanceId = UUID().uuidString
+            sessionDelegater.saveInstanceIdentifier(identifier: instanceId)
+        }
+        
+        let commandStatus = CommandStatus(command: .sendMessageData,
+                                          phrase: .sent,
+                                          latitude: emptyDegrees,
+                                          longitude: emptyDegrees,
+                                          instanceId: instanceId,
+                                          timedColor: defaultColor,
+                                          errorMessage: "")
+        
+        do {
+            let data = try JSONEncoder().encode(commandStatus)
+            
+            //let jsonString = String(data: data, encoding: .utf8)!
+            //print(jsonString)
+            
+            WCSession.default.sendMessageData(data, replyHandler: { replyHandler in
+            }, errorHandler: { error in
+                print("error")})
+        } catch {
+            print("Send Message Data")
+        }
+        
+    }
+    
+    public func postLocationByInstanceId(commandStatus: CommandStatus) {
         let serviceUrl = blueBuzzWebServicePostLocation
         
-        let lat = currentLocation.coordinate.latitude
-        let long = currentLocation.coordinate.longitude
-        let instanceId = self.instanceId
+        let lat = commandStatus.latitude
+        let long = commandStatus.longitude
+        let instanceId = commandStatus.instanceId
         let deviceId = "watchos"
         
         let parameterDictionary = [

@@ -128,6 +128,11 @@ class MainViewController: UIViewController {
         let long = commandStatus.longitude
         let instanceId = commandStatus.instanceId
         
+        if (instanceId != emptyInstanceIdentifier)
+        {
+            SessionDelegater().saveInstanceIdentifier(identifier: instanceId)
+        }
+        
         //log the messageData i.e location to the screen else show command
         //
         if (lat != emptyDegrees && long != emptyDegrees)

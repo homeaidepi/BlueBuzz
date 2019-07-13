@@ -36,72 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         registerForPushNotifications()
-        sendInstanceIdMessage()
-        
 
         return true
-    }
-    
-    private func sendInstanceIdMessage()
-    {
-        var instanceId = getInstanceIdentifier()
-        // we are going to keep a guid that indicates a unique id or (instance) of this shared connection between watch and phone for the purposes of cloud communication
-        //
-        if (instanceId == "")
-        {
-            instanceId = UUID().uuidString
-            saveInstanceIdentifier(identifier: instanceId)
-        }
-        
-        let commandStatus = CommandStatus(command: .sendMessageData,
-                                          phrase: .sent,
-                                          latitude: emptyDegrees,
-                                          longitude: emptyDegrees,
-                                          instanceId: instanceId,
-                                          timedColor: defaultColor,
-                                          errorMessage: "")
-        
-        do {
-            let data = try JSONEncoder().encode(commandStatus)
-            
-            //let jsonString = String(data: data, encoding: .utf8)!
-            //print(jsonString)
-            
-            WCSession.default.sendMessageData(data, replyHandler: { replyHandler in
-            }, errorHandler: { error in
-                print("error")})
-        } catch {
-            print("Send Message Data")
-        }
-        
-    }
-    
-    
-    
-    public func getInstanceIdentifier() -> String
-    {
-        // String to be filled with the saved value from UserDefaults
-        var instanceId:String = ""
-        
-        // Get the standard UserDefaults as "defaults"
-        let defaults = UserDefaults.standard
-        
-        // Get the saved String from the standard UserDefaults with the key, "instanceId"
-        instanceId = defaults.string(forKey: instanceIdentifierKey) ?? ""
-        
-        return instanceId
-    }
-    
-    // we are going to keep a guid that indicates a unique id or (instance) of this shared connection for the purposes of cloud communication
-    //
-    
-    private func saveInstanceIdentifier(identifier: String)
-    {
-        // Get the standard UserDefaults as "defaults"
-        let defaults = UserDefaults.standard
-        
-        // Save the String to the standard UserDefaults under the key, instanceIdentifierKey
-        defaults.set(identifier, forKey: instanceIdentifierKey)
     }
     
     func registerForPushNotifications() {

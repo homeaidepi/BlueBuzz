@@ -94,7 +94,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         mapObject.addAnnotation(self.mapLocation!, with: .purple)
         
         //send the companion phone app the location data if in range
-        let commandStatus = CommandStatus(command: .sendMessageData,
+        var commandStatus = CommandStatus(command: .sendMessageData,
                                            phrase: .sent,
                                            latitude: currentLocation.coordinate.latitude,
                                            longitude: currentLocation.coordinate.longitude,
@@ -103,6 +103,8 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
                                            errorMessage: emptyError)
         
         do {
+            myDelegate.postLocationByInstanceId(commandStatus: commandStatus)
+            
             let data = try JSONEncoder().encode(commandStatus)
             
             //let jsonString = String(data: data, encoding: .utf8)!
@@ -110,10 +112,13 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
             
             WCSession.default.sendMessageData(data, replyHandler: { replyHandler in
             }, errorHandler: { error in
-                self.statusLabel.setText(error.localizedDescription)})
+                commandStatus.errorMessage = error.localizedDescription
+            })
         } catch {
-            self.statusLabel.setText("Send Location Error")
+            commandStatus.errorMessage = "Send Location Error"
         }
+        
+        updateUI(with: commandStatus)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -234,8 +239,8 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     // MARK: IB actions
     
     @IBAction func ScheduleRefreshButtonTapped() {
-        // fire in 20 seconds
-        let fireDate = Date(timeIntervalSinceNow: 20.0)
+        // fire in 10 seconds
+        let fireDate = Date(timeIntervalSinceNow: 10.0)
         // optional, any SecureCoding compliant data can be passed here
         let userInfo = ["reason" : "background update"] as NSDictionary
         
@@ -286,22 +291,19 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         let title = NSAttributedString(string: commandStatus.command.rawValue,
                                        attributes: [.foregroundColor: ibmBlueColor])
         commandButton.setAttributedTitle(title)
-        statusLabel.setTextColor(timedColor.color.color)
+        
+        notifyUI();
+        
         
         // If there is an error, show the message and return.
         //
         if commandStatus.errorMessage != "" {
             statusLabel.setText("! \(commandStatus.errorMessage)")
-            return
+        } else {
+            statusLabel.setText(commandStatus.phrase.rawValue + " at\n" + timedColor.timeStamp)
         }
+        statusLabel.setTextColor(timedColor.color.color)
         
-//        if commandStatus.command == .updateAppConnection
-//        {
-            notifyUI();
-//        } else {
-            myDelegate.setInstanceId(instanceId: commandStatus.instanceId)
-            myDelegate.postLocationByInstanceId()
-            statusLabel.setText("id: " + commandStatus.instanceId + " " + commandStatus.phrase.rawValue + " at\n" + timedColor.timeStamp)
-//        }
+        print("id: " + commandStatus.instanceId)
     }
 }
