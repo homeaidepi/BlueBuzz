@@ -69,6 +69,8 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         NotificationCenter.default.addObserver(
             self, selector: #selector(type(of: self).appDidEnterBackground(_:)),
             name: .appDidEnterBackground, object: nil)
+        
+        notifyUI();
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -122,9 +124,6 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         }
         
         updateUI(with: commandStatus)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-            self.locationManager?.requestLocation()
-        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

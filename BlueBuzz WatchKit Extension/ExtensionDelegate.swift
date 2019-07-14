@@ -25,7 +25,6 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
     func applicationDidFinishLaunching() {
         locationManager = CLLocationManager()
         locationManager?.delegate = self
-        //locationManager?.requestWhenInUseAuthorization()
         locationManager?.requestAlwaysAuthorization()
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.allowsBackgroundLocationUpdates = true
@@ -41,10 +40,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, etc.
         print("application will resign active")
-        locationManager!.requestLocation()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-            self.locationManager!.requestLocation()
-        }
+        scheduleRefresh()
     }
     
     public func setCurrentLocation(location: CLLocation) -> String {
@@ -59,20 +55,10 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
             switch task {
             case let backgroundTask as WKApplicationRefreshBackgroundTask:
                 
-                locationManager?.requestLocation()
+                self.locationManager!.requestLocation()
                 
                 // Be sure to complete the background task once you’re done.
                 backgroundTask.setTaskCompleted()
-                
-            case let snapshotTask as WKSnapshotRefreshBackgroundTask:
-                // Snapshot tasks have a unique completion call, make sure to set your expiration date
-                snapshotTask.setTaskCompleted(restoredDefaultState: true, estimatedSnapshotExpiration: Date.distantFuture, userInfo: nil)
-            case let connectivityTask as WKWatchConnectivityRefreshBackgroundTask:
-                // Be sure to complete the connectivity task once you’re done.
-                connectivityTask.setTaskCompleted()
-            case let urlSessionTask as WKURLSessionRefreshBackgroundTask:
-                // Be sure to complete the URL session task once you’re done.
-                urlSessionTask.setTaskCompleted()
             default:
                 // make sure to complete unhandled task types
                 task.setTaskCompleted()
@@ -112,7 +98,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         let instanceId = setCurrentLocation(location: location)
         
         //send the companion phone app the location data if in range
-        var commandStatus = CommandStatus(command: .sendMessageData,
+        let commandStatus = CommandStatus(command: .sendMessageData,
                                           phrase: .sent,
                                           latitude: currentLocation.coordinate.latitude,
                                           longitude: currentLocation.coordinate.longitude,
@@ -120,33 +106,15 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                                           timedColor: defaultColor,
                                           errorMessage: emptyError)
         
-        do {
-            //send the cloud the current location information
-            postLocationByInstanceId(commandStatus: commandStatus)
-            
-            let data = try JSONEncoder().encode(commandStatus)
-            
-            //let jsonString = String(data: data, encoding: .utf8)!
-            //print(jsonString)
-            
-            //send the message out of the current command
-            WCSession.default.sendMessageData(data, replyHandler: {
-                replyHandler in
-            },
-                errorHandler: { error in
-                commandStatus.errorMessage = error.localizedDescription
-            })
-            
-        } catch {
-            commandStatus.errorMessage = "Send Location Error"
-        }
+        //send the cloud the current location information
+        postLocationByInstanceId(commandStatus: commandStatus)
         
-        scheduleRefresh()
-        scheduleNotifications()
+        //locationManager!.requestLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error.localizedDescription)
+        scheduleNotifications()
         //myDelegate.setCurrentLocation(location: emptyLocation)
     }
     
@@ -182,15 +150,15 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                     return
                 }
                 
-//                let trigger = UNTimeIntervalNotificationTrigger.init(
-//                    timeInterval: 60,
-//                    repeats: true)
+                let trigger = UNTimeIntervalNotificationTrigger.init(
+                    timeInterval: 60,
+                    repeats: true)
                 // Create the trigger as a repeating event.
-                var dateComponents = DateComponents()
-                dateComponents.calendar = Calendar.current
-                dateComponents.second = 30
-                let trigger = UNCalendarNotificationTrigger(
-                    dateMatching: dateComponents, repeats: true)
+//                var dateComponents = DateComponent()
+//                dateComponents.calendar = Calendar.current
+//                dateComponents.second = 30
+//                let trigger = UNCalendarNotificationTrigger(
+//                    dateMatching: dateComponents, repeats: true)
                 let identifier = UUID().uuidString
                 let request = UNNotificationRequest.init(
                     identifier: identifier,
@@ -204,7 +172,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                         print (error!.localizedDescription)
                     }
                     else {
-                        notificationCenter.removeAllDeliveredNotifications()
+                        return;
                     }
                 })
             }
@@ -218,47 +186,15 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         let fireDate = Date(timeIntervalSinceNow: 10.0)
         // optional, any SecureCoding compliant data can be passed here
         let userInfo = ["reason" : "background update"] as NSDictionary
+        
+        locationManager!.requestLocation()
 
         WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: fireDate, userInfo: userInfo) { (error) in
             if (error == nil) {
-                print("successfully scheduled background task, use the crown to send the app to the background and wait for handle:BackgroundTasks to fire.")
+                print("successfully scheduled background task")
             }
         }
     }
-    
-//    func scheduleURLSession() {
-//        print("Scheduling URL Session")
-//
-//        let backgroundConfigObject = URLSessionConfiguration.background(withIdentifier: NSUUID().uuidString)
-//        backgroundConfigObject.sessionSendsLaunchEvents = true
-//
-//        let backgroundSession = URLSession(configuration: backgroundConfigObject, delegate: self as? URLSessionDelegate, delegateQueue: nil)
-//
-//        let downloadTask = backgroundSession.downloadTask(with: blueBuzzWebServicePostLocation)
-//        downloadTask.resume()
-//    }
-//
-//    func scheduleSnapshot() {
-//        print("Scheduling Snapshot")
-//
-//        // fire now, we're ready
-//        let fireDate = Date()
-//        WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: fireDate, userInfo: nil) { error in
-//            if (error == nil) {
-//                print("successfully scheduled snapshot.  All background work completed.")
-//            }
-//        }
-//    }
-    
-//    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo url: URL) {
-//        print("url Session Start")
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "hh:mm:ss a"
-//        let someDateTime = formatter.string(from: Date())
-//
-//        print("\(someDateTime) End session url: \(url)")
-//        scheduleSnapshot()
-//    }
     
     private func sendInstanceIdMessage()
     {
