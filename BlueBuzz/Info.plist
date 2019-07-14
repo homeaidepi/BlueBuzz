@@ -30,6 +30,7 @@
 	<string>This app will notify you when your phone is out of range</string>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>fetch</string>
 		<string>location</string>
 		<string>remote-notification</string>
 	</array>

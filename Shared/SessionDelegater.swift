@@ -31,7 +31,7 @@ private var blueBuzzWebServicePostLocation = URL(string: "https://91ccdda5.us-so
 // Implement WCSessionDelegate methods to receive Watch Connectivity data and notify clients.
 // WCsession status changes are also handled here.
 //
-class SessionDelegater: NSObject, WCSessionDelegate {
+class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
     
     // Called when WCSession activation state is changed.
     //

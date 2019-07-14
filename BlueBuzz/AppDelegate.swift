@@ -11,7 +11,7 @@ import UserNotifications
 import CoreLocation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
     
@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         return SessionDelegater()
     }()
     
+    var backgroundTask: UIBackgroundTaskIdentifier = .invalid
     private var locationManager: CLLocationManager?
     private var currentLocation: CLLocation = emptyLocation
 
@@ -39,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         registerForPushNotifications()
         registerForLocation()
+        registerBackgroundTask()
 
         return true
     }
@@ -51,6 +53,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.allowsBackgroundLocationUpdates = true
         locationManager?.requestLocation()
+    }
+    
+    func registerBackgroundTask() {
+        // Fetch data once every 30 secs
+        UIApplication.shared.setMinimumBackgroundFetchInterval(60)
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        // Fetch no sooner than every (60) seconds which is thrillingly short actually.
+        // Defaults to Infinite if not set.
+        UIApplication.shared.setMinimumBackgroundFetchInterval( 60 )
     }
     
     func registerForPushNotifications() {
@@ -67,14 +80,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         }
     }
     
+    func application(_ application: UIApplication,
+                     performFetchWithCompletionHandler completionHandler:
+        @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        print("application background fetch")
+        var fetchResult: UIBackgroundFetchResult!
+        
+        locationManager!.requestLocation()
+        fetchResult = UIBackgroundFetchResult.newData
+
+        completionHandler( fetchResult )
+
+        return
+    }
+    
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         // 1. Convert device token to string
-        let tokenParts = deviceToken.map { data -> String in
-            return String(format: "%02.2hhx", data)
-        }
-        let token = tokenParts.joined()
+//        let tokenParts = deviceToken.map { data -> String in
+//            return String(format: "%02.2hhx", data)
+//        }
+        //let token = tokenParts.joined()
         // 2. Print device token to use for PNs payloads
-        print("Device Token: \(token)")
+        //print("Device Token: \(token)")
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
