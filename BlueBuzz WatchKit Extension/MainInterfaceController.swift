@@ -66,9 +66,6 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
             self, selector: #selector(type(of: self).reachabilityDidChange(_:)),
             name: .reachabilityDidChange, object: nil
         )
-        NotificationCenter.default.addObserver(
-            self, selector: #selector(type(of: self).appDidEnterBackground(_:)),
-            name: .appDidEnterBackground, object: nil)
         
         notifyUI();
     }
@@ -105,7 +102,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
                                            errorMessage: emptyError)
         
         do {
-            myDelegate.postLocationByInstanceId(commandStatus: commandStatus)
+            myDelegate.postLocationByInstanceId(commandStatus: commandStatus, deviceId: "watchos")
             
             let data = try JSONEncoder().encode(commandStatus)
             
@@ -137,10 +134,20 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         }
     }
     
-    @objc
-    func appDidEnterBackground(_ notification: Notification) {
+    func applicationDidEnterBackground() {
         myDelegate.scheduleRefresh()
         myDelegate.scheduleNotifications()
+    }
+    
+    func applicationDidBecomeActive() {
+        notifyUI()
+        return
+    }
+    
+    func applicationWillResignActive() {
+        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+        // Use this method to pause ongoing tasks, disable timers, etc.
+        print("application will resign active")
     }
     
 //    @objc private func deinitLocationManager() {
@@ -278,11 +285,11 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     //
     private func notifyUI() {
         if (WCSession.default.isReachable) {
-            statusLabel.setText("Device connected.")
+            statusLabel.setText("Device paired... \n Sending location.")
             WKInterfaceDevice.current().play(.success)
         }
         else {
-            statusLabel.setText("Device disconnected.")
+            statusLabel.setText("Device not paired. Please pair iPhone.")
             WKInterfaceDevice.current().play(.failure)
             WKInterfaceDevice.current().play(.notification)
         }

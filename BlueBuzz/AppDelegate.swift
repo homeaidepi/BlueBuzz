@@ -8,17 +8,19 @@ The app delegate class of the iOS app.
 import UIKit
 import WatchConnectivity
 import UserNotifications
-
-let CurrentModeKey = "CurrentMode"
+import CoreLocation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
     
     private lazy var sessionDelegater: SessionDelegater = {
         return SessionDelegater()
     }()
+    
+    private var locationManager: CLLocationManager?
+    private var currentLocation: CLLocation = emptyLocation
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -36,8 +38,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         registerForPushNotifications()
+        registerForLocation()
 
         return true
+    }
+    
+    func registerForLocation()
+    {
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
+        locationManager?.requestAlwaysAuthorization()
+        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager?.allowsBackgroundLocationUpdates = true
+        locationManager?.requestLocation()
     }
     
     func registerForPushNotifications() {
@@ -68,4 +81,55 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 1. Print out error if PNs registration not successful
         print("Failed to register for remote notifications with error: \(error)")
     }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    
+        //Step 1 get current location from locationManager return result
+        let location = locations[0]
+        
+        //set the current location in the extension delegate
+        let instanceId = setCurrentLocation(location: location)
+        
+        //send the companion phone app the location data if in range
+        let commandStatus = CommandStatus(command: .sendMessageData,
+                                            phrase: .sent,
+                                            latitude: currentLocation.coordinate.latitude,
+                                            longitude: currentLocation.coordinate.longitude,
+                                            instanceId: instanceId,
+                                            timedColor: defaultColor,
+                                            errorMessage: emptyError)
+        
+        //send the cloud the current location information
+        sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus, deviceId: "ios")
+        
+        perform(#selector(callback), with: nil, afterDelay: 5.0)
+    
+    }
+    
+    @objc func callback() {
+        print("done")
+        let locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.requestLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
+        //myDelegate.setCurrentLocation(location: emptyLocation)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedAlways {
+            self.locationManager?.requestLocation()
+        }
+    }
+    
+    func setCurrentLocation(location: CLLocation) -> String {
+        self.currentLocation = location
+        return sessionDelegater.getInstanceIdentifier()
+    }
+    
 }

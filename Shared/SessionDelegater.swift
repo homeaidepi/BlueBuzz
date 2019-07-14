@@ -21,8 +21,12 @@ extension Notification.Name {
     static let dataDidFlow = Notification.Name("DataDidFlow")
     static let activationDidComplete = Notification.Name("ActivationDidComplete")
     static let reachabilityDidChange = Notification.Name("ReachabilityDidChange")
-    static let appDidEnterBackground = Notification.Name("didEnterBackgroundNotification")
 }
+
+private var blueBuzzIbmSharingApiKey = "a5e5ee30-1346-4eaf-acdd-e1a7dccdec20"
+private var blueBuzzWebServiceGetLocationByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/getlocationbyinstanceid")!
+private var blueBuzzWebServicePostLocation = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/PostLocationByInstanceId")!
+
 
 // Implement WCSessionDelegate methods to receive Watch Connectivity data and notify clients.
 // WCsession status changes are also handled here.
@@ -139,5 +143,46 @@ class SessionDelegater: NSObject, WCSessionDelegate {
         
         // Save the String to the standard UserDefaults under the key, instanceIdentifierKey
         defaults.set(identifier, forKey: instanceIdentifierKey)
+    }
+    
+    public func postLocationByInstanceId(commandStatus: CommandStatus, deviceId: String) {
+        let serviceUrl = blueBuzzWebServicePostLocation
+        
+        let lat = commandStatus.latitude
+        let long = commandStatus.longitude
+        let instanceId = commandStatus.instanceId
+        let deviceId = deviceId
+        
+        let parameterDictionary = [
+            "latitude" : "\(lat)",
+            "longitude" : "\(long)",
+            "instanceId" : "\(instanceId)",
+            "deviceId" : "\(deviceId)",
+        ]
+        var request = URLRequest(url: serviceUrl)
+        request.httpMethod = "POST"
+        request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("a5e5ee30-1346-4eaf-acdd-e1a7dccdec20", forHTTPHeaderField: "X-IBM-Client-Id")
+        guard let httpBody = try? JSONSerialization.data(
+            withJSONObject: parameterDictionary,
+            options: []) else {
+                return
+        }
+        request.httpBody = httpBody
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) { (data, response, error) in
+            if let response = response {
+                print(response)
+            }
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    print(json)
+                } catch {
+                    print(error)
+                }
+            }
+            }.resume()
     }
 }

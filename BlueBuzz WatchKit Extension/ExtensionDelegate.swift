@@ -18,10 +18,6 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
     private var locationManager: CLLocationManager?
     private var currentLocation: CLLocation = emptyLocation
 
-    private var blueBuzzIbmSharingApiKey = "a5e5ee30-1346-4eaf-acdd-e1a7dccdec20"
-    private var blueBuzzWebServiceGetLocationByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/getlocationbyinstanceid")!
-    private var blueBuzzWebServicePostLocation = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/PostLocationByInstanceId")!
-    
     func applicationDidFinishLaunching() {
         locationManager = CLLocationManager()
         locationManager?.delegate = self
@@ -89,6 +85,10 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         }
     }
     
+    public func postLocationByInstanceId(commandStatus: CommandStatus, deviceId: String){
+        sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus, deviceId: deviceId)
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         //Step 1 get current location from locationManager return result
@@ -107,11 +107,39 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                                           errorMessage: emptyError)
         
         //send the cloud the current location information
-        postLocationByInstanceId(commandStatus: commandStatus)
+        sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus, deviceId: "watchos")
         
-        //locationManager!.requestLocation()
+        perform(#selector(callback), with: nil, afterDelay: 5.0)
     }
     
+    @objc func callback() {
+        print("done")
+        let locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.requestLocation()
+    }
+    
+//    public func delay(bySeconds seconds: Double, dispatchLevel: DispatchLevel = .main, closure: @escaping () -> Void) {
+//        let dispatchTime = DispatchTime.now() + seconds
+//        dispatchLevel.dispatchQueue.asyncAfter(deadline: dispatchTime, execute: closure)
+//    }
+//
+//    public enum DispatchLevel {
+//        case main, userInteractive, userInitiated, utility, background
+//        var dispatchQueue: DispatchQueue {
+//            switch self {
+//            case .main:                 return DispatchQueue.main
+//            case .userInteractive:      return DispatchQueue.global(qos: .userInteractive)
+//            case .userInitiated:        return DispatchQueue.global(qos: .userInitiated)
+//            case .utility:              return DispatchQueue.global(qos: .utility)
+//            case .background:           return DispatchQueue.global(qos: .background)
+//            }
+//        }
+//    }
+
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error.localizedDescription)
         scheduleNotifications()
@@ -120,7 +148,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedAlways {
-            locationManager?.requestLocation()
+            self.locationManager?.requestLocation()
         }
     }
  
@@ -230,44 +258,5 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         
     }
     
-    public func postLocationByInstanceId(commandStatus: CommandStatus) {
-        let serviceUrl = blueBuzzWebServicePostLocation
-        
-        let lat = commandStatus.latitude
-        let long = commandStatus.longitude
-        let instanceId = commandStatus.instanceId
-        let deviceId = "watchos"
-        
-        let parameterDictionary = [
-            "latitude" : "\(lat)",
-            "longitude" : "\(long)",
-            "instanceId" : "\(instanceId)",
-            "deviceId" : "\(deviceId)",
-        ]
-        var request = URLRequest(url: serviceUrl)
-        request.httpMethod = "POST"
-        request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("a5e5ee30-1346-4eaf-acdd-e1a7dccdec20", forHTTPHeaderField: "X-IBM-Client-Id")
-        guard let httpBody = try? JSONSerialization.data(
-            withJSONObject: parameterDictionary,
-            options: []) else {
-            return
-        }
-        request.httpBody = httpBody
-        
-        let session = URLSession.shared
-        session.dataTask(with: request) { (data, response, error) in
-            if let response = response {
-                print(response)
-            }
-            if let data = data {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    print(json)
-                } catch {
-                    print(error)
-                }
-            }
-            }.resume()
-    }
+    
 }
