@@ -52,7 +52,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, C
         locationManager?.requestAlwaysAuthorization()
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.allowsBackgroundLocationUpdates = true
-        locationManager?.requestLocation()
+        locationManager?.pausesLocationUpdatesAutomatically = false
+        //locationManager?.startUpdatingLocation()
+        locationManager?.startMonitoringSignificantLocationChanges()
+        //locationManager?.requestLocation()
     }
     
     func registerBackgroundTask() {
