@@ -23,6 +23,13 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
     private var blueBuzzWebServicePostLocation = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/PostLocationByInstanceId")!
     
     func applicationDidFinishLaunching() {
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
+        //locationManager?.requestWhenInUseAuthorization()
+        locationManager?.requestAlwaysAuthorization()
+        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager?.allowsBackgroundLocationUpdates = true
+        locationManager?.requestLocation()
         return
     }
     
@@ -33,9 +40,11 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
     func applicationWillResignActive() {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, etc.
-        print("Application will resign active")
-        scheduleRefresh()
-        scheduleNotifications()
+        print("application will resign active")
+        locationManager!.requestLocation()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            self.locationManager!.requestLocation()
+        }
     }
     
     public func setCurrentLocation(location: CLLocation) -> String {
@@ -49,9 +58,8 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
             // Use a switch statement to check the task type
             switch task {
             case let backgroundTask as WKApplicationRefreshBackgroundTask:
+                
                 locationManager?.requestLocation()
-                scheduleRefresh()
-                scheduleNotifications()
                 
                 // Be sure to complete the background task once you’re done.
                 backgroundTask.setTaskCompleted()
@@ -132,6 +140,9 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         } catch {
             commandStatus.errorMessage = "Send Location Error"
         }
+        
+        scheduleRefresh()
+        scheduleNotifications()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
