@@ -112,7 +112,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
             
             WCSession.default.sendMessageData(data, replyHandler: {
               replyHandler in
-                self.myDelegate.scheduleRefresh()},
+                },
               errorHandler: { error in
                 commandStatus.errorMessage = error.localizedDescription
             })
@@ -122,6 +122,9 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         }
         
         updateUI(with: commandStatus)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            self.locationManager?.requestLocation()
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -277,7 +280,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     private func notifyUI() {
         if (WCSession.default.isReachable) {
             statusLabel.setText("Device connected.")
-            //WKInterfaceDevice.current().play(.success)
+            WKInterfaceDevice.current().play(.success)
         }
         else {
             statusLabel.setText("Device disconnected.")
