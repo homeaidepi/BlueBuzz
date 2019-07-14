@@ -102,18 +102,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         //send the cloud the current location information
         sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus, deviceId: "ios")
         
-        perform(#selector(callback), with: nil, afterDelay: 5.0)
+        perform(#selector(wait), with: nil, afterDelay: 30)
     
     }
     
-    @objc func callback() {
-        print("done")
-        let locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.requestAlwaysAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.requestLocation()
+    @objc func wait() {
+        print("waiting 30 seconds for next send location")
+        locationManager!.requestLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

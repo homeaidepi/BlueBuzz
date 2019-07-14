@@ -130,6 +130,7 @@ class MainViewController: UIViewController {
         
         if (instanceId != emptyInstanceIdentifier)
         {
+            //todo dont need to save every message. Only once. 
             SessionDelegater().saveInstanceIdentifier(identifier: instanceId)
         }
         
