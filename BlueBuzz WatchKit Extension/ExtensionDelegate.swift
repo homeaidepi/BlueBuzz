@@ -126,7 +126,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         let description = error.localizedDescription
         print(description)
         
-        if (description.contains("Code: 0") == false) {
+        if (description.contains("error 0") == false) {
             _ = setCurrentLocation(location: emptyLocation)
             scheduleNotifications()
         }

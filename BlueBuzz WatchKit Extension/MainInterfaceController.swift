@@ -119,7 +119,6 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         
         do {
             if (myDelegate.postLocationByInstanceId(commandStatus: commandStatus, deviceId: "watchos")) {
-                
                 UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                 lastUpdatedLocationDateTime = Date()
                 
