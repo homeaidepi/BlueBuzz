@@ -145,7 +145,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         let description = error.localizedDescription
         print(description)
         
-        if (description.contains("Code: 0") == false) {
+        if (description.contains("error 0") == false) {
             _ = myDelegate.setCurrentLocation(location: emptyLocation)
             myDelegate.scheduleNotifications()
         }
@@ -185,6 +185,9 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     override func willActivate() {
         super.willActivate()
 
+        
+        notifyUI()
+        lastUpdatedLocationDateTime = nil;
         locationManager?.requestLocation()
         
         // Update the status group background color.
@@ -264,18 +267,18 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         //case .updateAppConnection: updateAppConnection(appConnection)
         //case .sendMessage: sendMessage(message)
         //case .sendMessageData: sendMessageData(messageData, location: location, instanceId: instanceId)
-        case .sendMessageData:  locationManager?.requestLocation()
+        case .sendMessageData:  sendLocation();
         }
     }
 }
 
-    extension MainInterfaceController { // MARK: - Update status view.
+extension MainInterfaceController { // MARK: - Update status view.
     
     //Play haptic notifications to the user and display some updated data
     //
     private func notifyUI() {
         if (WCSession.default.isReachable) {
-            statusLabel.setText("Device paired... \n Sending location.")
+            statusLabel.setText("Device paired... \n Getting location.")
             WKInterfaceDevice.current().play(.success)
         }
         else {
@@ -283,6 +286,12 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
             WKInterfaceDevice.current().play(.failure)
             WKInterfaceDevice.current().play(.notification)
         }
+    }
+        
+    func sendLocation() {
+        statusLabel.setText("Getting location... \n Sending location.")
+        WKInterfaceDevice.current().play(.click)
+        locationManager?.requestLocation()
     }
     
     // Update the user interface with the command status.
