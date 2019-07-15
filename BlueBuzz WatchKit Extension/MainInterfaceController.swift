@@ -33,6 +33,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     private var location: CLLocation?
     private var mapLocation: CLLocationCoordinate2D?
     private var lastUpdatedLocationDateTime: Date?
+    private var lastNotifyUiDateTime: Date?
     
     let myDelegate = WKExtension.shared().delegate as! ExtensionDelegate
 
@@ -277,14 +278,18 @@ extension MainInterfaceController { // MARK: - Update status view.
     //Play haptic notifications to the user and display some updated data
     //
     private func notifyUI() {
-        if (WCSession.default.isReachable) {
-            statusLabel.setText("Device paired... \n Getting location.")
-            WKInterfaceDevice.current().play(.success)
-        }
-        else {
-            statusLabel.setText("Device not paired. Please pair iPhone.")
-            WKInterfaceDevice.current().play(.failure)
-            WKInterfaceDevice.current().play(.notification)
+        
+        if (shouldNotifyUi()) {
+            if (WCSession.default.isReachable) {
+                statusLabel.setText("Device paired... \n Getting location.")
+                WKInterfaceDevice.current().play(.success)
+            }
+            else {
+                statusLabel.setText("Device not paired. Please pair iPhone.")
+                WKInterfaceDevice.current().play(.failure)
+                WKInterfaceDevice.current().play(.notification)
+            }
+            lastNotifyUiDateTime = Date()
         }
     }
         
@@ -292,6 +297,34 @@ extension MainInterfaceController { // MARK: - Update status view.
         statusLabel.setText("Getting location... \n Sending location.")
         WKInterfaceDevice.current().play(.click)
         locationManager?.requestLocation()
+    }
+    
+    private func shouldNotifyUi() -> Bool {
+        
+        if (lastNotifyUiDateTime != nil) {
+            let calendar = Calendar.current
+            let componentSet: Set = [Calendar.Component.hour, .minute, .second]
+            let components = calendar.dateComponents(componentSet, from: lastNotifyUiDateTime!, to: Date())
+            let minutesSinceLastUpdatedLocation = components.minute!
+            let hoursSinceLastUpdatedLocation = components.hour!
+            let secondsSinceLastUpdatedLocation = components.second!
+            
+            if (hoursSinceLastUpdatedLocation > 0) {
+                return true
+            }
+            
+            if (minutesSinceLastUpdatedLocation > 0) {
+                return true
+            }
+            
+            if (secondsSinceLastUpdatedLocation > 30) {
+                return true
+            }
+        } else {
+            return true
+        }
+        
+        return false
     }
     
     // Update the user interface with the command status.
