@@ -178,7 +178,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                 content.sound = UNNotificationSound.defaultCritical
                 
                 let trigger = UNTimeIntervalNotificationTrigger.init(
-                    timeInterval: 3,
+                    timeInterval: 30,
                     repeats: false)
                 // Create the trigger as a repeating event.
                 //                var dateComponents = DateComponent()

@@ -27,7 +27,8 @@ private var blueBuzzIbmSharingApiKey = "a5e5ee30-1346-4eaf-acdd-e1a7dccdec20"
 private var blueBuzzWebServiceGetLocationByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/getlocationbyinstanceid")!
 private var blueBuzzWebServicePostLocation = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/PostLocationByInstanceId")!
 private var blueBuzzWebServiceCheckDistanceByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/CheckDistanceByInstanceId")!
-
+private var secondsBeforeCheckingDistance = 45;
+private var distanceBeforeNotifying: Double = 100;
 
 // Implement WCSessionDelegate methods to receive Watch Connectivity data and notify clients.
 // WCsession status changes are also handled here.
@@ -225,7 +226,7 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
                     
                     if let distance = json?["distance"] as? Double {
                         print("distance: \(distance)")
-                        if (distance > 10) {
+                        if (distance > distanceBeforeNotifying) {
                             self.retval = true
                         }
                     }
@@ -257,7 +258,7 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
                 return true
             }
             
-            if (secondsSinceLastUpdatedLocation > 30) {
+            if (secondsSinceLastUpdatedLocation > secondsBeforeCheckingDistance) {
                 return true
             }
         } else {
