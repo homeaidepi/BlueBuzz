@@ -17,6 +17,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
     
     private var locationManager: CLLocationManager?
     private var currentLocation: CLLocation = emptyLocation
+    private var lastUpdatedLocationDateTime: Date?
 
     func applicationDidFinishLaunching() {
         locationManager = CLLocationManager()
@@ -85,11 +86,15 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         }
     }
     
-    public func postLocationByInstanceId(commandStatus: CommandStatus, deviceId: String){
-        sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus, deviceId: deviceId)
+    public func postLocationByInstanceId(commandStatus: CommandStatus, deviceId: String) -> Bool {
+        return sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus, deviceId: deviceId)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        if (sessionDelegater.checkLastUpdatedLocationDateTime(lastUpdatedLocationDateTime: lastUpdatedLocationDateTime) == false) {
+            return
+        }
         
         //Step 1 get current location from locationManager return result
         let location = locations[0]
@@ -107,20 +112,22 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                                           errorMessage: emptyError)
         
         //send the cloud the current location information
-        sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus, deviceId: "watchos")
-        
-        perform(#selector(callback), with: nil, afterDelay: 5.0)
+        if (sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus, deviceId: "watchos")) {
+            //perform(#selector(callback), with: nil, afterDelay: 5.0)
+            lastUpdatedLocationDateTime = Date()
+        }
     }
     
-    @objc func callback() {
-        print("done")
-        let locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.requestAlwaysAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.requestLocation()
-    }
+//    @objc func callback() {
+//        print("done")
+//        let locationManager = CLLocationManager()
+//        locationManager.delegate = self
+//        locationManager.requestAlwaysAuthorization()
+//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//        locationManager.allowsBackgroundLocationUpdates = true
+//        locationManager.startUpdatingLocation()
+//        //locationManager.requestLocation()
+//    }
     
 //    public func delay(bySeconds seconds: Double, dispatchLevel: DispatchLevel = .main, closure: @escaping () -> Void) {
 //        let dispatchTime = DispatchTime.now() + seconds

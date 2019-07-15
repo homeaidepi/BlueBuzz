@@ -116,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, C
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     
-        if (checkLastUpdatedLocationDateTime() == false) {
+        if (sessionDelegater.checkLastUpdatedLocationDateTime(lastUpdatedLocationDateTime: lastUpdatedLocationDateTime) == false) {
             return
         }
         
@@ -139,34 +139,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, C
         if (sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus, deviceId: "ios")) {
             lastUpdatedLocationDateTime = Date()
         }
-    }
-    
-    func checkLastUpdatedLocationDateTime() -> Bool {
-        
-        if (lastUpdatedLocationDateTime != nil) {
-            let calendar = Calendar.current
-            let componentSet: Set = [Calendar.Component.hour, .minute, .second]
-            let components = calendar.dateComponents(componentSet, from: lastUpdatedLocationDateTime!, to: Date())
-            let minutesSinceLastUpdatedLocation = components.minute!
-            let hoursSinceLastUpdatedLocation = components.hour!
-            let secondsSinceLastUpdatedLocation = components.second!
-            
-            if (hoursSinceLastUpdatedLocation > 0) {
-                return true
-            }
-            
-            if (minutesSinceLastUpdatedLocation > 0) {
-                return true
-            }
-            
-            if (secondsSinceLastUpdatedLocation > 45) {
-                return true
-            }
-        } else {
-            return true
-        }
-        
-        return false
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
