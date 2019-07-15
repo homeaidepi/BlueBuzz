@@ -32,7 +32,6 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     private var locationManager: CLLocationManager?
     private var location: CLLocation?
     private var mapLocation: CLLocationCoordinate2D?
-    private var instanceId: String = ""
     private var lastUpdatedLocationDateTime: Date?
     
     let myDelegate = WKExtension.shared().delegate as! ExtensionDelegate
@@ -68,7 +67,19 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
             name: .reachabilityDidChange, object: nil
         )
         
+        initLocationManager()
         notifyUI();
+    }
+    
+    func initLocationManager()
+    {
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
+        locationManager?.requestAlwaysAuthorization()
+        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager?.allowsBackgroundLocationUpdates = true
+        locationManager?.requestLocation()
+        //locationManager?.startUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -108,6 +119,10 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         
         do {
             if (myDelegate.postLocationByInstanceId(commandStatus: commandStatus, deviceId: "watchos")) {
+                
+                UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                lastUpdatedLocationDateTime = Date()
+                
                 let data = try JSONEncoder().encode(commandStatus)
                 
                 //let jsonString = String(data: data, encoding: .utf8)!
@@ -119,8 +134,6 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
                   errorHandler: { error in
                     commandStatus.errorMessage = error.localizedDescription
                 })
-                
-                lastUpdatedLocationDateTime = Date()
             }
         } catch {
             commandStatus.errorMessage = "Send Location Error"
@@ -130,8 +143,13 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error.localizedDescription)
-        //myDelegate.setCurrentLocation(location: emptyLocation)
+        let description = error.localizedDescription
+        print(description)
+        
+        if (description.contains("Code: 0") == false) {
+            _ = myDelegate.setCurrentLocation(location: emptyLocation)
+            myDelegate.scheduleNotifications()
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -141,8 +159,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     }
     
     func applicationDidEnterBackground() {
-        //myDelegate.scheduleRefresh()
-        myDelegate.scheduleNotifications()
+        return
     }
     
     func applicationDidBecomeActive() {
@@ -169,30 +186,12 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     override func willActivate() {
         super.willActivate()
 
-        locationManager = CLLocationManager()
-        locationManager?.delegate = self
-        locationManager?.requestAlwaysAuthorization()
-        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager?.allowsBackgroundLocationUpdates = true
-        locationManager?.startUpdatingLocation()
-        //locationManager?.requestLocation()
-        
-        // For .updateAppConnection, retrieve the receieved app context if any and update the UI.
-//        if command == .updateAppConnection {
-//            let commandStatus = CommandStatus(command: .updateAppConnection,
-//                                               phrase: .received,
-//                                               latitude: emptyDegrees,
-//                                               longitude: emptyDegrees,
-//                                               instanceId: emptyInstanceIdentifier,
-//                                               timedColor: defaultColor,
-//                                               errorMessage: emptyError)
-//            updateUI(with: commandStatus)
-//        }
+        locationManager?.requestLocation()
         
         // Update the status group background color.
         //
         statusGroup.setBackgroundColor(.black)
-        
+
     }
     
     // Load paged-based UI.
@@ -253,21 +252,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         notifyUI();
         //print("\(#function): isReachable:\(WCSession.default.isReachable)")
     }
-    // MARK: IB actions
-    
-//    @IBAction func ScheduleRefreshButtonTapped() {
-//        // fire in 10 seconds
-//        let fireDate = Date(timeIntervalSinceNow: 10.0)
-//        // optional, any SecureCoding compliant data can be passed here
-//        let userInfo = ["reason" : "background update"] as NSDictionary
-//
-//        WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: fireDate, userInfo: userInfo) { (error) in
-//            if (error == nil) {
-//                print("successfully scheduled background task, use the crown to send the app to the background and wait for handle:BackgroundTasks to fire.")
-//            }
-//        }
-//    }
-    
+ 
     // Do the command associated with the current page.
     //
     @IBAction func commandAction() {

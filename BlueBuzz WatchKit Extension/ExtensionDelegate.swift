@@ -116,15 +116,20 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         
         //send the cloud the current location information
         if (sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus, deviceId: "watchos")) {
+            UNUserNotificationCenter.current().removeAllDeliveredNotifications()
             lastUpdatedLocationDateTime = Date()
         }
     }
 
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error.localizedDescription)
-        _ = setCurrentLocation(location: emptyLocation)
-        scheduleNotifications()
+        let description = error.localizedDescription
+        print(description)
+        
+        if (description.contains("Code: 0") == false) {
+            _ = setCurrentLocation(location: emptyLocation)
+            scheduleNotifications()
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -159,8 +164,8 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                 }
                 
                 let trigger = UNTimeIntervalNotificationTrigger.init(
-                    timeInterval: 60,
-                    repeats: true)
+                    timeInterval: 3,
+                    repeats: false)
                 // Create the trigger as a repeating event.
 //                var dateComponents = DateComponent()
 //                dateComponents.calendar = Calendar.current
