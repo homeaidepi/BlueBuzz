@@ -145,13 +145,14 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         defaults.set(identifier, forKey: instanceIdentifierKey)
     }
     
-    public func postLocationByInstanceId(commandStatus: CommandStatus, deviceId: String) {
+    public func postLocationByInstanceId(commandStatus: CommandStatus, deviceId: String) -> Bool {
         let serviceUrl = blueBuzzWebServicePostLocation
         
         let lat = commandStatus.latitude
         let long = commandStatus.longitude
         let instanceId = commandStatus.instanceId
         let deviceId = deviceId
+        var retval = true
         
         let parameterDictionary = [
             "latitude" : "\(lat)",
@@ -166,7 +167,7 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         guard let httpBody = try? JSONSerialization.data(
             withJSONObject: parameterDictionary,
             options: []) else {
-                return
+                return false
         }
         request.httpBody = httpBody
         
@@ -179,10 +180,14 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: [])
                     print(json)
+                    retval = true
                 } catch {
                     print(error)
+                    retval = false
                 }
             }
             }.resume()
+        
+        return retval
     }
 }

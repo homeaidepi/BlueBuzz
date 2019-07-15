@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, C
     var backgroundTask: UIBackgroundTaskIdentifier = .invalid
     private var locationManager: CLLocationManager?
     private var currentLocation: CLLocation = emptyLocation
+    private var lastUpdatedLocationDateTime: Date?
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -53,8 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, C
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.allowsBackgroundLocationUpdates = true
         locationManager?.pausesLocationUpdatesAutomatically = false
-        //locationManager?.startUpdatingLocation()
-        locationManager?.startMonitoringSignificantLocationChanges()
+        locationManager?.startUpdatingLocation()
+        //locationManager?.startMonitoringSignificantLocationChanges()
         //locationManager?.requestLocation()
     }
     
@@ -100,9 +101,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, C
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         // 1. Convert device token to string
-//        let tokenParts = deviceToken.map { data -> String in
-//            return String(format: "%02.2hhx", data)
-//        }
+        //        let tokenParts = deviceToken.map { data -> String in
+        //            return String(format: "%02.2hhx", data)
+        //        }
         //let token = tokenParts.joined()
         // 2. Print device token to use for PNs payloads
         //print("Device Token: \(token)")
@@ -115,6 +116,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, C
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     
+        if (checkLastUpdatedLocationDateTime() == false) {
+            return
+        }
+        
         //Step 1 get current location from locationManager return result
         let location = locations[0]
         
@@ -131,15 +136,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, C
                                             errorMessage: emptyError)
         
         //send the cloud the current location information
-        sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus, deviceId: "ios")
-        
-        perform(#selector(wait), with: nil, afterDelay: 30)
-    
+        if (sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus, deviceId: "ios")) {
+            lastUpdatedLocationDateTime = Date()
+        }
     }
     
-    @objc func wait() {
-        print("waiting 30 seconds for next send location")
-        locationManager!.requestLocation()
+    func checkLastUpdatedLocationDateTime() -> Bool {
+        
+        if (lastUpdatedLocationDateTime != nil) {
+            let calendar = Calendar.current
+            let componentSet: Set = [Calendar.Component.hour, .minute, .second]
+            let components = calendar.dateComponents(componentSet, from: lastUpdatedLocationDateTime!, to: Date())
+            let minutesSinceLastUpdatedLocation = components.minute!
+            let hoursSinceLastUpdatedLocation = components.hour!
+            let secondsSinceLastUpdatedLocation = components.second!
+            
+            if (hoursSinceLastUpdatedLocation > 0) {
+                return true
+            }
+            
+            if (minutesSinceLastUpdatedLocation > 0) {
+                return true
+            }
+            
+            if (secondsSinceLastUpdatedLocation > 45) {
+                return true
+            }
+        } else {
+            return true
+        }
+        
+        return false
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
