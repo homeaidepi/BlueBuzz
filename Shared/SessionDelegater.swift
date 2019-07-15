@@ -26,6 +26,7 @@ extension Notification.Name {
 private var blueBuzzIbmSharingApiKey = "a5e5ee30-1346-4eaf-acdd-e1a7dccdec20"
 private var blueBuzzWebServiceGetLocationByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/getlocationbyinstanceid")!
 private var blueBuzzWebServicePostLocation = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/PostLocationByInstanceId")!
+private var blueBuzzWebServiceCheckDistanceByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/CheckDistanceByInstanceId")!
 
 
 // Implement WCSessionDelegate methods to receive Watch Connectivity data and notify clients.
@@ -33,6 +34,7 @@ private var blueBuzzWebServicePostLocation = URL(string: "https://91ccdda5.us-so
 //
 class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
     
+    private var retval = false
     // Called when WCSession activation state is changed.
     //
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
@@ -189,6 +191,52 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
             }.resume()
         
         return retval
+    }
+    
+    public func checkDistanceByInstanceId(commandStatus: CommandStatus) -> Bool {
+        let serviceUrl = blueBuzzWebServiceCheckDistanceByInstanceId
+        
+        let instanceId = commandStatus.instanceId
+        
+        let parameterDictionary = [
+            "instanceId" : "\(instanceId)",
+        ]
+        var request = URLRequest(url: serviceUrl)
+        request.httpMethod = "POST"
+        request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("a5e5ee30-1346-4eaf-acdd-e1a7dccdec20", forHTTPHeaderField: "X-IBM-Client-Id")
+        guard let httpBody = try? JSONSerialization.data(
+            withJSONObject: parameterDictionary,
+            options: []) else {
+                return false
+        }
+        request.httpBody = httpBody
+        
+        let session = URLSession.shared
+        session.dataTask(with: request) { (data, response, error) in
+            if let response = response {
+                print(response)
+            }
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                    
+                    //print(json ?? {})
+                    
+                    if let distance = json?["distance"] as? Double {
+                        print("distance: \(distance)")
+                        if (distance > 10) {
+                            self.retval = true
+                        }
+                    }
+                } catch {
+                    print(error)
+                    self.retval = false
+                }
+            }
+            }.resume()
+        
+        return self.retval
     }
     
     func checkLastUpdatedLocationDateTime(lastUpdatedLocationDateTime: Date?) -> Bool {

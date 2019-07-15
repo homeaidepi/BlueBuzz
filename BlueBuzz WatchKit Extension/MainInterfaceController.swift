@@ -34,6 +34,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     private var mapLocation: CLLocationCoordinate2D?
     private var lastUpdatedLocationDateTime: Date?
     private var lastNotifyUiDateTime: Date?
+    private var alerted: Bool = false;
     
     let myDelegate = WKExtension.shared().delegate as! ExtensionDelegate
 
@@ -120,8 +121,24 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         
         do {
             if (myDelegate.postLocationByInstanceId(commandStatus: commandStatus, deviceId: "watchos")) {
-                UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                
                 lastUpdatedLocationDateTime = Date()
+                
+                if (myDelegate.checkDistanceByInstanceId(commandStatus: commandStatus) == true ) {
+                    alerted = myDelegate.scheduleAlertNotifications()
+                    
+                    if (alerted) {
+                        WKInterfaceDevice.current().play(.failure)
+                        WKInterfaceDevice.current().play(.notification)
+                    }
+                } else {
+                    if (alerted == true) {
+                        // previously alerted and now distance is good again
+                        //TODO May need a delay in this logic to keep from too many alerts or too many clears
+                        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                        WKInterfaceDevice.current().play(.success)
+                    }
+                }
                 
                 let data = try JSONEncoder().encode(commandStatus)
                 
@@ -148,7 +165,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         
         if (description.contains("error 0") == false) {
             _ = myDelegate.setCurrentLocation(location: emptyLocation)
-            myDelegate.scheduleNotifications()
+            myDelegate.scheduleWarningNotifications()
         }
     }
     

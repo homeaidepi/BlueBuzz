@@ -18,6 +18,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
     private var locationManager: CLLocationManager?
     private var currentLocation: CLLocation = emptyLocation
     private var lastUpdatedLocationDateTime: Date?
+    private var alerted: Bool = false;
 
     func applicationDidFinishLaunching() {
         initLocationManager()
@@ -49,6 +50,11 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         self.currentLocation = location
         return sessionDelegater.getInstanceIdentifier()
     }
+    
+    public func checkDistanceByInstanceId(commandStatus: CommandStatus) -> Bool {
+        return sessionDelegater.checkDistanceByInstanceId(commandStatus: commandStatus)
+    }
+    
     
     func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
         // Sent when the system needs to launch the application in the background to process tasks. Tasks arrive in a set, so loop through and process each one.
@@ -116,8 +122,22 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         
         //send the cloud the current location information
         if (sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus, deviceId: "watchos")) {
-            UNUserNotificationCenter.current().removeAllDeliveredNotifications()
             lastUpdatedLocationDateTime = Date()
+            
+            if (sessionDelegater.checkDistanceByInstanceId(commandStatus: commandStatus) == true) {
+                self.alerted = scheduleAlertNotifications()
+                if (self.alerted) {
+                    WKInterfaceDevice.current().play(.failure)
+                    WKInterfaceDevice.current().play(.notification)
+                }
+            } else {
+                if (self.alerted == true) {
+                    // previously alerted and now distance is good again
+                    //TODO May need a delay in this logic to keep from too many alerts or too many clears
+                    UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                    WKInterfaceDevice.current().play(.success)
+                }
+            }
         }
     }
 
@@ -128,7 +148,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         
         if (description.contains("error 0") == false) {
             _ = setCurrentLocation(location: emptyLocation)
-            scheduleNotifications()
+            scheduleWarningNotifications()
         }
     }
     
@@ -137,9 +157,59 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
             self.locationManager?.requestLocation()
         }
     }
+    
+    func scheduleAlertNotifications() -> Bool {
+        print("Scheduling alert notification")
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+            // Enable or disable features based on authorization.
+            if granted {
+                
+                // Schedule the request with the system.
+                let notificationCenter = UNUserNotificationCenter.current()
+                let content = UNMutableNotificationContent()
+                
+                let formatter = DateFormatter()
+                formatter.dateFormat = "hh:mm:ss a"
+                let now = formatter.string(from: Date())
+                
+                content.title = NSLocalizedString("Location Warning", comment: now)
+                content.body =  NSLocalizedString("Distance to phone greater then 10 feet", comment: now)
+                content.sound = UNNotificationSound.defaultCritical
+                
+                let trigger = UNTimeIntervalNotificationTrigger.init(
+                    timeInterval: 3,
+                    repeats: false)
+                // Create the trigger as a repeating event.
+                //                var dateComponents = DateComponent()
+                //                dateComponents.calendar = Calendar.current
+                //                dateComponents.second = 30
+                //                let trigger = UNCalendarNotificationTrigger(
+                //                    dateMatching: dateComponents, repeats: true)
+                let identifier = UUID().uuidString
+                let request = UNNotificationRequest.init(
+                    identifier: identifier,
+                    content: content,
+                    trigger: trigger
+                )
+                //notificationCenter.removeAllDeliveredNotifications()
+                notificationCenter.add(request, withCompletionHandler: { (error) in
+                    if error != nil {
+                        // Handle any errors.
+                        print (error!.localizedDescription)
+                        self.alerted = false
+                    }
+                    else {
+                        self.alerted = true
+                    }
+                })
+            }
+        }
+        return self.alerted
+    }
  
-    func scheduleNotifications() {
-        print("Scheduling notifications")
+    func scheduleWarningNotifications() {
+        print("Scheduling warning notification")
 
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (granted, error) in
             // Enable or disable features based on authorization.
