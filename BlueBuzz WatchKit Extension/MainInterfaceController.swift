@@ -33,6 +33,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     private var location: CLLocation?
     private var mapLocation: CLLocationCoordinate2D?
     private var instanceId: String = ""
+    private var lastUpdatedLocationDateTime: Date?
     
     let myDelegate = WKExtension.shared().delegate as! ExtensionDelegate
 
@@ -72,6 +73,10 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
+        if (SessionDelegater().checkLastUpdatedLocationDateTime(lastUpdatedLocationDateTime: lastUpdatedLocationDateTime) == false) {
+            return
+        }
+        
         //Step 1 get current location from locationManager return result
         let currentLocation = locations[0]
         let lat = currentLocation.coordinate.latitude
@@ -102,20 +107,21 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
                                            errorMessage: emptyError)
         
         do {
-            myDelegate.postLocationByInstanceId(commandStatus: commandStatus, deviceId: "watchos")
-            
-            let data = try JSONEncoder().encode(commandStatus)
-            
-            //let jsonString = String(data: data, encoding: .utf8)!
-            //print(jsonString)
-            
-            WCSession.default.sendMessageData(data, replyHandler: {
-              replyHandler in
-                },
-              errorHandler: { error in
-                commandStatus.errorMessage = error.localizedDescription
-            })
-            
+            if (myDelegate.postLocationByInstanceId(commandStatus: commandStatus, deviceId: "watchos")) {
+                let data = try JSONEncoder().encode(commandStatus)
+                
+                //let jsonString = String(data: data, encoding: .utf8)!
+                //print(jsonString)
+                
+                WCSession.default.sendMessageData(data, replyHandler: {
+                  replyHandler in
+                    },
+                  errorHandler: { error in
+                    commandStatus.errorMessage = error.localizedDescription
+                })
+                
+                lastUpdatedLocationDateTime = Date()
+            }
         } catch {
             commandStatus.errorMessage = "Send Location Error"
         }
@@ -135,7 +141,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     }
     
     func applicationDidEnterBackground() {
-        myDelegate.scheduleRefresh()
+        //myDelegate.scheduleRefresh()
         myDelegate.scheduleNotifications()
     }
     
@@ -165,11 +171,11 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
 
         locationManager = CLLocationManager()
         locationManager?.delegate = self
-        //locationManager?.requestWhenInUseAuthorization()
         locationManager?.requestAlwaysAuthorization()
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.allowsBackgroundLocationUpdates = true
-        locationManager?.requestLocation()
+        locationManager?.startUpdatingLocation()
+        //locationManager?.requestLocation()
         
         // For .updateAppConnection, retrieve the receieved app context if any and update the UI.
 //        if command == .updateAppConnection {

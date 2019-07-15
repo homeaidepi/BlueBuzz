@@ -20,13 +20,19 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
     private var lastUpdatedLocationDateTime: Date?
 
     func applicationDidFinishLaunching() {
+        initLocationManager()
+        return
+    }
+    
+    func initLocationManager()
+    {
         locationManager = CLLocationManager()
         locationManager?.delegate = self
         locationManager?.requestAlwaysAuthorization()
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.allowsBackgroundLocationUpdates = true
-        locationManager?.requestLocation()
-        return
+        locationManager?.startUpdatingLocation()
+        //locationManager?.requestLocation()
     }
     
     func applicationDidBecomeActive() {
@@ -37,7 +43,6 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, etc.
         print("application will resign active")
-        scheduleRefresh()
     }
     
     public func setCurrentLocation(location: CLLocation) -> String {
@@ -51,9 +56,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
             // Use a switch statement to check the task type
             switch task {
             case let backgroundTask as WKApplicationRefreshBackgroundTask:
-                
-                self.locationManager!.requestLocation()
-                
+                // do work here
                 // Be sure to complete the background task once you’re done.
                 backgroundTask.setTaskCompleted()
             default:
@@ -113,44 +116,15 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         
         //send the cloud the current location information
         if (sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus, deviceId: "watchos")) {
-            //perform(#selector(callback), with: nil, afterDelay: 5.0)
             lastUpdatedLocationDateTime = Date()
         }
     }
-    
-//    @objc func callback() {
-//        print("done")
-//        let locationManager = CLLocationManager()
-//        locationManager.delegate = self
-//        locationManager.requestAlwaysAuthorization()
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        locationManager.allowsBackgroundLocationUpdates = true
-//        locationManager.startUpdatingLocation()
-//        //locationManager.requestLocation()
-//    }
-    
-//    public func delay(bySeconds seconds: Double, dispatchLevel: DispatchLevel = .main, closure: @escaping () -> Void) {
-//        let dispatchTime = DispatchTime.now() + seconds
-//        dispatchLevel.dispatchQueue.asyncAfter(deadline: dispatchTime, execute: closure)
-//    }
-//
-//    public enum DispatchLevel {
-//        case main, userInteractive, userInitiated, utility, background
-//        var dispatchQueue: DispatchQueue {
-//            switch self {
-//            case .main:                 return DispatchQueue.main
-//            case .userInteractive:      return DispatchQueue.global(qos: .userInteractive)
-//            case .userInitiated:        return DispatchQueue.global(qos: .userInitiated)
-//            case .utility:              return DispatchQueue.global(qos: .utility)
-//            case .background:           return DispatchQueue.global(qos: .background)
-//            }
-//        }
-//    }
+
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error.localizedDescription)
+        _ = setCurrentLocation(location: emptyLocation)
         scheduleNotifications()
-        //myDelegate.setCurrentLocation(location: emptyLocation)
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -181,7 +155,6 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                     content.sound = UNNotificationSound.defaultCritical
                 } else {
                     notificationCenter.removeAllDeliveredNotifications()
-                    //self.locationManager?.requestLocation()
                     return
                 }
                 
