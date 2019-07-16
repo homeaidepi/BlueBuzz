@@ -76,13 +76,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Shared/SessionDelegater.swift"
-            timestampString = "584928397.384107"
+            timestampString = "584944257.6090339"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "session(_:didReceiveApplicationContext:)"
-            landmarkType = "7">
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -124,13 +124,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BlueBuzz WatchKit Extension/MainInterfaceController.swift"
-            timestampString = "584928397.384228"
+            timestampString = "584936183.808429"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "190"
             endingLineNumber = "190"
-            landmarkName = "locationManager(_:didFailWithError:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -140,13 +140,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BlueBuzz WatchKit Extension/MainInterfaceController.swift"
-            timestampString = "584928397.384294"
+            timestampString = "584936183.808515"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "159"
             endingLineNumber = "159"
-            landmarkName = "locationManager(_:didUpdateLocations:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BlueBuzz WatchKit Extension/ExtensionDelegate.swift"
+            timestampString = "584936183.808634"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "312"
+            endingLineNumber = "312"
+            landmarkName = "ExtensionDelegate"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Shared/SessionDelegater.swift"
+            timestampString = "584944257.609404"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

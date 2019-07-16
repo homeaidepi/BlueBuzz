@@ -131,7 +131,7 @@ class MainViewController: UIViewController {
         if (instanceId != emptyInstanceIdentifier)
         {
             //todo dont need to save every message. Only once. 
-            SessionDelegater().saveInstanceIdentifier(identifier: instanceId)
+            SessionDelegater().saveInstanceIdentifier(instanceId: instanceId)
         }
         
         //log the messageData i.e location to the screen else show command

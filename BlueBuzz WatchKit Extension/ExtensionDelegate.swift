@@ -241,7 +241,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         if (instanceId == "")
         {
             instanceId = UUID().uuidString
-            sessionDelegater.saveInstanceIdentifier(identifier: instanceId)
+            sessionDelegater.saveInstanceIdentifier(instanceId: instanceId)
         }
         
         let commandStatus = CommandStatus(command: .sendMessageData,
@@ -296,6 +296,8 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         WCSession.default.delegate = sessionDelegater
         WCSession.default.activate()
         
+        sessionDelegater.registerDefaultSettings()
+        
         let instanceId = sessionDelegater.getInstanceIdentifier()
         // we are going to keep a guid that indicates a unique id or (instance) of this shared connection between watch and phone for the purposes of cloud communication
         //
@@ -303,6 +305,8 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         {
             sendInstanceIdMessage();
         }
+        
+        
     }
     
 }

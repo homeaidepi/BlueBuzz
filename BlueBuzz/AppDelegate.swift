@@ -33,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, C
         WCSession.default.delegate = sessionDelegater
         WCSession.default.activate()
         
+        sessionDelegater.registerDefaultSettings()
+        
         // Remind the setup of WatchSettings.sharedContainerID.
         //
         if WatchSettings.sharedContainerID.isEmpty {
@@ -42,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, C
         registerForPushNotifications()
         registerForLocation()
         registerBackgroundTask()
-
+        
         return true
     }
     

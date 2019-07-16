@@ -34,6 +34,8 @@
 		40DD4D8E1EA6B7510074E73F /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
 		E6140ED422DB79A800B961F0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6140ED322DB79A800B961F0 /* CoreLocation.framework */; };
 		E64DFB0022D1A65B00C91B3D /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E64DFAFF22D1A65B00C91B3D /* UserNotifications.framework */; };
+		E6B6421C22DD6569002254D3 /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
+		E6B6421D22DD656B002254D3 /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
 		E6C25B9822D959A400D9A1FD /* MongoDBConnection.uri in Resources */ = {isa = PBXBuildFile; fileRef = E6C25B9722D959A400D9A1FD /* MongoDBConnection.uri */; };
 		E6C25B9D22D9663600D9A1FD /* BlueBuzzAPI.json in Resources */ = {isa = PBXBuildFile; fileRef = E6C25B9C22D9663600D9A1FD /* BlueBuzzAPI.json */; };
 		E6C25B9F22D9666A00D9A1FD /* BlueBuzzAPI.yaml in Resources */ = {isa = PBXBuildFile; fileRef = E6C25B9E22D9666A00D9A1FD /* BlueBuzzAPI.yaml */; };
@@ -321,7 +323,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -404,6 +406,7 @@
 			files = (
 				40D46F661E8065200077A7B7 /* Assets.xcassets in Resources */,
 				40D46F641E8065200077A7B7 /* Interface.storyboard in Resources */,
+				E6B6421D22DD656B002254D3 /* Settings-Watch.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +414,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6B6421C22DD6569002254D3 /* Settings-Watch.bundle in Resources */,
 				40D46F761E8065200077A7B7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
