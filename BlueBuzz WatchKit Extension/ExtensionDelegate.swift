@@ -15,14 +15,39 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         return SessionDelegater()
     }()
     
+    private var blueBuzzAppGroup = "group.com.homeaidepi.bluebuzz1"
     private var locationManager: CLLocationManager?
     private var currentLocation: CLLocation = emptyLocation
     private var lastUpdatedLocationDateTime: Date?
     private var alerted: Bool = false;
+    private var instanceId: String = ""
+    private var secondsBeforeCheckingLocation: Int = 45
+    private var secondsBeforeCheckingDistance: Int = 60
+    private var distanceBeforeNotifying: Double = 100
 
     func applicationDidFinishLaunching() {
+        
         initLocationManager()
         return
+    }
+    
+    func initSettings() {
+        self.instanceId = sessionDelegater.getInstanceIdentifier()
+        self.secondsBeforeCheckingLocation = sessionDelegater.getSecondsBeforeCheckingLocation()
+        self.secondsBeforeCheckingDistance = sessionDelegater.getSecondsBeforeCheckingDistance()
+        self.distanceBeforeNotifying = sessionDelegater.getDistanceBeforeNotifying()
+        
+        // we are going to keep a guid that indicates a unique id or (instance) of this shared connection between watch and phone for the purposes of cloud communication
+        //
+        print(instanceId)
+        print(secondsBeforeCheckingDistance)
+        print(secondsBeforeCheckingLocation)
+        print(distanceBeforeNotifying)
+        
+        if (instanceId == "")
+        {
+            sendInstanceIdMessage();
+        }
     }
     
     func initLocationManager()
@@ -54,7 +79,8 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         let location = locations[0]
         
         //set the current location in the extension delegate
-        let instanceId = setCurrentLocation(location: location)
+        currentLocation = location
+        let instanceId = sessionDelegater.getInstanceIdentifier()
         
         //send the companion phone app the location data if in range
         let commandStatus = CommandStatus(command: .sendMessageData,
@@ -90,7 +116,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         print(description)
         
         if (description.contains("error 0") == false) {
-            _ = setCurrentLocation(location: emptyLocation)
+            setCurrentLocation(location: emptyLocation)
             scheduleWarningNotifications()
         }
     }
@@ -105,17 +131,24 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         return sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus, deviceId: deviceId)
     }
     
-    public func setCurrentLocation(location: CLLocation) -> String {
+    public func setCurrentLocation(location: CLLocation) {
         self.currentLocation = location
-        return sessionDelegater.getInstanceIdentifier()
     }
     
     public func checkDistanceByInstanceId(commandStatus: CommandStatus) -> Bool {
         return sessionDelegater.checkDistanceByInstanceId(commandStatus: commandStatus)
     }
     
-    public func checkSecondsSinceLastUpdatedLocation() -> Int {
-        return sessionDelegater.getSecondsSinceLastUpdatedLocation()
+    public func getInstanceId() -> String {
+        return sessionDelegater.getInstanceIdentifier()
+    }
+
+    public func getSecondsBeforeCheckingLocation() -> Int {
+        return sessionDelegater.getSecondsBeforeCheckingLocation()
+    }
+    
+    public func getSecondsBeforeCheckingDistance() -> Int {
+        return sessionDelegater.getSecondsBeforeCheckingDistance()
     }
     
     func scheduleAlertNotifications() -> Bool {
@@ -233,11 +266,11 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         }
     }
     
-    private func sendInstanceIdMessage()
-    {
-        var instanceId = sessionDelegater.getInstanceIdentifier()
+    private func sendInstanceIdMessage() {
+        
         // we are going to keep a guid that indicates a unique id or (instance) of this shared connection between watch and phone for the purposes of cloud communication
         //
+        var instanceId = sessionDelegater.getInstanceIdentifier()
         if (instanceId == "")
         {
             instanceId = UUID().uuidString
@@ -286,27 +319,12 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         super.init()
         assert(WCSession.isSupported(), "BlueBuzz requires Apple Watch!")
         
-        if WatchSettings.sharedContainerID.isEmpty {
-            print("Specify shared container ID for WatchSettings.sharedContainerID to use watch settings!")
-        }
-        
         // Activate the session asynchronously as early as possible.
         // In the case of being background launched with a task, this may save some background runtime budget.
         //
         WCSession.default.delegate = sessionDelegater
         WCSession.default.activate()
         
-        sessionDelegater.registerDefaultSettings()
-        
-        let instanceId = sessionDelegater.getInstanceIdentifier()
-        // we are going to keep a guid that indicates a unique id or (instance) of this shared connection between watch and phone for the purposes of cloud communication
-        //
-        if (instanceId == "")
-        {
-            sendInstanceIdMessage();
-        }
-        
-        
+        initSettings()
     }
-    
 }

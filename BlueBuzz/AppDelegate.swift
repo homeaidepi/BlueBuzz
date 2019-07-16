@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, C
     private var locationManager: CLLocationManager?
     private var currentLocation: CLLocation = emptyLocation
     private var lastUpdatedLocationDateTime: Date?
-
+    
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -33,19 +33,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, C
         WCSession.default.delegate = sessionDelegater
         WCSession.default.activate()
         
-        sessionDelegater.registerDefaultSettings()
-        
-        // Remind the setup of WatchSettings.sharedContainerID.
-        //
-        if WatchSettings.sharedContainerID.isEmpty {
-            print("Specify a shared container ID for WatchSettings.sharedContainerID to use watch settings!")
-        }
-        
+        registerSettings()
         registerForPushNotifications()
         registerForLocation()
         registerBackgroundTask()
         
         return true
+    }
+    
+    func registerSettings() {
+        sessionDelegater.registerSettings()
+    }
+    
+    func saveInstanceIdentifier(instanceId: String) {
+        sessionDelegater.saveInstanceIdentifier(instanceId: instanceId)
     }
     
     func registerForLocation()
@@ -124,9 +125,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, C
         
         //Step 1 get current location from locationManager return result
         let location = locations[0]
+        currentLocation = location
         
         //set the current location in the extension delegate
-        let instanceId = setCurrentLocation(location: location)
+        let instanceId = sessionDelegater.getInstanceIdentifier()
         
         //send the companion phone app the location data if in range
         let commandStatus = CommandStatus(command: .sendMessageData,
@@ -154,9 +156,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, C
         }
     }
     
-    func setCurrentLocation(location: CLLocation) -> String {
-        self.currentLocation = location
-        return sessionDelegater.getInstanceIdentifier()
-    }
+//    func setCurrentLocation(location: CLLocation) -> String {
+//        self.currentLocation = location
+//        return sessionDelegater.getInstanceIdentifier()
+//    }
     
 }

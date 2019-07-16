@@ -153,6 +153,7 @@
 				40AF22981F29236300E6D1A8 /* SessionDelegater.swift */,
 				40DC7D0E1EA8186200A93AFB /* Logger.swift */,
 				E6C25B9722D959A400D9A1FD /* MongoDBConnection.uri */,
+				40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -194,7 +195,6 @@
 				40D46F551E8065200077A7B7 /* Assets.xcassets */,
 				40D46F571E8065200077A7B7 /* LaunchScreen.storyboard */,
 				40D46F5A1E8065200077A7B7 /* Info.plist */,
-				40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */,
 			);
 			path = BlueBuzz;
 			sourceTree = "<group>";

@@ -34,7 +34,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     private var lastUpdatedLocationDateTime: Date?
     private var lastNotifyUiDateTime: Date?
     private var alerted: Bool = false;
-    
+
     let myDelegate = WKExtension.shared().delegate as! ExtensionDelegate
 
     // Context == nil: the fist-time loading, load pages with reloadRootController then
@@ -124,7 +124,8 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         let long = currentLocation.coordinate.longitude
         
         //set the current location in the extension delegate
-        let instanceId = myDelegate.setCurrentLocation(location: currentLocation)
+        myDelegate.setCurrentLocation(location: currentLocation)
+        let instanceId = myDelegate.getInstanceId()
         
         //step 2 assign local variables
         self.location = currentLocation
@@ -307,7 +308,7 @@ extension MainInterfaceController { // MARK: - Update status view.
                 return true
             }
             
-            if (secondsSinceLastUpdatedLocation > myDelegate.checkSecondsSinceLastUpdatedLocation()) {
+            if (secondsSinceLastUpdatedLocation > myDelegate.getSecondsBeforeCheckingLocation()) {
                 return true
             }
         } else {

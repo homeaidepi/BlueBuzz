@@ -28,13 +28,99 @@ extension Notification.Name {
 //
 class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
     
-    var blueBuzzAppGroup = "group.com.homeaidepi.bluebuzz1"
     var blueBuzzIbmSharingApiKey = "a5e5ee30-1346-4eaf-acdd-e1a7dccdec20"
     var blueBuzzWebServiceGetLocationByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/getlocationbyinstanceid")!
     var blueBuzzWebServicePostLocation = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/PostLocationByInstanceId")!
     var blueBuzzWebServiceCheckDistanceByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/CheckDistanceByInstanceId")
 
     private var retval = false
+    private var instanceId: String = ""
+    private var secondsBeforeCheckingLocation: Int = 45
+    private var secondsBeforeCheckingDistance: Int = 60
+    private var distanceBeforeNotifying: Double = 100
+    
+    //Settings
+    //
+    public func registerSettings()
+    {
+        self.instanceId = getInstanceIdentifier()
+        
+        if (self.instanceId == emptyInstanceIdentifier) {
+            initSettings()
+        } else {
+            self.secondsBeforeCheckingLocation = getSecondsBeforeCheckingLocation()
+            self.secondsBeforeCheckingDistance = getSecondsBeforeCheckingDistance()
+            self.distanceBeforeNotifying = getDistanceBeforeNotifying()
+        }
+    }
+    
+    func initSettings() {
+        saveSecondsBeforeCheckingDistance(secondsBeforeCheckingDistance: 45)
+        saveSecondsBeforeCheckingLocation(secondsBeforeCheckingLocation: 60)
+        saveDistanceBeforeNotifying(distanceBeforeNotifying: 100)
+    }
+    
+    //instance id get set
+    public func getInstanceIdentifier() -> String {
+        let defaults = UserDefaults.standard
+        
+        // Get the saved String from the standard UserDefaults with the key, "instanceId"
+        let instanceId = defaults.string(forKey: instanceIdentifierKey) ?? ""
+        
+        return instanceId
+    }
+    
+    public func saveInstanceIdentifier(instanceId: String) {
+        let defaults = UserDefaults.standard
+        
+        defaults.set(instanceId, forKey: instanceIdentifierKey)
+    }
+    
+    //Seconds before checking location get set
+    public func getSecondsBeforeCheckingLocation() -> Int {
+        let defaults = UserDefaults.standard
+        
+        // Get the saved int from the standard UserDefaults with the key, "secondsSinceLastUpdatedLocation"
+        let secondsBeforeCheckingLocation = defaults.integer(forKey: secondsBeforeCheckingLocationKey)
+        
+        return secondsBeforeCheckingLocation
+    }
+    
+    public func saveSecondsBeforeCheckingLocation(secondsBeforeCheckingLocation: Int) {
+        let defaults = UserDefaults.standard
+        
+        defaults.set(secondsBeforeCheckingLocation, forKey: secondsBeforeCheckingLocationKey)
+    }
+    
+    //Seconds before checking distance get set
+    public func getSecondsBeforeCheckingDistance() -> Int {
+        let defaults = UserDefaults.standard
+        
+        let secondsBeforeCheckingDistance = defaults.integer(forKey: secondsBeforeCheckingDistanceKey)
+        
+        return secondsBeforeCheckingDistance
+    }
+    
+    public func saveSecondsBeforeCheckingDistance(secondsBeforeCheckingDistance: Int) {
+        let defaults = UserDefaults.standard
+        
+        defaults.set(secondsBeforeCheckingDistance, forKey: secondsBeforeCheckingDistanceKey)
+    }
+    
+    //Distance Before Notifying get set
+    public func getDistanceBeforeNotifying() -> Double {
+        let defaults = UserDefaults.standard
+        
+        let distanceBeforeNotifying = defaults.double(forKey: distanceBeforeNotifyingKey)
+        
+        return distanceBeforeNotifying
+    }
+    
+    public func saveDistanceBeforeNotifying(distanceBeforeNotifying: Int) {
+        let defaults = UserDefaults.standard
+        
+        defaults.set(distanceBeforeNotifying, forKey: distanceBeforeNotifyingKey)
+    }
     // Called when WCSession activation state is changed.
     //
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
@@ -121,76 +207,6 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
             NotificationCenter.default.post(name: name, object: object)
         }
     }
-        
-    //Settings
-    //
-    public func registerDefaultSettings()
-    {
-        let defaults = UserDefaults(suiteName: blueBuzzAppGroup)
-        
-        let defaultSettings = [instanceIdentifierKey: "",
-                               secondsSinceLastUpdatedLocationKey : 31,
-                               secondsBeforeCheckingDistanceKey : 32,
-                               distanceBeforeNotifyingKey: 62] as [String : Any]
-        
-        //if (defaults == nil) {
-            defaults?.register(defaults: defaultSettings)
-            defaults?.synchronize()
-//        } else {
-//            let sync = defaults?.synchronize()
-//            print("sync: \(sync ?? false)")
-//        }
-    }
-    
-    public func getInstanceIdentifier() -> String
-    {
-        let defaults = UserDefaults(suiteName: blueBuzzAppGroup)
-        
-        // Get the saved String from the standard UserDefaults with the key, "instanceId"
-        let instanceId = defaults?.string(forKey: instanceIdentifierKey) ?? ""
-        
-        return instanceId
-    }
-    
-    public func saveInstanceIdentifier(instanceId: String)
-    {
-        let defaults = UserDefaults(suiteName: blueBuzzAppGroup)
-        
-        let defaultSettings = [instanceIdentifierKey : instanceId]
-        
-        defaults?.register(defaults: defaultSettings)
-    }
-    
-    public func getSecondsSinceLastUpdatedLocation() -> Int
-    {
-        let defaults = UserDefaults(suiteName: blueBuzzAppGroup)
-        
-        // Get the saved int from the standard UserDefaults with the key, "secondsSinceLastUpdatedLocation"
-        let secondsSinceLastUpdatedLocation = defaults?.integer(forKey: secondsSinceLastUpdatedLocationKey) ?? 45
-        
-        return secondsSinceLastUpdatedLocation
-    }
-    
-    public func getSecondsBeforeCheckingDistance() -> Int
-    {
-        let defaults = UserDefaults(suiteName:
-            "group.com.homeaidepi.bluebuzz1")
-        
-        let secondsBeforeCheckingDistance = defaults?.integer(forKey: secondsBeforeCheckingDistanceKey) ?? 45
-        
-        return secondsBeforeCheckingDistance
-    }
-    
-    public func getDistanceBeforeNotifying() -> Double
-    {
-        let defaults = UserDefaults(suiteName:
-            "group.com.homeaidepi.bluebuzz1")
-        
-        let distanceBeforeNotifying = defaults?.double(forKey: distanceBeforeNotifyingKey) ?? 50
-        
-        return distanceBeforeNotifying
-    }
-    
     
     public func postLocationByInstanceId(commandStatus: CommandStatus, deviceId: String) -> Bool {
         let serviceUrl = blueBuzzWebServicePostLocation
@@ -270,7 +286,7 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
                     
                     if let distance = json?["distance"] as? Double {
                         print("distance: \(distance)")
-                        if (distance > self.getDistanceBeforeNotifying()) {
+                        if (distance > self.distanceBeforeNotifying) {
                             self.retval = true
                         }
                     }
@@ -302,7 +318,7 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
                 return true
             }
             
-            if (secondsSinceLastUpdatedLocation > getSecondsBeforeCheckingDistance()) {
+            if (secondsSinceLastUpdatedLocation > secondsBeforeCheckingDistance) {
                 return true
             }
         } else {

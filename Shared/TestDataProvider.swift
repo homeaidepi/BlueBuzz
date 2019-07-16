@@ -18,16 +18,6 @@ struct PayloadKey {
     static let isCurrentComplicationInfo = "isCurrentComplicationInfo"
 }
 
-// Constants to identify the app group container used for Settings-Watch.bundle and access
-// the information in Settings-Watch.bundle.
-//
-struct WatchSettings {
-    //static let sharedContainerID = "" // Specify your group container ID here and Root.plist to make watch settings work.
-    static let sharedContainerID = "com.homeaidepi.bluebuzz1"
-    static let useLogFileForFileTransfer = "useLogFileForFileTransfer"
-    static let clearLogsAfterTransferred = "clearLogsAfterTransferred"
-}
-
 // Define the interfaces for providing payload for Watch Connectivity APIs.
 // MainViewController and MainInterfaceController adopt this protocol.
 //

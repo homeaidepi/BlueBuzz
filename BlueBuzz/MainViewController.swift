@@ -16,6 +16,10 @@ class MainViewController: UIViewController {
     @IBOutlet weak var noteLabel: UILabel!
     @IBOutlet weak var tablePlaceholderView: UIView!
     
+    private lazy var sessionDelegater: SessionDelegater = {
+        return SessionDelegater()
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -130,18 +134,18 @@ class MainViewController: UIViewController {
         
         if (instanceId != emptyInstanceIdentifier)
         {
-            //todo dont need to save every message. Only once. 
-            SessionDelegater().saveInstanceIdentifier(instanceId: instanceId)
+            //todo dont need to save every message. Only once.
+            sessionDelegater.saveInstanceIdentifier(instanceId: instanceId)
         }
         
         //log the messageData i.e location to the screen else show command
         //
-        if (lat != emptyDegrees && long != emptyDegrees)
-        {
-            log("-> id:\(instanceId) \(lat):\(long) \(commandStatus.command.rawValue): \(commandStatus.phrase.rawValue) at \(timedColor.timeStamp)")
-        }
-        else {
-            log("-> id:\(instanceId) \(commandStatus.command.rawValue): \(commandStatus.phrase.rawValue) at \(timedColor.timeStamp)")
-        }
+//        if (lat != emptyDegrees && long != emptyDegrees)
+//        {
+            log("-> id:\(instanceId) lat:\(lat) long:\(long) secCheckLocation:\(sessionDelegater.getSecondsBeforeCheckingLocation()) secCheckDistance:\(sessionDelegater.getSecondsBeforeCheckingDistance()) distanceBeforeNotifying:\(sessionDelegater.getDistanceBeforeNotifying()) \(commandStatus.command.rawValue): \(commandStatus.phrase.rawValue) at \(timedColor.timeStamp)")
+//        }
+//        else {
+//            log("-> id:\(instanceId) \(commandStatus.command.rawValue): \(commandStatus.phrase.rawValue) at \(timedColor.timeStamp)")
+//        }
     }
 }
