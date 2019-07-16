@@ -31,9 +31,7 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
     var blueBuzzIbmSharingApiKey = "a5e5ee30-1346-4eaf-acdd-e1a7dccdec20"
     var blueBuzzWebServiceGetLocationByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/getlocationbyinstanceid")!
     var blueBuzzWebServicePostLocation = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/PostLocationByInstanceId")!
-    var blueBuzzWebServiceCheckDistanceByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/CheckDistanceByInstanceId")!
-    var secondsBeforeCheckingDistance = 45;
-    var distanceBeforeNotifying: Double = 100;
+    var blueBuzzWebServiceCheckDistanceByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/CheckDistanceByInstanceId")
 
     private var retval = false
     // Called when WCSession activation state is changed.
@@ -138,7 +136,6 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
     }
     
     // we are going to keep a guid that indicates a unique id or (instance) of this shared connection for the purposes of cloud communication
-    //
     public func saveInstanceIdentifier(identifier: String)
     {
         // Get the standard UserDefaults as "defaults"
@@ -146,6 +143,63 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         
         // Save the String to the standard UserDefaults under the key, instanceIdentifierKey
         defaults.set(identifier, forKey: instanceIdentifierKey)
+    }
+    
+    public func getSecondsSinceLastUpdatedLocation() -> Int
+    {
+        // String to be filled with the saved value from UserDefaults
+        var secondsSinceLastUpdatedLocation:Int = 45
+        
+        // Get the standard UserDefaults as "defaults"
+        let defaults = UserDefaults.standard
+        
+        // Get the saved int from the standard UserDefaults with the key, "secondsSinceLastUpdatedLocation"
+        secondsSinceLastUpdatedLocation = defaults.integer(forKey: secondsSinceLastUpdatedLocationKey)
+        
+        return secondsSinceLastUpdatedLocation
+    }
+    
+    public func saveSecondsSinceLastUpdatedLocation(seconds: Int)
+    {
+        let defaults = UserDefaults.standard
+        
+        defaults.set(seconds, forKey: secondsSinceLastUpdatedLocationKey)
+    }
+    
+    public func getSecondsBeforeCheckingDistance() -> Int
+    {
+        var secondsBeforeCheckingDistance:Int = 45
+        
+        let defaults = UserDefaults.standard
+        
+        secondsBeforeCheckingDistance = defaults.integer(forKey: secondsBeforeCheckingDistanceKey)
+        
+        return secondsBeforeCheckingDistance
+    }
+    
+    public func saveSecondsBeforeCheckingDistance(seconds: Int)
+    {
+        let defaults = UserDefaults.standard
+        
+        defaults.set(seconds, forKey: secondsBeforeCheckingDistanceKey)
+    }
+    
+    public func getDistanceBeforeNotifying() -> Double
+    {
+        var distanceBeforeNotifying:Double = 100
+        
+        let defaults = UserDefaults.standard
+        
+        distanceBeforeNotifying = defaults.double(forKey: distanceBeforeNotifyingKey)
+        
+        return distanceBeforeNotifying
+    }
+    
+    public func saveDistanceBeforeNotifying(distance: Double)
+    {
+        let defaults = UserDefaults.standard
+        
+        defaults.set(distance, forKey: distanceBeforeNotifyingKey)
     }
     
     public func postLocationByInstanceId(commandStatus: CommandStatus, deviceId: String) -> Bool {
@@ -195,7 +249,7 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
     }
     
     public func checkDistanceByInstanceId(commandStatus: CommandStatus) -> Bool {
-        let serviceUrl = blueBuzzWebServiceCheckDistanceByInstanceId
+        let serviceUrl = blueBuzzWebServiceCheckDistanceByInstanceId!
         
         let instanceId = commandStatus.instanceId
         
@@ -226,7 +280,7 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
                     
                     if let distance = json?["distance"] as? Double {
                         print("distance: \(distance)")
-                        if (distance > self.distanceBeforeNotifying) {
+                        if (distance > self.getDistanceBeforeNotifying()) {
                             self.retval = true
                         }
                     }
@@ -258,7 +312,7 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
                 return true
             }
             
-            if (secondsSinceLastUpdatedLocation > secondsBeforeCheckingDistance) {
+            if (secondsSinceLastUpdatedLocation > getSecondsBeforeCheckingDistance()) {
                 return true
             }
         } else {

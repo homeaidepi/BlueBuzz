@@ -114,6 +114,10 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         return sessionDelegater.checkDistanceByInstanceId(commandStatus: commandStatus)
     }
     
+    public func checkSecondsSinceLastUpdatedLocation() -> Int {
+        return sessionDelegater.getSecondsSinceLastUpdatedLocation()
+    }
+    
     func scheduleAlertNotifications() -> Bool {
         print("Scheduling alert notification")
         
@@ -130,7 +134,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                 let now = formatter.string(from: Date())
                 
                 content.title = NSLocalizedString("Location Warning", comment: now)
-                content.body =  NSLocalizedString("Distance to phone greater then \(self.sessionDelegater.distanceBeforeNotifying) feet", comment: now)
+                content.body =  NSLocalizedString("Distance to phone greater then \(self.sessionDelegater.getDistanceBeforeNotifying()) feet", comment: now)
                 content.sound = UNNotificationSound.defaultCritical
                 
                 let trigger = UNTimeIntervalNotificationTrigger.init(

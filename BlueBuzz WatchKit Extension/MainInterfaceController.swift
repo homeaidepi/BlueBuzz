@@ -307,7 +307,7 @@ extension MainInterfaceController { // MARK: - Update status view.
                 return true
             }
             
-            if (secondsSinceLastUpdatedLocation > 30) {
+            if (secondsSinceLastUpdatedLocation > myDelegate.checkSecondsSinceLastUpdatedLocation()) {
                 return true
             }
         } else {
