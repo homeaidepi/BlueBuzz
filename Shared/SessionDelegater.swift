@@ -23,18 +23,18 @@ extension Notification.Name {
     static let reachabilityDidChange = Notification.Name("ReachabilityDidChange")
 }
 
-private var blueBuzzIbmSharingApiKey = "a5e5ee30-1346-4eaf-acdd-e1a7dccdec20"
-private var blueBuzzWebServiceGetLocationByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/getlocationbyinstanceid")!
-private var blueBuzzWebServicePostLocation = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/PostLocationByInstanceId")!
-private var blueBuzzWebServiceCheckDistanceByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/CheckDistanceByInstanceId")!
-private var secondsBeforeCheckingDistance = 45;
-private var distanceBeforeNotifying: Double = 100;
-
 // Implement WCSessionDelegate methods to receive Watch Connectivity data and notify clients.
 // WCsession status changes are also handled here.
 //
 class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
     
+    var blueBuzzIbmSharingApiKey = "a5e5ee30-1346-4eaf-acdd-e1a7dccdec20"
+    var blueBuzzWebServiceGetLocationByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/getlocationbyinstanceid")!
+    var blueBuzzWebServicePostLocation = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/PostLocationByInstanceId")!
+    var blueBuzzWebServiceCheckDistanceByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/CheckDistanceByInstanceId")!
+    var secondsBeforeCheckingDistance = 45;
+    var distanceBeforeNotifying: Double = 100;
+
     private var retval = false
     // Called when WCSession activation state is changed.
     //
@@ -226,7 +226,7 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
                     
                     if let distance = json?["distance"] as? Double {
                         print("distance: \(distance)")
-                        if (distance > distanceBeforeNotifying) {
+                        if (distance > self.distanceBeforeNotifying) {
                             self.retval = true
                         }
                     }

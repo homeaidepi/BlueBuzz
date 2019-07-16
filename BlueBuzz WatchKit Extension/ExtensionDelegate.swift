@@ -41,62 +41,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
     }
     
     func applicationWillResignActive() {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, etc.
         print("application will resign active")
-    }
-    
-    public func setCurrentLocation(location: CLLocation) -> String {
-        self.currentLocation = location
-        return sessionDelegater.getInstanceIdentifier()
-    }
-    
-    public func checkDistanceByInstanceId(commandStatus: CommandStatus) -> Bool {
-        return sessionDelegater.checkDistanceByInstanceId(commandStatus: commandStatus)
-    }
-    
-    
-    func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
-        // Sent when the system needs to launch the application in the background to process tasks. Tasks arrive in a set, so loop through and process each one.
-        for task in backgroundTasks {
-            // Use a switch statement to check the task type
-            switch task {
-            case let backgroundTask as WKApplicationRefreshBackgroundTask:
-                // do work here
-                // Be sure to complete the background task once you’re done.
-                backgroundTask.setTaskCompleted()
-            default:
-                // make sure to complete unhandled task types
-                task.setTaskCompleted()
-            }
-        }
-    }
-    
-    override init() {
-        super.init()
-        assert(WCSession.isSupported(), "BlueBuzz requires Apple Watch!")
-        
-        if WatchSettings.sharedContainerID.isEmpty {
-            print("Specify shared container ID for WatchSettings.sharedContainerID to use watch settings!")
-        }
-        
-        // Activate the session asynchronously as early as possible.
-        // In the case of being background launched with a task, this may save some background runtime budget.
-        //
-        WCSession.default.delegate = sessionDelegater
-        WCSession.default.activate()
-        
-        let instanceId = sessionDelegater.getInstanceIdentifier()
-        // we are going to keep a guid that indicates a unique id or (instance) of this shared connection between watch and phone for the purposes of cloud communication
-        //
-        if (instanceId == "")
-        {
-            sendInstanceIdMessage();
-        }
-    }
-    
-    public func postLocationByInstanceId(commandStatus: CommandStatus, deviceId: String) -> Bool {
-        return sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus, deviceId: deviceId)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -124,24 +69,22 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         if (sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus, deviceId: "watchos")) {
             lastUpdatedLocationDateTime = Date()
             
-            if (sessionDelegater.checkDistanceByInstanceId(commandStatus: commandStatus) == true) {
-                self.alerted = scheduleAlertNotifications()
-                if (self.alerted) {
-                    WKInterfaceDevice.current().play(.failure)
-                    WKInterfaceDevice.current().play(.notification)
+            if (WCSession.default.isReachable == false) {
+                if (sessionDelegater.checkDistanceByInstanceId(commandStatus: commandStatus) == true) {
+                    self.alerted = scheduleAlertNotifications()
+                    if (self.alerted) {
+                        WKInterfaceDevice.current().play(.failure)
+                        WKInterfaceDevice.current().play(.notification)
+                    }
+                } else {
+                    UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                 }
             } else {
-                if (self.alerted == true) {
-                    // previously alerted and now distance is good again
-                    //TODO May need a delay in this logic to keep from too many alerts or too many clears
-                    UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-                    WKInterfaceDevice.current().play(.success)
-                }
+                UNUserNotificationCenter.current().removeAllDeliveredNotifications()
             }
         }
     }
-
-
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         let description = error.localizedDescription
         print(description)
@@ -156,6 +99,19 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         if status == .authorizedAlways {
             self.locationManager?.requestLocation()
         }
+    }
+    
+    public func postLocationByInstanceId(commandStatus: CommandStatus, deviceId: String) -> Bool {
+        return sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus, deviceId: deviceId)
+    }
+    
+    public func setCurrentLocation(location: CLLocation) -> String {
+        self.currentLocation = location
+        return sessionDelegater.getInstanceIdentifier()
+    }
+    
+    public func checkDistanceByInstanceId(commandStatus: CommandStatus) -> Bool {
+        return sessionDelegater.checkDistanceByInstanceId(commandStatus: commandStatus)
     }
     
     func scheduleAlertNotifications() -> Bool {
@@ -174,18 +130,12 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                 let now = formatter.string(from: Date())
                 
                 content.title = NSLocalizedString("Location Warning", comment: now)
-                content.body =  NSLocalizedString("Distance to phone greater then 10 feet", comment: now)
+                content.body =  NSLocalizedString("Distance to phone greater then \(self.sessionDelegater.distanceBeforeNotifying) feet", comment: now)
                 content.sound = UNNotificationSound.defaultCritical
                 
                 let trigger = UNTimeIntervalNotificationTrigger.init(
                     timeInterval: 30,
                     repeats: false)
-                // Create the trigger as a repeating event.
-                //                var dateComponents = DateComponent()
-                //                dateComponents.calendar = Calendar.current
-                //                dateComponents.second = 30
-                //                let trigger = UNCalendarNotificationTrigger(
-                //                    dateMatching: dateComponents, repeats: true)
                 let identifier = UUID().uuidString
                 let request = UNNotificationRequest.init(
                     identifier: identifier,
@@ -310,8 +260,45 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         } catch {
             print("Send Message Data")
         }
-        
     }
     
+    func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
+        // Sent when the system needs to launch the application in the background to process tasks. Tasks arrive in a set, so loop through and process each one.
+        for task in backgroundTasks {
+            // Use a switch statement to check the task type
+            switch task {
+            case let backgroundTask as WKApplicationRefreshBackgroundTask:
+                // do work here
+                // Be sure to complete the background task once you’re done.
+                backgroundTask.setTaskCompleted()
+            default:
+                // make sure to complete unhandled task types
+                task.setTaskCompleted()
+            }
+        }
+    }
+    
+    override init() {
+        super.init()
+        assert(WCSession.isSupported(), "BlueBuzz requires Apple Watch!")
+        
+        if WatchSettings.sharedContainerID.isEmpty {
+            print("Specify shared container ID for WatchSettings.sharedContainerID to use watch settings!")
+        }
+        
+        // Activate the session asynchronously as early as possible.
+        // In the case of being background launched with a task, this may save some background runtime budget.
+        //
+        WCSession.default.delegate = sessionDelegater
+        WCSession.default.activate()
+        
+        let instanceId = sessionDelegater.getInstanceIdentifier()
+        // we are going to keep a guid that indicates a unique id or (instance) of this shared connection between watch and phone for the purposes of cloud communication
+        //
+        if (instanceId == "")
+        {
+            sendInstanceIdMessage();
+        }
+    }
     
 }

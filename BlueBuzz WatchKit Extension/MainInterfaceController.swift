@@ -25,7 +25,6 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     @IBOutlet var mapObject: WKInterfaceMap!
 
     // Retain the controllers so that we don't have to reload root controllers for every switch.
-    //
     static var instances = [MainInterfaceController]()
     
     private var command: Command?
@@ -41,7 +40,6 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     // Context == nil: the fist-time loading, load pages with reloadRootController then
     // Context != nil: Loading the pages, save the controller instances so that we can
     // switch pages more smoothly.
-    //
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
@@ -55,7 +53,6 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         }
         
         // Install notification observer.
-        //
         NotificationCenter.default.addObserver(
             self, selector: #selector(type(of: self).dataDidFlow(_:)),
             name: .dataDidFlow, object: nil
@@ -71,6 +68,37 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         
         initLocationManager()
         notifyUI();
+    }
+    
+    func applicationDidEnterBackground() {
+        return
+    }
+    
+    func applicationDidBecomeActive() {
+        notifyUI()
+        return
+    }
+    
+    func applicationWillResignActive() {
+        print("application will resign active")
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    override func willActivate() {
+        super.willActivate()
+        
+        
+        notifyUI()
+        lastUpdatedLocationDateTime = nil;
+        locationManager?.requestLocation()
+        
+        // Update the status group background color.
+        //
+        statusGroup.setBackgroundColor(.black)
+        
     }
     
     func initLocationManager()
@@ -121,29 +149,24 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         
         do {
             if (myDelegate.postLocationByInstanceId(commandStatus: commandStatus, deviceId: "watchos")) {
-                
                 lastUpdatedLocationDateTime = Date()
                 
-                if (myDelegate.checkDistanceByInstanceId(commandStatus: commandStatus) == true ) {
-                    alerted = myDelegate.scheduleAlertNotifications()
-                    
-                    if (alerted) {
-                        WKInterfaceDevice.current().play(.failure)
-                        WKInterfaceDevice.current().play(.notification)
+                if (WCSession.default.isReachable == false) {
+                    if (myDelegate.checkDistanceByInstanceId(commandStatus: commandStatus) == true ) {
+                        alerted = myDelegate.scheduleAlertNotifications()
+                        
+                        if (alerted) {
+                            WKInterfaceDevice.current().play(.failure)
+                            WKInterfaceDevice.current().play(.notification)
+                        }
+                    } else {
+                        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                     }
                 } else {
-                    if (alerted == true) {
-                        // previously alerted and now distance is good again
-                        //TODO May need a delay in this logic to keep from too many alerts or too many clears
-                        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-                        WKInterfaceDevice.current().play(.success)
-                    }
+                    UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                 }
                 
                 let data = try JSONEncoder().encode(commandStatus)
-                
-                //let jsonString = String(data: data, encoding: .utf8)!
-                //print(jsonString)
                 
                 WCSession.default.sendMessageData(data, replyHandler: {
                   replyHandler in
@@ -175,48 +198,8 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         }
     }
     
-    func applicationDidEnterBackground() {
-        return
-    }
-    
-    func applicationDidBecomeActive() {
-        notifyUI()
-        return
-    }
-    
-    func applicationWillResignActive() {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, etc.
-        print("application will resign active")
-    }
-    
-//    @objc private func deinitLocationManager() {
-//        locationManager = nil
-//    }
-    
-    deinit {
-        //NotificationCenter.default.removeObserver(self)
-        //cant deinit the location manager as we run in the background
-//        self.performSelector(onMainThread: #selector(deinitLocationManager), with: nil, waitUntilDone: true)
-    }
-    
-    override func willActivate() {
-        super.willActivate()
-
-        
-        notifyUI()
-        lastUpdatedLocationDateTime = nil;
-        locationManager?.requestLocation()
-        
-        // Update the status group background color.
-        //
-        statusGroup.setBackgroundColor(.black)
-
-    }
-    
     // Load paged-based UI.
     // If a current context is specified, use the timed color it provided.
-    //
     private func reloadRootController(with currentContext: CommandStatus? = nil) {
         //let commands: [Command] = [.updateAppConnection, .sendMessage, .sendMessageData]
         let commands: [Command] = [.sendMessageData]
@@ -245,7 +228,6 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     }
     
     // .dataDidFlow notification handler. Update the UI based on the command status.
-    //
     @objc
     func dataDidFlow(_ notification: Notification) {
         guard let commandStatus = notification.object as? CommandStatus else { return }
@@ -259,22 +241,17 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         }
     }
     // .activationDidComplete notification handler.
-    //
     @objc
     func activationDidComplete(_ notification: Notification) {
-        //print("\(#function): activationState:\(WCSession.default.activationState.rawValue)")
     }
     
     // .reachabilityDidChange notification handler.
-    //
     @objc
     func reachabilityDidChange(_ notification: Notification) {
         notifyUI();
-        //print("\(#function): isReachable:\(WCSession.default.isReachable)")
     }
  
     // Do the command associated with the current page.
-    //
     @IBAction func commandAction() {
         guard let command = command
         else {
@@ -282,9 +259,6 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         }
         
         switch command {
-        //case .updateAppConnection: updateAppConnection(appConnection)
-        //case .sendMessage: sendMessage(message)
-        //case .sendMessageData: sendMessageData(messageData, location: location, instanceId: instanceId)
         case .sendMessageData:  sendLocation();
         }
     }
@@ -293,7 +267,6 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
 extension MainInterfaceController { // MARK: - Update status view.
     
     //Play haptic notifications to the user and display some updated data
-    //
     private func notifyUI() {
         
         if (shouldNotifyUi()) {
@@ -346,7 +319,6 @@ extension MainInterfaceController { // MARK: - Update status view.
     
     // Update the user interface with the command status.
     // Note that there isn't a timed color when the interface controller is initially loaded.
-    //
     private func updateUI(with commandStatus: CommandStatus) {
         let timedColor = commandStatus.timedColor
         let title = NSAttributedString(string: commandStatus.command.rawValue,
@@ -365,3 +337,7 @@ extension MainInterfaceController { // MARK: - Update status view.
         print("id: " + commandStatus.instanceId)
     }
 }
+
+//extra code to save
+//let jsonString = String(data: data, encoding: .utf8)!
+//print(jsonString)
