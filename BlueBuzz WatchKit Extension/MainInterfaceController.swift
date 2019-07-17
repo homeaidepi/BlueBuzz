@@ -34,6 +34,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     private var lastUpdatedLocationDateTime: Date?
     private var lastNotifyUiDateTime: Date?
     private var alerted: Bool = false;
+    private var sendMessageDataImmediately: Bool = false;
 
     let myDelegate = WKExtension.shared().delegate as! ExtensionDelegate
 
@@ -114,8 +115,11 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        if (SessionDelegater().checkLastUpdatedLocationDateTime(lastUpdatedLocationDateTime: lastUpdatedLocationDateTime) == false) {
-            return
+        //escapements for either send immediately or delay based on time settings
+        if (sendMessageDataImmediately == false) {
+            if (SessionDelegater().checkLastUpdatedLocationDateTime(lastUpdatedLocationDateTime: lastUpdatedLocationDateTime) == false) {
+                return
+            }
         }
         
         //Step 1 get current location from locationManager return result
@@ -145,11 +149,12 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
                                            latitude: currentLocation.coordinate.latitude,
                                            longitude: currentLocation.coordinate.longitude,
                                            instanceId: instanceId,
+                                           deviceId: "watchos",
                                            timedColor: TimedColor(ibmBlueColor),
                                            errorMessage: emptyError)
         
         do {
-            if (myDelegate.postLocationByInstanceId(commandStatus: commandStatus, deviceId: "watchos")) {
+            if (myDelegate.postLocationByInstanceId(commandStatus: commandStatus)) {
                 lastUpdatedLocationDateTime = Date()
                 
                 if (WCSession.default.isReachable == false) {
@@ -212,6 +217,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
                                          latitude: emptyDegrees,
                                          longitude: emptyDegrees,
                                          instanceId: emptyInstanceIdentifier,
+                                         deviceId: "watchos",
                                          timedColor: defaultColor,
                                          errorMessage: emptyError)
             
@@ -285,6 +291,7 @@ extension MainInterfaceController { // MARK: - Update status view.
     }
         
     func sendLocation() {
+        sendMessageDataImmediately = true
         statusLabel.setText("Getting location... \n Sending location.")
         WKInterfaceDevice.current().play(.click)
         locationManager?.requestLocation()

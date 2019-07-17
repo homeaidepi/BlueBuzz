@@ -18,82 +18,24 @@ import CoreLocation
 protocol SessionCommands {
     //func updateAppConnection(_ context: [String: Any])
     //func sendMessage(_ message: [String: Any])
-    func sendMessageData(_ messageData: Data, location: CLLocation?, instanceId: String)
+    func sendMessageData(_ messageData: Data, location: CLLocation?, instanceId: String, deviceId: String)
 }
 
 // Implement the commands. Every command handles the communication and notifies clients
 // when WCSession status changes or data flows. Shared by the iOS app and watchOS app.
 //
 extension SessionCommands {
-    // Update app connection if the session is activated and update UI with the command status.
-    //
-//    func updateAppConnection(_ context: [String: Any]) {
-//
-//        var command = CommandStatus(command: .updateAppConnection,
-//                                          phrase: .unauthorized,
-//                                          latitude: emptyDegrees,
-//                                          longitude: emptyDegrees,
-//                                          instanceId: emptyInstanceIdentifier,
-//                                          timedColor: defaultColor,
-//                                          errorMessage: emptyError)
-//
-//        if (WCSession.default.activationState == .activated)
-//        {
-//            command.phrase = .authorized
-//        }
-//        else {
-//            let center = UNUserNotificationCenter.current()
-//
-//            center.requestAuthorization(options: [.sound]) { (granted, error) in
-//                if granted {
-//                    command.phrase = .authorized
-//                } else {
-//                    command.phrase = .unauthorized
-//                    command.errorMessage = "You have not accepted location services."
-//                }
-//            }
-//        }
-//
-//        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: command)
-//    }
-    
-    // Send a message if the session is activated and update UI with the command status.
-    //
-//    func sendMessage(_ message: [String: Any]) {
-//        var commandStatus = CommandStatus(command: .sendMessage,
-//                                          phrase: .sent,
-//                                          latitude: emptyDegrees,
-//                                          longitude: emptyDegrees,
-//                                          instanceId: emptyInstanceIdentifier,
-//                                          timedColor: TimedColor(message),
-//                                          errorMessage: emptyError)
-//
-//        guard WCSession.default.activationState == .activated else {
-//            return handleSessionUnactivated(with: commandStatus)
-//        }
-//
-//        WCSession.default.sendMessage(message, replyHandler: { replyMessage in
-//            commandStatus.phrase = .replied
-//            commandStatus.timedColor = TimedColor(replyMessage)
-//            self.postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
-//
-//        }, errorHandler: { error in
-//            commandStatus.phrase = .failed
-//            commandStatus.errorMessage = error.localizedDescription
-//            self.postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
-//        })
-//        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
-//    }
-    
+ 
     // Send  a piece of message data if the session is activated and update UI with the command status.
     //
-    func sendMessageData(_ messageData: Data, location: CLLocation?, instanceId: String) {
+    func sendMessageData(_ messageData: Data, location: CLLocation?, instanceId: String, deviceId: String) {
         
         var commandStatus =  CommandStatus(command: .sendMessageData,
                                          phrase: .sent,
                                          latitude: location?.coordinate.latitude ?? emptyDegrees,
                                          longitude: location?.coordinate.longitude ?? emptyDegrees,
                                          instanceId: instanceId,
+                                         deviceId: deviceId,
                                          timedColor: TimedColor(messageData),
                                          errorMessage: emptyError)
         

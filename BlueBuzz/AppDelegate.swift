@@ -136,11 +136,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, C
                                             latitude: currentLocation.coordinate.latitude,
                                             longitude: currentLocation.coordinate.longitude,
                                             instanceId: instanceId,
+                                            deviceId: "ios",
                                             timedColor: defaultColor,
                                             errorMessage: emptyError)
         
         //send the cloud the current location information
-        if (sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus, deviceId: "ios")) {
+        if (sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus)) {
             lastUpdatedLocationDateTime = Date()
         }
     }

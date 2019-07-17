@@ -21,6 +21,7 @@ var secondsBeforeCheckingDistanceKey = "secondsBeforeCheckingDistance"
 var distanceBeforeNotifyingKey = "distanceBeforeNotifying"
 var instanceIdentifierKey = "instanceId"
 var emptyInstanceIdentifier = String("")
+var emptyDeviceIdentifier = String("")
 
 // Constants to identify the Watch Connectivity methods, also used as user-visible strings in UI.
 //
@@ -180,6 +181,7 @@ struct CommandStatus: Codable {
     var latitude: CLLocationDegrees
     var longitude: CLLocationDegrees
     var instanceId: String
+    var deviceId: String
     var timedColor: TimedColor
     var errorMessage: String
     
@@ -189,6 +191,7 @@ struct CommandStatus: Codable {
         case latitude
         case longitude
         case instanceId
+        case deviceId
         case timedColor
         case errorMessage
     }
@@ -198,6 +201,7 @@ struct CommandStatus: Codable {
          latitude: CLLocationDegrees,
          longitude: CLLocationDegrees,
          instanceId: String,
+         deviceId: String,
          timedColor: TimedColor,
          errorMessage: String) {
         self.command = command
@@ -205,6 +209,7 @@ struct CommandStatus: Codable {
         self.latitude = latitude
         self.longitude = longitude
         self.instanceId = instanceId
+        self.deviceId = deviceId
         self.timedColor = timedColor
         self.errorMessage = errorMessage
     }
@@ -217,6 +222,7 @@ struct CommandStatus: Codable {
         try container.encode(latitude, forKey: .latitude)
         try container.encode(longitude, forKey: .longitude)
         try container.encode(instanceId, forKey: .instanceId)
+        try container.encode(deviceId, forKey: .deviceId)
         try container.encode(errorMessage, forKey: .errorMessage)
     }
     
@@ -228,6 +234,7 @@ struct CommandStatus: Codable {
         latitude = try container.decode(CLLocationDegrees.self, forKey: .latitude)
         longitude = try container.decode(CLLocationDegrees.self, forKey: .longitude)
         instanceId = try container.decode(String.self, forKey: .instanceId)
+        deviceId = try container.decode(String.self, forKey: .deviceId)
         timedColor = try container.decode(TimedColor.self, forKey: .timedColor)
         errorMessage = try container.decode(String.self, forKey: .errorMessage)
         

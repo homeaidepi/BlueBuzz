@@ -88,11 +88,12 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                                           latitude: currentLocation.coordinate.latitude,
                                           longitude: currentLocation.coordinate.longitude,
                                           instanceId: instanceId,
+                                          deviceId: "watchos",
                                           timedColor: defaultColor,
                                           errorMessage: emptyError)
         
         //send the cloud the current location information
-        if (sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus, deviceId: "watchos")) {
+        if (sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus)) {
             lastUpdatedLocationDateTime = Date()
             
             if (WCSession.default.isReachable == false) {
@@ -127,8 +128,8 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         }
     }
     
-    public func postLocationByInstanceId(commandStatus: CommandStatus, deviceId: String) -> Bool {
-        return sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus, deviceId: deviceId)
+    public func postLocationByInstanceId(commandStatus: CommandStatus) -> Bool {
+        return sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus)
     }
     
     public func setCurrentLocation(location: CLLocation) {
@@ -282,6 +283,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                                           latitude: emptyDegrees,
                                           longitude: emptyDegrees,
                                           instanceId: instanceId,
+                                          deviceId: "watchos",
                                           timedColor: defaultColor,
                                           errorMessage: "")
         

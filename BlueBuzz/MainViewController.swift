@@ -131,6 +131,7 @@ class MainViewController: UIViewController {
         let lat = commandStatus.latitude
         let long = commandStatus.longitude
         let instanceId = commandStatus.instanceId
+        let deviceId = commandStatus.deviceId
         
         if (instanceId != emptyInstanceIdentifier)
         {
@@ -142,7 +143,7 @@ class MainViewController: UIViewController {
         //
 //        if (lat != emptyDegrees && long != emptyDegrees)
 //        {
-            log("-> id:\(instanceId) lat:\(lat) long:\(long) secCheckLocation:\(sessionDelegater.getSecondsBeforeCheckingLocation()) secCheckDistance:\(sessionDelegater.getSecondsBeforeCheckingDistance()) distanceBeforeNotifying:\(sessionDelegater.getDistanceBeforeNotifying()) \(commandStatus.command.rawValue): \(commandStatus.phrase.rawValue) at \(timedColor.timeStamp)")
+        log("{id:\(instanceId), location: { lat:\(lat), long:\(long) }, deviceId: \(deviceId),  secCheckLocation:\(sessionDelegater.getSecondsBeforeCheckingLocation()), secCheckDistance:\(sessionDelegater.getSecondsBeforeCheckingDistance()), distanceBeforeNotifying:\(sessionDelegater.getDistanceBeforeNotifying()), command:\(commandStatus.command.rawValue), phrase:\(commandStatus.phrase.rawValue), timeStamp:\(timedColor.timeStamp)}")
 //        }
 //        else {
 //            log("-> id:\(instanceId) \(commandStatus.command.rawValue): \(commandStatus.phrase.rawValue) at \(timedColor.timeStamp)")

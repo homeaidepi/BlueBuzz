@@ -141,6 +141,7 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
                                           latitude: emptyDegrees,
                                           longitude: emptyDegrees,
                                           instanceId: emptyInstanceIdentifier,
+                                          deviceId: emptyDeviceIdentifier,
                                           timedColor: TimedColor(applicationConnection),
                                           errorMessage: emptyError)
         
@@ -155,6 +156,7 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
                                           latitude: emptyDegrees,
                                           longitude: emptyDegrees,
                                           instanceId: emptyInstanceIdentifier,
+                                          deviceId: emptyDeviceIdentifier,
                                           timedColor: TimedColor(message),
                                           errorMessage: emptyError)
         
@@ -208,13 +210,13 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         }
     }
     
-    public func postLocationByInstanceId(commandStatus: CommandStatus, deviceId: String) -> Bool {
+    public func postLocationByInstanceId(commandStatus: CommandStatus) -> Bool {
         let serviceUrl = blueBuzzWebServicePostLocation
         
         let lat = commandStatus.latitude
         let long = commandStatus.longitude
         let instanceId = commandStatus.instanceId
-        let deviceId = deviceId
+        let deviceId = commandStatus.deviceId
         var retval = true
         
         let parameterDictionary = [
