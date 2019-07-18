@@ -34,6 +34,9 @@
 		40DD4D8E1EA6B7510074E73F /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
 		E6140ED422DB79A800B961F0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6140ED322DB79A800B961F0 /* CoreLocation.framework */; };
 		E64DFB0022D1A65B00C91B3D /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E64DFAFF22D1A65B00C91B3D /* UserNotifications.framework */; };
+		E690119422DFF3FD00BD9C54 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E690119322DFF3FD00BD9C54 /* Podfile */; };
+		E690119522DFF3FD00BD9C54 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E690119322DFF3FD00BD9C54 /* Podfile */; };
+		E690119622DFF3FD00BD9C54 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E690119322DFF3FD00BD9C54 /* Podfile */; };
 		E6B6421C22DD6569002254D3 /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
 		E6B6421D22DD656B002254D3 /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
 		E6C25B9822D959A400D9A1FD /* MongoDBConnection.uri in Resources */ = {isa = PBXBuildFile; fileRef = E6C25B9722D959A400D9A1FD /* MongoDBConnection.uri */; };
@@ -117,6 +120,7 @@
 		E605438722D3E8C9006D121A /* SimpleWatchConnectivity.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimpleWatchConnectivity.entitlements; sourceTree = "<group>"; };
 		E6140ED322DB79A800B961F0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		E64DFAFF22D1A65B00C91B3D /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS5.2.sdk/System/Library/Frameworks/UserNotifications.framework; sourceTree = DEVELOPER_DIR; };
+		E690119322DFF3FD00BD9C54 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		E6C25B9722D959A400D9A1FD /* MongoDBConnection.uri */ = {isa = PBXFileReference; lastKnownFileType = text; name = MongoDBConnection.uri; path = Shared/MongoDBConnection.uri; sourceTree = "<group>"; };
 		E6C25B9C22D9663600D9A1FD /* BlueBuzzAPI.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = BlueBuzzAPI.json; path = Shared/BlueBuzzAPI.json; sourceTree = "<group>"; };
 		E6C25B9E22D9666A00D9A1FD /* BlueBuzzAPI.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = BlueBuzzAPI.yaml; path = Shared/BlueBuzzAPI.yaml; sourceTree = "<group>"; };
@@ -161,6 +165,7 @@
 		40D46F421E8065200077A7B7 = {
 			isa = PBXGroup;
 			children = (
+				E690119322DFF3FD00BD9C54 /* Podfile */,
 				E605438722D3E8C9006D121A /* SimpleWatchConnectivity.entitlements */,
 				40DC7D141EA81D8100A93AFB /* README.md */,
 				4076077B1E81834B00A6A8EA /* Shared */,
@@ -392,6 +397,7 @@
 			files = (
 				40D46F591E8065200077A7B7 /* LaunchScreen.storyboard in Resources */,
 				E6C25B9D22D9663600D9A1FD /* BlueBuzzAPI.json in Resources */,
+				E690119422DFF3FD00BD9C54 /* Podfile in Resources */,
 				E6C25B9F22D9666A00D9A1FD /* BlueBuzzAPI.yaml in Resources */,
 				40D46F561E8065200077A7B7 /* Assets.xcassets in Resources */,
 				40DD4D8E1EA6B7510074E73F /* Settings-Watch.bundle in Resources */,
@@ -406,6 +412,7 @@
 			files = (
 				40D46F661E8065200077A7B7 /* Assets.xcassets in Resources */,
 				40D46F641E8065200077A7B7 /* Interface.storyboard in Resources */,
+				E690119522DFF3FD00BD9C54 /* Podfile in Resources */,
 				E6B6421D22DD656B002254D3 /* Settings-Watch.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -414,6 +421,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E690119622DFF3FD00BD9C54 /* Podfile in Resources */,
 				E6B6421C22DD6569002254D3 /* Settings-Watch.bundle in Resources */,
 				40D46F761E8065200077A7B7 /* Assets.xcassets in Resources */,
 			);

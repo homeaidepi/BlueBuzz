@@ -167,8 +167,8 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                 formatter.dateFormat = "hh:mm:ss a"
                 let now = formatter.string(from: Date())
                 
-                content.title = NSLocalizedString("Location Warning", comment: now)
-                content.body =  NSLocalizedString("Distance to phone greater then \(self.sessionDelegater.getDistanceBeforeNotifying()) feet", comment: now)
+                content.title = NSLocalizedString("Connection Alert", comment: now)
+                content.body =  NSLocalizedString("Phone out of range, signal or disconnected.", comment: now) //\(self.sessionDelegater.getDistanceBeforeNotifying()) feet or Phone ", comment: now)
                 content.sound = UNNotificationSound.defaultCritical
                 
                 let trigger = UNTimeIntervalNotificationTrigger.init(

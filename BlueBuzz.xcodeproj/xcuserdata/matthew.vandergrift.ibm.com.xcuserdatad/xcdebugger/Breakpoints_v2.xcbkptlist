@@ -76,7 +76,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Shared/SessionDelegater.swift"
-            timestampString = "585020361.495852"
+            timestampString = "585025359.809423"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "139"
@@ -124,11 +124,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BlueBuzz WatchKit Extension/MainInterfaceController.swift"
-            timestampString = "585021386.210176"
+            timestampString = "585025359.8095599"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
             landmarkName = "locationManager(_:didFailWithError:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -156,7 +156,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Shared/SessionDelegater.swift"
-            timestampString = "585020361.4960639"
+            timestampString = "585025359.809955"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "154"
@@ -172,12 +172,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Shared/SessionDelegater.swift"
-            timestampString = "585020361.496103"
+            timestampString = "585025359.810001"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "58"
             endingLineNumber = "58"
             landmarkName = "initSettings()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BlueBuzz/MainViewController.swift"
+            timestampString = "585025359.810042"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "updateReachabilityColor()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BlueBuzz WatchKit Extension/MainInterfaceController.swift"
+            timestampString = "585025359.810088"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "267"
+            endingLineNumber = "267"
+            landmarkName = "reachabilityDidChange(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BlueBuzz WatchKit Extension/MainInterfaceController.swift"
+            timestampString = "585025678.693226"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "applicationWillResignActive()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

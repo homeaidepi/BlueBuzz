@@ -76,25 +76,25 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     }
     
     func applicationDidBecomeActive() {
-        notifyUI()
         return
     }
     
     func applicationWillResignActive() {
         print("application will resign active")
+        NotificationCenter.default.removeObserver(self)
+        locationManager?.stopUpdatingLocation()
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
+
     }
     
     override func willActivate() {
         super.willActivate()
         
-        
         notifyUI()
         lastUpdatedLocationDateTime = nil;
-        locationManager?.requestLocation()
+        locationManager?.startUpdatingLocation()
         
         // Update the status group background color.
         //
@@ -109,8 +109,8 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         locationManager?.requestAlwaysAuthorization()
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.allowsBackgroundLocationUpdates = true
-        locationManager?.requestLocation()
-        //locationManager?.startUpdatingLocation()
+        //locationManager?.requestLocation()
+        locationManager?.startUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -256,6 +256,15 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     @objc
     func reachabilityDidChange(_ notification: Notification) {
         notifyUI();
+        
+        var isReachable = false
+        if WCSession.default.activationState == .activated {
+            isReachable = WCSession.default.isReachable
+        }
+        
+        if (isReachable == false) {
+            myDelegate.scheduleAlertNotifications()
+        }
     }
  
     // Do the command associated with the current page.

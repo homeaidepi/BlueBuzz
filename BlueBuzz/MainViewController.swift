@@ -7,6 +7,7 @@ The main view controller of the iOS app.
 
 import UIKit
 import WatchConnectivity
+import UserNotifications
 
 class MainViewController: UIViewController {
         
@@ -90,6 +91,13 @@ class MainViewController: UIViewController {
         }
         reachableLabel.textColor = isReachable ? .green : .red
         reachableLabel.text = isReachable ? "Device Connected" : "Device Disconnected"
+        
+        if (isReachable == false) {
+            return
+        } else {
+            UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        }
+        
     }
     
     // .activationDidComplete notification handler.
