@@ -17,7 +17,29 @@ class MainViewController: UIViewController {
     @IBOutlet weak var pageLabel: UILabel!
     @IBOutlet weak var tablePlaceholderView: UIView!
     @IBOutlet weak var clearButton: UIButton!
+    @IBOutlet weak var secondsBeforeCheckingLocationValue: UISlider!
+    @IBOutlet weak var settingsPanel: UIStackView!
+    
     var dataObject: String = ""
+    
+//    private var instanceId: String = ""
+//    private var secondsBeforeCheckingLocation: Int = 45
+//    private var secondsBeforeCheckingDistance: Int = 60
+//    private var distanceBeforeNotifying: Double = 100
+    
+    @IBAction func secondsBeforeCheckingLocationValueChanged(sender: UISlider) {
+        let currentValue = Int(secondsBeforeCheckingLocationValue.value)
+        print("Slider changing to \(currentValue) ?")
+        sessionDelegater.saveSecondsBeforeCheckingDistance(secondsBeforeCheckingDistance: currentValue)
+        let settings = sessionDelegater.getSettings()
+        
+        do {
+            try WCSession.default.updateApplicationContext(settings)
+        } catch {
+            print("Settings Sync Error")
+        }
+        
+    }
     
     private lazy var sessionDelegater: SessionDelegater = {
         return SessionDelegater()
@@ -45,6 +67,21 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.pageLabel!.text = dataObject
+        
+        if (pageLabel.text == SessionPages.Settings.rawValue) {
+            reachableLabel.isHidden = true
+            clearButton.isHidden = true
+            logView.isHidden = true
+            tableContainerView.isHidden = true
+            settingsPanel.isHidden = false
+            secondsBeforeCheckingLocationValue.value = Float(sessionDelegater.getSecondsBeforeCheckingLocation())
+        } else {
+            settingsPanel.isHidden = true
+            tableContainerView.isHidden = false
+            reachableLabel.isHidden = false
+            clearButton.isHidden = false
+            logView.isHidden = false
+        }
         //self.updateReachabilityColor()
     }
     
@@ -54,14 +91,7 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if (pageLabel.text == SessionPages.Settings.rawValue) {
-            reachableLabel.isHidden = true
-            clearButton.isHidden = true
-            logView.isHidden = true
-        } else {
-            reachableLabel.isHidden = false
-            clearButton.isHidden = false
-            logView.isHidden = false
+        if (pageLabel.text == SessionPages.History.rawValue) {
             let layer = CALayer()
             layer.shadowOpacity = 1.0
             layer.shadowOffset = CGSize(width: 0, height: 1)

@@ -36,7 +36,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qjE-hX-evH">
-                                <rect key="frame" x="16" y="99" width="376" height="591"/>
+                                <rect key="frame" x="263" y="99" width="129" height="591"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -65,13 +65,37 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qPL-DJ-6vn">
+                                <rect key="frame" x="65" y="350" width="336" height="49.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seconds Before Checking Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJq-BM-LKF">
+                                        <rect key="frame" x="0.0" y="0.0" width="336" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="10" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="zQe-zy-bR5" userLabel="Seconds Before Checking Location">
+                                        <rect key="frame" x="-2" y="20.5" width="340" height="30"/>
+                                        <accessibility key="accessibilityConfiguration" label="Seconds Before Checking Location"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="29" id="ZRY-MI-m8f"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="secondsBeforeCheckingLocationValueChangedWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="6jl-g3-f8Y"/>
+                                        </connections>
+                                    </slider>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="qjE-hX-evH" firstAttribute="trailing" secondItem="AgY-JW-uOJ" secondAttribute="trailing" id="1S3-8m-fk5"/>
                             <constraint firstItem="Nar-Xb-h9G" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="762" id="6Pv-ew-9NP"/>
+                            <constraint firstItem="Yzd-6G-Wtl" firstAttribute="trailing" secondItem="qPL-DJ-6vn" secondAttribute="trailing" constant="13" id="9ve-69-Df4"/>
                             <constraint firstItem="Nar-Xb-h9G" firstAttribute="bottom" secondItem="Yzd-6G-Wtl" secondAttribute="bottom" id="Cyx-QB-hBd"/>
                             <constraint firstItem="cLY-TK-31d" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Fd5-4Y-5x7"/>
+                            <constraint firstItem="qPL-DJ-6vn" firstAttribute="leading" secondItem="Yzd-6G-Wtl" secondAttribute="leading" constant="65" id="H7H-0q-Y8Z"/>
+                            <constraint firstItem="qPL-DJ-6vn" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="350" id="HoR-WA-Ytf"/>
                             <constraint firstItem="cLY-TK-31d" firstAttribute="top" secondItem="Yzd-6G-Wtl" secondAttribute="top" constant="12" id="JBM-p7-PtR"/>
                             <constraint firstItem="AgY-JW-uOJ" firstAttribute="top" secondItem="Yzd-6G-Wtl" secondAttribute="top" constant="5" id="JYe-26-MSN"/>
                             <constraint firstItem="la5-4T-2zy" firstAttribute="baseline" secondItem="EGo-8a-hTu" secondAttribute="firstBaseline" id="TzP-uP-VZx"/>
@@ -94,6 +118,8 @@
                         <outlet property="logView" destination="qjE-hX-evH" id="Cs7-O7-xL9"/>
                         <outlet property="pageLabel" destination="la5-4T-2zy" id="gzX-bK-v7f"/>
                         <outlet property="reachableLabel" destination="cLY-TK-31d" id="n5Y-z5-sDS"/>
+                        <outlet property="secondsBeforeCheckingLocationValue" destination="zQe-zy-bR5" id="TT3-8G-h8G"/>
+                        <outlet property="settingsPanel" destination="qPL-DJ-6vn" id="c9E-nQ-UbY"/>
                         <outlet property="tableContainerView" destination="Nar-Xb-h9G" id="L0D-m5-TJS"/>
                         <outlet property="tablePlaceholderView" destination="fs3-Ag-kBY" id="zfs-Oj-QQf"/>
                     </connections>

@@ -104,6 +104,8 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         let defaults = UserDefaults.standard
         
         defaults.set(instanceId, forKey: instanceIdentifierKey)
+        
+        self.instanceId = instanceId
     }
     
     //Seconds before checking location get set
@@ -120,6 +122,8 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         let defaults = UserDefaults.standard
         
         defaults.set(secondsBeforeCheckingLocation, forKey: secondsBeforeCheckingLocationKey)
+        
+        self.secondsBeforeCheckingLocation = secondsBeforeCheckingLocation
     }
     
     //Seconds before checking distance get set
@@ -135,6 +139,8 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         let defaults = UserDefaults.standard
         
         defaults.set(secondsBeforeCheckingDistance, forKey: secondsBeforeCheckingDistanceKey)
+        
+        self.secondsBeforeCheckingDistance = secondsBeforeCheckingDistance
     }
     
     //Distance Before Notifying get set
@@ -150,6 +156,8 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         let defaults = UserDefaults.standard
         
         defaults.set(distanceBeforeNotifying, forKey: distanceBeforeNotifyingKey)
+        
+        self.distanceBeforeNotifying = distanceBeforeNotifying
     }
     // Called when WCSession activation state is changed.
     //
