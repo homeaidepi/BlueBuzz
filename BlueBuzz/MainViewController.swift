@@ -18,6 +18,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var tablePlaceholderView: UIView!
     @IBOutlet weak var clearButton: UIButton!
     @IBOutlet weak var secondsBeforeCheckingLocationValue: UISlider!
+    @IBOutlet weak var secondsBeforeCheckingDistanceValue: UISlider!
+    @IBOutlet weak var distanceBeforeNotifyingValue: UISlider!
     @IBOutlet weak var settingsPanel: UIStackView!
     
     var dataObject: String = ""
@@ -30,7 +32,29 @@ class MainViewController: UIViewController {
     @IBAction func secondsBeforeCheckingLocationValueChanged(sender: UISlider) {
         let currentValue = Int(secondsBeforeCheckingLocationValue.value)
         print("Slider changing to \(currentValue) ?")
+        sessionDelegater.saveSecondsBeforeCheckingLocation(secondsBeforeCheckingLocation: currentValue)
+        
+        syncSettings()
+    }
+    
+    @IBAction func secondsBeforeCheckingDistanceValueChanged(sender: UISlider) {
+        let currentValue = Int(secondsBeforeCheckingDistanceValue.value)
+        print("Slider changing to \(currentValue) ?")
         sessionDelegater.saveSecondsBeforeCheckingDistance(secondsBeforeCheckingDistance: currentValue)
+        
+        syncSettings()
+    }
+    
+    @IBAction func distanceBeforeNotifyingValueChanged(sender: UISlider) {
+        let currentValue = Double(distanceBeforeNotifyingValue.value)
+        print("Slider changing to \(currentValue) ?")
+        sessionDelegater.saveDistanceBeforeNotifying(distanceBeforeNotifying: currentValue)
+        
+        syncSettings()
+    }
+    
+    func syncSettings()
+    {
         let settings = sessionDelegater.getSettings()
         
         do {
@@ -38,7 +62,6 @@ class MainViewController: UIViewController {
         } catch {
             print("Settings Sync Error")
         }
-        
     }
     
     private lazy var sessionDelegater: SessionDelegater = {
@@ -75,6 +98,9 @@ class MainViewController: UIViewController {
             tableContainerView.isHidden = true
             settingsPanel.isHidden = false
             secondsBeforeCheckingLocationValue.value = Float(sessionDelegater.getSecondsBeforeCheckingLocation())
+            secondsBeforeCheckingDistanceValue.value =
+                Float(sessionDelegater.getSecondsBeforeCheckingDistance())
+            distanceBeforeNotifyingValue.value = Float(sessionDelegater.getDistanceBeforeNotifying())
         } else {
             settingsPanel.isHidden = true
             tableContainerView.isHidden = false
