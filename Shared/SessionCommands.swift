@@ -12,12 +12,15 @@ import WatchConnectivity
 import UserNotifications
 import CoreLocation
 
+enum SessionPages: String {
+    case History = "History"
+    case Settings = "Settings"
+}
 // Define an interface to wrap Watch Connectivity APIs and
 // bridge the UI. Shared by the iOS app and watchOS app.
 //
 protocol SessionCommands {
-    //func updateAppConnection(_ context: [String: Any])
-    //func sendMessage(_ message: [String: Any])
+    func updateApplicationContext(applicationContext: [String : Any])
     func sendMessageData(_ messageData: Data, location: CLLocation?, instanceId: String, deviceId: String)
 }
 
@@ -26,6 +29,17 @@ protocol SessionCommands {
 //
 extension SessionCommands {
  
+    // This is where the settings sync!
+    // Yes, that's it!
+    // Just updateApplicationContext on the session with a string array of settings
+    func updateApplicationContext(applicationContext: [String : Any]) throws {
+        do {
+            try WCSession.default.updateApplicationContext(applicationContext)
+        } catch let error {
+            throw error
+        }
+    }
+    
     // Send  a piece of message data if the session is activated and update UI with the command status.
     //
     func sendMessageData(_ messageData: Data, location: CLLocation?, instanceId: String, deviceId: String) {

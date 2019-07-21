@@ -60,6 +60,36 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         saveDistanceBeforeNotifying(distanceBeforeNotifying: 100)
     }
     
+    func getSettings() -> [String: Any] {
+        let settings = [
+            instanceIdentifierKey: instanceId,
+            secondsBeforeCheckingLocationKey: secondsBeforeCheckingLocation,
+            secondsBeforeCheckingDistanceKey: secondsBeforeCheckingDistance,
+            distanceBeforeNotifyingKey: distanceBeforeNotifying] as [String : Any]
+        
+        return settings;
+    }
+    
+    func saveSettings(applicationContext: [String: Any]) {
+        let instanceId = applicationContext[instanceIdentifierKey] as? String ?? ""
+        let secondsBeforeCheckingLocation = applicationContext[secondsBeforeCheckingLocationKey] as? Int ?? 0
+        let secondsBeforeCheckingDistance = applicationContext[secondsBeforeCheckingDistanceKey] as? Int ?? 0
+        let distanceBeforeNotifying = applicationContext[distanceBeforeNotifyingKey] as? Double ?? 0
+        
+        if (instanceId != "") {
+            saveInstanceIdentifier(instanceId: instanceId)
+        }
+        if (secondsBeforeCheckingLocation != 0) {
+            saveSecondsBeforeCheckingLocation(secondsBeforeCheckingLocation: secondsBeforeCheckingLocation)
+        }
+        if (secondsBeforeCheckingDistance != 0) {
+            saveSecondsBeforeCheckingDistance(secondsBeforeCheckingDistance: secondsBeforeCheckingDistance)
+        }
+        if (distanceBeforeNotifying != 0) {
+            saveDistanceBeforeNotifying(distanceBeforeNotifying: distanceBeforeNotifying )
+        }
+    }
+    
     //instance id get set
     public func getInstanceIdentifier() -> String {
         let defaults = UserDefaults.standard
@@ -116,7 +146,7 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         return distanceBeforeNotifying
     }
     
-    public func saveDistanceBeforeNotifying(distanceBeforeNotifying: Int) {
+    public func saveDistanceBeforeNotifying(distanceBeforeNotifying: Double) {
         let defaults = UserDefaults.standard
         
         defaults.set(distanceBeforeNotifying, forKey: distanceBeforeNotifyingKey)
@@ -135,14 +165,17 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
     
     // Called when an app context is received.
     //
-    func session(_ session: WCSession, didReceiveApplicationContext applicationConnection: [String: Any]) {
-        let commandStatus = CommandStatus(command: .sendMessageData,
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
+        let instanceId = applicationContext[instanceIdentifierKey] as? String ?? emptyInstanceIdentifier
+        
+        
+        let commandStatus = CommandStatus(command: .updateAppConnection,
                                           phrase: .received,
                                           latitude: emptyDegrees,
                                           longitude: emptyDegrees,
-                                          instanceId: emptyInstanceIdentifier,
+                                          instanceId: instanceId,
                                           deviceId: emptyDeviceIdentifier,
-                                          timedColor: TimedColor(applicationConnection),
+                                          timedColor: TimedColor(applicationContext),
                                           errorMessage: emptyError)
         
         postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
@@ -165,16 +198,17 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
     
     // Called when a message is received and the peer needs a response.
     //
-    func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
-        self.session(session, didReceiveMessage: message)
-        replyHandler(message) // Echo back the time stamp.
-    }
+    //    func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
+    //        self.session(session, didReceiveMessage: message)
+    //        replyHandler(message) // Echo back the time stamp.
+    //    }
     
     // Called when a piece of message data is received and the peer doesn't need a response.
     //
     func session(_ session: WCSession, didReceiveMessageData messageData: Data) {
-        let commandStatus = try? JSONDecoder().decode(CommandStatus.self, from: messageData)
+        var commandStatus = try? JSONDecoder().decode(CommandStatus.self, from: messageData)
         
+        commandStatus?.phrase = .received
         postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
     }
     

@@ -9,6 +9,8 @@ import UIKit
 import WatchConnectivity
 import UserNotifications
 import CoreLocation
+//import BMSCore
+//import BMSPush
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, CLLocationManagerDelegate {

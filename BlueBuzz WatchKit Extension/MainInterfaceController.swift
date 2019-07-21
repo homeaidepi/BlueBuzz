@@ -159,12 +159,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
                 
                 if (WCSession.default.isReachable == false) {
                     if (myDelegate.checkDistanceByInstanceId(commandStatus: commandStatus) == true ) {
-                        alerted = myDelegate.scheduleAlertNotifications()
-                        
-                        if (alerted) {
-                            WKInterfaceDevice.current().play(.failure)
-                            WKInterfaceDevice.current().play(.notification)
-                        }
+                        myDelegate.scheduleAlertNotifications()
                     } else {
                         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                     }
@@ -276,6 +271,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         
         switch command {
         case .sendMessageData:  sendLocation();
+        case .updateAppConnection: updateApplicationContext(applicationContext: myDelegate.getSettings())
         }
     }
 }
@@ -347,11 +343,37 @@ extension MainInterfaceController { // MARK: - Update status view.
         if commandStatus.errorMessage != "" {
             statusLabel.setText("! \(commandStatus.errorMessage)")
         } else {
+            if (commandStatus.command == .updateAppConnection) {
+                statusLabel.setText("Settings Synced")
+            } else {
             statusLabel.setText(commandStatus.phrase.rawValue + " at\n" + timedColor.timeStamp)
+            }
         }
         statusLabel.setTextColor(timedColor.color.color)
         
         print("id: " + commandStatus.instanceId)
+    }
+    
+    //send the settings to the ios device
+    func updateApplicationContext(applicationContext: [String : Any]) {
+        //send the companion phone app the location data if in range
+        var commandStatus = CommandStatus(command: .updateAppConnection,
+                                          phrase: .transferring,
+                                          latitude: emptyDegrees,
+                                          longitude:emptyDegrees,
+                                          instanceId: myDelegate.getInstanceId(),
+                                          deviceId: "ios",
+                                          timedColor: TimedColor(ibmBlueColor),
+                                          errorMessage: emptyError)
+        
+        do {
+            try WCSession.default.updateApplicationContext(applicationContext)
+            
+        } catch {
+            commandStatus.errorMessage = "Sync Settings Error"
+        }
+        
+        updateUI(with: commandStatus)
     }
 }
 

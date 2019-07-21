@@ -10,7 +10,11 @@ import WatchConnectivity
 import Foundation
 
 class CommandsViewController: UITableViewController, TestDataProvider, SessionCommands {
-
+    func updateApplicationContext(applicationContext: [String : Any]) {
+        return;
+    }
+    
+    
     // List the supported methods, shown in the main table.
     //
     //let commands: [Command] = [.updateAppConnection, .sendMessage, .sendMessageData]
@@ -98,6 +102,8 @@ extension CommandsViewController { // MARK: - UITableViewDelegate and UITableVie
         currentCommand = commands[indexPath.row]
         switch currentCommand {
             case .sendMessageData: sendMessageData(messageData, location: location, instanceId: SessionDelegater().getInstanceIdentifier(), deviceId: "ios")
+        case .updateAppConnection: updateApplicationContext(applicationContext: SessionDelegater().getSettings())
+            
         }
     }
 }
@@ -118,9 +124,6 @@ enum SerializationError: Error {
     case missing(String)
     case invalid(String, Any)
 }
-
-//    log("{id:\(instanceId), location: { lat:\(lat), long:\(long) }, deviceId: \(deviceId),  secCheckLocation:\(sessionDelegater.getSecondsBeforeCheckingLocation()), secCheckDistance:\(sessionDelegater.getSecondsBeforeCheckingDistance()), distanceBeforeNotifying:\(sessionDelegater.getDistanceBeforeNotifying()), command:\(commandStatus.command.rawValue), phrase:\(commandStatus.phrase.rawValue), timeStamp:\(timedColor.timeStamp)}")
-//        }
 
 extension NSObject{
     convenience init(jsonStr:String) {
@@ -149,58 +152,3 @@ extension NSObject{
         }
     }
 }
-
-//extension CommandPhrase {
-//    init(json: [String: Any]) throws {
-//        // Extract properties
-//        guard let id = json["name"] as? String else {
-//            throw SerializationError.missing("id")
-//        }
-//        guard let deviceId = json["deviceId"] as? String else {
-//            throw SerializationError.missing("deviceId")
-//        }
-//        guard let secCheckLocation = json["secCheckLocation"] as? Int else {
-//            throw SerializationError.missing("secCheckLocation")
-//        }
-//        guard let secCheckDistance = json["secCheckDistance"] as? Int else {
-//            throw SerializationError.missing("secCheckDistance")
-//        }
-//        guard let distanceBeforeNotifying = json["distanceBeforeNotifying"] as? Double else {
-//            throw SerializationError.missing("secCheckDistance")
-//        }
-//        guard let command = json["command"] as? String else {
-//            throw SerializationError.missing("command")
-//        }
-//        guard let phrase = json["phrase"] as? String else {
-//            throw SerializationError.missing("phrase")
-//        }
-//        guard let timeStamp = json["timeStamp"] as? Date else {
-//            throw SerializationError.missing("timeStamp")
-//        }
-//        // Extract and validate coordinates
-//        guard let locationJSON = json["location"] as? [String: Double],
-//            let lat = locationJSON["lat"],
-//            let long = locationJSON["long"]
-//            else {
-//                throw SerializationError.missing("location")
-//        }
-//
-//        let location = (lat, long)
-//        guard case (-90...90, -180...180) = location else {
-//            throw SerializationError.invalid("location", location)
-//        }
-//
-//
-//        // Initialize properties
-//        self.id = id
-//        self.deviceId = deviceId
-//        self.command = command
-//        self.phrase = phrase
-//        self.secCheckDistance = secCheckDistance
-//        self.secCheckLocation = secCheckLocation
-//        self.distanceBeforeNotifying = distanceBeforeNotifying
-//        self.timeStamp = timeStamp
-//        self.location = location
-//    }
-//}
-

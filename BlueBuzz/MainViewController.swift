@@ -14,8 +14,10 @@ class MainViewController: UIViewController {
     @IBOutlet weak var reachableLabel: UILabel!
     @IBOutlet weak var tableContainerView: UIView!
     @IBOutlet weak var logView: UITextView!
-    @IBOutlet weak var noteLabel: UILabel!
+    @IBOutlet weak var pageLabel: UILabel!
     @IBOutlet weak var tablePlaceholderView: UIView!
+    @IBOutlet weak var clearButton: UIButton!
+    var dataObject: String = ""
     
     private lazy var sessionDelegater: SessionDelegater = {
         return SessionDelegater()
@@ -40,35 +42,50 @@ class MainViewController: UIViewController {
         )
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.pageLabel!.text = dataObject
+        //self.updateReachabilityColor()
+    }
+    
     // Implement the round corners on the top.
     // Do this here because everything should have been laid out at this moment.
     //
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        let layer = CALayer()
-        layer.shadowOpacity = 1.0
-        layer.shadowOffset = CGSize(width: 0, height: 1)
-        
-        // Make sure the shadow is outside of the bottom of the screen.
-        //
-        var rect = self.tableContainerView.bounds
-        
-        if #available(iOS 11.0, *) {
-            rect.size.height += view.window!.safeAreaInsets.bottom
+        if (pageLabel.text == SessionPages.Settings.rawValue) {
+            reachableLabel.isHidden = true
+            clearButton.isHidden = true
+            logView.isHidden = true
+        } else {
+            reachableLabel.isHidden = false
+            clearButton.isHidden = false
+            logView.isHidden = false
+            let layer = CALayer()
+            layer.shadowOpacity = 1.0
+            layer.shadowOffset = CGSize(width: 0, height: 1)
+            
+            // Make sure the shadow is outside of the bottom of the screen.
+            //
+            let rect = self.tableContainerView.bounds
+            
+    //        if #available(iOS 11.0, *) {
+    //            rect.size.height += view.window!.safeAreaInsets.bottom
+    //        }
+            
+            let path = UIBezierPath(roundedRect: rect,
+                                    byRoundingCorners: [.topRight, .topLeft],
+                                    cornerRadii: CGSize(width: 10, height: 10))
+            let shapeLayer = CAShapeLayer()
+            shapeLayer.path = path.cgPath
+            shapeLayer.fillColor = UIColor.white.cgColor
+            
+            layer.addSublayer(shapeLayer)
+            
+            tableContainerView.layer.addSublayer(layer)
+                tablePlaceholderView.layer.zPosition = layer.zPosition + 1
         }
-        
-        let path = UIBezierPath(roundedRect: rect,
-                                byRoundingCorners: [.topRight, .topLeft],
-                                cornerRadii: CGSize(width: 10, height: 10))
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.path = path.cgPath
-        shapeLayer.fillColor = UIColor.white.cgColor
-        
-        layer.addSublayer(shapeLayer)
-        
-        tableContainerView.layer.addSublayer(layer)
-        tablePlaceholderView.layer.zPosition = layer.zPosition + 1
     }
     
     deinit {
@@ -93,7 +110,7 @@ class MainViewController: UIViewController {
         reachableLabel.text = isReachable ? "Device Connected" : "Device Disconnected"
         
         if (isReachable == false) {
-            return
+            return //TODO Local notifications for ios
         } else {
             UNUserNotificationCenter.current().removeAllDeliveredNotifications()
         }
@@ -126,8 +143,9 @@ class MainViewController: UIViewController {
         
         guard let commandStatus = notification.object as? CommandStatus else { return }
         
-        defer { noteLabel.isHidden = logView.text.isEmpty ? false: true }
-        
+        //TODO May be a good reference for page settings
+//        defer { noteLabel.isHidden = logView.text.isEmpty ? false: true }
+//
         // If an error occurs, show the error message and returns.
         //
         if commandStatus.errorMessage.count > 0 {
@@ -151,7 +169,7 @@ class MainViewController: UIViewController {
         //
 //        if (lat != emptyDegrees && long != emptyDegrees)
 //        {
-        log("{id:\(instanceId), location: { lat:\(lat), long:\(long) }, deviceId: \(deviceId),  secCheckLocation:\(sessionDelegater.getSecondsBeforeCheckingLocation()), secCheckDistance:\(sessionDelegater.getSecondsBeforeCheckingDistance()), distanceBeforeNotifying:\(sessionDelegater.getDistanceBeforeNotifying()), command:\(commandStatus.command.rawValue), phrase:\(commandStatus.phrase.rawValue), timeStamp:\(timedColor.timeStamp)}")
+        log("{id:\(instanceId), location: { lat:\(lat), long:\(long) }, <b> deviceId: \(deviceId)</b>,  secCheckLocation:\(sessionDelegater.getSecondsBeforeCheckingLocation()), secCheckDistance:\(sessionDelegater.getSecondsBeforeCheckingDistance()), distanceBeforeNotifying:\(sessionDelegater.getDistanceBeforeNotifying()), command:\(commandStatus.command.rawValue), phrase:\(commandStatus.phrase.rawValue), timeStamp:\(timedColor.timeStamp)}")
 //        }
 //        else {
 //            log("-> id:\(instanceId) \(commandStatus.command.rawValue): \(commandStatus.phrase.rawValue) at \(timedColor.timeStamp)")

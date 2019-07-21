@@ -50,6 +50,16 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         }
     }
     
+    func getSettings() -> [String: Any] {
+        let settings = [
+            instanceIdentifierKey: instanceId,
+            secondsBeforeCheckingLocationKey: secondsBeforeCheckingLocation,
+            secondsBeforeCheckingDistanceKey: secondsBeforeCheckingDistance,
+            distanceBeforeNotifyingKey: distanceBeforeNotifying] as [String : Any]
+        
+        return settings;
+    }
+    
     func initLocationManager()
     {
         locationManager = CLLocationManager()
@@ -98,7 +108,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
             
             if (WCSession.default.isReachable == false) {
                 if (sessionDelegater.checkDistanceByInstanceId(commandStatus: commandStatus) == true) {
-                    self.alerted = scheduleAlertNotifications()
+                    scheduleAlertNotifications()
                     if (self.alerted) {
                         WKInterfaceDevice.current().play(.failure)
                         WKInterfaceDevice.current().play(.notification)
@@ -152,7 +162,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         return sessionDelegater.getSecondsBeforeCheckingDistance()
     }
     
-    func scheduleAlertNotifications() -> Bool {
+    func scheduleAlertNotifications() {
         print("Scheduling alert notification")
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (granted, error) in
@@ -193,7 +203,6 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                 })
             }
         }
-        return self.alerted
     }
  
     func scheduleWarningNotifications() {
