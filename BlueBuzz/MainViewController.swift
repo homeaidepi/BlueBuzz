@@ -92,7 +92,7 @@ class MainViewController: UIViewController {
         self.pageLabel!.text = dataObject
         
         if (pageLabel.text == SessionPages.Settings.rawValue) {
-            reachableLabel.isHidden = true
+            //reachableLabel.isHidden = true
             clearButton.isHidden = true
             logView.isHidden = true
             tableContainerView.isHidden = true
@@ -104,8 +104,12 @@ class MainViewController: UIViewController {
         } else {
             settingsPanel.isHidden = true
             tableContainerView.isHidden = false
-            reachableLabel.isHidden = false
-            clearButton.isHidden = false
+            //reachableLabel.isHidden = false
+            if (logView.text == "") {
+                clearButton.isHidden = true
+            } else {
+                clearButton.isHidden = false
+            }
             logView.isHidden = false
         }
         //self.updateReachabilityColor()
@@ -118,6 +122,7 @@ class MainViewController: UIViewController {
         super.viewDidAppear(animated)
         
         if (pageLabel.text == SessionPages.History.rawValue) {
+            
             let layer = CALayer()
             layer.shadowOpacity = 1.0
             layer.shadowOffset = CGSize(width: 0, height: 1)
@@ -140,7 +145,7 @@ class MainViewController: UIViewController {
             layer.addSublayer(shapeLayer)
             
             tableContainerView.layer.addSublayer(layer)
-                tablePlaceholderView.layer.zPosition = layer.zPosition + 1
+            tablePlaceholderView.layer.zPosition = layer.zPosition + 1
         }
     }
     
@@ -151,8 +156,21 @@ class MainViewController: UIViewController {
     // Append the message to the end of the text view and make sure it is visiable.
     //
     private func log(_ message: String) {
-        logView.text = logView.text! + "\n\n" + message
-        logView.scrollRangeToVisible(NSRange(location: logView.text.count, length: 1))
+        if (logView.isHidden == false) {
+            if (logView.text != "") {
+                logView.text = logView.text! + "\n\n"
+            }
+            logView.text = logView.text! + message
+            logView.scrollRangeToVisible(NSRange(location: logView.text.count, length: 1))
+            clearButton.isHidden = false
+        }
+    }
+    
+    @IBAction func clear(_ sender: UIButton) {
+        if (logView.isHidden == false) {
+            logView.text = ""
+            clearButton.isHidden = true
+        }
     }
     
     private func updateReachabilityColor() {
@@ -162,6 +180,7 @@ class MainViewController: UIViewController {
         if WCSession.default.activationState == .activated {
             isReachable = WCSession.default.isReachable
         }
+        
         reachableLabel.textColor = isReachable ? .green : .red
         reachableLabel.text = isReachable ? "Device Connected" : "Device Disconnected"
         
@@ -185,10 +204,6 @@ class MainViewController: UIViewController {
     @objc
     func reachabilityDidChange(_ notification: Notification) {
         updateReachabilityColor()
-    }
-
-    @IBAction func clear(_ sender: UIButton) {
-        logView.text = ""
     }
     
     // .dataDidFlow notification handler.
