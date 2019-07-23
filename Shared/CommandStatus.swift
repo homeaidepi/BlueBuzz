@@ -148,10 +148,11 @@ struct TimedColor: Codable {
     }
     
     init(_ timedColor: [String: Any]) {
-        guard let timeStamp = timedColor[PayloadKey.timeStamp] as? String,
-            let colorData = timedColor[PayloadKey.colorData] as? Data else {
-                fatalError("Timed color dictionary doesn't have right keys!")
-        }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hh:mm:ss a"
+        let now = formatter.string(from: Date())
+        let timeStamp = timedColor[PayloadKey.timeStamp] as? String ?? now
+        let colorData = timedColor[PayloadKey.colorData] as? Data ?? ibmBlueColor.data()
         self.timeStamp = timeStamp
         self.colorData = colorData
         self.defaultValue = false
