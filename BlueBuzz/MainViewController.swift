@@ -121,32 +121,32 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if (pageLabel.text == SessionPages.History.rawValue) {
-            
-            let layer = CALayer()
-            layer.shadowOpacity = 1.0
-            layer.shadowOffset = CGSize(width: 0, height: 1)
-            
-            // Make sure the shadow is outside of the bottom of the screen.
-            //
-            let rect = self.tableContainerView.bounds
-            
-    //        if #available(iOS 11.0, *) {
-    //            rect.size.height += view.window!.safeAreaInsets.bottom
-    //        }
-            
-            let path = UIBezierPath(roundedRect: rect,
-                                    byRoundingCorners: [.topRight, .topLeft],
-                                    cornerRadii: CGSize(width: 10, height: 10))
-            let shapeLayer = CAShapeLayer()
-            shapeLayer.path = path.cgPath
-            shapeLayer.fillColor = UIColor.white.cgColor
-            
-            layer.addSublayer(shapeLayer)
-            
-            tableContainerView.layer.addSublayer(layer)
-            tablePlaceholderView.layer.zPosition = layer.zPosition + 1
-        }
+//        if (tableContainerView.isHidden == false) {
+//
+//            let layer = CALayer()
+//            layer.shadowOpacity = 1.0
+//            layer.shadowOffset = CGSize(width: 0, height: 1)
+//
+//            // Make sure the shadow is outside of the bottom of the screen.
+//            //
+//            var rect = self.tableContainerView.bounds
+//
+//            if #available(iOS 11.0, *) {
+//                rect.size.height += view.safeAreaLayoutGuide.layoutFrame.size.height
+//            }
+//
+//            let path = UIBezierPath(roundedRect: rect,
+//                                    byRoundingCorners: [.topRight, .topLeft],
+//                                    cornerRadii: CGSize(width: 10, height: 10))
+//            let shapeLayer = CAShapeLayer()
+//            shapeLayer.path = path.cgPath
+//            shapeLayer.fillColor = UIColor.white.cgColor
+//
+//            layer.addSublayer(shapeLayer)
+//
+//            tableContainerView.layer.addSublayer(layer)
+//            tablePlaceholderView.layer.zPosition = layer.zPosition + 1
+//        }
     }
     
     deinit {
