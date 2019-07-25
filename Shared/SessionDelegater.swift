@@ -159,6 +159,7 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         
         self.distanceBeforeNotifying = distanceBeforeNotifying
     }
+    
     // Called when WCSession activation state is changed.
     //
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
@@ -176,17 +177,18 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
         let instanceId = applicationContext[instanceIdentifierKey] as? String ?? emptyInstanceIdentifier
         
-        
-        let commandStatus = CommandStatus(command: .updateAppConnection,
-                                          phrase: .received,
-                                          latitude: emptyDegrees,
-                                          longitude: emptyDegrees,
-                                          instanceId: instanceId,
-                                          deviceId: emptyDeviceIdentifier,
-                                          timedColor: TimedColor(applicationContext),
-                                          errorMessage: emptyError)
-        
-        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
+        if (instanceId != "") {
+            let commandStatus = CommandStatus(command: .updateAppConnection,
+                                              phrase: .received,
+                                              latitude: emptyDegrees,
+                                              longitude: emptyDegrees,
+                                              instanceId: instanceId,
+                                              deviceId: emptyDeviceIdentifier,
+                                              timedColor: TimedColor(applicationContext),
+                                              errorMessage: emptyError)
+            
+            postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
+        }
     }
     
     // Called when a message is received and the peer doesn't need a response.
@@ -354,15 +356,17 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
             let hoursSinceLastUpdatedLocation = components.hour!
             let secondsSinceLastUpdatedLocation = components.second!
             
-            if (hoursSinceLastUpdatedLocation > 0) {
+            let (h,m,s) = secondsToHoursMinutesSeconds(seconds: Int(secondsBeforeCheckingLocation))
+            
+            if (hoursSinceLastUpdatedLocation > h) {
                 return true
             }
             
-            if (minutesSinceLastUpdatedLocation > 0) {
+            if (minutesSinceLastUpdatedLocation > m) {
                 return true
             }
             
-            if (secondsSinceLastUpdatedLocation > secondsBeforeCheckingDistance) {
+            if (secondsSinceLastUpdatedLocation > s) {
                 return true
             }
         } else {
@@ -370,5 +374,9 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         }
         
         return false
+    }
+    
+    func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
+        return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
     }
 }

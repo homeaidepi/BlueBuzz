@@ -18,6 +18,10 @@ struct ControllerID {
 }
 
 class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate, TestDataProvider, SessionCommands {
+    
+    private lazy var sessionDelegater: SessionDelegater = {
+        return SessionDelegater()
+    }()
 
     @IBOutlet weak var statusGroup: WKInterfaceGroup!
     @IBOutlet var statusLabel: WKInterfaceLabel!
@@ -69,6 +73,9 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         
         initLocationManager()
         notifyUI();
+        
+        WCSession.default.delegate = sessionDelegater
+        WCSession.default.activate()
     }
     
     func applicationDidEnterBackground() {
@@ -290,6 +297,7 @@ extension MainInterfaceController { // MARK: - Update status view.
                 statusLabel.setText("Device not paired. Please pair iPhone.")
                 WKInterfaceDevice.current().play(.failure)
                 WKInterfaceDevice.current().play(.notification)
+                myDelegate.scheduleAlertNotifications()
             }
             lastNotifyUiDateTime = Date()
         }

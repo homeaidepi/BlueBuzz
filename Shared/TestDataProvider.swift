@@ -42,12 +42,8 @@ extension TestDataProvider {
         
         let data = try? NSKeyedArchiver.archivedData(withRootObject: randomColor, requiringSecureCoding: false)
         guard let colorData = data else { fatalError("Failed to archive a UIColor!") }
-    
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeStyle = .medium
-        let timeString = dateFormatter.string(from: Date())
         
-        return [PayloadKey.timeStamp: timeString, PayloadKey.colorData: colorData]
+        return [PayloadKey.timeStamp: Now(), PayloadKey.colorData: colorData]
     }
     
     // Generate an app connection, used as the payload for updateAppConnection.

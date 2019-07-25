@@ -20,6 +20,9 @@ class MainViewController: UIViewController {
     @IBOutlet weak var secondsBeforeCheckingLocationValue: UISlider!
     @IBOutlet weak var secondsBeforeCheckingDistanceValue: UISlider!
     @IBOutlet weak var distanceBeforeNotifyingValue: UISlider!
+    @IBOutlet weak var secondsBeforeCheckingLocationLabel: UILabel!
+    @IBOutlet weak var secondsBeforeCheckingDistanceLabel: UILabel!
+    @IBOutlet weak var distanceBeforeNotifyingLabel: UILabel!
     @IBOutlet weak var settingsPanel: UIStackView!
     
     var dataObject: String = ""
@@ -31,7 +34,10 @@ class MainViewController: UIViewController {
     
     @IBAction func secondsBeforeCheckingLocationValueChanged(sender: UISlider) {
         let currentValue = Int(secondsBeforeCheckingLocationValue.value)
-        print("Slider changing to \(currentValue) ?")
+        
+        secondsBeforeCheckingLocationLabel.text = "\(currentValue) Seconds Before Checking Location"
+        
+        //print("Slider changing to \(currentValue) ?")
         sessionDelegater.saveSecondsBeforeCheckingLocation(secondsBeforeCheckingLocation: currentValue)
         
         syncSettings()
@@ -39,15 +45,20 @@ class MainViewController: UIViewController {
     
     @IBAction func secondsBeforeCheckingDistanceValueChanged(sender: UISlider) {
         let currentValue = Int(secondsBeforeCheckingDistanceValue.value)
-        print("Slider changing to \(currentValue) ?")
+        
+        secondsBeforeCheckingDistanceLabel.text = "\(currentValue) Seconds Before Checking Distance"
+        
+        //print("Slider changing to \(currentValue) ?")
         sessionDelegater.saveSecondsBeforeCheckingDistance(secondsBeforeCheckingDistance: currentValue)
         
         syncSettings()
     }
     
     @IBAction func distanceBeforeNotifyingValueChanged(sender: UISlider) {
-        let currentValue = Double(distanceBeforeNotifyingValue.value)
-        print("Slider changing to \(currentValue) ?")
+        let currentValue = Double(distanceBeforeNotifyingValue.value).rounded()
+        
+        distanceBeforeNotifyingLabel.text = "\(currentValue) Feet Before Sending Alert "
+        //print("Slider changing to \(currentValue) ?")
         sessionDelegater.saveDistanceBeforeNotifying(distanceBeforeNotifying: currentValue)
         
         syncSettings()
@@ -58,6 +69,19 @@ class MainViewController: UIViewController {
         let settings = sessionDelegater.getSettings()
         
         do {
+            var isReachable = false
+            if WCSession.default.activationState == .activated {
+                isReachable = WCSession.default.isReachable
+            }
+            
+            if (isReachable == false)
+            {
+                WCSession.default.delegate = sessionDelegater
+                WCSession.default.activate()
+            }
+            
+            print("Reachable: \(isReachable)")
+            
             try WCSession.default.updateApplicationContext(settings)
         } catch {
             print("Settings Sync Error")
@@ -85,6 +109,9 @@ class MainViewController: UIViewController {
             self, selector: #selector(type(of: self).reachabilityDidChange(_:)),
             name: .reachabilityDidChange, object: nil
         )
+        
+        WCSession.default.delegate = sessionDelegater
+        WCSession.default.activate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
