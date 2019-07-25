@@ -173,12 +173,8 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                 let notificationCenter = UNUserNotificationCenter.current()
                 let content = UNMutableNotificationContent()
                 
-                let formatter = DateFormatter()
-                formatter.dateFormat = "hh:mm:ss a"
-                let now = formatter.string(from: Date())
-                
-                content.title = NSLocalizedString("Connection Alert", comment: now)
-                content.body =  NSLocalizedString("Phone out of range, signal or disconnected.", comment: now) //\(self.sessionDelegater.getDistanceBeforeNotifying()) feet or Phone ", comment: now)
+                content.title = NSLocalizedString("Connection Alert", comment: Now())
+                content.body =  NSLocalizedString("Phone out of range, signal or disconnected.", comment: Now())
                 content.sound = UNNotificationSound.defaultCritical
                 
                 let trigger = UNTimeIntervalNotificationTrigger.init(
@@ -190,7 +186,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                     content: content,
                     trigger: trigger
                 )
-                //notificationCenter.removeAllDeliveredNotifications()
+                notificationCenter.removeAllDeliveredNotifications()
                 notificationCenter.add(request, withCompletionHandler: { (error) in
                     if error != nil {
                         // Handle any errors.
@@ -216,14 +212,10 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                 let notificationCenter = UNUserNotificationCenter.current()
                 let content = UNMutableNotificationContent()
                 
-                let formatter = DateFormatter()
-                formatter.dateFormat = "hh:mm:ss a"
-                let now = formatter.string(from: Date())
-                
                 if (self.currentLocation == emptyLocation)
                 {
-                    content.title = NSLocalizedString("Location Warning", comment: now)
-                    content.body =  NSLocalizedString("Cant determine location", comment: now)
+                    content.title = NSLocalizedString("Location Warning", comment: Now())
+                    content.body =  NSLocalizedString("Cant determine location", comment: Now())
                     content.sound = UNNotificationSound.defaultCritical
                 } else {
                     notificationCenter.removeAllDeliveredNotifications()

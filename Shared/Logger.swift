@@ -53,13 +53,9 @@ class Logger {
     private var _fileURL: URL?
     private var fileURL: URL! {
         guard _fileURL == nil else { return _fileURL }
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        let dateString = dateFormatter.string(from: Date())
     
         var fileURL: URL = self.folderURL
-        fileURL.appendPathComponent("\(dateString).log")
+        fileURL.appendPathComponent("\(Now()).log")
         
         if !FileManager.default.fileExists(atPath: fileURL.path) {
             if !FileManager.default.createFile(atPath: fileURL.path, contents: nil, attributes: nil) {
@@ -70,14 +66,6 @@ class Logger {
         _fileURL = fileURL
         return fileURL
     }
-    
-    // Avoid creating DateFormatter for time stamp as Logger may count into execution budget.
-    //
-    private lazy var timeStampFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeStyle = .medium
-        return dateFormatter
-    }()
     
     // Use this dispatch queue to make the log file access is thread-safe.
     // Public methods use performBlockAndWait to access the resource; private methods don't.
@@ -102,7 +90,7 @@ class Logger {
     // Use FileHandle so that we can see to the end directly.
     //
     func append(line: String) {
-        let timeStamp = timeStampFormatter.string(from: Date())
+        let timeStamp = Now()
         let timedLine = timeStamp + ": " + line + "\n"
         
         if let data = timedLine.data(using: .utf8) {

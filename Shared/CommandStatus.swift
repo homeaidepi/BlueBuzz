@@ -23,6 +23,17 @@ var instanceIdentifierKey = "instanceId"
 var emptyInstanceIdentifier = String("")
 var emptyDeviceIdentifier = String("")
 
+// Avoid creating DateFormatter for time stamp as Logger may count into execution budget.
+//
+private var timeStampFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "hh:mm:ss a"
+    return formatter
+}()
+
+public func Now() -> String {
+    return timeStampFormatter.string(from: Date())
+}
 // Constants to identify the Watch Connectivity methods, also used as user-visible strings in UI.
 //
 enum Command: String, Codable {
@@ -86,6 +97,7 @@ extension UIColor {
         return NSKeyedUnarchiver.unarchiveObject(with: data) as? UIColor
     }
 }
+
 // Wrap a timed color payload dictionary with a stronger type.
 //
 struct TimedColor: Codable {
@@ -138,20 +150,13 @@ struct TimedColor: Codable {
     
     init(_ timedColor: UIColor)
     {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "hh:mm:ss a"
-        let now = formatter.string(from: Date())
-        
-        self.timeStamp = now
+        self.timeStamp = Now()
         self.colorData = timedColor.data()
         self.defaultValue = false
     }
     
     init(_ timedColor: [String: Any]) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "hh:mm:ss a"
-        let now = formatter.string(from: Date())
-        let timeStamp = timedColor[PayloadKey.timeStamp] as? String ?? now
+        let timeStamp = timedColor[PayloadKey.timeStamp] as? String ?? Now()
         let colorData = timedColor[PayloadKey.colorData] as? Data ?? ibmBlueColor.data()
         self.timeStamp = timeStamp
         self.colorData = colorData
