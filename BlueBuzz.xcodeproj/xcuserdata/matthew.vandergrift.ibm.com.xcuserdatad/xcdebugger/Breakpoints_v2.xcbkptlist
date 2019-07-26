@@ -11,7 +11,7 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SimpleWatchConnectivity WatchKit Extension/MainInterfaceController.swift"
+            filePath = "BlueBuzz WatchKit Extension/MainInterfaceController.swift"
             timestampString = "583192442.1247261"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -27,7 +27,7 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SimpleWatchConnectivity WatchKit Extension/MainInterfaceController.swift"
+            filePath = "BlueBuzz WatchKit Extension/MainInterfaceController.swift"
             timestampString = "583192442.124941"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -43,13 +43,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SimpleWatchConnectivity/MainViewController.swift"
+            filePath = "BlueBuzz/MainViewController.swift"
             timestampString = "583192442.124989"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "118"
             endingLineNumber = "118"
-            landmarkName = "dataDidFlow(_:)"
+            landmarkName = "viewWillAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -59,7 +59,7 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SimpleWatchConnectivity/CommandsViewController.swift"
+            filePath = "BlueBuzz/CommandsViewController.swift"
             timestampString = "583192442.125035"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -75,13 +75,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SimpleWatchConnectivity/MainViewController.swift"
+            filePath = "BlueBuzz/MainViewController.swift"
             timestampString = "583192442.125703"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "124"
             endingLineNumber = "124"
-            landmarkName = "dataDidFlow(_:)"
+            landmarkName = "viewWillAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

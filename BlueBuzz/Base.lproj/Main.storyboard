@@ -12,7 +12,7 @@
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" id="BYZ-38-t0r" customClass="MainViewController" customModule="SimpleWatchConnectivity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="BYZ-38-t0r" customClass="MainViewController" customModule="BlueBuzz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -164,7 +164,7 @@
         <!--Root View Controller-->
         <scene sceneID="nya-It-KI2">
             <objects>
-                <viewController id="L0V-mN-xeA" customClass="RootViewController" customModule="SimpleWatchConnectivity" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="L0V-mN-xeA" customClass="RootViewController" customModule="BlueBuzz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OQl-MS-X9f">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -179,7 +179,7 @@
         <!--Commands View Controller-->
         <scene sceneID="EaW-2q-NjP">
             <objects>
-                <tableViewController id="0t5-7r-jOK" customClass="CommandsViewController" customModule="SimpleWatchConnectivity" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="0t5-7r-jOK" customClass="CommandsViewController" customModule="BlueBuzz" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="5" id="Xjv-bS-n0V">
                         <rect key="frame" x="0.0" y="0.0" width="374" height="71"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

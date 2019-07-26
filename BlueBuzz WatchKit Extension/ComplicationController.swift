@@ -13,7 +13,7 @@ import ClockKit
 // 1. Choose a Modular watch face on your watch.
 // 2. Deep press to get to the customization screen, tap the Customize button,
 //    then swipe right to get to the complications configuration screen and tap the tall body area.
-// 3. Rotate the digital crown to choose the SimpleWatchConnectivity complication.
+// 3. Rotate the digital crown to choose the BlueBuzz complication.
 // 4. Press the digital crown and tap the screen to go back to the watch face.
 //
 class ComplicationController: NSObject, CLKComplicationDataSource {
