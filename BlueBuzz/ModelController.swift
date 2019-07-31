@@ -26,7 +26,9 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
     override init() {
         super.init()
         // Create the data model.
-        pageData = [SessionPages.History.rawValue, SessionPages.Settings.rawValue]
+        pageData = [
+            SessionPages.Settings.rawValue,
+            SessionPages.LogView.rawValue ]
     }
 
     func viewControllerAtIndex(_ index: Int, storyboard: UIStoryboard) -> MainViewController? {
