@@ -351,7 +351,7 @@ extension MainInterfaceController { // MARK: - Update status view.
         // If there is an error, show the message and return.
         //
         if commandStatus.errorMessage != "" {
-            statusLabel.setText("! \(commandStatus.errorMessage)")
+            statusLabel.setText("\(commandStatus.errorMessage)")
         } else {
             if (commandStatus.command == .updateAppConnection) {
                 statusLabel.setText("Settings Synced")

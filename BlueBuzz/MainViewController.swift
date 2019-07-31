@@ -115,7 +115,7 @@ class MainViewController: UIViewController {
         
         if (pageLabel.text == SessionPages.Settings.rawValue) {
             //reachableLabel.isHidden = true
-            clearButton.isHidden = true
+            clearButton.setTitle("Reset", for: .normal)
             logView.isHidden = true
             tableContainerView.isHidden = true
             settingsPanel.isHidden = false
@@ -127,11 +127,7 @@ class MainViewController: UIViewController {
             settingsPanel.isHidden = true
             tableContainerView.isHidden = false
             //reachableLabel.isHidden = false
-            if (logView.text == "") {
-                clearButton.isHidden = true
-            } else {
-                clearButton.isHidden = false
-            }
+            clearButton.setTitle("Clear", for: .normal)
             logView.isHidden = false
         }
         //self.updateReachabilityColor()
@@ -182,11 +178,10 @@ class MainViewController: UIViewController {
     private func log(_ message: String) {
         if (logView.isHidden == false) {
             if (logView.text != "") {
-                logView.text = logView.text! + "\n\n"
+                logView.text = logView.text! + "\n"
             }
             logView.text = logView.text! + message
             logView.scrollRangeToVisible(NSRange(location: logView.text.count, length: 1))
-            clearButton.isHidden = false
         }
     }
     
@@ -194,6 +189,10 @@ class MainViewController: UIViewController {
         if (logView.isHidden == false) {
             logView.text = ""
             clearButton.isHidden = true
+        } else {
+            secondsBeforeCheckingLocationValue.value = 45
+            secondsBeforeCheckingDistanceValue.value = 60
+            distanceBeforeNotifyingValue.value = 100
         }
     }
     
@@ -244,7 +243,7 @@ class MainViewController: UIViewController {
         // If an error occurs, show the error message and returns.
         //
         if commandStatus.errorMessage.count > 0 {
-            log("! \(commandStatus.command.rawValue): \(commandStatus.errorMessage)")
+            log("\(commandStatus.command.rawValue): \(commandStatus.errorMessage)")
             return
         }
         
@@ -264,11 +263,15 @@ class MainViewController: UIViewController {
         //
         if (lat != emptyDegrees && long != emptyDegrees)
         {
-            log("-> id:\(instanceId) Device: \(deviceId) at \(timedColor.timeStamp)")
+            if (logView.text.contains("id")) {
+                log("\(deviceId) sent at: \(timedColor.timeStamp)")
+            } else {
+                log("id:\(instanceId.prefix(20))\n\(deviceId) sent at: \(timedColor.timeStamp)")
+            }
 //        log("{id:\(instanceId), location: { lat:\(lat), long:\(long) }, <b> deviceId: \(deviceId)</b>,  secCheckLocation:\(sessionDelegater.getSecondsBeforeCheckingLocation()), secCheckDistance:\(sessionDelegater.getSecondsBeforeCheckingDistance()), distanceBeforeNotifying:\(sessionDelegater.getDistanceBeforeNotifying()), command:\(commandStatus.command.rawValue), phrase:\(commandStatus.phrase.rawValue), timeStamp:\(timedColor.timeStamp)}")
         }
         else {
-        log("-> id:\(instanceId) Device: \(deviceId) at \(timedColor.timeStamp)")
+            log("Device: \(deviceId) missing lat,long at: \(timedColor.timeStamp)")
         }
     }
 }

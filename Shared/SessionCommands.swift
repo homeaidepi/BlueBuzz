@@ -13,7 +13,7 @@ import UserNotifications
 import CoreLocation
 
 enum SessionPages: String {
-    case History = "History"
+    case LogView = "History"
     case Settings = "Settings"
 }
 // Define an interface to wrap Watch Connectivity APIs and
