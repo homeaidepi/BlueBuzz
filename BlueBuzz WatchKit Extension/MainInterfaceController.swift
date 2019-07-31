@@ -123,11 +123,13 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         //escapements for either send immediately or delay based on time settings
-        if (sendMessageDataImmediately == false) {
-            if (SessionDelegater().checkLastUpdatedLocationDateTime(lastUpdatedLocationDateTime: lastUpdatedLocationDateTime) == false) {
+        if (sendMessageDataImmediately == false && lastNotifyUiDateTime != nil ) {
+            if (sessionDelegater.checkLastUpdatedLocationDateTime(lastUpdatedLocationDateTime: lastUpdatedLocationDateTime) == false) {
+                //statusLabel.setText("Location checked recently.")
                 return
             }
         }
+        sendMessageDataImmediately = false;
         
         //Step 1 get current location from locationManager return result
         let currentLocation = locations[0]
@@ -202,7 +204,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedAlways {
-            locationManager?.requestLocation()
+            locationManager?.startUpdatingLocation()
         }
     }
     
@@ -305,9 +307,9 @@ extension MainInterfaceController { // MARK: - Update status view.
         
     func sendLocation() {
         sendMessageDataImmediately = true
-        statusLabel.setText("Getting location... \n Sending location.")
+        statusLabel.setText("Getting location every \(myDelegate.getSecondsBeforeCheckingLocation()) seconds.")
+        locationManager?.startUpdatingLocation()
         WKInterfaceDevice.current().play(.click)
-        locationManager?.requestLocation()
     }
     
     private func shouldNotifyUi() -> Bool {

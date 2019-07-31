@@ -31,7 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, C
         
         // Trigger WCSession activation at the early phase of app launching.
         //
+        #if DEBUG
         assert(WCSession.isSupported(), "BlueBuzz requires Apple Watch!")
+        #endif
         WCSession.default.delegate = sessionDelegater
         WCSession.default.activate()
         
@@ -96,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, C
         print("application background fetch")
         var fetchResult: UIBackgroundFetchResult!
         
-        locationManager!.requestLocation()
+        locationManager!.startUpdatingLocation()
         fetchResult = UIBackgroundFetchResult.newData
 
         completionHandler( fetchResult )
@@ -155,7 +157,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, C
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedAlways {
-            self.locationManager?.requestLocation()
+            self.locationManager?.startUpdatingLocation()
         }
     }
     

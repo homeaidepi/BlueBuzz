@@ -27,11 +27,6 @@ class MainViewController: UIViewController {
     
     var dataObject: String = ""
     
-//    private var instanceId: String = ""
-//    private var secondsBeforeCheckingLocation: Int = 45
-//    private var secondsBeforeCheckingDistance: Int = 60
-//    private var distanceBeforeNotifying: Double = 100
-    
     @IBAction func secondsBeforeCheckingLocationValueChanged(sender: UISlider) {
         let currentValue = Int(secondsBeforeCheckingLocationValue.value)
         
@@ -167,8 +162,10 @@ class MainViewController: UIViewController {
 //                                    cornerRadii: CGSize(width: 10, height: 10))
 //            let shapeLayer = CAShapeLayer()
 //            shapeLayer.path = path.cgPath
-//            shapeLayer.fillColor = UIColor.white.cgColor
-//
+//            shapeLayer.fillColor = UIColor.clear.cgColor
+//            shapeLayer.backgroundColor = UIColor.clear.cgColor
+//            
+//            
 //            layer.addSublayer(shapeLayer)
 //
 //            tableContainerView.layer.addSublayer(layer)
@@ -209,7 +206,7 @@ class MainViewController: UIViewController {
         }
         
         reachableLabel.textColor = isReachable ? .green : .red
-        reachableLabel.text = isReachable ? "Device Connected" : "Device Disconnected"
+        reachableLabel.text = isReachable ? "Connected" : "Disconnected"
         
         if (isReachable == false) {
             return //TODO Local notifications for ios
@@ -265,12 +262,13 @@ class MainViewController: UIViewController {
         
         //log the messageData i.e location to the screen else show command
         //
-//        if (lat != emptyDegrees && long != emptyDegrees)
-//        {
-        log("{id:\(instanceId), location: { lat:\(lat), long:\(long) }, <b> deviceId: \(deviceId)</b>,  secCheckLocation:\(sessionDelegater.getSecondsBeforeCheckingLocation()), secCheckDistance:\(sessionDelegater.getSecondsBeforeCheckingDistance()), distanceBeforeNotifying:\(sessionDelegater.getDistanceBeforeNotifying()), command:\(commandStatus.command.rawValue), phrase:\(commandStatus.phrase.rawValue), timeStamp:\(timedColor.timeStamp)}")
-//        }
-//        else {
-//            log("-> id:\(instanceId) \(commandStatus.command.rawValue): \(commandStatus.phrase.rawValue) at \(timedColor.timeStamp)")
-//        }
+        if (lat != emptyDegrees && long != emptyDegrees)
+        {
+            log("-> id:\(instanceId) Device: \(deviceId) at \(timedColor.timeStamp)")
+//        log("{id:\(instanceId), location: { lat:\(lat), long:\(long) }, <b> deviceId: \(deviceId)</b>,  secCheckLocation:\(sessionDelegater.getSecondsBeforeCheckingLocation()), secCheckDistance:\(sessionDelegater.getSecondsBeforeCheckingDistance()), distanceBeforeNotifying:\(sessionDelegater.getDistanceBeforeNotifying()), command:\(commandStatus.command.rawValue), phrase:\(commandStatus.phrase.rawValue), timeStamp:\(timedColor.timeStamp)}")
+        }
+        else {
+        log("-> id:\(instanceId) Device: \(deviceId) at \(timedColor.timeStamp)")
+        }
     }
 }

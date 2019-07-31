@@ -34,49 +34,41 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
     var blueBuzzWebServiceCheckDistanceByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/CheckDistanceByInstanceId")
 
     private var retval = false
-    private var instanceId: String = ""
-    private var secondsBeforeCheckingLocation: Int = 45
-    private var secondsBeforeCheckingDistance: Int = 60
-    private var distanceBeforeNotifying: Double = 100
-    
+   
     //Settings
     //
     public func registerSettings()
     {
-        self.instanceId = getInstanceIdentifier()
+        let instanceId = getInstanceIdentifier()
         
-        if (self.instanceId == emptyInstanceIdentifier) {
+        if (instanceId == emptyInstanceIdentifier) {
             initSettings()
-        } else {
-            self.secondsBeforeCheckingLocation = getSecondsBeforeCheckingLocation()
-            self.secondsBeforeCheckingDistance = getSecondsBeforeCheckingDistance()
-            self.distanceBeforeNotifying = getDistanceBeforeNotifying()
         }
     }
     
     func initSettings() {
-        saveSecondsBeforeCheckingDistance(secondsBeforeCheckingDistance: 45)
-        saveSecondsBeforeCheckingLocation(secondsBeforeCheckingLocation: 60)
-        saveDistanceBeforeNotifying(distanceBeforeNotifying: 100)
+        saveSecondsBeforeCheckingDistance(secondsBeforeCheckingDistance: defaultSecondsBeforeCheckingLocation)
+        saveSecondsBeforeCheckingLocation(secondsBeforeCheckingLocation: defaultSecondsBeforeCheckingDistance)
+        saveDistanceBeforeNotifying(distanceBeforeNotifying: defaultDistanceBeforeNotifying)
     }
     
     func getSettings() -> [String: Any] {
         let settings = [
-            instanceIdentifierKey: instanceId,
-            secondsBeforeCheckingLocationKey: secondsBeforeCheckingLocation,
-            secondsBeforeCheckingDistanceKey: secondsBeforeCheckingDistance,
-            distanceBeforeNotifyingKey: distanceBeforeNotifying] as [String : Any]
+            instanceIdentifierKey: getInstanceIdentifier(),
+            secondsBeforeCheckingLocationKey: getSecondsBeforeCheckingLocation(),
+            secondsBeforeCheckingDistanceKey: getSecondsBeforeCheckingDistance(),
+            distanceBeforeNotifyingKey: getDistanceBeforeNotifying()] as [String : Any]
         
         return settings;
     }
     
     func saveSettings(applicationContext: [String: Any]) {
-        let instanceId = applicationContext[instanceIdentifierKey] as? String ?? ""
+        let instanceId = applicationContext[instanceIdentifierKey] as? String ?? emptyInstanceIdentifier
         let secondsBeforeCheckingLocation = applicationContext[secondsBeforeCheckingLocationKey] as? Int ?? 0
         let secondsBeforeCheckingDistance = applicationContext[secondsBeforeCheckingDistanceKey] as? Int ?? 0
         let distanceBeforeNotifying = applicationContext[distanceBeforeNotifyingKey] as? Double ?? 0
         
-        if (instanceId != "") {
+        if (instanceId != emptyInstanceIdentifier) {
             saveInstanceIdentifier(instanceId: instanceId)
         }
         if (secondsBeforeCheckingLocation != 0) {
@@ -104,8 +96,6 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         let defaults = UserDefaults.standard
         
         defaults.set(instanceId, forKey: instanceIdentifierKey)
-        
-        self.instanceId = instanceId
     }
     
     //Seconds before checking location get set
@@ -122,8 +112,6 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         let defaults = UserDefaults.standard
         
         defaults.set(secondsBeforeCheckingLocation, forKey: secondsBeforeCheckingLocationKey)
-        
-        self.secondsBeforeCheckingLocation = secondsBeforeCheckingLocation
     }
     
     //Seconds before checking distance get set
@@ -139,8 +127,6 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         let defaults = UserDefaults.standard
         
         defaults.set(secondsBeforeCheckingDistance, forKey: secondsBeforeCheckingDistanceKey)
-        
-        self.secondsBeforeCheckingDistance = secondsBeforeCheckingDistance
     }
     
     //Distance Before Notifying get set
@@ -156,8 +142,6 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         let defaults = UserDefaults.standard
         
         defaults.set(distanceBeforeNotifying, forKey: distanceBeforeNotifyingKey)
-        
-        self.distanceBeforeNotifying = distanceBeforeNotifying
     }
     
     // Called when WCSession activation state is changed.
@@ -175,19 +159,45 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
     // Called when an app context is received.
     //
     func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
-        let instanceId = applicationContext[instanceIdentifierKey] as? String ?? emptyInstanceIdentifier
         
-        if (instanceId != "") {
-            let commandStatus = CommandStatus(command: .updateAppConnection,
-                                              phrase: .received,
-                                              latitude: emptyDegrees,
-                                              longitude: emptyDegrees,
-                                              instanceId: instanceId,
-                                              deviceId: emptyDeviceIdentifier,
-                                              timedColor: TimedColor(applicationContext),
-                                              errorMessage: emptyError)
+        DispatchQueue.main.async { [weak self] in do {
             
-            postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
+            let instanceId = applicationContext[instanceIdentifierKey] as? String ?? emptyInstanceIdentifier
+            let secondsBeforeCheckingLocation = applicationContext[secondsBeforeCheckingLocationKey] as? Int ?? 0
+            let secondsBeforeCheckingDistance = applicationContext[secondsBeforeCheckingDistanceKey] as? Int ?? 0
+            let distanceBeforeNotifying = applicationContext[distanceBeforeNotifyingKey] as? Double ?? 0
+            
+            if (instanceId != emptyInstanceIdentifier) {
+                self?.saveInstanceIdentifier(instanceId: instanceId)
+            }
+            
+            if (secondsBeforeCheckingLocation != 0) {
+                self?.saveSecondsBeforeCheckingLocation(secondsBeforeCheckingLocation: secondsBeforeCheckingLocation)
+            }
+            
+            if (secondsBeforeCheckingDistance != 0) {
+                self?.saveSecondsBeforeCheckingDistance(secondsBeforeCheckingDistance: secondsBeforeCheckingDistance)
+            }
+            
+            if (distanceBeforeNotifying != 0) {
+                self?.saveDistanceBeforeNotifying(distanceBeforeNotifying: distanceBeforeNotifying)
+            }
+            
+            if (instanceId != emptyInstanceIdentifier) {
+                let commandStatus = CommandStatus(command: .updateAppConnection,
+                                                  phrase: .received,
+                                                  latitude: emptyDegrees,
+                                                  longitude: emptyDegrees,
+                                                  instanceId: instanceId,
+                                                  deviceId: emptyDeviceIdentifier,
+                                                  timedColor: TimedColor(applicationContext),
+                                                  errorMessage: emptyError)
+                
+                self?.postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
+            } else {
+                print("Error Getting App Context")
+            }
+            }
         }
     }
     
@@ -332,7 +342,7 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
                     
                     if let distance = json?["distance"] as? Double {
                         print("distance: \(distance)")
-                        if (distance > self.distanceBeforeNotifying) {
+                        if (distance > self.getDistanceBeforeNotifying()) {
                             self.retval = true
                         }
                     }
@@ -356,7 +366,12 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
             let hoursSinceLastUpdatedLocation = components.hour!
             let secondsSinceLastUpdatedLocation = components.second!
             
-            let (h,m,s) = secondsToHoursMinutesSeconds(seconds: Int(secondsBeforeCheckingLocation))
+            let (h,m,s) = secondsToHoursMinutesSeconds(seconds: Int(getSecondsBeforeCheckingLocation()))
+            
+            //ran location  before a setting came back
+            if ( h == 0 && m == 0 && s == 0) {
+                return false
+            }
             
             if (hoursSinceLastUpdatedLocation > h) {
                 return true

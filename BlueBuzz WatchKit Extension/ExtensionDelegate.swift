@@ -44,8 +44,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         print(secondsBeforeCheckingLocation)
         print(distanceBeforeNotifying)
         
-        if (instanceId == "")
-        {
+        if (instanceId == "") {
             sendInstanceIdMessage();
         }
     }
@@ -134,7 +133,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedAlways {
-            self.locationManager?.requestLocation()
+            self.locationManager?.startUpdatingLocation()
         }
     }
     
@@ -259,7 +258,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         // optional, any SecureCoding compliant data can be passed here
         let userInfo = ["reason" : "background update"] as NSDictionary
         
-        locationManager!.requestLocation()
+        locationManager!.startUpdatingLocation()
 
         WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: fireDate, userInfo: userInfo) { (error) in
             if (error == nil) {
@@ -328,6 +327,6 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         WCSession.default.delegate = sessionDelegater
         WCSession.default.activate()
         
-        initSettings()
+        sessionDelegater.registerSettings()
     }
 }
