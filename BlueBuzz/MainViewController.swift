@@ -69,11 +69,11 @@ class MainViewController: UIViewController {
                 isReachable = WCSession.default.isReachable
             }
             
-//            if (isReachable == false)
-//            {
-//                WCSession.default.delegate = sessionDelegater
-//                WCSession.default.activate()
-//            }
+            if (isReachable == false)
+            {
+                WCSession.default.delegate = sessionDelegater
+                WCSession.default.activate()
+            }
             
             print("Reachable: \(isReachable)")
             
@@ -115,7 +115,7 @@ class MainViewController: UIViewController {
         
         if (pageLabel.text == SessionPages.Settings.rawValue) {
             //reachableLabel.isHidden = true
-            clearButton.setTitle("Reset   ", for: .normal)
+            clearButton.setTitle("Reset", for: .normal)
             logView.isHidden = true
             tableContainerView.isHidden = true
             settingsPanel.isHidden = false
@@ -127,7 +127,7 @@ class MainViewController: UIViewController {
             settingsPanel.isHidden = true
             tableContainerView.isHidden = false
             //reachableLabel.isHidden = false
-            clearButton.setTitle("Clear   ", for: .normal)
+            clearButton.setTitle("Clear", for: .normal)
             logView.isHidden = false
         }
         //self.updateReachabilityColor()
