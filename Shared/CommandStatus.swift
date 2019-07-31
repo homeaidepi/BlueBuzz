@@ -42,7 +42,7 @@ public func Now() -> String {
 enum Command: String, Codable {
     case updateAppConnection = "Sync Settings"
     //case sendMessage = "Send Message"
-    case sendMessageData = "Update Paired Devices Loc: Lat, Long"
+    case sendMessageData = "Update Paired Devices Location"
 }
 
 // Constants to identify the phrases of a Watch Connectivity communication.
