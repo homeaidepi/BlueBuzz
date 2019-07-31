@@ -162,8 +162,10 @@ class MainViewController: UIViewController {
 //                                    cornerRadii: CGSize(width: 10, height: 10))
 //            let shapeLayer = CAShapeLayer()
 //            shapeLayer.path = path.cgPath
-//            shapeLayer.fillColor = UIColor.white.cgColor
-//
+//            shapeLayer.fillColor = UIColor.clear.cgColor
+//            shapeLayer.backgroundColor = UIColor.clear.cgColor
+//            
+//            
 //            layer.addSublayer(shapeLayer)
 //
 //            tableContainerView.layer.addSublayer(layer)
