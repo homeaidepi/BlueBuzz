@@ -182,7 +182,7 @@ class MainViewController: UIViewController {
     private func log(_ message: String) {
         if (logView.isHidden == false) {
             if (logView.text != "") {
-                logView.text = logView.text! + "\n\n"
+                logView.text = logView.text! + "\n"
             }
             logView.text = logView.text! + message
             logView.scrollRangeToVisible(NSRange(location: logView.text.count, length: 1))
@@ -244,7 +244,7 @@ class MainViewController: UIViewController {
         // If an error occurs, show the error message and returns.
         //
         if commandStatus.errorMessage.count > 0 {
-            log("! \(commandStatus.command.rawValue): \(commandStatus.errorMessage)")
+            log("\(commandStatus.command.rawValue): \(commandStatus.errorMessage)")
             return
         }
         
@@ -264,11 +264,15 @@ class MainViewController: UIViewController {
         //
         if (lat != emptyDegrees && long != emptyDegrees)
         {
-            log("-> id:\(instanceId) Device: \(deviceId) at \(timedColor.timeStamp)")
+            if (logView.text.contains("id")) {
+                log("\(deviceId) sent at: \(timedColor.timeStamp)")
+            } else {
+                log("id:\(instanceId.prefix(20))\n\(deviceId) sent at: \(timedColor.timeStamp)")
+            }
 //        log("{id:\(instanceId), location: { lat:\(lat), long:\(long) }, <b> deviceId: \(deviceId)</b>,  secCheckLocation:\(sessionDelegater.getSecondsBeforeCheckingLocation()), secCheckDistance:\(sessionDelegater.getSecondsBeforeCheckingDistance()), distanceBeforeNotifying:\(sessionDelegater.getDistanceBeforeNotifying()), command:\(commandStatus.command.rawValue), phrase:\(commandStatus.phrase.rawValue), timeStamp:\(timedColor.timeStamp)}")
         }
         else {
-        log("-> id:\(instanceId) Device: \(deviceId) at \(timedColor.timeStamp)")
+            log("Device: \(deviceId) missing lat,long at: \(timedColor.timeStamp)")
         }
     }
 }
