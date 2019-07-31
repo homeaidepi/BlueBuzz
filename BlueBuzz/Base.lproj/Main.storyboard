@@ -28,9 +28,10 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="63" translatesAutoresizingMaskIntoConstraints="NO" id="xyD-bN-BQA" userLabel="Top Banner">
                                 <rect key="frame" x="20" y="44" width="374" height="34"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="History" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="la5-4T-2zy" userLabel="Page">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QZf-Io-lzh">
                                         <rect key="frame" x="0.0" y="0.0" width="68" height="34"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected" textAlignment="center" lineBreakMode="clip" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cLY-TK-31d" userLabel="Reachable">
@@ -177,7 +178,7 @@
                         <outlet property="distanceBeforeNotifyingLabel" destination="rBg-kg-tYN" id="bv3-zf-EdX"/>
                         <outlet property="distanceBeforeNotifyingValue" destination="zQe-zy-bR5" id="PBD-4k-mg9"/>
                         <outlet property="logView" destination="qjE-hX-evH" id="Cs7-O7-xL9"/>
-                        <outlet property="pageLabel" destination="la5-4T-2zy" id="gzX-bK-v7f"/>
+                        <outlet property="pageLabel" destination="QZf-Io-lzh" id="fAm-9n-fT3"/>
                         <outlet property="reachableLabel" destination="cLY-TK-31d" id="n5Y-z5-sDS"/>
                         <outlet property="secondsBeforeCheckingDistanceLabel" destination="fZb-pD-4uv" id="SpA-xN-xLM"/>
                         <outlet property="secondsBeforeCheckingDistanceValue" destination="l8b-yD-jlD" id="Ewb-yg-fWz"/>
