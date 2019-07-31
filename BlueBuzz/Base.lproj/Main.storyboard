@@ -21,7 +21,7 @@
                                 <rect key="frame" x="57" y="398" width="300" height="100"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg3-828x1792" translatesAutoresizingMaskIntoConstraints="NO" id="txm-5u-Hga" userLabel="Background">
+                            <imageView userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg3-828x1792" translatesAutoresizingMaskIntoConstraints="NO" id="txm-5u-Hga" userLabel="Background">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -34,12 +34,12 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="xyD-bN-BQA">
-                                <rect key="frame" x="43" y="44" width="304" height="36"/>
+                                <rect key="frame" x="43" y="44" width="319" height="36"/>
                                 <subviews>
                                     <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected" lineBreakMode="headTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cLY-TK-31d">
                                         <rect key="frame" x="0.0" y="0.0" width="96" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <color key="textColor" red="0.099473066701490878" green="0.70767280382195907" blue="0.098732349252473206" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="textColor" red="0.099473066700000001" green="0.70767280379999997" blue="0.098732349250000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="History" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="la5-4T-2zy" userLabel="PageLabel">
@@ -48,9 +48,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6k6-QB-Jn2">
-                                        <rect key="frame" x="235" y="0.0" width="69" height="36"/>
+                                        <rect key="frame" x="235" y="0.0" width="84" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Clear     ">
+                                        <state key="normal" title="Clear Log">
                                             <color key="titleColor" red="0.27450980390000002" green="0.41960784309999999" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
                                         <connections>
@@ -59,6 +59,7 @@
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="bQN-qj-Z1k" userLabel="Settings Panel">
                                 <rect key="frame" x="46" y="99" width="300" height="238"/>
@@ -69,8 +70,10 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <slider opaque="NO" contentMode="redraw" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="10" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Na6-cW-k8Y" userLabel="Seconds Before Checking Location">
+                                    <slider contentMode="redraw" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="10" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Na6-cW-k8Y" userLabel="Seconds Before Checking Location">
                                         <rect key="frame" x="-2" y="37.333333333333343" width="304" height="31"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <accessibility key="accessibilityConfiguration" label="Seconds Before Checking Distance"/>
                                         <connections>
                                             <action selector="secondsBeforeCheckingLocationValueChangedWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="riP-3N-Z05"/>
@@ -82,8 +85,10 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <slider opaque="NO" contentMode="redraw" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="10" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="l8b-yD-jlD" userLabel="Seconds Before Checking Distance">
+                                    <slider opaque="NO" contentMode="redraw" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="10" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="l8b-yD-jlD" userLabel="Seconds Before Checking Distance">
                                         <rect key="frame" x="-2" y="122.66666666666666" width="304" height="31"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <accessibility key="accessibilityConfiguration" label="Seconds Before Checking Distance"/>
                                         <connections>
                                             <action selector="secondsBeforeCheckingDistanceValueChangedWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="2wh-h5-XDH"/>
@@ -95,8 +100,10 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <slider opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="10" maxValue="1000" translatesAutoresizingMaskIntoConstraints="NO" id="zQe-zy-bR5" userLabel="Distance Before Notifying Alert">
+                                    <slider opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="500" minValue="10" maxValue="1000" translatesAutoresizingMaskIntoConstraints="NO" id="zQe-zy-bR5" userLabel="Distance Before Notifying Alert">
                                         <rect key="frame" x="-2" y="208" width="304" height="31"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <accessibility key="accessibilityConfiguration" label="Distance Before Notifying Alert"/>
                                         <connections>
                                             <action selector="distanceBeforeNotifyingValueChangedWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="99y-2x-yJB"/>
