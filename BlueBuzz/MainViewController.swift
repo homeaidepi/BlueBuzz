@@ -69,11 +69,11 @@ class MainViewController: UIViewController {
                 isReachable = WCSession.default.isReachable
             }
             
-            if (isReachable == false)
-            {
-                WCSession.default.delegate = sessionDelegater
-                WCSession.default.activate()
-            }
+//            if (isReachable == false)
+//            {
+//                WCSession.default.delegate = sessionDelegater
+//                WCSession.default.activate()
+//            }
             
             print("Reachable: \(isReachable)")
             
@@ -115,7 +115,7 @@ class MainViewController: UIViewController {
         
         if (pageLabel.text == SessionPages.Settings.rawValue) {
             //reachableLabel.isHidden = true
-            clearButton.isHidden = true
+            clearButton.setTitle("Reset   ", for: .normal)
             logView.isHidden = true
             tableContainerView.isHidden = true
             settingsPanel.isHidden = false
@@ -127,11 +127,7 @@ class MainViewController: UIViewController {
             settingsPanel.isHidden = true
             tableContainerView.isHidden = false
             //reachableLabel.isHidden = false
-            if (logView.text == "") {
-                clearButton.isHidden = true
-            } else {
-                clearButton.isHidden = false
-            }
+            clearButton.setTitle("Clear   ", for: .normal)
             logView.isHidden = false
         }
         //self.updateReachabilityColor()
@@ -186,7 +182,6 @@ class MainViewController: UIViewController {
             }
             logView.text = logView.text! + message
             logView.scrollRangeToVisible(NSRange(location: logView.text.count, length: 1))
-            clearButton.isHidden = false
         }
     }
     
@@ -194,6 +189,10 @@ class MainViewController: UIViewController {
         if (logView.isHidden == false) {
             logView.text = ""
             clearButton.isHidden = true
+        } else {
+            secondsBeforeCheckingLocationValue.value = 45
+            secondsBeforeCheckingDistanceValue.value = 60
+            distanceBeforeNotifyingValue.value = 100
         }
     }
     
