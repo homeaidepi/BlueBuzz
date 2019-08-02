@@ -377,11 +377,11 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
                 return true
             }
             
-            if (minutesSinceLastUpdatedLocation > m) {
-                return true
-            }
+//            if (minutesSinceLastUpdatedLocation > m) {
+//                return true
+//            }
             
-            if (secondsSinceLastUpdatedLocation > s) {
+            if (secondsSinceLastUpdatedLocation > s && minutesSinceLastUpdatedLocation > m) {
                 return true
             }
         } else {

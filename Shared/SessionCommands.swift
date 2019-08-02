@@ -72,7 +72,7 @@ extension SessionCommands {
             })
         } catch { return }
         
-        postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
+        //postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
     }
     
     // Post a notification on the main thread asynchronously.
