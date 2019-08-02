@@ -130,7 +130,8 @@ class MainViewController: UIViewController {
             clearButton.setTitle("Clear", for: .normal)
             logView.isHidden = false
         }
-        //self.updateReachabilityColor()
+        
+        self.updateReachabilityColor()
     }
     
     // Implement the round corners on the top.
