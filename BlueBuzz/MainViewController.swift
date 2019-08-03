@@ -130,7 +130,8 @@ class MainViewController: UIViewController {
             clearButton.setTitle("Clear", for: .normal)
             logView.isHidden = false
         }
-        //self.updateReachabilityColor()
+        
+        self.updateReachabilityColor()
     }
     
     // Implement the round corners on the top.
@@ -188,11 +189,15 @@ class MainViewController: UIViewController {
     @IBAction func clear(_ sender: UIButton) {
         if (logView.isHidden == false) {
             logView.text = ""
-            clearButton.isHidden = true
         } else {
             secondsBeforeCheckingLocationValue.value = 45
             secondsBeforeCheckingDistanceValue.value = 60
             distanceBeforeNotifyingValue.value = 100
+        sessionDelegater.saveSecondsBeforeCheckingLocation(secondsBeforeCheckingLocation: Int(secondsBeforeCheckingLocationValue!.value))
+        sessionDelegater.saveSecondsBeforeCheckingDistance(secondsBeforeCheckingDistance: Int(secondsBeforeCheckingDistanceValue!.value))
+        sessionDelegater.saveDistanceBeforeNotifying(distanceBeforeNotifying: Double(distanceBeforeNotifyingValue!.value))
+            
+            syncSettings()
         }
     }
     
@@ -273,5 +278,7 @@ class MainViewController: UIViewController {
         else {
             log("Device: \(deviceId) missing lat,long at: \(timedColor.timeStamp)")
         }
+        
+        updateReachabilityColor()
     }
 }
