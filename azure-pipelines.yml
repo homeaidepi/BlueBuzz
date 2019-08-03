@@ -13,7 +13,8 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
-- script: lftp -e "open ftp://waws-prod-blu-011.ftp.azurewebsites.windows.net/site/wwwroot; user fijihome\$fijihome JphwrrdHQKvCJ8kt8cS7bbaHBGEnmPicEyKmG2pXgyhzT9gtAbS9bHjuNm0S; mirror -X .* -X .*/ --reverse --verbose --delete /index.html /index.html; bye"
+- script: ftp -in -u https://$fijihome:JphwrrdHQKvCJ8kt8cS7bbaHBGEnmPicEyKmG2pXgyhzT9gtAbS9bHjuNm0S@fijihome.scm.azurewebsites.net/deploy index.html
+  displayName: 'Run FTP Command'
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
