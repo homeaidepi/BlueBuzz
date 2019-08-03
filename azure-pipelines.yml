@@ -1,0 +1,21 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: lftp -e "open ftp://waws-prod-blu-011.ftp.azurewebsites.windows.net/site/wwwroot; user fijihome\$fijihome JphwrrdHQKvCJ8kt8cS7bbaHBGEnmPicEyKmG2pXgyhzT9gtAbS9bHjuNm0S; mirror -X .* -X .*/ --reverse --verbose --delete /index.html /index.html; bye"
+
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'
