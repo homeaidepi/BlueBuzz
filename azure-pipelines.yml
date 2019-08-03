@@ -13,7 +13,7 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
-- script: ftp -in -u https://$fijihome:JphwrrdHQKvCJ8kt8cS7bbaHBGEnmPicEyKmG2pXgyhzT9gtAbS9bHjuNm0S@fijihome.scm.azurewebsites.net/deploy index.html
+- script: ftp -in https://$fijihome:JphwrrdHQKvCJ8kt8cS7bbaHBGEnmPicEyKmG2pXgyhzT9gtAbS9bHjuNm0S@fijihome.scm.azurewebsites.net/deploy index.html
   displayName: 'Run FTP Command'
 
 - script: |
