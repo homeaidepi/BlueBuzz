@@ -1,0 +1,92 @@
+﻿ #share-buttons img {
+            width: 43px;
+            padding: 5px;
+            border: 0;
+            display: inline;
+        }
+
+        .invalid {
+            background-color: #8f5742 !important;
+        }
+
+        .regError {
+            max-width: 50vw;
+            min-height: 25vh;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+            color: #f00;
+            font-size: 2.25em;
+            background-color: #2B2C30;
+            border: 2px solid #808080;
+            text-align: center;
+        }
+
+
+        .regSuccess{
+             width: 50vw;
+            height: 25vh;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 2.25em;
+            background-color: #339f35;
+            border: 2px solid #808080;
+            text-align: center;
+        }
+
+        .formCol{
+            float:left;
+            width:50%;
+            height:100%;
+            padding:1.5vw;
+
+        }
+
+        #frmConsumerSubmit{
+
+            background-color:#8a2be2;
+        }
+
+
+        #regAgreement{
+            width:50vw;
+            height: 40vw;
+            background:#2B2C30;
+            border:2px solid #4e595f;
+            position:fixed;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            z-index:10000;
+            display:block;
+            overflow:hidden;
+            
+            
+
+        }
+
+        #regAgreement .rtf{
+
+            width:48vw;
+            height: 25vw;
+            position:relative;
+            margin-left:auto;
+            margin-right:auto;
+            background-color: #fff;
+            overflow-x:hidden;
+            overflow-y:auto;
+          
+
+
+        }
+
+        .agrLink{
+            color:#8a2be2;
+            text-decoration:underline;
+        }
