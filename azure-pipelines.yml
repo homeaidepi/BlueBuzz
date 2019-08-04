@@ -13,9 +13,6 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
-- script: ftp -in https://$fijihome:JphwrrdHQKvCJ8kt8cS7bbaHBGEnmPicEyKmG2pXgyhzT9gtAbS9bHjuNm0S@fijihome.scm.azurewebsites.net/deploy index.html
-  displayName: 'Run FTP Command'
-
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
