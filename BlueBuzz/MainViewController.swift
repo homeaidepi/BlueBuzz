@@ -121,7 +121,7 @@ class MainViewController: UIViewController {
             self.welcomeMessage = message
             
             DispatchQueue.main.async {
-                self.logView.text = self.welcomeMessage
+                self.logView.attributedText = self.welcomeMessage.html2Attributed
             }
         }) { (error, params) in
             if let err = error {
@@ -130,7 +130,7 @@ class MainViewController: UIViewController {
             self.welcomeMessage += "\nParameters passed are: " + String(describing:params)
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.pageLabel!.text = dataObject
@@ -139,6 +139,7 @@ class MainViewController: UIViewController {
             reachableLabel.isHidden = false
             clearButton.setTitle("Reset", for: .normal)
             logView.isHidden = true
+            logView.text = ""
             tableContainerView.isHidden = true
             settingsPanel.isHidden = false
             secondsBeforeCheckingLocationValue.value = Float(sessionDelegater.getSecondsBeforeCheckingLocation())
