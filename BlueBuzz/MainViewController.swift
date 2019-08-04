@@ -25,7 +25,6 @@ class MainViewController: UIViewController {
     @IBOutlet weak var distanceBeforeNotifyingLabel: UILabel!
     @IBOutlet weak var settingsPanel: UIStackView!
     
-    var welcomeMessage: String = "Welcome to Blue Buzz..."
     var dataObject: String = ""
     
     @IBAction func secondsBeforeCheckingLocationValueChanged(sender: UISlider) {
@@ -58,6 +57,11 @@ class MainViewController: UIViewController {
         sessionDelegater.saveDistanceBeforeNotifying(distanceBeforeNotifying: currentValue)
         
         syncSettings()
+    }
+    
+    required init(coder: NSCoder) {
+        super.init(coder: coder)!
+        getWelcomeMessage()
     }
     
     func syncSettings()
@@ -108,26 +112,35 @@ class MainViewController: UIViewController {
         
         WCSession.default.delegate = sessionDelegater
         WCSession.default.activate()
-        
-        getWelcomeMessage()
     }
     
     func getWelcomeMessage()
     {
-        sessionDelegater.getChangeLogByVersion(onSuccess: { (JSON) in
-            
-            let message = JSON[messageKey] as? String ?? emptyMessage
-            
-            self.welcomeMessage = message
-            
-            DispatchQueue.main.async {
-                self.logView.attributedText = self.welcomeMessage.html2Attributed
+        var message: String = "Welcome to Blue Buzz..."
+        if (Variables.welcomeMessage.count < 30) {
+            sessionDelegater.getChangeLogByVersion(onSuccess: { (JSON) in
+                
+                message = JSON[messageKey] as? String ?? emptyMessage
+                
+                Variables.welcomeMessage = message
+                DispatchQueue.main.async {
+                    self.logView.attributedText =  Variables.welcomeMessage.html2Attributed
+                }
+                
+            }) { (error, params) in
+                if let err = error {
+                   message = "\nError: " + err.localizedDescription
+                }
+                message += "\nParameters passed are: " + String(describing:params)
+                
+                DispatchQueue.main.async {
+                    self.logView.attributedText = message.html2Attributed
+                }
             }
-        }) { (error, params) in
-            if let err = error {
-               self.welcomeMessage = "\nError: " + err.localizedDescription
-            }
-            self.welcomeMessage += "\nParameters passed are: " + String(describing:params)
+            
+           
+            
+            
         }
     }
 
@@ -151,14 +164,14 @@ class MainViewController: UIViewController {
             reachableLabel.isHidden = false
             clearButton.setTitle("Clear", for: .normal)
             logView.isHidden = false
-            logView.attributedText = ("").html2Attributed
+            logView.attributedText = ("<h4>History Log View</h4>").html2Attributed
         } else {
             settingsPanel.isHidden = true
             tableContainerView.isHidden = true
             reachableLabel.isHidden = true
             clearButton.setTitle("", for: .normal)
             logView.isHidden = false
-            logView.text = welcomeMessage
+            logView.attributedText = Variables.welcomeMessage.html2Attributed
         }
         
         self.updateReachabilityColor()
