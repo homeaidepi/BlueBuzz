@@ -86,7 +86,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <slider contentMode="redraw" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="45" minValue="10" maxValue="100" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Na6-cW-k8Y" userLabel="Seconds Before Checking Location">
+                                    <slider contentMode="redraw" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="45" minValue="10" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Na6-cW-k8Y" userLabel="Seconds Before Checking Location">
                                         <rect key="frame" x="-2" y="38" width="346" height="31"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -107,7 +107,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <slider opaque="NO" contentMode="redraw" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="60" minValue="10" maxValue="100" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l8b-yD-jlD" userLabel="Seconds Before Checking Distance">
+                                    <slider opaque="NO" contentMode="redraw" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="60" minValue="10" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="l8b-yD-jlD" userLabel="Seconds Before Checking Distance">
                                         <rect key="frame" x="-2" y="119" width="346" height="31"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -128,7 +128,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <slider opaque="NO" contentMode="redraw" verticalHuggingPriority="252" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="10" maxValue="1000" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zQe-zy-bR5" userLabel="Distance Before Notifying Alert">
+                                    <slider opaque="NO" contentMode="redraw" verticalHuggingPriority="252" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="10" maxValue="1000" translatesAutoresizingMaskIntoConstraints="NO" id="zQe-zy-bR5" userLabel="Distance Before Notifying Alert">
                                         <rect key="frame" x="-2" y="200" width="346" height="31"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -232,9 +232,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg3-828x1792" translatesAutoresizingMaskIntoConstraints="NO" id="pwl-Ce-uw5" userLabel="Background">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg3-828x1792" translatesAutoresizingMaskIntoConstraints="NO" id="pwl-Ce-uw5" userLabel="Background">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                         </subviews>
@@ -303,5 +304,5 @@
         <image name="100" width="100" height="100"/>
         <image name="bg3-828x1792" width="828" height="1792"/>
     </resources>
-    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>

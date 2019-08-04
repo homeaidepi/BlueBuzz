@@ -1,10 +1,3 @@
-/*
-See LICENSE folder for this sample’s licensing information.
-
-Abstract:
-The main view controller of the iOS app.
-*/
-
 import UIKit
 import WatchConnectivity
 import UserNotifications
@@ -137,10 +130,6 @@ class MainViewController: UIViewController {
                     self.logView.attributedText = message.html2Attributed
                 }
             }
-            
-           
-            
-            
         }
     }
 
@@ -182,35 +171,6 @@ class MainViewController: UIViewController {
     //
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-//        if (tableContainerView.isHidden == false) {
-//
-//            let layer = CALayer()
-//            layer.shadowOpacity = 1.0
-//            layer.shadowOffset = CGSize(width: 0, height: 1)
-//
-//            // Make sure the shadow is outside of the bottom of the screen.
-//            //
-//            var rect = self.tableContainerView.bounds
-//
-//            if #available(iOS 11.0, *) {
-//                rect.size.height += view.safeAreaLayoutGuide.layoutFrame.size.height
-//            }
-//
-//            let path = UIBezierPath(roundedRect: rect,
-//                                    byRoundingCorners: [.topRight, .topLeft],
-//                                    cornerRadii: CGSize(width: 10, height: 10))
-//            let shapeLayer = CAShapeLayer()
-//            shapeLayer.path = path.cgPath
-//            shapeLayer.fillColor = UIColor.clear.cgColor
-//            shapeLayer.backgroundColor = UIColor.clear.cgColor
-//            
-//            
-//            layer.addSublayer(shapeLayer)
-//
-//            tableContainerView.layer.addSublayer(layer)
-//            tablePlaceholderView.layer.zPosition = layer.zPosition + 1
-//        }
     }
     
     deinit {
@@ -220,18 +180,26 @@ class MainViewController: UIViewController {
     // Append the message to the end of the text view and make sure it is visiable.
     //
     private func log(_ message: String) {
-        if (logView.isHidden == false) {
-            if (logView.text != "") {
-                logView.text = logView.text! + "\n"
+        if (pageLabel.text == SessionPages.LogView.rawValue) {
+            if (logView.attributedText.string.count > 0) {
+                let format = "#{{message}} #{{newLine}}"
+                let attributedMessage = NSAttributedString(format: format,
+                                                 mapping: ["message": message,
+                                                           "newLine": "\n"])
+                let logText = NSMutableAttributedString()
+                
+                logText.append(logView.attributedText)
+                logText.append(attributedMessage)
+                
+                logView.attributedText = logText
             }
-            logView.text = logView.text! + message
-            logView.scrollRangeToVisible(NSRange(location: logView.text.count, length: 1))
+            logView.scrollRangeToVisible(NSRange(location: logView.attributedText.string.count, length: 1))
         }
     }
     
     @IBAction func clear(_ sender: UIButton) {
         if (logView.isHidden == false) {
-            logView.text = ""
+            logView.attributedText = "".html2Attributed
         } else {
             secondsBeforeCheckingLocationValue.value = 45
             secondsBeforeCheckingDistanceValue.value = 60
@@ -285,9 +253,6 @@ class MainViewController: UIViewController {
         
         guard let commandStatus = notification.object as? CommandStatus else { return }
         
-        //TODO May be a good reference for page settings
-//        defer { noteLabel.isHidden = logView.text.isEmpty ? false: true }
-//
         // If an error occurs, show the error message and returns.
         //
         if commandStatus.errorMessage.count > 0 {
@@ -316,7 +281,6 @@ class MainViewController: UIViewController {
             } else {
                 log("id:\(instanceId.prefix(20))\n\(deviceId) sent at: \(timedColor.timeStamp)")
             }
-//        log("{id:\(instanceId), location: { lat:\(lat), long:\(long) }, <b> deviceId: \(deviceId)</b>,  secCheckLocation:\(sessionDelegater.getSecondsBeforeCheckingLocation()), secCheckDistance:\(sessionDelegater.getSecondsBeforeCheckingDistance()), distanceBeforeNotifying:\(sessionDelegater.getDistanceBeforeNotifying()), command:\(commandStatus.command.rawValue), phrase:\(commandStatus.phrase.rawValue), timeStamp:\(timedColor.timeStamp)}")
         }
         else {
             log("Device: \(deviceId) missing lat,long at: \(timedColor.timeStamp)")

@@ -43,6 +43,8 @@
 		E6C25B9F22D9666A00D9A1FD /* BlueBuzzAPI.yaml in Resources */ = {isa = PBXBuildFile; fileRef = E6C25B9E22D9666A00D9A1FD /* BlueBuzzAPI.yaml */; };
 		E6DAE69722F70C3D0086AC23 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DAE69622F70C3D0086AC23 /* Variables.swift */; };
 		E6DAE69822F70C3D0086AC23 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DAE69622F70C3D0086AC23 /* Variables.swift */; };
+		E6DAE69A22F750BE0086AC23 /* SwiftyFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DAE69922F750BE0086AC23 /* SwiftyFormat.swift */; };
+		E6DAE69B22F750BE0086AC23 /* SwiftyFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DAE69922F750BE0086AC23 /* SwiftyFormat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +129,7 @@
 		E6C25B9E22D9666A00D9A1FD /* BlueBuzzAPI.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = BlueBuzzAPI.yaml; path = Shared/BlueBuzzAPI.yaml; sourceTree = "<group>"; };
 		E6DAE69522F70C3C0086AC23 /* BlueBuzz WatchKit App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BlueBuzz WatchKit App-Bridging-Header.h"; sourceTree = "<group>"; };
 		E6DAE69622F70C3D0086AC23 /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Variables.swift; path = Shared/Variables.swift; sourceTree = "<group>"; };
+		E6DAE69922F750BE0086AC23 /* SwiftyFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwiftyFormat.swift; path = Shared/SwiftyFormat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +173,7 @@
 				40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */,
 				E6DAE69622F70C3D0086AC23 /* Variables.swift */,
 				E6DAE69522F70C3C0086AC23 /* BlueBuzz WatchKit App-Bridging-Header.h */,
+				E6DAE69922F750BE0086AC23 /* SwiftyFormat.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -478,6 +482,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6DAE69A22F750BE0086AC23 /* SwiftyFormat.swift in Sources */,
 				E60460DE22E1642D00B29482 /* RootViewController.swift in Sources */,
 				40D46F511E8065200077A7B7 /* MainViewController.swift in Sources */,
 				40D8B77920A554A5005F7D76 /* CommandStatus.swift in Sources */,
@@ -502,6 +507,7 @@
 				E6DAE69822F70C3D0086AC23 /* Variables.swift in Sources */,
 				407607871E81A7F000A6A8EA /* TestDataProvider.swift in Sources */,
 				400DB0971EA005A000F637F0 /* ComplicationController.swift in Sources */,
+				E6DAE69B22F750BE0086AC23 /* SwiftyFormat.swift in Sources */,
 				40DC7D101EA8186200A93AFB /* Logger.swift in Sources */,
 				4076077E1E8183AF00A6A8EA /* SessionCommands.swift in Sources */,
 				40D46F721E8065200077A7B7 /* MainInterfaceController.swift in Sources */,
