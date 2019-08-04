@@ -128,6 +128,8 @@ class MainViewController: UIViewController {
                 
                 DispatchQueue.main.async {
                     self.logView.attributedText = message.html2Attributed
+                    
+                    self.logView.textColor = UIColor(white: 1, alpha: 1)
                 }
             }
         }
@@ -153,7 +155,7 @@ class MainViewController: UIViewController {
             reachableLabel.isHidden = false
             clearButton.setTitle("Clear", for: .normal)
             logView.isHidden = false
-            logView.attributedText = ("<h4>History Log View</h4>").html2Attributed
+            logView.attributedText = ("<h1>Log View</h4>").html2Attributed
         } else {
             settingsPanel.isHidden = true
             tableContainerView.isHidden = true
@@ -161,6 +163,7 @@ class MainViewController: UIViewController {
             clearButton.setTitle("", for: .normal)
             logView.isHidden = false
             logView.attributedText = Variables.welcomeMessage.html2Attributed
+            logView.scrollRangeToVisible(NSRange(location:1, length: 1))
         }
         
         self.updateReachabilityColor()
