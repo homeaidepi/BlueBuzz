@@ -41,6 +41,10 @@
 		E6C25B9822D959A400D9A1FD /* MongoDBConnection.uri in Resources */ = {isa = PBXBuildFile; fileRef = E6C25B9722D959A400D9A1FD /* MongoDBConnection.uri */; };
 		E6C25B9D22D9663600D9A1FD /* BlueBuzzAPI.json in Resources */ = {isa = PBXBuildFile; fileRef = E6C25B9C22D9663600D9A1FD /* BlueBuzzAPI.json */; };
 		E6C25B9F22D9666A00D9A1FD /* BlueBuzzAPI.yaml in Resources */ = {isa = PBXBuildFile; fileRef = E6C25B9E22D9666A00D9A1FD /* BlueBuzzAPI.yaml */; };
+		E6DAE69722F70C3D0086AC23 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DAE69622F70C3D0086AC23 /* Variables.swift */; };
+		E6DAE69822F70C3D0086AC23 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DAE69622F70C3D0086AC23 /* Variables.swift */; };
+		E6DAE69A22F750BE0086AC23 /* SwiftyFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DAE69922F750BE0086AC23 /* SwiftyFormat.swift */; };
+		E6DAE69B22F750BE0086AC23 /* SwiftyFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DAE69922F750BE0086AC23 /* SwiftyFormat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +127,9 @@
 		E6C25B9722D959A400D9A1FD /* MongoDBConnection.uri */ = {isa = PBXFileReference; lastKnownFileType = text; name = MongoDBConnection.uri; path = Shared/MongoDBConnection.uri; sourceTree = "<group>"; };
 		E6C25B9C22D9663600D9A1FD /* BlueBuzzAPI.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = BlueBuzzAPI.json; path = Shared/BlueBuzzAPI.json; sourceTree = "<group>"; };
 		E6C25B9E22D9666A00D9A1FD /* BlueBuzzAPI.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = BlueBuzzAPI.yaml; path = Shared/BlueBuzzAPI.yaml; sourceTree = "<group>"; };
+		E6DAE69522F70C3C0086AC23 /* BlueBuzz WatchKit App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BlueBuzz WatchKit App-Bridging-Header.h"; sourceTree = "<group>"; };
+		E6DAE69622F70C3D0086AC23 /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Variables.swift; path = Shared/Variables.swift; sourceTree = "<group>"; };
+		E6DAE69922F750BE0086AC23 /* SwiftyFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwiftyFormat.swift; path = Shared/SwiftyFormat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +171,9 @@
 				40DC7D0E1EA8186200A93AFB /* Logger.swift */,
 				E6C25B9722D959A400D9A1FD /* MongoDBConnection.uri */,
 				40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */,
+				E6DAE69622F70C3D0086AC23 /* Variables.swift */,
+				E6DAE69522F70C3C0086AC23 /* BlueBuzz WatchKit App-Bridging-Header.h */,
+				E6DAE69922F750BE0086AC23 /* SwiftyFormat.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -348,6 +358,7 @@
 					40D46F5C1E8065200077A7B7 = {
 						CreatedOnToolsVersion = 8.3;
 						DevelopmentTeam = F2VGAV7YDQ;
+						LastSwiftMigration = 1030;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -471,6 +482,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6DAE69A22F750BE0086AC23 /* SwiftyFormat.swift in Sources */,
 				E60460DE22E1642D00B29482 /* RootViewController.swift in Sources */,
 				40D46F511E8065200077A7B7 /* MainViewController.swift in Sources */,
 				40D8B77920A554A5005F7D76 /* CommandStatus.swift in Sources */,
@@ -478,6 +490,7 @@
 				E60460DC22E1642600B29482 /* ModelController.swift in Sources */,
 				40D46F4F1E8065200077A7B7 /* AppDelegate.swift in Sources */,
 				40DC7D0F1EA8186200A93AFB /* Logger.swift in Sources */,
+				E6DAE69722F70C3D0086AC23 /* Variables.swift in Sources */,
 				40C02A9A20A27F28006F07AE /* CommandsViewController.swift in Sources */,
 				40AF22991F29236300E6D1A8 /* SessionDelegater.swift in Sources */,
 				4084B0231EA057EF00ACA046 /* SessionCommands.swift in Sources */,
@@ -491,8 +504,10 @@
 				40AF229A1F29236300E6D1A8 /* SessionDelegater.swift in Sources */,
 				40D8B77A20A554A5005F7D76 /* CommandStatus.swift in Sources */,
 				40D46F741E8065200077A7B7 /* ExtensionDelegate.swift in Sources */,
+				E6DAE69822F70C3D0086AC23 /* Variables.swift in Sources */,
 				407607871E81A7F000A6A8EA /* TestDataProvider.swift in Sources */,
 				400DB0971EA005A000F637F0 /* ComplicationController.swift in Sources */,
+				E6DAE69B22F750BE0086AC23 /* SwiftyFormat.swift in Sources */,
 				40DC7D101EA8186200A93AFB /* Logger.swift in Sources */,
 				4076077E1E8183AF00A6A8EA /* SessionCommands.swift in Sources */,
 				40D46F721E8065200077A7B7 /* MainInterfaceController.swift in Sources */,
@@ -704,6 +719,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "BlueBuzz WatchKit App/BlueBuzz WatchKit App.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -711,6 +727,7 @@
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
 				IBSC_MODULE = BlueBuzz_WatchKit_Extension;
 				INFOPLIST_FILE = "BlueBuzz WatchKit App/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MARKETING_VERSION = 2.3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.homeaidepi.bluebuzz1.watchkitapp;
@@ -718,6 +735,8 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "BlueBuzz WatchKit App-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 5.0;
@@ -729,6 +748,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "BlueBuzz WatchKit App/BlueBuzz WatchKit App.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -736,6 +756,7 @@
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
 				IBSC_MODULE = BlueBuzz_WatchKit_Extension;
 				INFOPLIST_FILE = "BlueBuzz WatchKit App/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MARKETING_VERSION = 2.3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.homeaidepi.bluebuzz1.watchkitapp;
@@ -743,6 +764,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "BlueBuzz WatchKit App-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 5.0;

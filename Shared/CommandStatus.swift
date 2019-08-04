@@ -92,6 +92,23 @@ class Color:Codable{
     }
 }
 
+extension String {
+    var html2Attributed: NSAttributedString? {
+        do {
+            guard let data = data(using: String.Encoding.utf8) else {
+                return nil
+            }
+            return try NSAttributedString(data: data,
+                                          options: [.documentType: NSAttributedString.DocumentType.html,
+                                                    .characterEncoding: String.Encoding.utf8.rawValue],
+                                          documentAttributes: nil)
+        } catch {
+            print("error: ", error)
+            return nil
+        }
+    }
+}
+
 extension UIColor {
     func data() -> Data {
         return NSKeyedArchiver.archivedData(withRootObject: self)

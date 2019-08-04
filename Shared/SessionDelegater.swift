@@ -23,15 +23,19 @@ extension Notification.Name {
     static let reachabilityDidChange = Notification.Name("ReachabilityDidChange")
 }
 
+var messageKey = "message"
+var emptyMessage = "Welcome to Blue Buzz."
+
 // Implement WCSessionDelegate methods to receive Watch Connectivity data and notify clients.
 // WCsession status changes are also handled here.
 //
 class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
-    
+    var message = emptyMessage;
     var blueBuzzIbmSharingApiKey = "a5e5ee30-1346-4eaf-acdd-e1a7dccdec20"
     var blueBuzzWebServiceGetLocationByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/getlocationbyinstanceid")!
     var blueBuzzWebServicePostLocation = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/PostLocationByInstanceId")!
     var blueBuzzWebServiceCheckDistanceByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/CheckDistanceByInstanceId")
+    var blueBuzzWebServiceGetChangeLogByVersion = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/GetChangeLogByVersion")
 
     private var retval = false
    
@@ -309,6 +313,67 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         
         return retval
     }
+    
+    func callApiWithParams(_ params: [AnyHashable: Any], serviceUrl: URL,
+                           onSuccess success: @escaping (_ JSON: [String: Any]) -> Void,
+                                  onFailure failure: @escaping (_ error: Error?, _ params: [AnyHashable: Any]) -> Void) {
+        
+        print("\n" + String(describing: params))
+        
+        var request = URLRequest(url: serviceUrl)
+        
+        request.httpMethod = "POST"
+        request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("a5e5ee30-1346-4eaf-acdd-e1a7dccdec20", forHTTPHeaderField: "X-IBM-Client-Id")
+        guard let httpBody = try? JSONSerialization.data(
+            withJSONObject: params,
+            options: []) else {
+                return;
+        }
+        request.httpBody = httpBody
+        
+        let session = URLSession.shared
+        
+        session.dataTask(with: request) { (data, response, error) in
+            if let response = response {
+                print(response)
+            }
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                    
+                    //print(json);
+                    if (json != nil) {
+                        success(json!)
+                    } else {
+                        failure(NSError(domain:"Welcome message was nil", code:1, userInfo:nil), params)
+                    }
+                } catch {
+                    print(error)
+                    failure(error, params)
+                }
+            }
+            }.resume()
+    }
+    
+    public func getChangeLogByVersion(onSuccess success: @escaping (_ JSON: [String: Any]) -> Void,
+                                      onFailure failure: @escaping (_ error: Error?, _ params: [AnyHashable: Any]) -> Void) {
+        // dont fetch if already fetched
+        if (self.message == emptyMessage) {
+            let serviceUrl = blueBuzzWebServiceGetChangeLogByVersion!
+            
+            let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
+            
+            let parameterDictionary = [
+                "version" : "\(appVersion)",]
+            
+                callApiWithParams(parameterDictionary,
+                                  serviceUrl: serviceUrl,
+                                  onSuccess: success,
+                                  onFailure: failure)
+        }
+    }
+    
     
     public func checkDistanceByInstanceId(commandStatus: CommandStatus) -> Bool {
         let serviceUrl = blueBuzzWebServiceCheckDistanceByInstanceId!

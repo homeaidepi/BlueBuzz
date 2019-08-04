@@ -13,6 +13,7 @@ import UserNotifications
 import CoreLocation
 
 enum SessionPages: String {
+    case Welcome = "Welcome"
     case LogView = "History"
     case Settings = "Settings"
 }

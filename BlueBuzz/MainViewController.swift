@@ -1,10 +1,3 @@
-/*
-See LICENSE folder for this sample’s licensing information.
-
-Abstract:
-The main view controller of the iOS app.
-*/
-
 import UIKit
 import WatchConnectivity
 import UserNotifications
@@ -59,6 +52,11 @@ class MainViewController: UIViewController {
         syncSettings()
     }
     
+    required init(coder: NSCoder) {
+        super.init(coder: coder)!
+        getWelcomeMessage()
+    }
+    
     func syncSettings()
     {
         let settings = sessionDelegater.getSettings()
@@ -109,12 +107,40 @@ class MainViewController: UIViewController {
         WCSession.default.activate()
     }
     
+    func getWelcomeMessage()
+    {
+        var message: String = "Welcome to Blue Buzz..."
+        if (Variables.welcomeMessage.count < 30) {
+            sessionDelegater.getChangeLogByVersion(onSuccess: { (JSON) in
+                
+                message = JSON[messageKey] as? String ?? emptyMessage
+                
+                Variables.welcomeMessage = message
+                DispatchQueue.main.async {
+                    self.logView.attributedText =  Variables.welcomeMessage.html2Attributed
+                }
+                
+            }) { (error, params) in
+                if let err = error {
+                   message = "\nError: " + err.localizedDescription
+                }
+                message += "\nParameters passed are: " + String(describing:params)
+                
+                DispatchQueue.main.async {
+                    self.logView.attributedText = message.html2Attributed
+                    
+                    self.logView.textColor = UIColor(white: 1, alpha: 1)
+                }
+            }
+        }
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.pageLabel!.text = dataObject
         
         if (pageLabel.text == SessionPages.Settings.rawValue) {
-            //reachableLabel.isHidden = true
+            reachableLabel.isHidden = false
             clearButton.setTitle("Reset", for: .normal)
             logView.isHidden = true
             tableContainerView.isHidden = true
@@ -123,12 +149,22 @@ class MainViewController: UIViewController {
             secondsBeforeCheckingDistanceValue.value =
                 Float(sessionDelegater.getSecondsBeforeCheckingDistance())
             distanceBeforeNotifyingValue.value = Float(sessionDelegater.getDistanceBeforeNotifying())
-        } else {
+            logView.attributedText = ("").html2Attributed
+        } else if (pageLabel.text == SessionPages.LogView.rawValue) {
             settingsPanel.isHidden = true
             tableContainerView.isHidden = false
-            //reachableLabel.isHidden = false
+            reachableLabel.isHidden = false
             clearButton.setTitle("Clear", for: .normal)
             logView.isHidden = false
+            logView.attributedText = Variables.logHistory
+        } else {
+            settingsPanel.isHidden = true
+            tableContainerView.isHidden = true
+            reachableLabel.isHidden = true
+            clearButton.setTitle("", for: .normal)
+            logView.isHidden = false
+            logView.attributedText = Variables.welcomeMessage.html2Attributed
+            logView.scrollRangeToVisible(NSMakeRange(0, 1))
         }
         
         self.updateReachabilityColor()
@@ -139,35 +175,6 @@ class MainViewController: UIViewController {
     //
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-//        if (tableContainerView.isHidden == false) {
-//
-//            let layer = CALayer()
-//            layer.shadowOpacity = 1.0
-//            layer.shadowOffset = CGSize(width: 0, height: 1)
-//
-//            // Make sure the shadow is outside of the bottom of the screen.
-//            //
-//            var rect = self.tableContainerView.bounds
-//
-//            if #available(iOS 11.0, *) {
-//                rect.size.height += view.safeAreaLayoutGuide.layoutFrame.size.height
-//            }
-//
-//            let path = UIBezierPath(roundedRect: rect,
-//                                    byRoundingCorners: [.topRight, .topLeft],
-//                                    cornerRadii: CGSize(width: 10, height: 10))
-//            let shapeLayer = CAShapeLayer()
-//            shapeLayer.path = path.cgPath
-//            shapeLayer.fillColor = UIColor.clear.cgColor
-//            shapeLayer.backgroundColor = UIColor.clear.cgColor
-//            
-//            
-//            layer.addSublayer(shapeLayer)
-//
-//            tableContainerView.layer.addSublayer(layer)
-//            tablePlaceholderView.layer.zPosition = layer.zPosition + 1
-//        }
     }
     
     deinit {
@@ -177,18 +184,24 @@ class MainViewController: UIViewController {
     // Append the message to the end of the text view and make sure it is visiable.
     //
     private func log(_ message: String) {
-        if (logView.isHidden == false) {
-            if (logView.text != "") {
-                logView.text = logView.text! + "\n"
-            }
-            logView.text = logView.text! + message
-            logView.scrollRangeToVisible(NSRange(location: logView.text.count, length: 1))
+        if (pageLabel.text == SessionPages.LogView.rawValue) {
+            
+            let format = "#{{message}} #{{newLine}}"
+            let attributedMessage = NSAttributedString(format: format,
+                                             mapping: ["message": message,
+                                                       "newLine": "\n"])
+
+            Variables.logHistory.append(attributedMessage)
+            
+            logView.attributedText = Variables.logHistory
+            logView.scrollRangeToVisible(NSMakeRange(0, 1))
         }
     }
     
     @IBAction func clear(_ sender: UIButton) {
         if (logView.isHidden == false) {
-            logView.text = ""
+            Variables.logHistory = NSMutableAttributedString()
+            logView.attributedText = Variables.logHistory
         } else {
             secondsBeforeCheckingLocationValue.value = 45
             secondsBeforeCheckingDistanceValue.value = 60
@@ -242,9 +255,6 @@ class MainViewController: UIViewController {
         
         guard let commandStatus = notification.object as? CommandStatus else { return }
         
-        //TODO May be a good reference for page settings
-//        defer { noteLabel.isHidden = logView.text.isEmpty ? false: true }
-//
         // If an error occurs, show the error message and returns.
         //
         if commandStatus.errorMessage.count > 0 {
@@ -273,7 +283,6 @@ class MainViewController: UIViewController {
             } else {
                 log("id:\(instanceId.prefix(20))\n\(deviceId) sent at: \(timedColor.timeStamp)")
             }
-//        log("{id:\(instanceId), location: { lat:\(lat), long:\(long) }, <b> deviceId: \(deviceId)</b>,  secCheckLocation:\(sessionDelegater.getSecondsBeforeCheckingLocation()), secCheckDistance:\(sessionDelegater.getSecondsBeforeCheckingDistance()), distanceBeforeNotifying:\(sessionDelegater.getDistanceBeforeNotifying()), command:\(commandStatus.command.rawValue), phrase:\(commandStatus.phrase.rawValue), timeStamp:\(timedColor.timeStamp)}")
         }
         else {
             log("Device: \(deviceId) missing lat,long at: \(timedColor.timeStamp)")
