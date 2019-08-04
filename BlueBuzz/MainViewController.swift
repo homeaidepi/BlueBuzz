@@ -149,13 +149,14 @@ class MainViewController: UIViewController {
             secondsBeforeCheckingDistanceValue.value =
                 Float(sessionDelegater.getSecondsBeforeCheckingDistance())
             distanceBeforeNotifyingValue.value = Float(sessionDelegater.getDistanceBeforeNotifying())
+            logView.attributedText = ("").html2Attributed
         } else if (pageLabel.text == SessionPages.LogView.rawValue) {
             settingsPanel.isHidden = true
             tableContainerView.isHidden = false
             reachableLabel.isHidden = false
             clearButton.setTitle("Clear", for: .normal)
             logView.isHidden = false
-            logView.attributedText = ("<h1>Log View</h4>").html2Attributed
+            logView.attributedText = Variables.logHistory
         } else {
             settingsPanel.isHidden = true
             tableContainerView.isHidden = true
@@ -163,7 +164,7 @@ class MainViewController: UIViewController {
             clearButton.setTitle("", for: .normal)
             logView.isHidden = false
             logView.attributedText = Variables.welcomeMessage.html2Attributed
-            logView.scrollRangeToVisible(NSRange(location:1, length: 1))
+            logView.scrollRangeToVisible(NSMakeRange(0, 1))
         }
         
         self.updateReachabilityColor()
@@ -184,25 +185,23 @@ class MainViewController: UIViewController {
     //
     private func log(_ message: String) {
         if (pageLabel.text == SessionPages.LogView.rawValue) {
-            if (logView.attributedText.string.count > 0) {
-                let format = "#{{message}} #{{newLine}}"
-                let attributedMessage = NSAttributedString(format: format,
-                                                 mapping: ["message": message,
-                                                           "newLine": "\n"])
-                let logText = NSMutableAttributedString()
-                
-                logText.append(logView.attributedText)
-                logText.append(attributedMessage)
-                
-                logView.attributedText = logText
-            }
-            logView.scrollRangeToVisible(NSRange(location: logView.attributedText.string.count, length: 1))
+            
+            let format = "#{{message}} #{{newLine}}"
+            let attributedMessage = NSAttributedString(format: format,
+                                             mapping: ["message": message,
+                                                       "newLine": "\n"])
+
+            Variables.logHistory.append(attributedMessage)
+            
+            logView.attributedText = Variables.logHistory
+            logView.scrollRangeToVisible(NSMakeRange(0, 1))
         }
     }
     
     @IBAction func clear(_ sender: UIButton) {
         if (logView.isHidden == false) {
-            logView.attributedText = "".html2Attributed
+            Variables.logHistory = NSMutableAttributedString()
+            logView.attributedText = Variables.logHistory
         } else {
             secondsBeforeCheckingLocationValue.value = 45
             secondsBeforeCheckingDistanceValue.value = 60
