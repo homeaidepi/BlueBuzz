@@ -139,7 +139,6 @@ class MainViewController: UIViewController {
             reachableLabel.isHidden = false
             clearButton.setTitle("Reset", for: .normal)
             logView.isHidden = true
-            logView.text = ""
             tableContainerView.isHidden = true
             settingsPanel.isHidden = false
             secondsBeforeCheckingLocationValue.value = Float(sessionDelegater.getSecondsBeforeCheckingLocation())
@@ -152,6 +151,7 @@ class MainViewController: UIViewController {
             reachableLabel.isHidden = false
             clearButton.setTitle("Clear", for: .normal)
             logView.isHidden = false
+            logView.attributedText = ("").html2Attributed
         } else {
             settingsPanel.isHidden = true
             tableContainerView.isHidden = true
