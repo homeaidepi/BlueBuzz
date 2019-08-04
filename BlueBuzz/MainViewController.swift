@@ -25,6 +25,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var distanceBeforeNotifyingLabel: UILabel!
     @IBOutlet weak var settingsPanel: UIStackView!
     
+    var welcomeMessage: String = "Welcome to Blue Buzz..."
     var dataObject: String = ""
     
     @IBAction func secondsBeforeCheckingLocationValueChanged(sender: UISlider) {
@@ -107,6 +108,27 @@ class MainViewController: UIViewController {
         
         WCSession.default.delegate = sessionDelegater
         WCSession.default.activate()
+        
+        getWelcomeMessage()
+    }
+    
+    func getWelcomeMessage()
+    {
+        sessionDelegater.getChangeLogByVersion(onSuccess: { (JSON) in
+            
+            let message = JSON[messageKey] as? String ?? emptyMessage
+            
+            self.welcomeMessage = message
+            
+            DispatchQueue.main.async {
+                self.logView.text = self.welcomeMessage
+            }
+        }) { (error, params) in
+            if let err = error {
+               self.welcomeMessage = "\nError: " + err.localizedDescription
+            }
+            self.welcomeMessage += "\nParameters passed are: " + String(describing:params)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -114,7 +136,7 @@ class MainViewController: UIViewController {
         self.pageLabel!.text = dataObject
         
         if (pageLabel.text == SessionPages.Settings.rawValue) {
-            //reachableLabel.isHidden = true
+            reachableLabel.isHidden = false
             clearButton.setTitle("Reset", for: .normal)
             logView.isHidden = true
             tableContainerView.isHidden = true
@@ -123,12 +145,19 @@ class MainViewController: UIViewController {
             secondsBeforeCheckingDistanceValue.value =
                 Float(sessionDelegater.getSecondsBeforeCheckingDistance())
             distanceBeforeNotifyingValue.value = Float(sessionDelegater.getDistanceBeforeNotifying())
-        } else {
+        } else if (pageLabel.text == SessionPages.LogView.rawValue) {
             settingsPanel.isHidden = true
             tableContainerView.isHidden = false
-            //reachableLabel.isHidden = false
+            reachableLabel.isHidden = false
             clearButton.setTitle("Clear", for: .normal)
             logView.isHidden = false
+        } else {
+            settingsPanel.isHidden = true
+            tableContainerView.isHidden = true
+            reachableLabel.isHidden = true
+            clearButton.setTitle("", for: .normal)
+            logView.isHidden = false
+            logView.text = welcomeMessage
         }
         
         self.updateReachabilityColor()

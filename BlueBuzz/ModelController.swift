@@ -26,7 +26,7 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
     override init() {
         super.init()
         // Create the data model.
-        pageData = [
+        pageData = [SessionPages.Welcome.rawValue,
             SessionPages.Settings.rawValue,
             SessionPages.LogView.rawValue ]
     }

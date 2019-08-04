@@ -5,7 +5,6 @@
 # for deploying to servers that don't have git or ssh access
 # RUN THIS FROM A VAGRANT SSH IF YOU AREN'T ON LINUX ALREADY.
 ##########
-
 # prevents the certificate verification error.
 # sudo echo "set ssl:verify-certificate no" > ~/.lftp/rc
 # sudo echo "set ftp:ssl-allow no" >> ~/.lftp/rc
