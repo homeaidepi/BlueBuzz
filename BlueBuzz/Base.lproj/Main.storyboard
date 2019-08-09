@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg3-828x1792" translatesAutoresizingMaskIntoConstraints="NO" id="txm-5u-Hga" userLabel="Background">
-                                <rect key="frame" x="0.0" y="0.0" width="412" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="828" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
@@ -168,7 +168,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                             <view contentMode="redraw" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nar-Xb-h9G" userLabel="Commands Container">
-                                <rect key="frame" x="10" y="750" width="402" height="132"/>
+                                <rect key="frame" x="10" y="500" width="402" height="329"/>
                                 <subviews>
                                     <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fs3-Ag-kBY">
                                         <rect key="frame" x="8" y="6" width="374" height="53"/>
@@ -182,7 +182,6 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="30" right="8"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.36423587799072266" green="0.88404172658920288" blue="0.97335165739059448" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -193,9 +192,9 @@
                             <constraint firstItem="txm-5u-Hga" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="5zV-VA-fIn"/>
                             <constraint firstItem="bQN-qj-Z1k" firstAttribute="leading" secondItem="Yzd-6G-Wtl" secondAttribute="leading" constant="41" id="BBj-O7-EKQ"/>
                             <constraint firstItem="hyf-pn-pfG" firstAttribute="leading" secondItem="Yzd-6G-Wtl" secondAttribute="leading" constant="145" id="Gn0-5d-fHi"/>
-                            <constraint firstItem="Nar-Xb-h9G" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="750" id="HNE-Ie-1kC"/>
                             <constraint firstItem="qjE-hX-evH" firstAttribute="top" secondItem="flT-3C-9Rh" secondAttribute="bottom" constant="8" symbolic="YES" id="JK5-Mq-NHb"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="Nar-Xb-h9G" secondAttribute="bottom" constant="-20" id="KbR-2I-y9P"/>
+                            <constraint firstItem="Nar-Xb-h9G" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="500" id="MF2-8d-LJn"/>
+                            <constraint firstItem="Yzd-6G-Wtl" firstAttribute="bottom" secondItem="Nar-Xb-h9G" secondAttribute="bottom" constant="33" id="Mhx-gQ-BxW"/>
                             <constraint firstItem="hyf-pn-pfG" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="SaK-PL-X0b"/>
                             <constraint firstItem="bQN-qj-Z1k" firstAttribute="trailing" secondItem="flT-3C-9Rh" secondAttribute="trailing" id="TO3-iC-Ufb"/>
                             <constraint firstItem="flT-3C-9Rh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="-4" id="UVJ-YG-JIk"/>
@@ -203,7 +202,6 @@
                             <constraint firstItem="flT-3C-9Rh" firstAttribute="leading" secondItem="Yzd-6G-Wtl" secondAttribute="leading" constant="25" id="Uot-N6-2RQ"/>
                             <constraint firstItem="txm-5u-Hga" firstAttribute="centerY" secondItem="hyf-pn-pfG" secondAttribute="centerY" id="c7R-d9-DPZ"/>
                             <constraint firstItem="bQN-qj-Z1k" firstAttribute="top" secondItem="flT-3C-9Rh" secondAttribute="bottom" constant="14" id="d3U-2K-OQD"/>
-                            <constraint firstItem="Nar-Xb-h9G" firstAttribute="trailing" secondItem="txm-5u-Hga" secondAttribute="trailing" id="m5Y-oi-wZ1"/>
                             <constraint firstItem="Yzd-6G-Wtl" firstAttribute="trailing" secondItem="flT-3C-9Rh" secondAttribute="trailing" constant="31" id="p7Y-Wb-PxJ"/>
                             <constraint firstItem="qjE-hX-evH" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="pJ9-c9-Y0b"/>
                             <constraint firstItem="Yzd-6G-Wtl" firstAttribute="trailing" secondItem="Nar-Xb-h9G" secondAttribute="trailing" constant="2" id="tnS-WU-P34"/>
@@ -215,6 +213,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="clearButton" destination="6k6-QB-Jn2" id="QCQ-1Q-QbM"/>
+                        <outlet property="containerConstraint" destination="MF2-8d-LJn" id="wY5-XU-dPc"/>
                         <outlet property="distanceBeforeNotifyingLabel" destination="rBg-kg-tYN" id="bv3-zf-EdX"/>
                         <outlet property="distanceBeforeNotifyingValue" destination="zQe-zy-bR5" id="PBD-4k-mg9"/>
                         <outlet property="logView" destination="qjE-hX-evH" id="N3e-64-vy8"/>

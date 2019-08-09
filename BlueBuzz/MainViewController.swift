@@ -17,6 +17,9 @@ class MainViewController: UIViewController {
     @IBOutlet weak var secondsBeforeCheckingDistanceLabel: UILabel!
     @IBOutlet weak var distanceBeforeNotifyingLabel: UILabel!
     @IBOutlet weak var settingsPanel: UIStackView!
+    @IBOutlet weak var
+    containerConstraint:
+    NSLayoutConstraint!
     
     var dataObject: String = ""
     
@@ -139,25 +142,30 @@ class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         self.pageLabel!.text = dataObject
         
-        if (pageLabel.text == SessionPages.Settings.rawValue) {
-            reachableLabel.isHidden = false
-            clearButton.setTitle("Reset", for: .normal)
-            logView.isHidden = true
-            tableContainerView.isHidden = true
-            settingsPanel.isHidden = false
-            secondsBeforeCheckingLocationValue.value = Float(sessionDelegater.getSecondsBeforeCheckingLocation())
-            secondsBeforeCheckingDistanceValue.value =
-                Float(sessionDelegater.getSecondsBeforeCheckingDistance())
-            distanceBeforeNotifyingValue.value = Float(sessionDelegater.getDistanceBeforeNotifying())
-            logView.attributedText = ("").html2Attributed
-        } else if (pageLabel.text == SessionPages.LogView.rawValue) {
+        switch (pageLabel.text) {
+            case SessionPages.Settings.rawValue:
+                reachableLabel.isHidden = false
+                clearButton.setTitle("Reset", for: .normal)
+                logView.isHidden = true
+                tableContainerView.isHidden = true
+                settingsPanel.isHidden = false
+                secondsBeforeCheckingLocationValue.value = Float(sessionDelegater.getSecondsBeforeCheckingLocation())
+                secondsBeforeCheckingDistanceValue.value =
+                    Float(sessionDelegater.getSecondsBeforeCheckingDistance())
+                distanceBeforeNotifyingValue.value = Float(sessionDelegater.getDistanceBeforeNotifying())
+                logView.attributedText = ("").html2Attributed
+        case SessionPages.LogView.rawValue:
             settingsPanel.isHidden = true
             tableContainerView.isHidden = false
             reachableLabel.isHidden = false
             clearButton.setTitle("Clear", for: .normal)
             logView.isHidden = false
             logView.attributedText = Variables.logHistory
-        } else {
+            
+            //fix for container being offscreen
+            containerConstraint.constant = self.view.frame.size.height - 70
+            
+        default :
             settingsPanel.isHidden = true
             tableContainerView.isHidden = true
             reachableLabel.isHidden = true
