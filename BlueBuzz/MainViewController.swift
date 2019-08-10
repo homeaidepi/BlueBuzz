@@ -17,9 +17,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var secondsBeforeCheckingDistanceLabel: UILabel!
     @IBOutlet weak var distanceBeforeNotifyingLabel: UILabel!
     @IBOutlet weak var settingsPanel: UIStackView!
-    @IBOutlet weak var
-    containerConstraint:
-    NSLayoutConstraint!
+    @IBOutlet weak var logoLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var containerConstraint: NSLayoutConstraint!
     
     var dataObject: String = ""
     
@@ -88,6 +87,31 @@ class MainViewController: UIViewController {
         return SessionDelegater()
     }()
     
+    func adjustUiConstraints(size: CGSize) {
+        var portrait = false
+        
+        if UIDevice.current.orientation.isLandscape {
+            print("Landscape")
+        } else {
+            print("Portrait")
+            portrait = true
+        }
+        
+        //fix for container being offscreen
+        containerConstraint.constant = size.height - 70
+        
+        if (portrait) {
+            logoLeadingConstraint.constant = size.width / 2 - 50
+        } else {
+            logoLeadingConstraint.constant = size.width / 2 - 100
+        }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        adjustUiConstraints(size: size)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -108,34 +132,7 @@ class MainViewController: UIViewController {
         
         WCSession.default.delegate = sessionDelegater
         WCSession.default.activate()
-    }
-    
-    func getWelcomeMessage()
-    {
-        var message: String = "Welcome to Blue Buzz..."
-        if (Variables.welcomeMessage.count < 30) {
-            sessionDelegater.getChangeLogByVersion(onSuccess: { (JSON) in
-                
-                message = JSON[messageKey] as? String ?? emptyMessage
-                
-                Variables.welcomeMessage = message
-                DispatchQueue.main.async {
-                    self.logView.attributedText =  Variables.welcomeMessage.html2Attributed
-                }
-                
-            }) { (error, params) in
-                if let err = error {
-                   message = "\nError: " + err.localizedDescription
-                }
-                message += "\nParameters passed are: " + String(describing:params)
-                
-                DispatchQueue.main.async {
-                    self.logView.attributedText = message.html2Attributed
-                    
-                    self.logView.textColor = UIColor(white: 1, alpha: 1)
-                }
-            }
-        }
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -163,7 +160,8 @@ class MainViewController: UIViewController {
             logView.attributedText = Variables.logHistory
             
             //fix for container being offscreen
-            containerConstraint.constant = self.view.frame.size.height - 70
+            print (self.view.frame.size)
+            adjustUiConstraints(size: self.view.frame.size)
             
         default :
             settingsPanel.isHidden = true
@@ -187,6 +185,35 @@ class MainViewController: UIViewController {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    func getWelcomeMessage()
+    {
+        var message: String = "Welcome to Blue Buzz..."
+        if (Variables.welcomeMessage.count < 30) {
+            sessionDelegater.getChangeLogByVersion(onSuccess: { (JSON) in
+                
+                message = JSON[messageKey] as? String ?? emptyMessage
+                
+                Variables.welcomeMessage = message
+                DispatchQueue.main.async {
+                    self.logView.attributedText =  Variables.welcomeMessage.html2Attributed
+                }
+                
+            }) { (error, params) in
+                if let err = error {
+                    message = "\nError: " + err.localizedDescription
+                }
+                message += "\nParameters passed are: " + String(describing:params)
+                
+                DispatchQueue.main.async {
+                    self.logView.attributedText = message.html2Attributed
+                    
+                    self.logView.textColor = UIColor(white: 1, alpha: 1)
+                }
+            }
+        }
     }
     
     // Append the message to the end of the text view and make sure it is visiable.
