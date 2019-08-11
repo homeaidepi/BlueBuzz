@@ -9,6 +9,6 @@
 import Foundation
 
 struct Variables {
-    static var welcomeMessage = "Welcome to Blue Buzz..."
+    static var welcomeMessage = ""
     static var logHistory = NSMutableAttributedString()
 }

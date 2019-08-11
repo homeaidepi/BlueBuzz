@@ -24,7 +24,7 @@ extension Notification.Name {
 }
 
 var messageKey = "message"
-var emptyMessage = "Welcome to Blue Buzz."
+var emptyMessage = ""
 
 // Implement WCSessionDelegate methods to receive Watch Connectivity data and notify clients.
 // WCsession status changes are also handled here.

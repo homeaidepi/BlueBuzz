@@ -158,7 +158,6 @@ class MainViewController: UIViewController {
                 clearButton.setTitle("", for: .normal)
                 logView.isHidden = false
                 logView.attributedText = Variables.welcomeMessage.html2Attributed
-                logView.scrollRangeToVisible(NSMakeRange(0, 1))
         default:
             settingsPanel.isHidden = true
             tableContainerView.isHidden = true
@@ -176,6 +175,14 @@ class MainViewController: UIViewController {
     //
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        switch (pageLabel.text) {
+        case SessionPages.Welcome.rawValue:
+            logView.setContentOffset(.zero, animated: false)
+            logView.scrollRangeToVisible(NSRange(location:0, length:0))
+        default:
+            return;
+        }
     }
     
     deinit {
@@ -185,7 +192,7 @@ class MainViewController: UIViewController {
     
     func getWelcomeMessage()
     {
-        var message: String = "Welcome to Blue Buzz..."
+        var message: String = ""
         if (Variables.welcomeMessage.count < 30) {
             sessionDelegater.getChangeLogByVersion(onSuccess: { (JSON) in
                 
@@ -204,7 +211,6 @@ class MainViewController: UIViewController {
                 
                 DispatchQueue.main.async {
                     self.logView.attributedText = message.html2Attributed
-                    
                     self.logView.textColor = UIColor(white: 1, alpha: 1)
                 }
             }
