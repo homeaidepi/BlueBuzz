@@ -69,12 +69,6 @@ class MainViewController: UIViewController {
                 isReachable = WCSession.default.isReachable
             }
             
-            if (isReachable == false)
-            {
-                WCSession.default.delegate = sessionDelegater
-                WCSession.default.activate()
-            }
-            
             print("Reachable: \(isReachable)")
             
             try WCSession.default.updateApplicationContext(settings)
@@ -103,7 +97,7 @@ class MainViewController: UIViewController {
         if (portrait) {
             logoLeadingConstraint.constant = size.width / 2 - 50
         } else {
-            logoLeadingConstraint.constant = size.width / 2 - 100
+            logoLeadingConstraint.constant = size.width / 2 - 50
         }
     }
     
@@ -129,10 +123,6 @@ class MainViewController: UIViewController {
             self, selector: #selector(type(of: self).reachabilityDidChange(_:)),
             name: .reachabilityDidChange, object: nil
         )
-        
-        WCSession.default.delegate = sessionDelegater
-        WCSession.default.activate()
-        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -151,26 +141,31 @@ class MainViewController: UIViewController {
                     Float(sessionDelegater.getSecondsBeforeCheckingDistance())
                 distanceBeforeNotifyingValue.value = Float(sessionDelegater.getDistanceBeforeNotifying())
                 logView.attributedText = ("").html2Attributed
-        case SessionPages.LogView.rawValue:
-            settingsPanel.isHidden = true
-            tableContainerView.isHidden = false
-            reachableLabel.isHidden = false
-            clearButton.setTitle("Clear", for: .normal)
-            logView.isHidden = false
-            logView.attributedText = Variables.logHistory
-            
-            //fix for container being offscreen
-            print (self.view.frame.size)
-            adjustUiConstraints(size: self.view.frame.size)
-            
-        default :
+            case SessionPages.LogView.rawValue:
+                settingsPanel.isHidden = true
+                tableContainerView.isHidden = false
+                reachableLabel.isHidden = false
+                clearButton.setTitle("Clear", for: .normal)
+                logView.isHidden = false
+                logView.attributedText = Variables.logHistory
+                
+                //fix for container being offscreen
+                adjustUiConstraints(size: self.view.frame.size)
+            case SessionPages.Welcome.rawValue :
+                settingsPanel.isHidden = true
+                tableContainerView.isHidden = true
+                reachableLabel.isHidden = true
+                clearButton.setTitle("", for: .normal)
+                logView.isHidden = false
+                logView.attributedText = Variables.welcomeMessage.html2Attributed
+                logView.scrollRangeToVisible(NSMakeRange(0, 1))
+        default:
             settingsPanel.isHidden = true
             tableContainerView.isHidden = true
             reachableLabel.isHidden = true
             clearButton.setTitle("", for: .normal)
-            logView.isHidden = false
-            logView.attributedText = Variables.welcomeMessage.html2Attributed
-            logView.scrollRangeToVisible(NSMakeRange(0, 1))
+            logView.isHidden = true
+        
         }
         
         self.updateReachabilityColor()

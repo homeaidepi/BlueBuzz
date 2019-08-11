@@ -36,6 +36,14 @@
 		E60460DE22E1642D00B29482 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60460DD22E1642D00B29482 /* RootViewController.swift */; };
 		E6140ED422DB79A800B961F0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6140ED322DB79A800B961F0 /* CoreLocation.framework */; };
 		E64DFB0022D1A65B00C91B3D /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E64DFAFF22D1A65B00C91B3D /* UserNotifications.framework */; };
+		E66EE1D822FF930D00C954FF /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1D722FF930D00C954FF /* FeedbackViewController.swift */; };
+		E66EE1DF22FF95C500C954FF /* FormControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1DC22FF95C500C954FF /* FormControl.swift */; };
+		E66EE1E022FF95C500C954FF /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1DD22FF95C500C954FF /* Form.swift */; };
+		E66EE1E122FF95C500C954FF /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1DE22FF95C500C954FF /* TextField.swift */; };
+		E66EE1E722FFC29F00C954FF /* UsernameValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1E322FFC29F00C954FF /* UsernameValidator.swift */; };
+		E66EE1E822FFC29F00C954FF /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1E422FFC29F00C954FF /* Validator.swift */; };
+		E66EE1E922FFC29F00C954FF /* PasswordValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1E522FFC29F00C954FF /* PasswordValidator.swift */; };
+		E66EE1EA22FFC29F00C954FF /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1E622FFC29F00C954FF /* EmailValidator.swift */; };
 		E6B6421C22DD6569002254D3 /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
 		E6B6421D22DD656B002254D3 /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
 		E6C25B9822D959A400D9A1FD /* MongoDBConnection.uri in Resources */ = {isa = PBXBuildFile; fileRef = E6C25B9722D959A400D9A1FD /* MongoDBConnection.uri */; };
@@ -124,6 +132,14 @@
 		E605438722D3E8C9006D121A /* BlueBuzz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BlueBuzz.entitlements; sourceTree = "<group>"; };
 		E6140ED322DB79A800B961F0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		E64DFAFF22D1A65B00C91B3D /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS5.2.sdk/System/Library/Frameworks/UserNotifications.framework; sourceTree = DEVELOPER_DIR; };
+		E66EE1D722FF930D00C954FF /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
+		E66EE1DC22FF95C500C954FF /* FormControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormControl.swift; sourceTree = "<group>"; };
+		E66EE1DD22FF95C500C954FF /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
+		E66EE1DE22FF95C500C954FF /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		E66EE1E322FFC29F00C954FF /* UsernameValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsernameValidator.swift; sourceTree = "<group>"; };
+		E66EE1E422FFC29F00C954FF /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		E66EE1E522FFC29F00C954FF /* PasswordValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordValidator.swift; sourceTree = "<group>"; };
+		E66EE1E622FFC29F00C954FF /* EmailValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidator.swift; sourceTree = "<group>"; };
 		E6C25B9722D959A400D9A1FD /* MongoDBConnection.uri */ = {isa = PBXFileReference; lastKnownFileType = text; name = MongoDBConnection.uri; path = Shared/MongoDBConnection.uri; sourceTree = "<group>"; };
 		E6C25B9C22D9663600D9A1FD /* BlueBuzzAPI.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = BlueBuzzAPI.json; path = Shared/BlueBuzzAPI.json; sourceTree = "<group>"; };
 		E6C25B9E22D9666A00D9A1FD /* BlueBuzzAPI.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = BlueBuzzAPI.yaml; path = Shared/BlueBuzzAPI.yaml; sourceTree = "<group>"; };
@@ -207,10 +223,12 @@
 		40D46F4D1E8065200077A7B7 /* BlueBuzz */ = {
 			isa = PBXGroup;
 			children = (
+				E66EE1D922FF959A00C954FF /* Forms */,
 				40DD4D8A1EA6B6E20074E73F /* BlueBuzz.entitlements */,
 				40D46F4E1E8065200077A7B7 /* AppDelegate.swift */,
 				E60460DD22E1642D00B29482 /* RootViewController.swift */,
 				40D46F501E8065200077A7B7 /* MainViewController.swift */,
+				E66EE1D722FF930D00C954FF /* FeedbackViewController.swift */,
 				E60460DB22E1642600B29482 /* ModelController.swift */,
 				40C02A9920A27F28006F07AE /* CommandsViewController.swift */,
 				40D46F521E8065200077A7B7 /* Main.storyboard */,
@@ -267,6 +285,28 @@
 				E64DFAFF22D1A65B00C91B3D /* UserNotifications.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E66EE1D922FF959A00C954FF /* Forms */ = {
+			isa = PBXGroup;
+			children = (
+				E66EE1E222FFC28500C954FF /* Validators */,
+				E66EE1DD22FF95C500C954FF /* Form.swift */,
+				E66EE1DC22FF95C500C954FF /* FormControl.swift */,
+				E66EE1DE22FF95C500C954FF /* TextField.swift */,
+			);
+			path = Forms;
+			sourceTree = "<group>";
+		};
+		E66EE1E222FFC28500C954FF /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+				E66EE1E622FFC29F00C954FF /* EmailValidator.swift */,
+				E66EE1E522FFC29F00C954FF /* PasswordValidator.swift */,
+				E66EE1E322FFC29F00C954FF /* UsernameValidator.swift */,
+				E66EE1E422FFC29F00C954FF /* Validator.swift */,
+			);
+			path = Validators;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -482,16 +522,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E66EE1D822FF930D00C954FF /* FeedbackViewController.swift in Sources */,
 				E6DAE69A22F750BE0086AC23 /* SwiftyFormat.swift in Sources */,
+				E66EE1E022FF95C500C954FF /* Form.swift in Sources */,
+				E66EE1E122FF95C500C954FF /* TextField.swift in Sources */,
 				E60460DE22E1642D00B29482 /* RootViewController.swift in Sources */,
+				E66EE1DF22FF95C500C954FF /* FormControl.swift in Sources */,
 				40D46F511E8065200077A7B7 /* MainViewController.swift in Sources */,
 				40D8B77920A554A5005F7D76 /* CommandStatus.swift in Sources */,
 				407607861E81A7F000A6A8EA /* TestDataProvider.swift in Sources */,
 				E60460DC22E1642600B29482 /* ModelController.swift in Sources */,
+				E66EE1E822FFC29F00C954FF /* Validator.swift in Sources */,
 				40D46F4F1E8065200077A7B7 /* AppDelegate.swift in Sources */,
 				40DC7D0F1EA8186200A93AFB /* Logger.swift in Sources */,
 				E6DAE69722F70C3D0086AC23 /* Variables.swift in Sources */,
+				E66EE1E922FFC29F00C954FF /* PasswordValidator.swift in Sources */,
 				40C02A9A20A27F28006F07AE /* CommandsViewController.swift in Sources */,
+				E66EE1E722FFC29F00C954FF /* UsernameValidator.swift in Sources */,
+				E66EE1EA22FFC29F00C954FF /* EmailValidator.swift in Sources */,
 				40AF22991F29236300E6D1A8 /* SessionDelegater.swift in Sources */,
 				4084B0231EA057EF00ACA046 /* SessionCommands.swift in Sources */,
 			);
