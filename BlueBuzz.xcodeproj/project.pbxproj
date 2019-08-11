@@ -223,17 +223,17 @@
 		40D46F4D1E8065200077A7B7 /* BlueBuzz */ = {
 			isa = PBXGroup;
 			children = (
+				40D46F4E1E8065200077A7B7 /* AppDelegate.swift */,
 				E66EE1D922FF959A00C954FF /* Forms */,
 				40DD4D8A1EA6B6E20074E73F /* BlueBuzz.entitlements */,
-				40D46F4E1E8065200077A7B7 /* AppDelegate.swift */,
+				E60460DB22E1642600B29482 /* ModelController.swift */,
 				E60460DD22E1642D00B29482 /* RootViewController.swift */,
 				40D46F501E8065200077A7B7 /* MainViewController.swift */,
 				E66EE1D722FF930D00C954FF /* FeedbackViewController.swift */,
-				E60460DB22E1642600B29482 /* ModelController.swift */,
 				40C02A9920A27F28006F07AE /* CommandsViewController.swift */,
 				40D46F521E8065200077A7B7 /* Main.storyboard */,
-				40D46F551E8065200077A7B7 /* Assets.xcassets */,
 				40D46F571E8065200077A7B7 /* LaunchScreen.storyboard */,
+				40D46F551E8065200077A7B7 /* Assets.xcassets */,
 				40D46F5A1E8065200077A7B7 /* Info.plist */,
 			);
 			path = BlueBuzz;

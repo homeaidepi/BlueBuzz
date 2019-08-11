@@ -154,10 +154,12 @@ class MainViewController: UIViewController {
             case SessionPages.Welcome.rawValue :
                 settingsPanel.isHidden = true
                 tableContainerView.isHidden = true
-                reachableLabel.isHidden = true
+                reachableLabel.isHidden = false
                 clearButton.setTitle("", for: .normal)
                 logView.isHidden = false
                 logView.attributedText = Variables.welcomeMessage.html2Attributed
+                logView.setContentOffset(.zero, animated: false)
+                logView.scrollRangeToVisible(NSRange(location:0, length:0))
         default:
             settingsPanel.isHidden = true
             tableContainerView.isHidden = true

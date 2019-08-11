@@ -12,7 +12,8 @@ final class FeedbackViewController: UIViewController {
         print("Form Data:",
               form["firstName"] as Any,
               form["lastName"] as Any,
-              form["age"] as Any)
+              form["age"] as Any,
+              form["comment"] as Any)
     }
 }
 
