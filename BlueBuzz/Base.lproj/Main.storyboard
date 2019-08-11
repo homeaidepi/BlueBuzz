@@ -309,8 +309,8 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Vp0-sO-Lyh" userLabel="Form">
-                                <rect key="frame" x="16" y="372.66666666666669" width="382" height="151.00000000000006"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Vp0-sO-Lyh" userLabel="Form">
+                                <rect key="frame" x="16" y="139" width="382" height="151.00000000000006"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="G3i-pk-VCH" userLabel="Labels">
                                         <rect key="frame" x="0.0" y="0.0" width="86" height="151"/>
@@ -386,11 +386,9 @@
                                     <constraint firstItem="8fe-vs-tvS" firstAttribute="height" secondItem="SKP-dU-7bm" secondAttribute="height" id="8U4-MG-luA"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hj3-DA-fMa">
-                                <rect key="frame" x="16" y="792" width="382" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="kXZ-aj-T0x"/>
-                                </constraints>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hj3-DA-fMa">
+                                <rect key="frame" x="12" y="337" width="382" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                 <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Submit you bees wax"/>
@@ -401,11 +399,8 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="trN-Ik-aiB" firstAttribute="trailing" secondItem="hj3-DA-fMa" secondAttribute="trailing" constant="16" id="1b7-XY-c1k"/>
                             <constraint firstItem="trN-Ik-aiB" firstAttribute="trailing" secondItem="Vp0-sO-Lyh" secondAttribute="trailing" constant="16" id="6ff-Zc-r9f"/>
                             <constraint firstItem="Vp0-sO-Lyh" firstAttribute="centerY" secondItem="PlM-VK-JXo" secondAttribute="centerY" id="VdV-W2-AGY"/>
-                            <constraint firstItem="hj3-DA-fMa" firstAttribute="leading" secondItem="trN-Ik-aiB" secondAttribute="leading" constant="16" id="jbW-aV-yVr"/>
-                            <constraint firstItem="trN-Ik-aiB" firstAttribute="bottom" secondItem="hj3-DA-fMa" secondAttribute="bottom" constant="20" id="muv-El-kRB"/>
                             <constraint firstItem="Vp0-sO-Lyh" firstAttribute="leading" secondItem="trN-Ik-aiB" secondAttribute="leading" constant="16" id="y92-Zc-Kve"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="trN-Ik-aiB"/>

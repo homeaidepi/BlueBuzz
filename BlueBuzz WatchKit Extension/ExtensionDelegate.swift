@@ -201,15 +201,15 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                     }
                     else {
                         
-                        let mainBundle = Bundle.main
-                        if let url = mainBundle.url(forResource: "bee", withExtension: "mp3"){
-                            let asset = WKAudioFileAsset(url: url)
-                            let playerItem = WKAudioFilePlayerItem(asset: asset)
-                            self.soundPlayer = WKAudioFileQueuePlayer(playerItem: playerItem)
-                            if self.soundPlayer?.status == .readyToPlay {
-                                self.soundPlayer?.play()
-                            }
-                        }
+//                        let mainBundle = Bundle.main
+//                        if let url = mainBundle.url(forResource: "bee", withExtension: "mp3"){
+//                            let asset = WKAudioFileAsset(url: url)
+//                            let playerItem = WKAudioFilePlayerItem(asset: asset)
+//                            self.soundPlayer = WKAudioFileQueuePlayer(playerItem: playerItem)
+//                            if self.soundPlayer?.status == .readyToPlay {
+//                                self.soundPlayer?.play()
+//                            }
+//                        }
                         self.alerted = true
                     }
                 })
