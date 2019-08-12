@@ -20,6 +20,10 @@ class MainViewController: UIViewController {
     @IBOutlet weak var logoLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerConstraint: NSLayoutConstraint!
     
+    private lazy var sessionDelegater: SessionDelegater = {
+        return SessionDelegater()
+    }()
+    
     var dataObject: String = ""
     
     @IBAction func secondsBeforeCheckingLocationValueChanged(sender: UISlider) {
@@ -76,10 +80,6 @@ class MainViewController: UIViewController {
             print("Settings Sync Error")
         }
     }
-    
-    private lazy var sessionDelegater: SessionDelegater = {
-        return SessionDelegater()
-    }()
     
     func adjustUiConstraints(size: CGSize) {
         var portrait = false
