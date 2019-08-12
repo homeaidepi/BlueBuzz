@@ -19,6 +19,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var settingsPanel: UIStackView!
     @IBOutlet weak var logoLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerConstraint: NSLayoutConstraint!
+    @IBOutlet weak var pageControl: UIPageControl!
     
     private lazy var sessionDelegater: SessionDelegater = {
         return SessionDelegater()
@@ -130,7 +131,20 @@ class MainViewController: UIViewController {
         self.pageLabel!.text = dataObject
         
         switch (pageLabel.text) {
+            
+            case SessionPages.Welcome.rawValue :
+                pageControl.currentPage = 0
+                settingsPanel.isHidden = true
+                tableContainerView.isHidden = true
+                reachableLabel.isHidden = false
+                clearButton.setTitle("", for: .normal)
+                logView.isHidden = false
+                logView.attributedText = Variables.welcomeMessage.html2Attributed
+                logView.setContentOffset(.zero, animated: false)
+                logView.scrollRangeToVisible(NSRange(location:0, length:0))
+            
             case SessionPages.Settings.rawValue:
+                pageControl.currentPage = 1
                 reachableLabel.isHidden = false
                 clearButton.setTitle("Reset", for: .normal)
                 logView.isHidden = true
@@ -141,7 +155,9 @@ class MainViewController: UIViewController {
                     Float(sessionDelegater.getSecondsBeforeCheckingDistance())
                 distanceBeforeNotifyingValue.value = Float(sessionDelegater.getDistanceBeforeNotifying())
                 logView.attributedText = ("").html2Attributed
+            
             case SessionPages.LogView.rawValue:
+                pageControl.currentPage = 2
                 settingsPanel.isHidden = true
                 tableContainerView.isHidden = false
                 reachableLabel.isHidden = false
@@ -151,22 +167,14 @@ class MainViewController: UIViewController {
                 
                 //fix for container being offscreen
                 adjustUiConstraints(size: self.view.frame.size)
-            case SessionPages.Welcome.rawValue :
+            
+            default:
                 settingsPanel.isHidden = true
                 tableContainerView.isHidden = true
-                reachableLabel.isHidden = false
+                reachableLabel.isHidden = true
                 clearButton.setTitle("", for: .normal)
-                logView.isHidden = false
-                logView.attributedText = Variables.welcomeMessage.html2Attributed
-                logView.setContentOffset(.zero, animated: false)
-                logView.scrollRangeToVisible(NSRange(location:0, length:0))
-        default:
-            settingsPanel.isHidden = true
-            tableContainerView.isHidden = true
-            reachableLabel.isHidden = true
-            clearButton.setTitle("", for: .normal)
-            logView.isHidden = true
-        
+                logView.isHidden = true
+            
         }
         
         self.updateReachabilityColor()
