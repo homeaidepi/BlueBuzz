@@ -24,7 +24,7 @@ extension Notification.Name {
 }
 
 var messageKey = "message"
-var emptyMessage = "Welcome to Blue Buzz."
+var emptyMessage = ""
 
 // Implement WCSessionDelegate methods to receive Watch Connectivity data and notify clients.
 // WCsession status changes are also handled here.
@@ -32,12 +32,19 @@ var emptyMessage = "Welcome to Blue Buzz."
 class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
     var message = emptyMessage;
     var blueBuzzIbmSharingApiKey = "a5e5ee30-1346-4eaf-acdd-e1a7dccdec20"
-    var blueBuzzWebServiceGetLocationByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/getlocationbyinstanceid")!
-    var blueBuzzWebServicePostLocation = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/PostLocationByInstanceId")!
-    var blueBuzzWebServiceCheckDistanceByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/CheckDistanceByInstanceId")
-    var blueBuzzWebServiceGetChangeLogByVersion = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/GetChangeLogByVersion")
+    var blueBuzzWebServiceBaseAddress = "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606"
+    var blueBuzzWebServiceGetLocationByInstanceId = "getlocationbyinstanceid"
+    var blueBuzzWebServicePostLocation = "PostLocationByInstanceId"
+    var blueBuzzWebServiceCheckDistanceByInstanceId = "CheckDistanceByInstanceId"
+    var blueBuzzWebServiceGetChangeLogByVersion = "GetChangeLogByVersion"
+    var blueBuzzWebServicePostComment = "PostComment"
 
     private var retval = false
+    
+    func getURL(string: String) -> URL {
+        let url = "\(blueBuzzWebServiceBaseAddress)/\(string)"
+        return URL(string: url)!
+    }
    
     //Settings
     //
@@ -269,7 +276,7 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
     }
     
     public func postLocationByInstanceId(commandStatus: CommandStatus) -> Bool {
-        let serviceUrl = blueBuzzWebServicePostLocation
+        let serviceUrl = getURL(string: blueBuzzWebServicePostLocation)
         
         let lat = commandStatus.latitude
         let long = commandStatus.longitude
@@ -360,23 +367,33 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
                                       onFailure failure: @escaping (_ error: Error?, _ params: [AnyHashable: Any]) -> Void) {
         // dont fetch if already fetched
         if (self.message == emptyMessage) {
-            let serviceUrl = blueBuzzWebServiceGetChangeLogByVersion!
+            let serviceUrl = getURL(string: blueBuzzWebServiceGetChangeLogByVersion)
             
             let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
             
             let parameterDictionary = [
                 "version" : "\(appVersion)",]
             
-                callApiWithParams(parameterDictionary,
+            callApiWithParams(parameterDictionary,
+                              serviceUrl: serviceUrl,
+                              onSuccess: success,
+                              onFailure: failure)
+        }
+    }
+    
+    public func postComment(parameterDictionary: [String:String], onSuccess success: @escaping (_ JSON: [String: Any]) -> Void, onFailure failure: @escaping (_ error: Error?, _ params: [AnyHashable: Any]) -> Void) {
+
+            let serviceUrl = getURL(string: blueBuzzWebServicePostComment)
+            
+            callApiWithParams(parameterDictionary,
                                   serviceUrl: serviceUrl,
                                   onSuccess: success,
                                   onFailure: failure)
-        }
     }
     
     
     public func checkDistanceByInstanceId(commandStatus: CommandStatus) -> Bool {
-        let serviceUrl = blueBuzzWebServiceCheckDistanceByInstanceId!
+        let serviceUrl = getURL(string: blueBuzzWebServiceCheckDistanceByInstanceId)
         
         let instanceId = commandStatus.instanceId
         

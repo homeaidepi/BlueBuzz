@@ -20,8 +20,11 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         self.pageViewController = UIPageViewController(transitionStyle: .pageCurl, navigationOrientation: .horizontal, options: nil)
         self.pageViewController!.delegate = self
 
-        let startingViewController: MainViewController = self.modelController.viewControllerAtIndex(0, storyboard: self.storyboard!)!
-        let viewControllers = [startingViewController]
+        let startingMainViewController: MainViewController = self.modelController.mainViewControllerAtIndex(0, storyboard: self.storyboard!)!
+
+        // TODO add another view controller for the back of the page
+        
+        let viewControllers = [startingMainViewController]
         self.pageViewController!.setViewControllers(viewControllers, direction: .forward, animated: false, completion: {done in })
 
         self.pageViewController!.dataSource = self.modelController
@@ -67,7 +70,9 @@ class RootViewController: UIViewController, UIPageViewControllerDelegate {
         let currentViewController = self.pageViewController!.viewControllers![0] as! MainViewController
         var viewControllers: [UIViewController]
 
-        let indexOfCurrentViewController = self.modelController.indexOfViewController(currentViewController)
+        let indexOfCurrentViewController = self.modelController.indexOfMainViewController(currentViewController)
+        
+        
         if (indexOfCurrentViewController == 0) || (indexOfCurrentViewController % 2 == 0) {
             let nextViewController = self.modelController.pageViewController(self.pageViewController!, viewControllerAfter: currentViewController)
             viewControllers = [currentViewController, nextViewController!]

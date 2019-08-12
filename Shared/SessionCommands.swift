@@ -16,6 +16,7 @@ enum SessionPages: String {
     case Welcome = "Welcome"
     case LogView = "History"
     case Settings = "Settings"
+    case Feedback = "Feedback"
 }
 // Define an interface to wrap Watch Connectivity APIs and
 // bridge the UI. Shared by the iOS app and watchOS app.

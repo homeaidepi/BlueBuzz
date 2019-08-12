@@ -24,6 +24,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
     private var secondsBeforeCheckingLocation: Int = 45
     private var secondsBeforeCheckingDistance: Int = 60
     private var distanceBeforeNotifying: Double = 100
+    private var soundPlayer: WKAudioFileQueuePlayer?
 
     func applicationDidFinishLaunching() {
         
@@ -113,12 +114,18 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                         WKInterfaceDevice.current().play(.notification)
                     }
                 } else {
-                    UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                    devicesAreInRange()
                 }
             } else {
-                UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                devicesAreInRange()
             }
         }
+    }
+    
+    //do all the things you want when the devices come back in range of each other
+    func devicesAreInRange() {
+        self.soundPlayer?.pause()
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -172,7 +179,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                 let notificationCenter = UNUserNotificationCenter.current()
                 let content = UNMutableNotificationContent()
                 
-                content.title = NSLocalizedString("Connection Alert", comment: Now())
+                content.title = NSLocalizedString("Location Alert", comment: Now())
                 content.body =  NSLocalizedString("Phone out of range, signal or disconnected.", comment: Now())
                 content.sound = UNNotificationSound.defaultCritical
                 
@@ -193,6 +200,16 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                         self.alerted = false
                     }
                     else {
+                        
+//                        let mainBundle = Bundle.main
+//                        if let url = mainBundle.url(forResource: "bee", withExtension: "mp3"){
+//                            let asset = WKAudioFileAsset(url: url)
+//                            let playerItem = WKAudioFilePlayerItem(asset: asset)
+//                            self.soundPlayer = WKAudioFileQueuePlayer(playerItem: playerItem)
+//                            if self.soundPlayer?.status == .readyToPlay {
+//                                self.soundPlayer?.play()
+//                            }
+//                        }
                         self.alerted = true
                     }
                 })

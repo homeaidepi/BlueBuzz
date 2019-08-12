@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, C
         registerForLocation()
         registerBackgroundTask()
         
+        
         return true
     }
     

@@ -20,6 +20,10 @@ class MainViewController: UIViewController {
     @IBOutlet weak var logoLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerConstraint: NSLayoutConstraint!
     
+    private lazy var sessionDelegater: SessionDelegater = {
+        return SessionDelegater()
+    }()
+    
     var dataObject: String = ""
     
     @IBAction func secondsBeforeCheckingLocationValueChanged(sender: UISlider) {
@@ -69,12 +73,6 @@ class MainViewController: UIViewController {
                 isReachable = WCSession.default.isReachable
             }
             
-            if (isReachable == false)
-            {
-                WCSession.default.delegate = sessionDelegater
-                WCSession.default.activate()
-            }
-            
             print("Reachable: \(isReachable)")
             
             try WCSession.default.updateApplicationContext(settings)
@@ -82,10 +80,6 @@ class MainViewController: UIViewController {
             print("Settings Sync Error")
         }
     }
-    
-    private lazy var sessionDelegater: SessionDelegater = {
-        return SessionDelegater()
-    }()
     
     func adjustUiConstraints(size: CGSize) {
         var portrait = false
@@ -101,9 +95,9 @@ class MainViewController: UIViewController {
         containerConstraint.constant = size.height - 70
         
         if (portrait) {
-            logoLeadingConstraint.constant = size.width / 2 - 50
+            //logoLeadingConstraint.constant = size.width / 2 - 50
         } else {
-            logoLeadingConstraint.constant = size.width / 2 - 100
+            //logoLeadingConstraint.constant = size.width / 2 - 50
         }
     }
     
@@ -129,10 +123,6 @@ class MainViewController: UIViewController {
             self, selector: #selector(type(of: self).reachabilityDidChange(_:)),
             name: .reachabilityDidChange, object: nil
         )
-        
-        WCSession.default.delegate = sessionDelegater
-        WCSession.default.activate()
-        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -151,26 +141,32 @@ class MainViewController: UIViewController {
                     Float(sessionDelegater.getSecondsBeforeCheckingDistance())
                 distanceBeforeNotifyingValue.value = Float(sessionDelegater.getDistanceBeforeNotifying())
                 logView.attributedText = ("").html2Attributed
-        case SessionPages.LogView.rawValue:
-            settingsPanel.isHidden = true
-            tableContainerView.isHidden = false
-            reachableLabel.isHidden = false
-            clearButton.setTitle("Clear", for: .normal)
-            logView.isHidden = false
-            logView.attributedText = Variables.logHistory
-            
-            //fix for container being offscreen
-            print (self.view.frame.size)
-            adjustUiConstraints(size: self.view.frame.size)
-            
-        default :
+            case SessionPages.LogView.rawValue:
+                settingsPanel.isHidden = true
+                tableContainerView.isHidden = false
+                reachableLabel.isHidden = false
+                clearButton.setTitle("Clear", for: .normal)
+                logView.isHidden = false
+                logView.attributedText = Variables.logHistory
+                
+                //fix for container being offscreen
+                adjustUiConstraints(size: self.view.frame.size)
+            case SessionPages.Welcome.rawValue :
+                settingsPanel.isHidden = true
+                tableContainerView.isHidden = true
+                reachableLabel.isHidden = false
+                clearButton.setTitle("", for: .normal)
+                logView.isHidden = false
+                logView.attributedText = Variables.welcomeMessage.html2Attributed
+                logView.setContentOffset(.zero, animated: false)
+                logView.scrollRangeToVisible(NSRange(location:0, length:0))
+        default:
             settingsPanel.isHidden = true
             tableContainerView.isHidden = true
             reachableLabel.isHidden = true
             clearButton.setTitle("", for: .normal)
-            logView.isHidden = false
-            logView.attributedText = Variables.welcomeMessage.html2Attributed
-            logView.scrollRangeToVisible(NSMakeRange(0, 1))
+            logView.isHidden = true
+        
         }
         
         self.updateReachabilityColor()
@@ -181,6 +177,14 @@ class MainViewController: UIViewController {
     //
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        switch (pageLabel.text) {
+        case SessionPages.Welcome.rawValue:
+            logView.setContentOffset(.zero, animated: false)
+            logView.scrollRangeToVisible(NSRange(location:0, length:0))
+        default:
+            return;
+        }
     }
     
     deinit {
@@ -190,7 +194,7 @@ class MainViewController: UIViewController {
     
     func getWelcomeMessage()
     {
-        var message: String = "Welcome to Blue Buzz..."
+        var message: String = ""
         if (Variables.welcomeMessage.count < 30) {
             sessionDelegater.getChangeLogByVersion(onSuccess: { (JSON) in
                 
@@ -209,7 +213,6 @@ class MainViewController: UIViewController {
                 
                 DispatchQueue.main.async {
                     self.logView.attributedText = message.html2Attributed
-                    
                     self.logView.textColor = UIColor(white: 1, alpha: 1)
                 }
             }
