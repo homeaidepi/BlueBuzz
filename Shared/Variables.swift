@@ -11,4 +11,8 @@ import Foundation
 struct Variables {
     static var welcomeMessage = ""
     static var logHistory = NSMutableAttributedString()
+    static var givenName = ""
+    static var familyName = ""
+    static var age = ""
+    static var comment = ""
 }

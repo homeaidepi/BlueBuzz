@@ -95,9 +95,9 @@ class MainViewController: UIViewController {
         containerConstraint.constant = size.height - 70
         
         if (portrait) {
-            logoLeadingConstraint.constant = size.width / 2 - 50
+            //logoLeadingConstraint.constant = size.width / 2 - 50
         } else {
-            logoLeadingConstraint.constant = size.width / 2 - 50
+            //logoLeadingConstraint.constant = size.width / 2 - 50
         }
     }
     

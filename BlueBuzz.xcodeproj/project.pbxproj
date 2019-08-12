@@ -223,7 +223,9 @@
 		40D46F4D1E8065200077A7B7 /* BlueBuzz */ = {
 			isa = PBXGroup;
 			children = (
+				40D46F5A1E8065200077A7B7 /* Info.plist */,
 				40D46F4E1E8065200077A7B7 /* AppDelegate.swift */,
+				40D46F551E8065200077A7B7 /* Assets.xcassets */,
 				E66EE1D922FF959A00C954FF /* Forms */,
 				40DD4D8A1EA6B6E20074E73F /* BlueBuzz.entitlements */,
 				E60460DB22E1642600B29482 /* ModelController.swift */,
@@ -233,8 +235,6 @@
 				40C02A9920A27F28006F07AE /* CommandsViewController.swift */,
 				40D46F521E8065200077A7B7 /* Main.storyboard */,
 				40D46F571E8065200077A7B7 /* LaunchScreen.storyboard */,
-				40D46F551E8065200077A7B7 /* Assets.xcassets */,
-				40D46F5A1E8065200077A7B7 /* Info.plist */,
 			);
 			path = BlueBuzz;
 			sourceTree = "<group>";
