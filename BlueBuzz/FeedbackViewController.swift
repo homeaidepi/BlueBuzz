@@ -69,9 +69,9 @@ final class FeedbackViewController: UIViewController, UITextFieldDelegate, UITex
             }
             
         }) { (error, params) in
-            if let err = error {
+            //if let err = error {
                 //message = "\nError: " + err.localizedDescription
-            }
+            //}
             //message += "\nParameters passed are: " + String(describing:params)
             
 //            DispatchQueue.main.async {

@@ -44,11 +44,10 @@
 		E66EE1E822FFC29F00C954FF /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1E422FFC29F00C954FF /* Validator.swift */; };
 		E66EE1E922FFC29F00C954FF /* PasswordValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1E522FFC29F00C954FF /* PasswordValidator.swift */; };
 		E66EE1EA22FFC29F00C954FF /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1E622FFC29F00C954FF /* EmailValidator.swift */; };
+		E66EE1EF2301161F00C954FF /* BlueBuzzAPI.yaml in Resources */ = {isa = PBXBuildFile; fileRef = E66EE1ED2301161E00C954FF /* BlueBuzzAPI.yaml */; };
+		E66EE1F02301161F00C954FF /* BlueBuzzAPI.json in Resources */ = {isa = PBXBuildFile; fileRef = E66EE1EE2301161F00C954FF /* BlueBuzzAPI.json */; };
 		E6B6421C22DD6569002254D3 /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
 		E6B6421D22DD656B002254D3 /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
-		E6C25B9822D959A400D9A1FD /* MongoDBConnection.uri in Resources */ = {isa = PBXBuildFile; fileRef = E6C25B9722D959A400D9A1FD /* MongoDBConnection.uri */; };
-		E6C25B9D22D9663600D9A1FD /* BlueBuzzAPI.json in Resources */ = {isa = PBXBuildFile; fileRef = E6C25B9C22D9663600D9A1FD /* BlueBuzzAPI.json */; };
-		E6C25B9F22D9666A00D9A1FD /* BlueBuzzAPI.yaml in Resources */ = {isa = PBXBuildFile; fileRef = E6C25B9E22D9666A00D9A1FD /* BlueBuzzAPI.yaml */; };
 		E6DAE69722F70C3D0086AC23 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DAE69622F70C3D0086AC23 /* Variables.swift */; };
 		E6DAE69822F70C3D0086AC23 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DAE69622F70C3D0086AC23 /* Variables.swift */; };
 		E6DAE69A22F750BE0086AC23 /* SwiftyFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DAE69922F750BE0086AC23 /* SwiftyFormat.swift */; };
@@ -121,7 +120,6 @@
 		40D46F771E8065200077A7B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40D8B77820A554A5005F7D76 /* CommandStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommandStatus.swift; path = Shared/CommandStatus.swift; sourceTree = "<group>"; };
 		40DC7D0E1EA8186200A93AFB /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Logger.swift; path = Shared/Logger.swift; sourceTree = "<group>"; };
-		40DC7D141EA81D8100A93AFB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		40DD4D8A1EA6B6E20074E73F /* BlueBuzz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BlueBuzz.entitlements; sourceTree = "<group>"; };
 		40DD4D8B1EA6B6FB0074E73F /* BlueBuzz WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BlueBuzz WatchKit App.entitlements"; sourceTree = "<group>"; };
 		40DD4D8C1EA6B7010074E73F /* BlueBuzz WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BlueBuzz WatchKit Extension.entitlements"; sourceTree = "<group>"; };
@@ -140,9 +138,8 @@
 		E66EE1E422FFC29F00C954FF /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		E66EE1E522FFC29F00C954FF /* PasswordValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordValidator.swift; sourceTree = "<group>"; };
 		E66EE1E622FFC29F00C954FF /* EmailValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidator.swift; sourceTree = "<group>"; };
-		E6C25B9722D959A400D9A1FD /* MongoDBConnection.uri */ = {isa = PBXFileReference; lastKnownFileType = text; name = MongoDBConnection.uri; path = Shared/MongoDBConnection.uri; sourceTree = "<group>"; };
-		E6C25B9C22D9663600D9A1FD /* BlueBuzzAPI.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = BlueBuzzAPI.json; path = Shared/BlueBuzzAPI.json; sourceTree = "<group>"; };
-		E6C25B9E22D9666A00D9A1FD /* BlueBuzzAPI.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = BlueBuzzAPI.yaml; path = Shared/BlueBuzzAPI.yaml; sourceTree = "<group>"; };
+		E66EE1ED2301161E00C954FF /* BlueBuzzAPI.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BlueBuzzAPI.yaml; sourceTree = "<group>"; };
+		E66EE1EE2301161F00C954FF /* BlueBuzzAPI.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BlueBuzzAPI.json; sourceTree = "<group>"; };
 		E6DAE69522F70C3C0086AC23 /* BlueBuzz WatchKit App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BlueBuzz WatchKit App-Bridging-Header.h"; sourceTree = "<group>"; };
 		E6DAE69622F70C3D0086AC23 /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Variables.swift; path = Shared/Variables.swift; sourceTree = "<group>"; };
 		E6DAE69922F750BE0086AC23 /* SwiftyFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwiftyFormat.swift; path = Shared/SwiftyFormat.swift; sourceTree = "<group>"; };
@@ -178,18 +175,13 @@
 		4076077B1E81834B00A6A8EA /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				E6C25B9E22D9666A00D9A1FD /* BlueBuzzAPI.yaml */,
-				E6C25B9C22D9663600D9A1FD /* BlueBuzzAPI.json */,
-				407607851E81A7F000A6A8EA /* TestDataProvider.swift */,
+				E66EE1F22301164700C954FF /* Core */,
+				E66EE1F12301162500C954FF /* Test */,
+				E66EE1EC230115C600C954FF /* Models */,
 				40D8B77820A554A5005F7D76 /* CommandStatus.swift */,
 				4076077C1E8183AF00A6A8EA /* SessionCommands.swift */,
 				40AF22981F29236300E6D1A8 /* SessionDelegater.swift */,
-				40DC7D0E1EA8186200A93AFB /* Logger.swift */,
-				E6C25B9722D959A400D9A1FD /* MongoDBConnection.uri */,
-				40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */,
 				E6DAE69622F70C3D0086AC23 /* Variables.swift */,
-				E6DAE69522F70C3C0086AC23 /* BlueBuzz WatchKit App-Bridging-Header.h */,
-				E6DAE69922F750BE0086AC23 /* SwiftyFormat.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -198,7 +190,6 @@
 			isa = PBXGroup;
 			children = (
 				E605438722D3E8C9006D121A /* BlueBuzz.entitlements */,
-				40DC7D141EA81D8100A93AFB /* README.md */,
 				4076077B1E81834B00A6A8EA /* Shared */,
 				40D46F4D1E8065200077A7B7 /* BlueBuzz */,
 				40D46F611E8065200077A7B7 /* BlueBuzz WatchKit App */,
@@ -223,16 +214,14 @@
 		40D46F4D1E8065200077A7B7 /* BlueBuzz */ = {
 			isa = PBXGroup;
 			children = (
-				40D46F5A1E8065200077A7B7 /* Info.plist */,
-				40D46F4E1E8065200077A7B7 /* AppDelegate.swift */,
-				40D46F551E8065200077A7B7 /* Assets.xcassets */,
-				E66EE1D922FF959A00C954FF /* Forms */,
 				40DD4D8A1EA6B6E20074E73F /* BlueBuzz.entitlements */,
-				E60460DB22E1642600B29482 /* ModelController.swift */,
-				E60460DD22E1642D00B29482 /* RootViewController.swift */,
+				40D46F551E8065200077A7B7 /* Assets.xcassets */,
+				40D46F5A1E8065200077A7B7 /* Info.plist */,
+				E66EE1D922FF959A00C954FF /* Forms */,
+				E66EE1EB2301159600C954FF /* Controllers */,
 				40D46F501E8065200077A7B7 /* MainViewController.swift */,
 				E66EE1D722FF930D00C954FF /* FeedbackViewController.swift */,
-				40C02A9920A27F28006F07AE /* CommandsViewController.swift */,
+				40D46F4E1E8065200077A7B7 /* AppDelegate.swift */,
 				40D46F521E8065200077A7B7 /* Main.storyboard */,
 				40D46F571E8065200077A7B7 /* LaunchScreen.storyboard */,
 			);
@@ -307,6 +296,44 @@
 				E66EE1E422FFC29F00C954FF /* Validator.swift */,
 			);
 			path = Validators;
+			sourceTree = "<group>";
+		};
+		E66EE1EB2301159600C954FF /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E60460DB22E1642600B29482 /* ModelController.swift */,
+				E60460DD22E1642D00B29482 /* RootViewController.swift */,
+				40C02A9920A27F28006F07AE /* CommandsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		E66EE1EC230115C600C954FF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E66EE1EE2301161F00C954FF /* BlueBuzzAPI.json */,
+				E66EE1ED2301161E00C954FF /* BlueBuzzAPI.yaml */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		E66EE1F12301162500C954FF /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				407607851E81A7F000A6A8EA /* TestDataProvider.swift */,
+			);
+			name = Test;
+			sourceTree = "<group>";
+		};
+		E66EE1F22301164700C954FF /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				E6DAE69522F70C3C0086AC23 /* BlueBuzz WatchKit App-Bridging-Header.h */,
+				40DC7D0E1EA8186200A93AFB /* Logger.swift */,
+				E6DAE69922F750BE0086AC23 /* SwiftyFormat.swift */,
+				40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */,
+			);
+			name = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -454,11 +481,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				40D46F591E8065200077A7B7 /* LaunchScreen.storyboard in Resources */,
-				E6C25B9D22D9663600D9A1FD /* BlueBuzzAPI.json in Resources */,
-				E6C25B9F22D9666A00D9A1FD /* BlueBuzzAPI.yaml in Resources */,
 				40D46F561E8065200077A7B7 /* Assets.xcassets in Resources */,
 				40DD4D8E1EA6B7510074E73F /* Settings-Watch.bundle in Resources */,
-				E6C25B9822D959A400D9A1FD /* MongoDBConnection.uri in Resources */,
+				E66EE1EF2301161F00C954FF /* BlueBuzzAPI.yaml in Resources */,
+				E66EE1F02301161F00C954FF /* BlueBuzzAPI.json in Resources */,
 				40D46F541E8065200077A7B7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
