@@ -43,9 +43,10 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     
     @IBAction func statusAction() {
         #if DEBUG
-            statusLabel.setText("instanceId:\(sessionDelegater.getInstanceIdentifier())")
-            locationManager?.startUpdatingLocation()
+            //statusLabel.setText("instanceId:\(sessionDelegater.getInstanceIdentifier())")
         #endif
+        statusLabel.setText("Updating location...")
+        locationManager?.startUpdatingLocation()
     }
 
     // Retain the controllers so that we don't have to reload root controllers for every switch.
