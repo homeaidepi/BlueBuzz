@@ -27,6 +27,26 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     @IBOutlet var statusLabel: WKInterfaceLabel!
     @IBOutlet var commandButton: WKInterfaceButton!
     @IBOutlet var mapObject: WKInterfaceMap!
+    
+    // Do the command associated with the current page.
+    @IBAction func commandAction() {
+        guard let command = command
+            else {
+                return
+        }
+        
+        switch command {
+        case .sendMessageData: sendLocation();
+        case .updateAppConnection: updateApplicationContext(applicationContext: myDelegate.getSettings())
+        }
+    }
+    
+    @IBAction func statusAction() {
+        #if DEBUG
+            statusLabel.setText("instanceId:\(sessionDelegater.getInstanceIdentifier())")
+            locationManager?.startUpdatingLocation()
+        #endif
+    }
 
     // Retain the controllers so that we don't have to reload root controllers for every switch.
     static var instances = [MainInterfaceController]()
@@ -268,19 +288,6 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         
         if (isReachable == false) {
             myDelegate.scheduleAlertNotifications()
-        }
-    }
- 
-    // Do the command associated with the current page.
-    @IBAction func commandAction() {
-        guard let command = command
-        else {
-            return
-        }
-        
-        switch command {
-        case .sendMessageData:  sendLocation();
-        case .updateAppConnection: updateApplicationContext(applicationContext: myDelegate.getSettings())
         }
     }
 }

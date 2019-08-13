@@ -58,9 +58,44 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
     }
     
     func initSettings() {
+        sendInstanceIdMessage(deviceId: "ios")
         saveSecondsBeforeCheckingDistance(secondsBeforeCheckingDistance: defaultSecondsBeforeCheckingLocation)
         saveSecondsBeforeCheckingLocation(secondsBeforeCheckingLocation: defaultSecondsBeforeCheckingDistance)
         saveDistanceBeforeNotifying(distanceBeforeNotifying: defaultDistanceBeforeNotifying)
+    }
+    
+    func sendInstanceIdMessage(deviceId: String) {
+        
+        // we are going to keep a guid that indicates a unique id or (instance) of this shared connection between watch and phone for the purposes of cloud communication
+        //
+        var instanceId = getInstanceIdentifier()
+        if (instanceId == emptyInstanceIdentifier)
+        {
+            instanceId = UUID().uuidString
+            saveInstanceIdentifier(instanceId: instanceId)
+        }
+        
+        let commandStatus = CommandStatus(command: .sendMessageData,
+                                          phrase: .sent,
+                                          latitude: emptyDegrees,
+                                          longitude: emptyDegrees,
+                                          instanceId: instanceId,
+                                          deviceId: deviceId,
+                                          timedColor: defaultColor,
+                                          errorMessage: "")
+        
+        do {
+            let data = try JSONEncoder().encode(commandStatus)
+            
+            //let jsonString = String(data: data, encoding: .utf8)!
+            //print(jsonString)
+            
+            WCSession.default.sendMessageData(data, replyHandler: { replyHandler in
+            }, errorHandler: { error in
+                print("error")})
+        } catch {
+            print("Send Message Data")
+        }
     }
     
     func getSettings() -> [String: Any] {
@@ -81,7 +116,10 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         
         if (instanceId != emptyInstanceIdentifier) {
             saveInstanceIdentifier(instanceId: instanceId)
+        } else {
+            sendInstanceIdMessage(deviceId: "ios")
         }
+        
         if (secondsBeforeCheckingLocation != 0) {
             saveSecondsBeforeCheckingLocation(secondsBeforeCheckingLocation: secondsBeforeCheckingLocation)
         }
