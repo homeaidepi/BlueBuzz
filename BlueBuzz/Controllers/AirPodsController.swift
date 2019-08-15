@@ -92,7 +92,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
                         didFailToConnect peripheral: CBPeripheral,
                         error: Error?) {
         print("AirPods Connect error")
-        print(error)
+        print(error as Any)
         self.updateLabelStatus()
     }
 }
