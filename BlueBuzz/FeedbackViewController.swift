@@ -9,6 +9,7 @@ final class FeedbackViewController: UIViewController, UITextFieldDelegate, UITex
     @IBOutlet weak var givenName: UITextField!
     @IBOutlet weak var familyName: UITextField!
     @IBOutlet weak var age: UITextField!
+    @IBOutlet weak var email: UITextField!
     @IBOutlet weak var comment: UITextView!
     
     private lazy var sessionDelegater: SessionDelegater = {
@@ -21,10 +22,30 @@ final class FeedbackViewController: UIViewController, UITextFieldDelegate, UITex
         self.givenName.delegate = self
         self.familyName.delegate = self
         self.age.delegate = self
+        self.email.delegate = self
         self.comment.delegate = self
+        
+        setBorderColorTextField(textField: givenName, color: UIColor.yellow.cgColor)
+        setBorderColorTextField(textField: familyName, color: UIColor.yellow.cgColor)
+        setBorderColorTextField(textField: age, color: UIColor.yellow.cgColor)
+        setBorderColorTextField(textField: email, color: UIColor.yellow.cgColor)
+        setBorderColorTextView(textView: comment, color: UIColor.yellow.cgColor)
         
         updateFields()
     }
+    
+    func setBorderColorTextField(textField:UITextField, color:CGColor ) {
+        textField.layer.borderWidth = 2.0
+        textField.layer.borderColor = UIColor.yellow.cgColor
+        textField.layer.cornerRadius = 5;
+    }
+    
+    func setBorderColorTextView(textView:UITextView, color:CGColor ) {
+        textView.layer.borderWidth = 2.0
+        textView.layer.borderColor = color
+        textView.layer.cornerRadius = 5;
+    }
+    
     
     @IBAction func textFieldDidEndEditing(_ textField: UITextField) {
         updateVariables()
@@ -36,6 +57,7 @@ final class FeedbackViewController: UIViewController, UITextFieldDelegate, UITex
               form["givenName"] as Any,
               form["familyName"] as Any,
               form["age"] as Any,
+              form["email"] as Any,
               comment.text as Any)
         
         let instanceId = sessionDelegater.getInstanceIdentifier()
@@ -47,16 +69,15 @@ final class FeedbackViewController: UIViewController, UITextFieldDelegate, UITex
             "givenName": form["givenName"]! ,
             "familyName": form["familyName"]! ,
             "age": form["age"]!,
+            "email": form["email"]!,
             "comment": comment.text!
             ] as [String : String]
         
         sessionDelegater.postComment(parameterDictionary: parameterDictionary, onSuccess: { (JSON) in
             
             DispatchQueue.main.async {
-                self.givenName.text = ""
-                self.familyName.text = ""
-                self.age.text = ""
                 self.comment.text = ""
+                self.updateVariables()
                 
                 // create the alert
                 let alert = UIAlertController(title: "Feedback Submitted", message: "Buzz worthy input. Thank you", preferredStyle: UIAlertController.Style.alert)
@@ -86,6 +107,7 @@ final class FeedbackViewController: UIViewController, UITextFieldDelegate, UITex
         givenName.text = Variables.givenName
         familyName.text = Variables.familyName
         age.text = Variables.age
+        email.text = Variables.email
         comment.text = Variables.comment
     }
     
@@ -93,6 +115,7 @@ final class FeedbackViewController: UIViewController, UITextFieldDelegate, UITex
         Variables.givenName = form["givenName"] ?? ""
         Variables.familyName = form["familyName"] ?? ""
         Variables.age = form["age"] ?? ""
+        Variables.email = form["email"] ?? ""
         Variables.comment = comment.text ?? ""
     }
     
@@ -109,6 +132,7 @@ final class FeedbackViewController: UIViewController, UITextFieldDelegate, UITex
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         comment.resignFirstResponder()
+        updateVariables()
         return true
     }
     

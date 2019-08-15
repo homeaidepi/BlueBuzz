@@ -35,6 +35,7 @@
 		E60460DC22E1642600B29482 /* ModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60460DB22E1642600B29482 /* ModelController.swift */; };
 		E60460DE22E1642D00B29482 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60460DD22E1642D00B29482 /* RootViewController.swift */; };
 		E6140ED422DB79A800B961F0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6140ED322DB79A800B961F0 /* CoreLocation.framework */; };
+		E62DC66123050D8D000C7015 /* AirPodsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62DC66023050D8D000C7015 /* AirPodsController.swift */; };
 		E64DFB0022D1A65B00C91B3D /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E64DFAFF22D1A65B00C91B3D /* UserNotifications.framework */; };
 		E66EE1D822FF930D00C954FF /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1D722FF930D00C954FF /* FeedbackViewController.swift */; };
 		E66EE1DF22FF95C500C954FF /* FormControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1DC22FF95C500C954FF /* FormControl.swift */; };
@@ -129,6 +130,7 @@
 		E60460DD22E1642D00B29482 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		E605438722D3E8C9006D121A /* BlueBuzz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BlueBuzz.entitlements; sourceTree = "<group>"; };
 		E6140ED322DB79A800B961F0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		E62DC66023050D8D000C7015 /* AirPodsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPodsController.swift; sourceTree = "<group>"; };
 		E64DFAFF22D1A65B00C91B3D /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS5.2.sdk/System/Library/Frameworks/UserNotifications.framework; sourceTree = DEVELOPER_DIR; };
 		E66EE1D722FF930D00C954FF /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		E66EE1DC22FF95C500C954FF /* FormControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormControl.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				E60460DB22E1642600B29482 /* ModelController.swift */,
 				E60460DD22E1642D00B29482 /* RootViewController.swift */,
 				40C02A9920A27F28006F07AE /* CommandsViewController.swift */,
+				E62DC66023050D8D000C7015 /* AirPodsController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -567,6 +570,7 @@
 				E66EE1E722FFC29F00C954FF /* UsernameValidator.swift in Sources */,
 				E66EE1EA22FFC29F00C954FF /* EmailValidator.swift in Sources */,
 				40AF22991F29236300E6D1A8 /* SessionDelegater.swift in Sources */,
+				E62DC66123050D8D000C7015 /* AirPodsController.swift in Sources */,
 				4084B0231EA057EF00ACA046 /* SessionCommands.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
