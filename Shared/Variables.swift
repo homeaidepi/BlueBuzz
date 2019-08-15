@@ -14,5 +14,6 @@ struct Variables {
     static var givenName = ""
     static var familyName = ""
     static var age = ""
+    static var email = ""
     static var comment = ""
 }
