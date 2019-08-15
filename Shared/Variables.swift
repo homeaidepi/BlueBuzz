@@ -9,6 +9,9 @@
 import Foundation
 
 struct Variables {
+    static var bluetoothRangeInFeetClass1 = "314"
+    static var bluetoothRangeInFeetClass2 = "31.4"
+    static var bluetoothRangeInFeetClass3 = "3.14"
     static var welcomeMessage = ""
     static var logHistory = NSMutableAttributedString()
     static var givenName = ""

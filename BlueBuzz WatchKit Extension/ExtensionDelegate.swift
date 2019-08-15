@@ -184,7 +184,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                 content.sound = UNNotificationSound.defaultCritical
                 
                 let trigger = UNTimeIntervalNotificationTrigger.init(
-                    timeInterval: 30,
+                    timeInterval: 3,
                     repeats: false)
                 let identifier = UUID().uuidString
                 let request = UNNotificationRequest.init(
@@ -240,12 +240,6 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                 let trigger = UNTimeIntervalNotificationTrigger.init(
                     timeInterval: 3,
                     repeats: false)
-                // Create the trigger as a repeating event.
-//                var dateComponents = DateComponent()
-//                dateComponents.calendar = Calendar.current
-//                dateComponents.second = 30
-//                let trigger = UNCalendarNotificationTrigger(
-//                    dateMatching: dateComponents, repeats: true)
                 let identifier = UUID().uuidString
                 let request = UNNotificationRequest.init(
                     identifier: identifier,

@@ -43,7 +43,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
     
     @IBAction func statusAction() {
         #if DEBUG
-            //statusLabel.setText("instanceId:\(sessionDelegater.getInstanceIdentifier())")
+            statusLabel.setText("instanceId:\(sessionDelegater.getInstanceIdentifier())")
         #endif
         statusLabel.setText("Updating location...")
         locationManager?.startUpdatingLocation()
