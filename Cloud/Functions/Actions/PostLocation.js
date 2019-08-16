@@ -5,7 +5,7 @@ const driverVersion = pkg.version;
 
 async function main(params) {
 
-    const client = await mongodb.MongoClient.connect(uri);
+    const client = await mongodb.MongoClient.connect(uri, { useNewUrlParser: true });
 
     let doc = { "instanceId": params.instanceId, 
                 "deviceId": params.deviceId, 
@@ -21,4 +21,3 @@ async function main(params) {
 }
 
 exports.main = main;
-    

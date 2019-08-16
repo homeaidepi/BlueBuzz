@@ -45,8 +45,6 @@
 		E66EE1E822FFC29F00C954FF /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1E422FFC29F00C954FF /* Validator.swift */; };
 		E66EE1E922FFC29F00C954FF /* PasswordValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1E522FFC29F00C954FF /* PasswordValidator.swift */; };
 		E66EE1EA22FFC29F00C954FF /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1E622FFC29F00C954FF /* EmailValidator.swift */; };
-		E66EE1EF2301161F00C954FF /* BlueBuzzAPI.yaml in Resources */ = {isa = PBXBuildFile; fileRef = E66EE1ED2301161E00C954FF /* BlueBuzzAPI.yaml */; };
-		E66EE1F02301161F00C954FF /* BlueBuzzAPI.json in Resources */ = {isa = PBXBuildFile; fileRef = E66EE1EE2301161F00C954FF /* BlueBuzzAPI.json */; };
 		E6B6421C22DD6569002254D3 /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
 		E6B6421D22DD656B002254D3 /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
 		E6DAE69722F70C3D0086AC23 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DAE69622F70C3D0086AC23 /* Variables.swift */; };
@@ -140,8 +138,6 @@
 		E66EE1E422FFC29F00C954FF /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		E66EE1E522FFC29F00C954FF /* PasswordValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordValidator.swift; sourceTree = "<group>"; };
 		E66EE1E622FFC29F00C954FF /* EmailValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidator.swift; sourceTree = "<group>"; };
-		E66EE1ED2301161E00C954FF /* BlueBuzzAPI.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BlueBuzzAPI.yaml; sourceTree = "<group>"; };
-		E66EE1EE2301161F00C954FF /* BlueBuzzAPI.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = BlueBuzzAPI.json; sourceTree = "<group>"; };
 		E6DAE69522F70C3C0086AC23 /* BlueBuzz WatchKit App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BlueBuzz WatchKit App-Bridging-Header.h"; sourceTree = "<group>"; };
 		E6DAE69622F70C3D0086AC23 /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Variables.swift; path = Shared/Variables.swift; sourceTree = "<group>"; };
 		E6DAE69922F750BE0086AC23 /* SwiftyFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwiftyFormat.swift; path = Shared/SwiftyFormat.swift; sourceTree = "<group>"; };
@@ -179,7 +175,6 @@
 			children = (
 				E66EE1F22301164700C954FF /* Core */,
 				E66EE1F12301162500C954FF /* Test */,
-				E66EE1EC230115C600C954FF /* Models */,
 				40D8B77820A554A5005F7D76 /* CommandStatus.swift */,
 				4076077C1E8183AF00A6A8EA /* SessionCommands.swift */,
 				40AF22981F29236300E6D1A8 /* SessionDelegater.swift */,
@@ -309,15 +304,6 @@
 				E62DC66023050D8D000C7015 /* AirPodsController.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		E66EE1EC230115C600C954FF /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				E66EE1EE2301161F00C954FF /* BlueBuzzAPI.json */,
-				E66EE1ED2301161E00C954FF /* BlueBuzzAPI.yaml */,
-			);
-			name = Models;
 			sourceTree = "<group>";
 		};
 		E66EE1F12301162500C954FF /* Test */ = {
@@ -486,8 +472,6 @@
 				40D46F591E8065200077A7B7 /* LaunchScreen.storyboard in Resources */,
 				40D46F561E8065200077A7B7 /* Assets.xcassets in Resources */,
 				40DD4D8E1EA6B7510074E73F /* Settings-Watch.bundle in Resources */,
-				E66EE1EF2301161F00C954FF /* BlueBuzzAPI.yaml in Resources */,
-				E66EE1F02301161F00C954FF /* BlueBuzzAPI.json in Resources */,
 				40D46F541E8065200077A7B7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

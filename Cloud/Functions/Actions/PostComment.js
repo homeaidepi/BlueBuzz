@@ -5,7 +5,7 @@ const driverVersion = pkg.version;
 
 async function main(params) {
 
-    const client = await mongodb.MongoClient.connect(uri);
+    const client = await mongodb.MongoClient.connect(uri, { useNewUrlParser: true });
     
     let email = params.email == null ? '' : params.email;
 

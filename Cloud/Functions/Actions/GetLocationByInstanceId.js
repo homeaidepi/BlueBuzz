@@ -5,7 +5,7 @@ const uri = 'mongodb://admin:FPSCRUSGLHMHFZFP@portal-ssl1430-52.bmix-dal-yp-0ada
 
 async function main(params) {
   const driverVersion = pkg.version;
-  const client = await mongodb.MongoClient.connect(uri);
+  const client = await mongodb.MongoClient.connect(uri, { useNewUrlParser: true });
 
   const docs = await client.db('compose').collection('Location').find({"instanceId":params.instanceId}).toArray();
   
