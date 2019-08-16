@@ -24,7 +24,7 @@ extension Notification.Name {
 }
 
 var messageKey = "message"
-var emptyMessage = "Welcome to Blue Buzz."
+var emptyMessage = ""
 
 // Implement WCSessionDelegate methods to receive Watch Connectivity data and notify clients.
 // WCsession status changes are also handled here.
@@ -32,12 +32,19 @@ var emptyMessage = "Welcome to Blue Buzz."
 class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
     var message = emptyMessage;
     var blueBuzzIbmSharingApiKey = "a5e5ee30-1346-4eaf-acdd-e1a7dccdec20"
-    var blueBuzzWebServiceGetLocationByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/getlocationbyinstanceid")!
-    var blueBuzzWebServicePostLocation = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/PostLocationByInstanceId")!
-    var blueBuzzWebServiceCheckDistanceByInstanceId = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/CheckDistanceByInstanceId")
-    var blueBuzzWebServiceGetChangeLogByVersion = URL(string: "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606/GetChangeLogByVersion")
+    var blueBuzzWebServiceBaseAddress = "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606"
+    var blueBuzzWebServiceGetLocationByInstanceId = "getlocationbyinstanceid"
+    var blueBuzzWebServicePostLocation = "PostLocationByInstanceId"
+    var blueBuzzWebServiceCheckDistanceByInstanceId = "CheckDistanceByInstanceId"
+    var blueBuzzWebServiceGetChangeLogByVersion = "GetChangeLogByVersion"
+    var blueBuzzWebServicePostComment = "PostComment"
 
     private var retval = false
+    
+    func getURL(string: String) -> URL {
+        let url = "\(blueBuzzWebServiceBaseAddress)/\(string)"
+        return URL(string: url)!
+    }
    
     //Settings
     //
@@ -51,9 +58,44 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
     }
     
     func initSettings() {
+        sendInstanceIdMessage(deviceId: "ios")
         saveSecondsBeforeCheckingDistance(secondsBeforeCheckingDistance: defaultSecondsBeforeCheckingLocation)
         saveSecondsBeforeCheckingLocation(secondsBeforeCheckingLocation: defaultSecondsBeforeCheckingDistance)
         saveDistanceBeforeNotifying(distanceBeforeNotifying: defaultDistanceBeforeNotifying)
+    }
+    
+    func sendInstanceIdMessage(deviceId: String) {
+        
+        // we are going to keep a guid that indicates a unique id or (instance) of this shared connection between watch and phone for the purposes of cloud communication
+        //
+        var instanceId = getInstanceIdentifier()
+        if (instanceId == emptyInstanceIdentifier)
+        {
+            instanceId = UUID().uuidString
+            saveInstanceIdentifier(instanceId: instanceId)
+        }
+        
+        let commandStatus = CommandStatus(command: .sendMessageData,
+                                          phrase: .sent,
+                                          latitude: emptyDegrees,
+                                          longitude: emptyDegrees,
+                                          instanceId: instanceId,
+                                          deviceId: deviceId,
+                                          timedColor: defaultColor,
+                                          errorMessage: "")
+        
+        do {
+            let data = try JSONEncoder().encode(commandStatus)
+            
+            //let jsonString = String(data: data, encoding: .utf8)!
+            //print(jsonString)
+            
+            WCSession.default.sendMessageData(data, replyHandler: { replyHandler in
+            }, errorHandler: { error in
+                print("error")})
+        } catch {
+            print("Send Message Data")
+        }
     }
     
     func getSettings() -> [String: Any] {
@@ -74,7 +116,10 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         
         if (instanceId != emptyInstanceIdentifier) {
             saveInstanceIdentifier(instanceId: instanceId)
+        } else {
+            sendInstanceIdMessage(deviceId: "ios")
         }
+        
         if (secondsBeforeCheckingLocation != 0) {
             saveSecondsBeforeCheckingLocation(secondsBeforeCheckingLocation: secondsBeforeCheckingLocation)
         }
@@ -261,15 +306,15 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
     #endif
     
     // Post a notification on the main thread asynchronously.
-    //
-    private func postNotificationOnMainQueueAsync(name: NSNotification.Name, object: CommandStatus? = nil) {
+    //  Same as SessionCommands.swift
+    public func postNotificationOnMainQueueAsync(name: NSNotification.Name, object: CommandStatus? = nil) {
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: name, object: object)
         }
     }
     
     public func postLocationByInstanceId(commandStatus: CommandStatus) -> Bool {
-        let serviceUrl = blueBuzzWebServicePostLocation
+        let serviceUrl = getURL(string: blueBuzzWebServicePostLocation)
         
         let lat = commandStatus.latitude
         let long = commandStatus.longitude
@@ -360,23 +405,33 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
                                       onFailure failure: @escaping (_ error: Error?, _ params: [AnyHashable: Any]) -> Void) {
         // dont fetch if already fetched
         if (self.message == emptyMessage) {
-            let serviceUrl = blueBuzzWebServiceGetChangeLogByVersion!
+            let serviceUrl = getURL(string: blueBuzzWebServiceGetChangeLogByVersion)
             
             let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
             
             let parameterDictionary = [
                 "version" : "\(appVersion)",]
             
-                callApiWithParams(parameterDictionary,
+            callApiWithParams(parameterDictionary,
+                              serviceUrl: serviceUrl,
+                              onSuccess: success,
+                              onFailure: failure)
+        }
+    }
+    
+    public func postComment(parameterDictionary: [String:String], onSuccess success: @escaping (_ JSON: [String: Any]) -> Void, onFailure failure: @escaping (_ error: Error?, _ params: [AnyHashable: Any]) -> Void) {
+
+            let serviceUrl = getURL(string: blueBuzzWebServicePostComment)
+            
+            callApiWithParams(parameterDictionary,
                                   serviceUrl: serviceUrl,
                                   onSuccess: success,
                                   onFailure: failure)
-        }
     }
     
     
     public func checkDistanceByInstanceId(commandStatus: CommandStatus) -> Bool {
-        let serviceUrl = blueBuzzWebServiceCheckDistanceByInstanceId!
+        let serviceUrl = getURL(string: blueBuzzWebServiceCheckDistanceByInstanceId)
         
         let instanceId = commandStatus.instanceId
         

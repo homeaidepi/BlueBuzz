@@ -24,6 +24,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
     private var secondsBeforeCheckingLocation: Int = 45
     private var secondsBeforeCheckingDistance: Int = 60
     private var distanceBeforeNotifying: Double = 100
+    private var soundPlayer: WKAudioFileQueuePlayer?
 
     func applicationDidFinishLaunching() {
         
@@ -45,7 +46,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         print(distanceBeforeNotifying)
         
         if (instanceId == "") {
-            sendInstanceIdMessage();
+            sessionDelegater.sendInstanceIdMessage(deviceId: "watchos");
         }
     }
     
@@ -113,12 +114,18 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                         WKInterfaceDevice.current().play(.notification)
                     }
                 } else {
-                    UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                    devicesAreInRange()
                 }
             } else {
-                UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                devicesAreInRange()
             }
         }
+    }
+    
+    //do all the things you want when the devices come back in range of each other
+    func devicesAreInRange() {
+        //self.soundPlayer?.pause()
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -172,12 +179,12 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                 let notificationCenter = UNUserNotificationCenter.current()
                 let content = UNMutableNotificationContent()
                 
-                content.title = NSLocalizedString("Connection Alert", comment: Now())
+                content.title = NSLocalizedString("Location Alert", comment: Now())
                 content.body =  NSLocalizedString("Phone out of range, signal or disconnected.", comment: Now())
                 content.sound = UNNotificationSound.defaultCritical
                 
                 let trigger = UNTimeIntervalNotificationTrigger.init(
-                    timeInterval: 30,
+                    timeInterval: 3,
                     repeats: false)
                 let identifier = UUID().uuidString
                 let request = UNNotificationRequest.init(
@@ -193,6 +200,16 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                         self.alerted = false
                     }
                     else {
+                        
+//                        let mainBundle = Bundle.main
+//                        if let url = mainBundle.url(forResource: "bee", withExtension: "mp3"){
+//                            let asset = WKAudioFileAsset(url: url)
+//                            let playerItem = WKAudioFilePlayerItem(asset: asset)
+//                            self.soundPlayer = WKAudioFileQueuePlayer(playerItem: playerItem)
+//                            if self.soundPlayer?.status == .readyToPlay {
+//                                self.soundPlayer?.play()
+//                            }
+//                        }
                         self.alerted = true
                     }
                 })
@@ -206,7 +223,6 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (granted, error) in
             // Enable or disable features based on authorization.
             if granted {
-                
                 // Schedule the request with the system.
                 let notificationCenter = UNUserNotificationCenter.current()
                 let content = UNMutableNotificationContent()
@@ -224,12 +240,6 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                 let trigger = UNTimeIntervalNotificationTrigger.init(
                     timeInterval: 3,
                     repeats: false)
-                // Create the trigger as a repeating event.
-//                var dateComponents = DateComponent()
-//                dateComponents.calendar = Calendar.current
-//                dateComponents.second = 30
-//                let trigger = UNCalendarNotificationTrigger(
-//                    dateMatching: dateComponents, repeats: true)
                 let identifier = UUID().uuidString
                 let request = UNNotificationRequest.init(
                     identifier: identifier,
@@ -250,56 +260,24 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
         }
     }
 
-    func scheduleRefresh() {
-        print("Scheduling refresh")
-        
-        // fire in 10 seconds
-        let fireDate = Date(timeIntervalSinceNow: 10.0)
-        // optional, any SecureCoding compliant data can be passed here
-        let userInfo = ["reason" : "background update"] as NSDictionary
-        
-        locationManager!.startUpdatingLocation()
-
-        WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: fireDate, userInfo: userInfo) { (error) in
-            if (error == nil) {
-                print("successfully scheduled background task")
-            }
-        }
-    }
+//    func scheduleRefresh() {
+//        print("Scheduling refresh")
+//
+//        // fire in 10 seconds
+//        let fireDate = Date(timeIntervalSinceNow: 3.0)
+//        // optional, any SecureCoding compliant data can be passed here
+//        let userInfo = ["reason" : "background update"] as NSDictionary
+//
+//        //locationManager!.startUpdatingLocation()
+//
+//        WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: fireDate, userInfo: userInfo) { (error) in
+//            if (error == nil) {
+//                print("successfully scheduled background task")
+//            }
+//        }
+//    }
     
-    private func sendInstanceIdMessage() {
-        
-        // we are going to keep a guid that indicates a unique id or (instance) of this shared connection between watch and phone for the purposes of cloud communication
-        //
-        var instanceId = sessionDelegater.getInstanceIdentifier()
-        if (instanceId == "")
-        {
-            instanceId = UUID().uuidString
-            sessionDelegater.saveInstanceIdentifier(instanceId: instanceId)
-        }
-        
-        let commandStatus = CommandStatus(command: .sendMessageData,
-                                          phrase: .sent,
-                                          latitude: emptyDegrees,
-                                          longitude: emptyDegrees,
-                                          instanceId: instanceId,
-                                          deviceId: "watchos",
-                                          timedColor: defaultColor,
-                                          errorMessage: "")
-        
-        do {
-            let data = try JSONEncoder().encode(commandStatus)
-            
-            //let jsonString = String(data: data, encoding: .utf8)!
-            //print(jsonString)
-            
-            WCSession.default.sendMessageData(data, replyHandler: { replyHandler in
-            }, errorHandler: { error in
-                print("error")})
-        } catch {
-            print("Send Message Data")
-        }
-    }
+    
     
     func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
         // Sent when the system needs to launch the application in the background to process tasks. Tasks arrive in a set, so loop through and process each one.
@@ -309,6 +287,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
             case let backgroundTask as WKApplicationRefreshBackgroundTask:
                 // do work here
                 // Be sure to complete the background task once you’re done.
+                
                 backgroundTask.setTaskCompleted()
             default:
                 // make sure to complete unhandled task types

@@ -35,12 +35,18 @@
 		E60460DC22E1642600B29482 /* ModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60460DB22E1642600B29482 /* ModelController.swift */; };
 		E60460DE22E1642D00B29482 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E60460DD22E1642D00B29482 /* RootViewController.swift */; };
 		E6140ED422DB79A800B961F0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6140ED322DB79A800B961F0 /* CoreLocation.framework */; };
+		E62DC66123050D8D000C7015 /* AirPodsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62DC66023050D8D000C7015 /* AirPodsController.swift */; };
 		E64DFB0022D1A65B00C91B3D /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E64DFAFF22D1A65B00C91B3D /* UserNotifications.framework */; };
+		E66EE1D822FF930D00C954FF /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1D722FF930D00C954FF /* FeedbackViewController.swift */; };
+		E66EE1DF22FF95C500C954FF /* FormControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1DC22FF95C500C954FF /* FormControl.swift */; };
+		E66EE1E022FF95C500C954FF /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1DD22FF95C500C954FF /* Form.swift */; };
+		E66EE1E122FF95C500C954FF /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1DE22FF95C500C954FF /* TextField.swift */; };
+		E66EE1E722FFC29F00C954FF /* UsernameValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1E322FFC29F00C954FF /* UsernameValidator.swift */; };
+		E66EE1E822FFC29F00C954FF /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1E422FFC29F00C954FF /* Validator.swift */; };
+		E66EE1E922FFC29F00C954FF /* PasswordValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1E522FFC29F00C954FF /* PasswordValidator.swift */; };
+		E66EE1EA22FFC29F00C954FF /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1E622FFC29F00C954FF /* EmailValidator.swift */; };
 		E6B6421C22DD6569002254D3 /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
 		E6B6421D22DD656B002254D3 /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
-		E6C25B9822D959A400D9A1FD /* MongoDBConnection.uri in Resources */ = {isa = PBXBuildFile; fileRef = E6C25B9722D959A400D9A1FD /* MongoDBConnection.uri */; };
-		E6C25B9D22D9663600D9A1FD /* BlueBuzzAPI.json in Resources */ = {isa = PBXBuildFile; fileRef = E6C25B9C22D9663600D9A1FD /* BlueBuzzAPI.json */; };
-		E6C25B9F22D9666A00D9A1FD /* BlueBuzzAPI.yaml in Resources */ = {isa = PBXBuildFile; fileRef = E6C25B9E22D9666A00D9A1FD /* BlueBuzzAPI.yaml */; };
 		E6DAE69722F70C3D0086AC23 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DAE69622F70C3D0086AC23 /* Variables.swift */; };
 		E6DAE69822F70C3D0086AC23 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DAE69622F70C3D0086AC23 /* Variables.swift */; };
 		E6DAE69A22F750BE0086AC23 /* SwiftyFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DAE69922F750BE0086AC23 /* SwiftyFormat.swift */; };
@@ -113,7 +119,6 @@
 		40D46F771E8065200077A7B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40D8B77820A554A5005F7D76 /* CommandStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommandStatus.swift; path = Shared/CommandStatus.swift; sourceTree = "<group>"; };
 		40DC7D0E1EA8186200A93AFB /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Logger.swift; path = Shared/Logger.swift; sourceTree = "<group>"; };
-		40DC7D141EA81D8100A93AFB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		40DD4D8A1EA6B6E20074E73F /* BlueBuzz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BlueBuzz.entitlements; sourceTree = "<group>"; };
 		40DD4D8B1EA6B6FB0074E73F /* BlueBuzz WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BlueBuzz WatchKit App.entitlements"; sourceTree = "<group>"; };
 		40DD4D8C1EA6B7010074E73F /* BlueBuzz WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "BlueBuzz WatchKit Extension.entitlements"; sourceTree = "<group>"; };
@@ -123,10 +128,16 @@
 		E60460DD22E1642D00B29482 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		E605438722D3E8C9006D121A /* BlueBuzz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BlueBuzz.entitlements; sourceTree = "<group>"; };
 		E6140ED322DB79A800B961F0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		E62DC66023050D8D000C7015 /* AirPodsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirPodsController.swift; sourceTree = "<group>"; };
 		E64DFAFF22D1A65B00C91B3D /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS5.2.sdk/System/Library/Frameworks/UserNotifications.framework; sourceTree = DEVELOPER_DIR; };
-		E6C25B9722D959A400D9A1FD /* MongoDBConnection.uri */ = {isa = PBXFileReference; lastKnownFileType = text; name = MongoDBConnection.uri; path = Shared/MongoDBConnection.uri; sourceTree = "<group>"; };
-		E6C25B9C22D9663600D9A1FD /* BlueBuzzAPI.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = BlueBuzzAPI.json; path = Shared/BlueBuzzAPI.json; sourceTree = "<group>"; };
-		E6C25B9E22D9666A00D9A1FD /* BlueBuzzAPI.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = BlueBuzzAPI.yaml; path = Shared/BlueBuzzAPI.yaml; sourceTree = "<group>"; };
+		E66EE1D722FF930D00C954FF /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
+		E66EE1DC22FF95C500C954FF /* FormControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormControl.swift; sourceTree = "<group>"; };
+		E66EE1DD22FF95C500C954FF /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
+		E66EE1DE22FF95C500C954FF /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		E66EE1E322FFC29F00C954FF /* UsernameValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsernameValidator.swift; sourceTree = "<group>"; };
+		E66EE1E422FFC29F00C954FF /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		E66EE1E522FFC29F00C954FF /* PasswordValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordValidator.swift; sourceTree = "<group>"; };
+		E66EE1E622FFC29F00C954FF /* EmailValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidator.swift; sourceTree = "<group>"; };
 		E6DAE69522F70C3C0086AC23 /* BlueBuzz WatchKit App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BlueBuzz WatchKit App-Bridging-Header.h"; sourceTree = "<group>"; };
 		E6DAE69622F70C3D0086AC23 /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Variables.swift; path = Shared/Variables.swift; sourceTree = "<group>"; };
 		E6DAE69922F750BE0086AC23 /* SwiftyFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwiftyFormat.swift; path = Shared/SwiftyFormat.swift; sourceTree = "<group>"; };
@@ -162,18 +173,12 @@
 		4076077B1E81834B00A6A8EA /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				E6C25B9E22D9666A00D9A1FD /* BlueBuzzAPI.yaml */,
-				E6C25B9C22D9663600D9A1FD /* BlueBuzzAPI.json */,
-				407607851E81A7F000A6A8EA /* TestDataProvider.swift */,
+				E66EE1F22301164700C954FF /* Core */,
+				E66EE1F12301162500C954FF /* Test */,
 				40D8B77820A554A5005F7D76 /* CommandStatus.swift */,
 				4076077C1E8183AF00A6A8EA /* SessionCommands.swift */,
 				40AF22981F29236300E6D1A8 /* SessionDelegater.swift */,
-				40DC7D0E1EA8186200A93AFB /* Logger.swift */,
-				E6C25B9722D959A400D9A1FD /* MongoDBConnection.uri */,
-				40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */,
 				E6DAE69622F70C3D0086AC23 /* Variables.swift */,
-				E6DAE69522F70C3C0086AC23 /* BlueBuzz WatchKit App-Bridging-Header.h */,
-				E6DAE69922F750BE0086AC23 /* SwiftyFormat.swift */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -182,7 +187,6 @@
 			isa = PBXGroup;
 			children = (
 				E605438722D3E8C9006D121A /* BlueBuzz.entitlements */,
-				40DC7D141EA81D8100A93AFB /* README.md */,
 				4076077B1E81834B00A6A8EA /* Shared */,
 				40D46F4D1E8065200077A7B7 /* BlueBuzz */,
 				40D46F611E8065200077A7B7 /* BlueBuzz WatchKit App */,
@@ -208,15 +212,15 @@
 			isa = PBXGroup;
 			children = (
 				40DD4D8A1EA6B6E20074E73F /* BlueBuzz.entitlements */,
-				40D46F4E1E8065200077A7B7 /* AppDelegate.swift */,
-				E60460DD22E1642D00B29482 /* RootViewController.swift */,
-				40D46F501E8065200077A7B7 /* MainViewController.swift */,
-				E60460DB22E1642600B29482 /* ModelController.swift */,
-				40C02A9920A27F28006F07AE /* CommandsViewController.swift */,
-				40D46F521E8065200077A7B7 /* Main.storyboard */,
 				40D46F551E8065200077A7B7 /* Assets.xcassets */,
-				40D46F571E8065200077A7B7 /* LaunchScreen.storyboard */,
 				40D46F5A1E8065200077A7B7 /* Info.plist */,
+				E66EE1D922FF959A00C954FF /* Forms */,
+				E66EE1EB2301159600C954FF /* Controllers */,
+				40D46F501E8065200077A7B7 /* MainViewController.swift */,
+				E66EE1D722FF930D00C954FF /* FeedbackViewController.swift */,
+				40D46F4E1E8065200077A7B7 /* AppDelegate.swift */,
+				40D46F521E8065200077A7B7 /* Main.storyboard */,
+				40D46F571E8065200077A7B7 /* LaunchScreen.storyboard */,
 			);
 			path = BlueBuzz;
 			sourceTree = "<group>";
@@ -267,6 +271,58 @@
 				E64DFAFF22D1A65B00C91B3D /* UserNotifications.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E66EE1D922FF959A00C954FF /* Forms */ = {
+			isa = PBXGroup;
+			children = (
+				E66EE1E222FFC28500C954FF /* Validators */,
+				E66EE1DD22FF95C500C954FF /* Form.swift */,
+				E66EE1DC22FF95C500C954FF /* FormControl.swift */,
+				E66EE1DE22FF95C500C954FF /* TextField.swift */,
+			);
+			path = Forms;
+			sourceTree = "<group>";
+		};
+		E66EE1E222FFC28500C954FF /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+				E66EE1E622FFC29F00C954FF /* EmailValidator.swift */,
+				E66EE1E522FFC29F00C954FF /* PasswordValidator.swift */,
+				E66EE1E322FFC29F00C954FF /* UsernameValidator.swift */,
+				E66EE1E422FFC29F00C954FF /* Validator.swift */,
+			);
+			path = Validators;
+			sourceTree = "<group>";
+		};
+		E66EE1EB2301159600C954FF /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E60460DB22E1642600B29482 /* ModelController.swift */,
+				E60460DD22E1642D00B29482 /* RootViewController.swift */,
+				40C02A9920A27F28006F07AE /* CommandsViewController.swift */,
+				E62DC66023050D8D000C7015 /* AirPodsController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		E66EE1F12301162500C954FF /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				407607851E81A7F000A6A8EA /* TestDataProvider.swift */,
+			);
+			name = Test;
+			sourceTree = "<group>";
+		};
+		E66EE1F22301164700C954FF /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				E6DAE69522F70C3C0086AC23 /* BlueBuzz WatchKit App-Bridging-Header.h */,
+				40DC7D0E1EA8186200A93AFB /* Logger.swift */,
+				E6DAE69922F750BE0086AC23 /* SwiftyFormat.swift */,
+				40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */,
+			);
+			name = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -414,11 +470,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				40D46F591E8065200077A7B7 /* LaunchScreen.storyboard in Resources */,
-				E6C25B9D22D9663600D9A1FD /* BlueBuzzAPI.json in Resources */,
-				E6C25B9F22D9666A00D9A1FD /* BlueBuzzAPI.yaml in Resources */,
 				40D46F561E8065200077A7B7 /* Assets.xcassets in Resources */,
 				40DD4D8E1EA6B7510074E73F /* Settings-Watch.bundle in Resources */,
-				E6C25B9822D959A400D9A1FD /* MongoDBConnection.uri in Resources */,
 				40D46F541E8065200077A7B7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -482,17 +535,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E66EE1D822FF930D00C954FF /* FeedbackViewController.swift in Sources */,
 				E6DAE69A22F750BE0086AC23 /* SwiftyFormat.swift in Sources */,
+				E66EE1E022FF95C500C954FF /* Form.swift in Sources */,
+				E66EE1E122FF95C500C954FF /* TextField.swift in Sources */,
 				E60460DE22E1642D00B29482 /* RootViewController.swift in Sources */,
+				E66EE1DF22FF95C500C954FF /* FormControl.swift in Sources */,
 				40D46F511E8065200077A7B7 /* MainViewController.swift in Sources */,
 				40D8B77920A554A5005F7D76 /* CommandStatus.swift in Sources */,
 				407607861E81A7F000A6A8EA /* TestDataProvider.swift in Sources */,
 				E60460DC22E1642600B29482 /* ModelController.swift in Sources */,
+				E66EE1E822FFC29F00C954FF /* Validator.swift in Sources */,
 				40D46F4F1E8065200077A7B7 /* AppDelegate.swift in Sources */,
 				40DC7D0F1EA8186200A93AFB /* Logger.swift in Sources */,
 				E6DAE69722F70C3D0086AC23 /* Variables.swift in Sources */,
+				E66EE1E922FFC29F00C954FF /* PasswordValidator.swift in Sources */,
 				40C02A9A20A27F28006F07AE /* CommandsViewController.swift in Sources */,
+				E66EE1E722FFC29F00C954FF /* UsernameValidator.swift in Sources */,
+				E66EE1EA22FFC29F00C954FF /* EmailValidator.swift in Sources */,
 				40AF22991F29236300E6D1A8 /* SessionDelegater.swift in Sources */,
+				E62DC66123050D8D000C7015 /* AirPodsController.swift in Sources */,
 				4084B0231EA057EF00ACA046 /* SessionCommands.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -781,7 +843,7 @@
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
 				INFOPLIST_FILE = BlueBuzz/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.homeaidepi.bluebuzz1;
@@ -802,7 +864,7 @@
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
 				INFOPLIST_FILE = BlueBuzz/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.homeaidepi.bluebuzz1;

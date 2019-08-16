@@ -16,6 +16,7 @@ enum SessionPages: String {
     case Welcome = "Welcome"
     case LogView = "History"
     case Settings = "Settings"
+    case Feedback = "Feedback"
 }
 // Define an interface to wrap Watch Connectivity APIs and
 // bridge the UI. Shared by the iOS app and watchOS app.
@@ -77,7 +78,7 @@ extension SessionCommands {
     }
     
     // Post a notification on the main thread asynchronously.
-    //
+    // same as sessiondelegater.swift
     private func postNotificationOnMainQueueAsync(name: NSNotification.Name, object: CommandStatus) {
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: name, object: object)

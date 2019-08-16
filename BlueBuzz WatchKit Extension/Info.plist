@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
-	<string>12.6</string>
+	<string>12.13</string>
 	<key>CFBundleVersion</key>
-	<string>6</string>
+	<string>13</string>
 	<key>CLKComplicationPrincipalClass</key>
 	<string>ComplicationController</string>
 	<key>CLKComplicationSupportedFamilies</key>
@@ -35,6 +35,8 @@
 		</dict>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.watchkit</string>
+		<key>Opt out of Auto-launch Audio App</key>
+		<string>NO</string>
 	</dict>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>This app will notify you when your phone is out of range</string>

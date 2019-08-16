@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>12.6</string>
+	<string>12.13</string>
 	<key>CFBundleVersion</key>
-	<string>6</string>
+	<string>13</string>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>com.mce.application</string>
