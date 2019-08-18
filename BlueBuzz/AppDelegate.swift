@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, C
         registerForLocation()
         registerBackgroundTask()
         
+        UIApplication.shared.applicationIconBadgeNumber = 0
         
         return true
     }
@@ -50,6 +51,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, C
     
     func saveInstanceIdentifier(instanceId: String) {
         sessionDelegater.saveInstanceIdentifier(instanceId: instanceId)
+    }
+    
+    func requestLocation() {
+        lastUpdatedLocationDateTime = nil
+        locationManager?.requestLocation()
     }
     
     func registerForLocation()
@@ -140,12 +146,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, C
                                             longitude: currentLocation.coordinate.longitude,
                                             instanceId: instanceId,
                                             deviceId: "ios",
-                                            timedColor: defaultColor,
+                                            timedColor: TimedColor(ibmBlueColor),
                                             errorMessage: emptyError)
         
         //send the cloud the current location information
         if (sessionDelegater.postLocationByInstanceId(commandStatus: commandStatus)) {
             lastUpdatedLocationDateTime = Date()
+            sessionDelegater.postNotificationOnMainQueueAsync(name: .dataDidFlow, object: commandStatus)
         }
     }
     

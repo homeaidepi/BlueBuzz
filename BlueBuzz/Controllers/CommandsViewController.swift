@@ -101,7 +101,7 @@ extension CommandsViewController { // MARK: - UITableViewDelegate and UITableVie
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         currentCommand = commands[indexPath.row]
         switch currentCommand {
-            case .sendMessageData: sendMessageData(messageData, location: location, instanceId: SessionDelegater().getInstanceIdentifier(), deviceId: "ios")
+            case .sendMessageData: sendMessageData(messageData, location: testLocation, instanceId: SessionDelegater().getInstanceIdentifier(), deviceId: "ios")
         case .updateAppConnection: updateApplicationContext(applicationContext: SessionDelegater().getSettings())
             
         }

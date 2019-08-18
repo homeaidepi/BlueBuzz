@@ -78,7 +78,7 @@ extension SessionCommands {
     }
     
     // Post a notification on the main thread asynchronously.
-    //
+    // same as sessiondelegater.swift
     private func postNotificationOnMainQueueAsync(name: NSNotification.Name, object: CommandStatus) {
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: name, object: object)

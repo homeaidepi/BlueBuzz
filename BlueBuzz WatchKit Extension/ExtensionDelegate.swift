@@ -28,7 +28,8 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
 
     func applicationDidFinishLaunching() {
         
-        initLocationManager()
+        //initLocationManager()
+        scheduleAlertNotifications()
         return
     }
     
@@ -184,7 +185,7 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                 content.sound = UNNotificationSound.defaultCritical
                 
                 let trigger = UNTimeIntervalNotificationTrigger.init(
-                    timeInterval: 3,
+                    timeInterval: 10,
                     repeats: false)
                 let identifier = UUID().uuidString
                 let request = UNNotificationRequest.init(

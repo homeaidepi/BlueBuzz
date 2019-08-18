@@ -306,8 +306,8 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
     #endif
     
     // Post a notification on the main thread asynchronously.
-    //
-    private func postNotificationOnMainQueueAsync(name: NSNotification.Name, object: CommandStatus? = nil) {
+    //  Same as SessionCommands.swift
+    public func postNotificationOnMainQueueAsync(name: NSNotification.Name, object: CommandStatus? = nil) {
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: name, object: object)
         }

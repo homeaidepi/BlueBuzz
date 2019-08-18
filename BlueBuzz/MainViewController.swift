@@ -25,6 +25,8 @@ class MainViewController: UIViewController {
         return SessionDelegater()
     }()
     
+    let myDelegate = UIApplication.shared.delegate as? AppDelegate
+    
     var dataObject: String = ""
     
     @IBAction func secondsBeforeCheckingLocationValueChanged(sender: UISlider) {
@@ -230,15 +232,14 @@ class MainViewController: UIViewController {
     // Append the message to the end of the text view and make sure it is visiable.
     //
     private func log(_ message: String) {
-        if (pageLabel.text == SessionPages.LogView.rawValue) {
-            
-            let format = "#{{message}} #{{newLine}}"
-            let attributedMessage = NSAttributedString(format: format,
-                                             mapping: ["message": message,
-                                                       "newLine": "\n"])
+        let format = "#{{message}} #{{newLine}}"
+        let attributedMessage = NSAttributedString(format: format,
+                                         mapping: ["message": message,
+                                                   "newLine": "\n"])
 
-            Variables.logHistory.append(attributedMessage)
-            
+        Variables.logHistory.append(attributedMessage)
+        
+        if (pageLabel.text == SessionPages.LogView.rawValue) {
             logView.attributedText = Variables.logHistory
             logView.scrollRangeToVisible(NSMakeRange(0, 1))
         }
@@ -246,8 +247,10 @@ class MainViewController: UIViewController {
     
     @IBAction func clear(_ sender: UIButton) {
         if (logView.isHidden == false) {
-            Variables.logHistory = NSMutableAttributedString()
-            logView.attributedText = Variables.logHistory
+            if (pageLabel.text == SessionPages.LogView.rawValue) {
+                Variables.logHistory = NSMutableAttributedString()
+                logView.attributedText = Variables.logHistory
+            }
         } else {
             secondsBeforeCheckingLocationValue.value = 45
             secondsBeforeCheckingDistanceValue.value = 60
@@ -302,7 +305,6 @@ class MainViewController: UIViewController {
         guard let commandStatus = notification.object as? CommandStatus else { return }
         
         // If an error occurs, show the error message and returns.
-        //
         if commandStatus.errorMessage.count > 0 {
             log("\(commandStatus.command.rawValue): \(commandStatus.errorMessage)")
             return
@@ -320,20 +322,23 @@ class MainViewController: UIViewController {
             sessionDelegater.saveInstanceIdentifier(instanceId: instanceId)
         }
         
-        //log the messageData i.e location to the screen else show command
-        //
-        if (lat != emptyDegrees && long != emptyDegrees)
-        {
-            if (logView.text.contains("id")) {
-                log("\(deviceId) sent at: \(timedColor.timeStamp)")
-            } else {
-                log("id:\(instanceId.prefix(20))\n\(deviceId) sent at: \(timedColor.timeStamp)")
+        if (lat == testLat && long == testLong) {
+            myDelegate?.requestLocation()
+        } else {
+            //log the messageData i.e location to the screen else show command
+            if (lat != emptyDegrees && long != emptyDegrees)
+            {
+                if (Variables.logHistory.mutableString.contains("id")) {
+                    log("\(deviceId) sent at: \(timedColor.timeStamp)")
+                } else {
+                    log("id:\(instanceId.prefix(20))\n\(deviceId) sent at: \(timedColor.timeStamp)")
+                }
             }
+            else {
+                log("Device: \(deviceId) missing lat,long at: \(timedColor.timeStamp)")
+            }
+
+            updateReachabilityColor()
         }
-        else {
-            log("Device: \(deviceId) missing lat,long at: \(timedColor.timeStamp)")
-        }
-        
-        updateReachabilityColor()
     }
 }

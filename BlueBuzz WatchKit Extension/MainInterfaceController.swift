@@ -270,6 +270,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
             let controller = MainInterfaceController.instances[index]
             controller.becomeCurrentPage()
             controller.updateUI(with: commandStatus)
+            locationManager?.requestLocation()
         }
     }
     // .activationDidComplete notification handler.

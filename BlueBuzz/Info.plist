@@ -17,17 +17,27 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>12.10</string>
+	<string>12.14</string>
 	<key>CFBundleVersion</key>
-	<string>10</string>
+	<string>14</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Can we use your calendar?</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Can we use your camera?</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Can we use to your contacts?</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>This app will notify you when your phone is out of range</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>This app will notify you when your phone is out of range</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app will notify you when your phone is out of range</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Can we use your microphone?</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Can we save to your library?</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
