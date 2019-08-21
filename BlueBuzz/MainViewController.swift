@@ -113,7 +113,7 @@ class MainViewController: UIViewController {
         }
         
         //fix for container being offscreen
-        containerTopConstraint.constant = size.height - 70
+        //containerTopConstraint.constant = size.height - 70
         
         if (portrait) {
             //logoLeadingConstraint.constant = size.width / 2 - 50

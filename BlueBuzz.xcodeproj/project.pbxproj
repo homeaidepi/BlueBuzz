@@ -45,7 +45,6 @@
 		E66EE1E822FFC29F00C954FF /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1E422FFC29F00C954FF /* Validator.swift */; };
 		E66EE1E922FFC29F00C954FF /* PasswordValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1E522FFC29F00C954FF /* PasswordValidator.swift */; };
 		E66EE1EA22FFC29F00C954FF /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66EE1E622FFC29F00C954FF /* EmailValidator.swift */; };
-		E698EA8C230735B200B53DDA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E698EA8B230735B200B53DDA /* Default-568h@2x.png */; };
 		E6B6421C22DD6569002254D3 /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
 		E6B6421D22DD656B002254D3 /* Settings-Watch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 40DD4D8D1EA6B7510074E73F /* Settings-Watch.bundle */; };
 		E6DAE69722F70C3D0086AC23 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DAE69622F70C3D0086AC23 /* Variables.swift */; };
@@ -139,7 +138,6 @@
 		E66EE1E422FFC29F00C954FF /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		E66EE1E522FFC29F00C954FF /* PasswordValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordValidator.swift; sourceTree = "<group>"; };
 		E66EE1E622FFC29F00C954FF /* EmailValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidator.swift; sourceTree = "<group>"; };
-		E698EA8B230735B200B53DDA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		E6DAE69522F70C3C0086AC23 /* BlueBuzz WatchKit App-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BlueBuzz WatchKit App-Bridging-Header.h"; sourceTree = "<group>"; };
 		E6DAE69622F70C3D0086AC23 /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Variables.swift; path = Shared/Variables.swift; sourceTree = "<group>"; };
 		E6DAE69922F750BE0086AC23 /* SwiftyFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwiftyFormat.swift; path = Shared/SwiftyFormat.swift; sourceTree = "<group>"; };
@@ -188,7 +186,6 @@
 		40D46F421E8065200077A7B7 = {
 			isa = PBXGroup;
 			children = (
-				E698EA8B230735B200B53DDA /* Default-568h@2x.png */,
 				E605438722D3E8C9006D121A /* BlueBuzz.entitlements */,
 				4076077B1E81834B00A6A8EA /* Shared */,
 				40D46F4D1E8065200077A7B7 /* BlueBuzz */,
@@ -475,7 +472,6 @@
 				40D46F591E8065200077A7B7 /* LaunchScreen.storyboard in Resources */,
 				40D46F561E8065200077A7B7 /* Assets.xcassets in Resources */,
 				40DD4D8E1EA6B7510074E73F /* Settings-Watch.bundle in Resources */,
-				E698EA8C230735B200B53DDA /* Default-568h@2x.png in Resources */,
 				40D46F541E8065200077A7B7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
