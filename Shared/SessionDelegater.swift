@@ -157,6 +157,21 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         return secondsBeforeCheckingLocation
     }
     
+    public func saveShowBackground
+        (showBackground: Bool) {
+        let defaults = UserDefaults.standard
+        
+        defaults.set(showBackground, forKey: showBackgroundKey)
+    }
+    
+    public func getShowBackground() -> Bool {
+        let defaults = UserDefaults.standard
+        
+        let showBackground = defaults.bool(forKey: showBackgroundKey)
+        
+        return showBackground
+    }
+    
     public func saveSecondsBeforeCheckingLocation(secondsBeforeCheckingLocation: Int) {
         let defaults = UserDefaults.standard
         

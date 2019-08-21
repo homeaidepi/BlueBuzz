@@ -7,6 +7,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var reachableLabel: UILabel!
     @IBOutlet weak var tableContainerView: UIView!
     @IBOutlet weak var logView: UITextView!
+    @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var pageLabel: UILabel!
     @IBOutlet weak var tablePlaceholderView: UIView!
     @IBOutlet weak var clearButton: UIButton!
@@ -16,10 +17,12 @@ class MainViewController: UIViewController {
     @IBOutlet weak var secondsBeforeCheckingLocationLabel: UILabel!
     @IBOutlet weak var secondsBeforeCheckingDistanceLabel: UILabel!
     @IBOutlet weak var distanceBeforeNotifyingLabel: UILabel!
+    @IBOutlet weak var scrollViewPanel: UIScrollView!
     @IBOutlet weak var settingsPanel: UIStackView!
     @IBOutlet weak var logoLeadingConstraint: NSLayoutConstraint!
-    @IBOutlet weak var containerConstraint: NSLayoutConstraint!
+    @IBOutlet weak var containerTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var showBackgroundValue: UISlider!
     
     private lazy var sessionDelegater: SessionDelegater = {
         return SessionDelegater()
@@ -28,6 +31,17 @@ class MainViewController: UIViewController {
     let myDelegate = UIApplication.shared.delegate as? AppDelegate
     
     var dataObject: String = ""
+    
+    @IBAction func showBackgroundValueChanged(sender: UISlider) {
+        let currentValue = Bool(showBackgroundValue.value == 0)
+        
+        print("Slider changing to \(currentValue) ?")
+        sessionDelegater.saveShowBackground(showBackground: currentValue)
+        
+        syncSettings()
+        
+        showBackground(hideBackground: currentValue)
+    }
     
     @IBAction func secondsBeforeCheckingLocationValueChanged(sender: UISlider) {
         let currentValue = Int(secondsBeforeCheckingLocationValue.value)
@@ -66,6 +80,10 @@ class MainViewController: UIViewController {
         getWelcomeMessage()
     }
     
+    func showBackground(hideBackground: Bool) {
+        background.isHidden = hideBackground
+    }
+    
     func syncSettings()
     {
         let settings = sessionDelegater.getSettings()
@@ -95,7 +113,7 @@ class MainViewController: UIViewController {
         }
         
         //fix for container being offscreen
-        containerConstraint.constant = size.height - 70
+        containerTopConstraint.constant = size.height - 70
         
         if (portrait) {
             //logoLeadingConstraint.constant = size.width / 2 - 50
@@ -136,7 +154,7 @@ class MainViewController: UIViewController {
             
             case SessionPages.Welcome.rawValue :
                 pageControl.currentPage = 0
-                settingsPanel.isHidden = true
+                
                 tableContainerView.isHidden = true
                 reachableLabel.isHidden = false
                 clearButton.setTitle("", for: .normal)
@@ -144,7 +162,8 @@ class MainViewController: UIViewController {
                 logView.attributedText = Variables.welcomeMessage.html2Attributed
                 logView.setContentOffset(.zero, animated: false)
                 logView.scrollRangeToVisible(NSRange(location:0, length:0))
-            
+                scrollViewPanel.isUserInteractionEnabled = false
+                settingsPanel.isHidden = true
             case SessionPages.Settings.rawValue:
                 pageControl.currentPage = 1
                 reachableLabel.isHidden = false
@@ -152,6 +171,7 @@ class MainViewController: UIViewController {
                 logView.isHidden = true
                 tableContainerView.isHidden = true
                 settingsPanel.isHidden = false
+                scrollViewPanel.isUserInteractionEnabled = true
                 secondsBeforeCheckingLocationValue.value = Float(sessionDelegater.getSecondsBeforeCheckingLocation())
                 secondsBeforeCheckingDistanceValue.value =
                     Float(sessionDelegater.getSecondsBeforeCheckingDistance())
@@ -161,6 +181,7 @@ class MainViewController: UIViewController {
             case SessionPages.LogView.rawValue:
                 pageControl.currentPage = 2
                 settingsPanel.isHidden = true
+                scrollViewPanel.isUserInteractionEnabled = false
                 tableContainerView.isHidden = false
                 reachableLabel.isHidden = false
                 clearButton.setTitle("Clear", for: .normal)
@@ -172,6 +193,7 @@ class MainViewController: UIViewController {
             
             default:
                 settingsPanel.isHidden = true
+                scrollViewPanel.isUserInteractionEnabled = false
                 tableContainerView.isHidden = true
                 reachableLabel.isHidden = true
                 clearButton.setTitle("", for: .normal)
