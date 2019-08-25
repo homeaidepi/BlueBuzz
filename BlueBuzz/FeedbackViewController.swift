@@ -37,7 +37,7 @@ final class FeedbackViewController: UIViewController, UITextFieldDelegate, UITex
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        background.isHidden = Variables.hideBackground
+        background.isHidden = !Variables.showBackground
         
     }
     

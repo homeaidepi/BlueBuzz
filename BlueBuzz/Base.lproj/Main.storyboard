@@ -32,7 +32,14 @@
                                 <rect key="frame" x="20" y="88" width="374" height="808"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <attributedString key="attributedText"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="hello">
+                                        <attributes>
+                                            <font key="NSFont" size="11" name=".SFNSText"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
@@ -87,7 +94,7 @@
                                 <rect key="frame" x="20" y="88" width="369" height="567"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bQN-qj-Z1k" userLabel="Settings Panel">
-                                        <rect key="frame" x="13" y="8" width="282" height="444.66666666666669"/>
+                                        <rect key="frame" x="13" y="8" width="282" height="445.66666666666669"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Nag Alerts  ™" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VpF-hq-Ke2" userLabel="No Nag Alerts">
                                                 <rect key="frame" x="0.0" y="0.0" width="282" height="33.333333333333336"/>
@@ -112,23 +119,20 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <slider opaque="NO" contentMode="redraw" verticalHuggingPriority="253" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q0b-q3-U5n" userLabel="Show Background Slider">
-                                                <rect key="frame" x="-2" y="143.66666666666666" width="286" height="31"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <color key="tintColor" red="0.099473066700000001" green="0.70767280379999997" blue="0.098732349250000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <accessibility key="accessibilityConfiguration" label="Show Background"/>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nnb-6H-FUN" userLabel="Show Background Switch">
+                                                <rect key="frame" x="0.0" y="143.66666666666666" width="284" height="31"/>
                                                 <connections>
-                                                    <action selector="showBackgroundValueChangedWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="ZJQ-Wl-Xxt"/>
+                                                    <action selector="showBackgroundValueChangedWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="y6I-JK-fWL"/>
                                                 </connections>
-                                            </slider>
+                                            </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seconds Before Checking Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nRj-Rb-vFq">
-                                                <rect key="frame" x="0.0" y="193.66666666666669" width="282" height="20.333333333333343"/>
+                                                <rect key="frame" x="0.0" y="194.66666666666669" width="282" height="20.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <slider contentMode="redraw" verticalHuggingPriority="252" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="45" minValue="10" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Na6-cW-k8Y" userLabel="Seconds Before Checking Location">
-                                                <rect key="frame" x="-2" y="234" width="286" height="31"/>
+                                                <rect key="frame" x="-2" y="235" width="286" height="31"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <accessibility key="accessibilityConfiguration" label="Seconds Before Checking Distance"/>
@@ -137,13 +141,13 @@
                                                 </connections>
                                             </slider>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seconds Before Checking Distance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZb-pD-4uv">
-                                                <rect key="frame" x="0.0" y="284" width="282" height="20.333333333333314"/>
+                                                <rect key="frame" x="0.0" y="285" width="282" height="20.333333333333314"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <slider opaque="NO" contentMode="redraw" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="60" minValue="10" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="l8b-yD-jlD" userLabel="Seconds Before Checking Distance">
-                                                <rect key="frame" x="-2" y="324.33333333333331" width="286" height="31"/>
+                                                <rect key="frame" x="-2" y="325.33333333333331" width="286" height="31"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <accessibility key="accessibilityConfiguration" label="Seconds Before Checking Distance"/>
@@ -152,13 +156,13 @@
                                                 </connections>
                                             </slider>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance Before Notifying Alert" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBg-kg-tYN">
-                                                <rect key="frame" x="0.0" y="374.33333333333331" width="282" height="20.333333333333314"/>
+                                                <rect key="frame" x="0.0" y="375.33333333333331" width="282" height="20.333333333333314"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <slider opaque="NO" contentMode="redraw" verticalHuggingPriority="252" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="10" maxValue="1000" translatesAutoresizingMaskIntoConstraints="NO" id="zQe-zy-bR5" userLabel="Distance Before Notifying Alert">
-                                                <rect key="frame" x="-2" y="414.66666666666669" width="286" height="31"/>
+                                                <rect key="frame" x="-2" y="415.66666666666669" width="286" height="31"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <accessibility key="accessibilityConfiguration" label="Distance Before Notifying Alert"/>
@@ -226,7 +230,7 @@
                         <outlet property="secondsBeforeCheckingLocationLabel" destination="nRj-Rb-vFq" id="fRA-CS-WK1"/>
                         <outlet property="secondsBeforeCheckingLocationValue" destination="Na6-cW-k8Y" id="UaC-nZ-YNe"/>
                         <outlet property="settingsPanel" destination="bQN-qj-Z1k" id="qPe-w2-PgX"/>
-                        <outlet property="showBackgroundValue" destination="Q0b-q3-U5n" id="DAu-FU-H4g"/>
+                        <outlet property="showBackgroundValue" destination="nnb-6H-FUN" id="ksE-wp-nq3"/>
                         <outlet property="tableContainerView" destination="fs3-Ag-kBY" id="8Kr-W3-n7h"/>
                         <outlet property="tablePlaceholderView" destination="Nar-Xb-h9G" id="Lwk-Fq-LWs"/>
                     </connections>

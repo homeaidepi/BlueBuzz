@@ -14,7 +14,7 @@ struct Variables {
     static var bluetoothRangeInFeetClass3 = "3.14"
     static var welcomeMessage = ""
     static var logHistory = NSMutableAttributedString()
-    static var hideBackground = false
+    static var showBackground = true
     static var givenName = ""
     static var familyName = ""
     static var age = ""

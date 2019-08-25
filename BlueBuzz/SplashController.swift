@@ -13,7 +13,7 @@ final class SplashController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        background.isHidden = Variables.hideBackground
+        background.isHidden = Variables.showBackground
         
     }
 }
