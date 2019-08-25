@@ -28,6 +28,7 @@ var emptyDeviceIdentifier = String("")
 var defaultSecondsBeforeCheckingLocation = 45
 var defaultSecondsBeforeCheckingDistance = 60
 var defaultDistanceBeforeNotifying = 100.00
+var defaultShowBackground = true
 
 // Avoid creating DateFormatter for time stamp as Logger may count into execution budget.
 //

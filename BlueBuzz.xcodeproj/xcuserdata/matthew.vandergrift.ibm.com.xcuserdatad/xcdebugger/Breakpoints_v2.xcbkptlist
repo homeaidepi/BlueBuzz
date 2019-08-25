@@ -66,8 +66,8 @@
             timestampString = "588045153.309199"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "saveInstanceIdentifier(instanceId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -388,6 +388,22 @@
             startingLineNumber = "43"
             endingLineNumber = "43"
             landmarkName = "showBackgroundValueChanged(sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6365980F-746F-43D5-A6E4-DCB91AF35005"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BlueBuzz/AppDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "application(_:performFetchWithCompletionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -289,10 +289,10 @@ class ExtensionDelegate: WKURLSessionRefreshBackgroundTask, CLLocationManagerDel
                 // do work here
                 // Be sure to complete the background task once you’re done.
                 
-                backgroundTask.setTaskCompleted()
+                backgroundTask.setTaskCompletedWithSnapshot(false)
             default:
                 // make sure to complete unhandled task types
-                task.setTaskCompleted()
+                task.setTaskCompletedWithSnapshot(false)
             }
         }
     }

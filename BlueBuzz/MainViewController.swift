@@ -89,6 +89,10 @@ class MainViewController: UIViewController {
     {
         let settings = sessionDelegater.getSettings()
         
+        let hideBackground = settings[showBackgroundKey] as? Bool ?? false
+        
+        self.hideBackground(hideBackground: hideBackground)
+        
         do {
             var isReachable = false
             if WCSession.default.activationState == .activated {
@@ -114,7 +118,7 @@ class MainViewController: UIViewController {
         }
         
         //fix for container being offscreen
-        //containerTopConstraint.constant = size.height - 70
+        containerTopConstraint.constant = size.height - 70
         
         if (portrait) {
             //logoLeadingConstraint.constant = size.width / 2 - 50
@@ -145,6 +149,8 @@ class MainViewController: UIViewController {
             self, selector: #selector(type(of: self).reachabilityDidChange(_:)),
             name: .reachabilityDidChange, object: nil
         )
+        
+        syncSettings()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -152,44 +158,27 @@ class MainViewController: UIViewController {
         self.pageLabel!.text = dataObject
         
         switch (pageLabel.text) {
-            
             case SessionPages.Welcome.rawValue :
                 //print(Variables.welcomeMessage.html2Attributed)
-                background.isHidden = Variables.hideBackground
+                logView.isHidden = false
+                getWelcomeMessage()
+                
                 pageControl.currentPage = 0
                 tableContainerView.isHidden = true
                 reachableLabel.isHidden = false
                 clearButton.setTitle("", for: .normal)
-                logView.isHidden = false
-                logView.attributedText = Variables.welcomeMessage.html2Attributed
-                if #available(iOS 13.0, *) {
-                    logView.textColor = UIColor.systemBlue
-                } else {
-                    if Variables.hideBackground {
-                        logView.textColor = UIColor.darkText
-                    } else {
-                        logView.textColor = UIColor.systemBlue
-                    }
-                }
-                logView.setContentOffset(.zero, animated: false)
-                logView.scrollRangeToVisible(NSRange(location:0, length:0))
                 scrollViewPanel.isUserInteractionEnabled = false
                 settingsPanel.isHidden = true
             case SessionPages.Settings.rawValue:
-                background.isHidden = Variables.hideBackground
+                settingsPanel.isHidden = false
                 pageControl.currentPage = 1
                 reachableLabel.isHidden = false
                 clearButton.setTitle("Reset", for: .normal)
                 logView.isHidden = true
-                tableContainerView.isHidden = true
-                settingsPanel.isHidden = false
                 scrollViewPanel.isUserInteractionEnabled = true
-                secondsBeforeCheckingLocationValue.value = Float(sessionDelegater.getSecondsBeforeCheckingLocation())
-                secondsBeforeCheckingDistanceValue.value =
-                    Float(sessionDelegater.getSecondsBeforeCheckingDistance())
-                distanceBeforeNotifyingValue.value = Float(sessionDelegater.getDistanceBeforeNotifying())
+                setSettingSliders()
+                tableContainerView.isHidden = true
             case SessionPages.LogView.rawValue:
-                background.isHidden = Variables.hideBackground
                 pageControl.currentPage = 2
                 settingsPanel.isHidden = true
                 scrollViewPanel.isUserInteractionEnabled = false
@@ -198,31 +187,21 @@ class MainViewController: UIViewController {
                 clearButton.setTitle("Clear", for: .normal)
                 logView.isHidden = false
                 logView.attributedText = Variables.logHistory
-                if #available(iOS 13.0, *) {
-                    logView.textColor = UIColor.label
-                } else {
-                    if Variables.hideBackground {
-                        logView.textColor = UIColor.darkText
-                    } else {
-                        logView.textColor = UIColor.systemBlue
-                    }
-                }
                 
                 //fix for container being offscreen
                 adjustUiConstraints(size: self.view.frame.size)
-            
             default:
-                background.isHidden = Variables.hideBackground
+                pageControl.currentPage = 3
                 settingsPanel.isHidden = true
                 scrollViewPanel.isUserInteractionEnabled = false
                 tableContainerView.isHidden = true
                 reachableLabel.isHidden = true
                 clearButton.setTitle("", for: .normal)
                 logView.isHidden = true
-                logView.textColor = UIColor.clear
         }
         
         self.updateReachabilityColor()
+        self.hideBackground(hideBackground: Variables.hideBackground)
     }
     
     // Implement the round corners on the top.
@@ -233,8 +212,9 @@ class MainViewController: UIViewController {
         
         switch (pageLabel.text) {
         case SessionPages.Welcome.rawValue:
-            logView.setContentOffset(.zero, animated: false)
-            logView.scrollRangeToVisible(NSRange(location:0, length:0))
+            scrollToTopOfWelcomeView()
+        case SessionPages.LogView.rawValue:
+            scrollToEndOfLogView()
         default:
             return;
         }
@@ -244,30 +224,27 @@ class MainViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
+    func setSettingSliders() {
+        showBackgroundValue.value = Bool(sessionDelegater.getShowBackground()) == true ? 1 : 0
+        secondsBeforeCheckingLocationValue.value = Float(sessionDelegater.getSecondsBeforeCheckingLocation())
+        secondsBeforeCheckingDistanceValue.value =
+            Float(sessionDelegater.getSecondsBeforeCheckingDistance())
+        distanceBeforeNotifyingValue.value = Float(sessionDelegater.getDistanceBeforeNotifying())
+    }
     
     func getWelcomeMessage()
     {
-        var message: String = ""
-        if (Variables.welcomeMessage.count < 30) {
-            sessionDelegater.getChangeLogByVersion(onSuccess: { (JSON) in
-                
-                message = JSON[messageKey] as? String ?? emptyMessage
-                
-                Variables.welcomeMessage = message
-                DispatchQueue.main.async {
-                    self.logView.attributedText =  Variables.welcomeMessage.html2Attributed
-                    self.logView.textColor = UIColor.systemBlue
-                }
-                
-            }) { (error, params) in
-                if let err = error {
-                    message = "\nError: " + err.localizedDescription
-                }
-                message += "\nParameters passed are: " + String(describing:params)
-                
-                DispatchQueue.main.async {
-                    self.logView.attributedText = message.html2Attributed
-                    self.logView.textColor = UIColor.systemRed
+        DispatchQueue.main.async {
+            self.logView.attributedText =  Variables.welcomeMessage.html2Attributed
+            self.logView.setContentOffset(.zero, animated: false)
+            self.logView.scrollRangeToVisible(NSRange(location:0, length:0))
+            if #available(iOS 13.0, *) {
+                self.logView.textColor = UIColor.label
+            } else {
+                if Variables.hideBackground {
+                    self.logView.textColor = UIColor.darkText
+                } else {
+                    self.logView.textColor = UIColor.lightText
                 }
             }
         }
@@ -283,9 +260,19 @@ class MainViewController: UIViewController {
 
         Variables.logHistory.append(attributedMessage)
         
+        scrollToEndOfLogView()
+    }
+    
+    func scrollToTopOfWelcomeView() {
+        logView.setContentOffset(.zero, animated: true)
+        logView.scrollRangeToVisible(NSRange(location:0, length:0))
+    }
+    
+    func scrollToEndOfLogView() {
         if (pageLabel.text == SessionPages.LogView.rawValue) {
             logView.attributedText = Variables.logHistory
             logView.scrollRangeToVisible(NSMakeRange(0, 1))
+            logView.isHidden = false
         }
     }
     
