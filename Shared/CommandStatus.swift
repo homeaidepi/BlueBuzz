@@ -18,6 +18,7 @@ var testLong = -78.7811
 var emptyError = String("")
 var ibmBlueColor = UIColor(red: CGFloat(70)/255, green: CGFloat(107)/255, blue: CGFloat(176)/255, alpha: 1.0)
 var defaultColor = TimedColor(ibmBlueColor)
+var showBackgroundKey = "showBackground"
 var secondsBeforeCheckingLocationKey = "secondsBeforeCheckingLocation"
 var secondsBeforeCheckingDistanceKey = "secondsBeforeCheckingDistance"
 var distanceBeforeNotifyingKey = "distanceBeforeNotifying"
@@ -27,6 +28,7 @@ var emptyDeviceIdentifier = String("")
 var defaultSecondsBeforeCheckingLocation = 45
 var defaultSecondsBeforeCheckingDistance = 60
 var defaultDistanceBeforeNotifying = 100.00
+var defaultShowBackground = true
 
 // Avoid creating DateFormatter for time stamp as Logger may count into execution budget.
 //

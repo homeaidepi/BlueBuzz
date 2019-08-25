@@ -256,7 +256,7 @@ class MainInterfaceController: WKInterfaceController, CLLocationManagerDelegate,
         }
         
         let names = Array(repeating: ControllerID.mainInterfaceController, count: contexts.count)
-        WKInterfaceController.reloadRootControllers(withNames: names, contexts: contexts)
+        WKInterfaceController.reloadRootPageControllers(withNames: names, contexts: contexts, orientation: .vertical, pageIndex: 0)
     }
     
     // .dataDidFlow notification handler. Update the UI based on the command status.

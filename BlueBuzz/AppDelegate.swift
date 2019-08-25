@@ -27,22 +27,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate, URLSessionTaskDelegate, C
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        // Trigger WCSession activation at the early phase of app launching.
-        //
-        #if DEBUG
-        //assert(WCSession.isSupported(), "BlueBuzz requires Apple Watch!")
-        #endif
-        WCSession.default.delegate = sessionDelegater
-        WCSession.default.activate()
+        sessionDelegater.getWelcomeMessage { (status) in
+            if status {
+                DispatchQueue.main.async {
+                    
+//                let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+//                let rootVC = storyboard.instantiateViewController(withIdentifier: "RootViewController")
+//                self.window = UIWindow(frame: UIScreen.main.bounds)
+//                self.window?.rootViewController = rootVC
+//                self.window?.makeKeyAndVisible()
+                    
+                let stb = UIStoryboard(name: "Main", bundle: nil)
+                let rootVC = stb.instantiateViewController(withIdentifier: "RootViewController")
+                let snapshot = (UIApplication.shared.keyWindow?.snapshotView(afterScreenUpdates: true))!
+                rootVC.view.addSubview(snapshot);
+
+                UIApplication.shared.keyWindow?.rootViewController = rootVC;
+                UIView.transition(with: snapshot, duration: 0.4, options: .transitionCrossDissolve, animations: {
+                    snapshot.layer.opacity = 0;
+                }, completion: { (status) in
+                    snapshot.removeFromSuperview()
+                })
+                
+                // Trigger WCSession activation at the early phase of app launching.
+                //
+                #if DEBUG
+                //assert(WCSession.isSupported(), "BlueBuzz requires Apple Watch!")
+                #endif
+                WCSession.default.delegate = self.sessionDelegater
+                WCSession.default.activate()
+
+                self.registerSettings()
+                self.registerForPushNotifications()
+                self.registerForLocation()
+                self.registerBackgroundTask()
+                
+                UIApplication.shared.applicationIconBadgeNumber = 0
+                }
+            }
+        }
         
-        registerSettings()
-        registerForPushNotifications()
-        registerForLocation()
-        registerBackgroundTask()
-        
-        UIApplication.shared.applicationIconBadgeNumber = 0
-        
-        return true
+        return true;
     }
     
     func registerSettings() {

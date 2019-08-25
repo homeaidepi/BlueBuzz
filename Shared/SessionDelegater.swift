@@ -62,6 +62,7 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         saveSecondsBeforeCheckingDistance(secondsBeforeCheckingDistance: defaultSecondsBeforeCheckingLocation)
         saveSecondsBeforeCheckingLocation(secondsBeforeCheckingLocation: defaultSecondsBeforeCheckingDistance)
         saveDistanceBeforeNotifying(distanceBeforeNotifying: defaultDistanceBeforeNotifying)
+        saveShowBackground(showBackground: defaultShowBackground)
     }
     
     func sendInstanceIdMessage(deviceId: String) {
@@ -103,8 +104,8 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
             instanceIdentifierKey: getInstanceIdentifier(),
             secondsBeforeCheckingLocationKey: getSecondsBeforeCheckingLocation(),
             secondsBeforeCheckingDistanceKey: getSecondsBeforeCheckingDistance(),
-            distanceBeforeNotifyingKey: getDistanceBeforeNotifying()] as [String : Any]
-        
+            distanceBeforeNotifyingKey: getDistanceBeforeNotifying(),
+            showBackgroundKey: getShowBackground()] as [String : Any]
         return settings;
     }
     
@@ -113,6 +114,7 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         let secondsBeforeCheckingLocation = applicationContext[secondsBeforeCheckingLocationKey] as? Int ?? 0
         let secondsBeforeCheckingDistance = applicationContext[secondsBeforeCheckingDistanceKey] as? Int ?? 0
         let distanceBeforeNotifying = applicationContext[distanceBeforeNotifyingKey] as? Double ?? 0
+        let showBackground = applicationContext[showBackgroundKey] as? Bool ?? true
         
         if (instanceId != emptyInstanceIdentifier) {
             saveInstanceIdentifier(instanceId: instanceId)
@@ -129,6 +131,8 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         if (distanceBeforeNotifying != 0) {
             saveDistanceBeforeNotifying(distanceBeforeNotifying: distanceBeforeNotifying )
         }
+        
+        saveShowBackground(showBackground: showBackground)
     }
     
     //instance id get set
@@ -147,6 +151,31 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         defaults.set(instanceId, forKey: instanceIdentifierKey)
     }
     
+    public func getWelcomeMessage(completion:@escaping (Bool) -> () )
+    {
+        var message: String = ""
+        if (Variables.welcomeMessage.count < 30) {
+            getChangeLogByVersion(onSuccess: { (JSON) in
+                
+            message = JSON[messageKey] as? String ?? emptyMessage
+            
+            Variables.welcomeMessage = message
+                
+            completion(true)
+                
+            }) { (error, params) in
+            if let err = error {
+                message = "\nError: " + err.localizedDescription
+            }
+            message += "\nParameters passed are: " + String(describing:params)
+            
+            Variables.welcomeMessage = message
+        
+            completion(false)
+            }
+        }
+    }
+    
     //Seconds before checking location get set
     public func getSecondsBeforeCheckingLocation() -> Int {
         let defaults = UserDefaults.standard
@@ -155,6 +184,21 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         let secondsBeforeCheckingLocation = defaults.integer(forKey: secondsBeforeCheckingLocationKey)
         
         return secondsBeforeCheckingLocation
+    }
+    
+    public func saveShowBackground
+        (showBackground: Bool) {
+        let defaults = UserDefaults.standard
+        
+        defaults.set(showBackground, forKey: showBackgroundKey)
+    }
+    
+    public func getShowBackground() -> Bool {
+        let defaults = UserDefaults.standard
+        
+        let showBackground = defaults.bool(forKey: showBackgroundKey)
+        
+        return showBackground
     }
     
     public func saveSecondsBeforeCheckingLocation(secondsBeforeCheckingLocation: Int) {
