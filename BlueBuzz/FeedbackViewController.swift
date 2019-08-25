@@ -11,6 +11,7 @@ final class FeedbackViewController: UIViewController, UITextFieldDelegate, UITex
     @IBOutlet weak var age: UITextField!
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var comment: UITextView!
+     @IBOutlet weak var background: UIImageView!
     
     private lazy var sessionDelegater: SessionDelegater = {
         return SessionDelegater()
@@ -32,6 +33,12 @@ final class FeedbackViewController: UIViewController, UITextFieldDelegate, UITex
         setBorderColorTextView(textView: comment, color: UIColor.yellow.cgColor)
         
         updateFields()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        background.isHidden = Variables.hideBackground
+        
     }
     
     func setBorderColorTextField(textField:UITextField, color:CGColor ) {

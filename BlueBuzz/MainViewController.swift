@@ -33,14 +33,14 @@ class MainViewController: UIViewController {
     var dataObject: String = ""
     
     @IBAction func showBackgroundValueChanged(sender: UISlider) {
-        let currentValue = Bool(showBackgroundValue.value == 0)
+        let currentValue = Bool(sender.value == 0)
         
         print("Slider changing to \(currentValue) ?")
         sessionDelegater.saveShowBackground(showBackground: currentValue)
         
         syncSettings()
         
-        showBackground(hideBackground: currentValue)
+        hideBackground(hideBackground: currentValue)
     }
     
     @IBAction func secondsBeforeCheckingLocationValueChanged(sender: UISlider) {
@@ -80,7 +80,8 @@ class MainViewController: UIViewController {
         getWelcomeMessage()
     }
     
-    func showBackground(hideBackground: Bool) {
+    func hideBackground(hideBackground: Bool) {
+        Variables.hideBackground = hideBackground
         background.isHidden = hideBackground
     }
     
@@ -153,18 +154,29 @@ class MainViewController: UIViewController {
         switch (pageLabel.text) {
             
             case SessionPages.Welcome.rawValue :
+                //print(Variables.welcomeMessage.html2Attributed)
+                background.isHidden = Variables.hideBackground
                 pageControl.currentPage = 0
-                
                 tableContainerView.isHidden = true
                 reachableLabel.isHidden = false
                 clearButton.setTitle("", for: .normal)
                 logView.isHidden = false
                 logView.attributedText = Variables.welcomeMessage.html2Attributed
+                if #available(iOS 13.0, *) {
+                    logView.textColor = UIColor.systemBlue
+                } else {
+                    if Variables.hideBackground {
+                        logView.textColor = UIColor.darkText
+                    } else {
+                        logView.textColor = UIColor.systemBlue
+                    }
+                }
                 logView.setContentOffset(.zero, animated: false)
                 logView.scrollRangeToVisible(NSRange(location:0, length:0))
                 scrollViewPanel.isUserInteractionEnabled = false
                 settingsPanel.isHidden = true
             case SessionPages.Settings.rawValue:
+                background.isHidden = Variables.hideBackground
                 pageControl.currentPage = 1
                 reachableLabel.isHidden = false
                 clearButton.setTitle("Reset", for: .normal)
@@ -176,9 +188,8 @@ class MainViewController: UIViewController {
                 secondsBeforeCheckingDistanceValue.value =
                     Float(sessionDelegater.getSecondsBeforeCheckingDistance())
                 distanceBeforeNotifyingValue.value = Float(sessionDelegater.getDistanceBeforeNotifying())
-                logView.attributedText = ("").html2Attributed
-            
             case SessionPages.LogView.rawValue:
+                background.isHidden = Variables.hideBackground
                 pageControl.currentPage = 2
                 settingsPanel.isHidden = true
                 scrollViewPanel.isUserInteractionEnabled = false
@@ -187,18 +198,28 @@ class MainViewController: UIViewController {
                 clearButton.setTitle("Clear", for: .normal)
                 logView.isHidden = false
                 logView.attributedText = Variables.logHistory
+                if #available(iOS 13.0, *) {
+                    logView.textColor = UIColor.label
+                } else {
+                    if Variables.hideBackground {
+                        logView.textColor = UIColor.darkText
+                    } else {
+                        logView.textColor = UIColor.systemBlue
+                    }
+                }
                 
                 //fix for container being offscreen
                 adjustUiConstraints(size: self.view.frame.size)
             
             default:
+                background.isHidden = Variables.hideBackground
                 settingsPanel.isHidden = true
                 scrollViewPanel.isUserInteractionEnabled = false
                 tableContainerView.isHidden = true
                 reachableLabel.isHidden = true
                 clearButton.setTitle("", for: .normal)
                 logView.isHidden = true
-            
+                logView.textColor = UIColor.clear
         }
         
         self.updateReachabilityColor()
@@ -235,6 +256,7 @@ class MainViewController: UIViewController {
                 Variables.welcomeMessage = message
                 DispatchQueue.main.async {
                     self.logView.attributedText =  Variables.welcomeMessage.html2Attributed
+                    self.logView.textColor = UIColor.systemBlue
                 }
                 
             }) { (error, params) in
@@ -245,7 +267,7 @@ class MainViewController: UIViewController {
                 
                 DispatchQueue.main.async {
                     self.logView.attributedText = message.html2Attributed
-                    self.logView.textColor = UIColor(white: 1, alpha: 1)
+                    self.logView.textColor = UIColor.systemRed
                 }
             }
         }

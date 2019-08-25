@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -28,8 +27,8 @@
                                 <rect key="frame" x="157" y="398" width="100" height="100"/>
                                 <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Location Notification" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLs-qn-aCU">
-                                <rect key="frame" x="33" y="221" width="349" height="45"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location Notification" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLs-qn-aCU">
+                                <rect key="frame" x="33" y="221" width="348" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="N8c-X3-Dwr"/>
                                 </constraints>
@@ -37,26 +36,26 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blue Buzz" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Esq-zV-VtU">
-                                <rect key="frame" x="120" y="168" width="174" height="45"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blue Buzz" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Esq-zV-VtU">
+                                <rect key="frame" x="102" y="168" width="210" height="45"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="37"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="gLs-qn-aCU" firstAttribute="centerX" secondItem="Esq-zV-VtU" secondAttribute="centerX" id="0bQ-7j-b62"/>
-                            <constraint firstItem="gLs-qn-aCU" firstAttribute="top" secondItem="Esq-zV-VtU" secondAttribute="bottom" constant="8" symbolic="YES" id="26F-9E-G8M"/>
                             <constraint firstAttribute="trailing" secondItem="955-ic-SAe" secondAttribute="trailing" id="2aE-Ub-H7X"/>
                             <constraint firstItem="955-ic-SAe" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="4eK-wy-f6h"/>
+                            <constraint firstItem="Esq-zV-VtU" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="124" id="Bii-Fl-4GJ"/>
+                            <constraint firstItem="Esq-zV-VtU" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="82" id="GMz-UK-UCv"/>
                             <constraint firstItem="CX3-5H-yr0" firstAttribute="centerY" secondItem="955-ic-SAe" secondAttribute="centerY" id="KOh-VO-jRG"/>
+                            <constraint firstItem="CX3-5H-yr0" firstAttribute="centerX" secondItem="gLs-qn-aCU" secondAttribute="centerX" id="Z0H-ng-fO1"/>
                             <constraint firstAttribute="bottom" secondItem="955-ic-SAe" secondAttribute="bottom" id="bfU-yZ-0CF"/>
-                            <constraint firstItem="Esq-zV-VtU" firstAttribute="centerX" secondItem="CX3-5H-yr0" secondAttribute="centerX" id="bsa-Nr-R2e"/>
-                            <constraint firstItem="Esq-zV-VtU" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="124" id="gVY-FT-T10"/>
+                            <constraint firstItem="gLs-qn-aCU" firstAttribute="top" secondItem="Esq-zV-VtU" secondAttribute="bottom" constant="8" id="eee-K8-hxQ"/>
                             <constraint firstItem="gLs-qn-aCU" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="13" id="h7O-ce-U1S"/>
+                            <constraint firstItem="CX3-5H-yr0" firstAttribute="centerX" secondItem="955-ic-SAe" secondAttribute="centerX" id="tS4-jV-gk5"/>
                             <constraint firstItem="955-ic-SAe" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="tYg-G5-yZt"/>
-                            <constraint firstItem="Esq-zV-VtU" firstAttribute="centerX" secondItem="955-ic-SAe" secondAttribute="centerX" id="xgQ-Ms-BZg"/>
+                            <constraint firstItem="CX3-5H-yr0" firstAttribute="centerX" secondItem="Esq-zV-VtU" secondAttribute="centerX" id="xkb-Me-D7W"/>
                         </constraints>
                     </view>
                 </viewController>

@@ -110,7 +110,6 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Background" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S8e-ae-dUo">
                                                 <rect key="frame" x="0.0" y="103.33333333333334" width="274" height="20.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <slider opaque="NO" contentMode="redraw" verticalHuggingPriority="253" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q0b-q3-U5n" userLabel="Show Background Slider">
@@ -240,7 +239,6 @@
                     <view key="view" contentMode="scaleToFill" id="OQl-MS-X9f">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="0W8-RG-7UF"/>
                     </view>
                 </viewController>
@@ -262,21 +260,21 @@
                         <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommandCell" textLabel="vFs-5c-gtP" detailTextLabel="ibp-zK-358" style="IBUITableViewCellStyleValue1" id="8aS-JC-Ems">
-                                <rect key="frame" x="0.0" y="28" width="374" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="374" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8aS-JC-Ems" id="fLQ-2a-mFW">
-                                    <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vFs-5c-gtP">
-                                            <rect key="frame" x="15.000000000000004" y="11.999999999999998" width="34.333333333333336" height="20.333333333333332"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vFs-5c-gtP">
+                                            <rect key="frame" x="20.000000000000004" y="11.999999999999998" width="34.333333333333336" height="20.333333333333332"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ibp-zK-358">
-                                            <rect key="frame" x="322" y="11.999999999999998" width="44" height="20.333333333333332"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ibp-zK-358">
+                                            <rect key="frame" x="310" y="11.999999999999998" width="44" height="20.333333333333332"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -483,7 +481,6 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="b0h-C2-8mt" firstAttribute="leading" secondItem="PlM-VK-JXo" secondAttribute="leading" id="1gR-zD-0Rj"/>
                             <constraint firstItem="trN-Ik-aiB" firstAttribute="bottom" secondItem="cAf-0U-nCq" secondAttribute="bottom" constant="211" id="1xz-zz-TU8"/>
@@ -506,6 +503,7 @@
                     <navigationItem key="navigationItem" title="Simple" id="tCp-6g-LXQ" userLabel="Feedback"/>
                     <connections>
                         <outlet property="age" destination="xHu-If-pp8" id="cRY-mV-5st"/>
+                        <outlet property="background" destination="b0h-C2-8mt" id="Qjb-mJ-9OR"/>
                         <outlet property="comment" destination="gg3-oI-que" id="C22-5O-LNM"/>
                         <outlet property="email" destination="L5k-bn-FA3" id="bgs-hg-gwR"/>
                         <outlet property="familyName" destination="Qfp-ha-nNh" id="m8x-DV-Q0e"/>
