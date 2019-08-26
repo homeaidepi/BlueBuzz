@@ -130,6 +130,10 @@ class MainViewController: UIViewController {
         
         settingsBottomConstraint.constant  = 31.4
         
+        reachableLabel.widthAnchor.constraint(equalToConstant: (size.width / 2) + 31.4).isActive = true
+        reachableLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        
         topBanner.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor,
         constant: 8).isActive = true
         topBanner.heightAnchor.constraint(equalToConstant: 31.4).isActive = true
