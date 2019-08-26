@@ -11,8 +11,9 @@ final class FeedbackViewController: UIViewController, UITextFieldDelegate, UITex
     @IBOutlet weak var age: UITextField!
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var comment: UITextView!
-     @IBOutlet weak var background: UIImageView!
+    @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var feedbackBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topBanner: UIStackView!
     
     private lazy var sessionDelegater: SessionDelegater = {
         return SessionDelegater()
@@ -40,7 +41,7 @@ final class FeedbackViewController: UIViewController, UITextFieldDelegate, UITex
         super.viewWillAppear(animated)
         
         background.isHidden = !Variables.showBackground
-        
+        self.adjustUiConstraints(size: view.frame.size)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -61,6 +62,13 @@ final class FeedbackViewController: UIViewController, UITextFieldDelegate, UITex
         //fix for container being offscreen
         feedbackBottomConstraint.constant = 70
         
+        topBanner.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor,
+               constant: 8).isActive = true
+        topBanner.heightAnchor.constraint(equalToConstant: 31.4).isActive = true
+        topBanner.widthAnchor.constraint(equalToConstant: size.width - 31.4).isActive = true
+        topBanner.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 41.3).isActive=true
+        topBanner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+
         if (portrait) {
             //logoLeadingConstraint.constant = size.width / 2 - 50
         } else {

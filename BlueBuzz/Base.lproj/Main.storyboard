@@ -508,6 +508,7 @@
                         <outlet property="feedbackBottomConstraint" destination="1xz-zz-TU8" id="13R-GC-Y00"/>
                         <outlet property="form" destination="Zew-oa-KyO" id="peW-O9-Gzb"/>
                         <outlet property="givenName" destination="SKP-dU-7bm" id="NfC-5I-ahN"/>
+                        <outlet property="topBanner" destination="kh8-KT-CnC" id="n78-fj-BcN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LE5-ym-YM5" sceneMemberID="firstResponder"/>
