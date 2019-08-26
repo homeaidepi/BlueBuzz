@@ -143,17 +143,17 @@
                                     <constraint firstItem="bQN-qj-Z1k" firstAttribute="top" secondItem="PpX-2f-ogP" secondAttribute="topMargin" id="yQv-MO-w1R"/>
                                 </constraints>
                             </scrollView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="43" translatesAutoresizingMaskIntoConstraints="NO" id="flT-3C-9Rh" userLabel="Top Banner">
-                                <rect key="frame" x="20" y="44" width="364.66666666666669" height="35"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="flT-3C-9Rh" userLabel="Top Banner">
+                                <rect key="frame" x="20" y="44" width="375" height="35"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="va8-eg-YO3" userLabel="Page Label">
-                                        <rect key="frame" x="0.0" y="0.0" width="69" height="35"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="121.66666666666667" height="35"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="240" verticalHuggingPriority="251" text="Disconnected" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0KE-Dt-pfE" userLabel="Reachable">
-                                        <rect key="frame" x="112" y="0.0" width="121.66666666666669" height="35"/>
+                                        <rect key="frame" x="126.66666666666666" y="0.0" width="121.66666666666666" height="35"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -161,7 +161,7 @@
                                         <size key="shadowOffset" width="2" height="-1"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="6k6-QB-Jn2" userLabel="Button">
-                                        <rect key="frame" x="276.66666666666669" y="0.0" width="88" height="35"/>
+                                        <rect key="frame" x="253.33333333333334" y="0.0" width="121.66666666666666" height="35"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <size key="titleShadowOffset" width="10" height="10"/>
@@ -173,6 +173,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <viewLayoutGuide key="safeArea" id="BMF-mm-sJ8"/>
                             </stackView>
                         </subviews>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -181,7 +182,6 @@
                             <constraint firstAttribute="bottomMargin" secondItem="qjE-hX-evH" secondAttribute="bottom" constant="-34" id="4HC-8I-eIR"/>
                             <constraint firstItem="txm-5u-Hga" firstAttribute="bottom" secondItem="qjE-hX-evH" secondAttribute="bottom" id="59L-jP-4ZK"/>
                             <constraint firstItem="Nar-Xb-h9G" firstAttribute="leading" secondItem="WGu-mk-dEO" secondAttribute="leading" constant="10" id="8Ns-wO-xpz"/>
-                            <constraint firstItem="flT-3C-9Rh" firstAttribute="top" secondItem="WGu-mk-dEO" secondAttribute="top" id="8O5-Vy-7G5"/>
                             <constraint firstItem="WGu-mk-dEO" firstAttribute="trailing" secondItem="Nar-Xb-h9G" secondAttribute="trailing" constant="2" id="DMT-EB-Nb6"/>
                             <constraint firstItem="hyf-pn-pfG" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="KDH-eD-NDf"/>
                             <constraint firstItem="PpX-2f-ogP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Oxh-9v-6pS"/>
@@ -191,7 +191,6 @@
                             <constraint firstItem="PpX-2f-ogP" firstAttribute="top" secondItem="qjE-hX-evH" secondAttribute="top" id="Wdx-Ix-T6Y"/>
                             <constraint firstItem="txm-5u-Hga" firstAttribute="centerY" secondItem="hyf-pn-pfG" secondAttribute="centerY" id="aTE-9a-Sz7"/>
                             <constraint firstItem="txm-5u-Hga" firstAttribute="leading" secondItem="WGu-mk-dEO" secondAttribute="leading" id="cHh-aH-WHf"/>
-                            <constraint firstItem="flT-3C-9Rh" firstAttribute="leading" secondItem="PpX-2f-ogP" secondAttribute="leading" id="fai-h9-1gi"/>
                             <constraint firstAttribute="bottomMargin" secondItem="Nar-Xb-h9G" secondAttribute="bottom" constant="-1" id="iCc-Jb-OG9"/>
                             <constraint firstAttribute="bottom" secondItem="PpX-2f-ogP" secondAttribute="bottom" constant="241" id="icT-g0-8Vx"/>
                             <constraint firstItem="qjE-hX-evH" firstAttribute="centerX" secondItem="oB0-Vg-EHN" secondAttribute="centerX" id="j4T-DG-sCm"/>
@@ -224,6 +223,7 @@
                         <outlet property="showBackgroundValue" destination="nnb-6H-FUN" id="ksE-wp-nq3"/>
                         <outlet property="tableContainerView" destination="fs3-Ag-kBY" id="8Kr-W3-n7h"/>
                         <outlet property="tablePlaceholderView" destination="Nar-Xb-h9G" id="Lwk-Fq-LWs"/>
+                        <outlet property="topBanner" destination="flT-3C-9Rh" id="2rt-cc-iv2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -316,8 +316,8 @@
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" currentPage="3" translatesAutoresizingMaskIntoConstraints="NO" id="W9U-EE-d6M">
                                 <rect key="frame" x="187" y="429.66666666666669" width="40" height="37"/>
                             </pageControl>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="64" translatesAutoresizingMaskIntoConstraints="NO" id="kh8-KT-CnC" userLabel="Top Banner">
-                                <rect key="frame" x="25" y="38" width="312" height="40"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="kh8-KT-CnC" userLabel="Top Banner">
+                                <rect key="frame" x="25" y="38" width="369" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feedback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cW-Ef-7fJ" userLabel="Page Label">
                                         <rect key="frame" x="0.0" y="0.0" width="170" height="40"/>
@@ -330,7 +330,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="omr-HW-3OY" userLabel="Submit">
-                                        <rect key="frame" x="234" y="0.0" width="78" height="40"/>
+                                        <rect key="frame" x="199" y="0.0" width="170" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="PQi-H8-BoV"/>
                                         </constraints>

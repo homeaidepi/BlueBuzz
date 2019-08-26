@@ -22,6 +22,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var logoLeadingConstraint: NSLayoutConstraint!
     @IBOutlet weak var settingsBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topBanner: UIStackView!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var showBackgroundValue: UISwitch!
     
@@ -118,15 +119,27 @@ class MainViewController: UIViewController {
             portrait = true
         }
         
-        //fix for container being offscreen
-        containerTopConstraint.constant = size.height - 70
-        settingsBottomConstraint.constant = 70
-        
         if (portrait) {
             //logoLeadingConstraint.constant = size.width / 2 - 50
         } else {
             //logoLeadingConstraint.constant = size.width / 2 - 50
         }
+        
+        //fix for container being offscreen
+        containerTopConstraint.constant = size.height - 70
+        
+        settingsBottomConstraint.constant  = 31.4
+        
+        topBanner.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor,
+        constant: 8).isActive = true
+        topBanner.heightAnchor.constraint(equalToConstant: 31.4).isActive = true
+        topBanner.widthAnchor.constraint(equalToConstant: size.width - 31.4).isActive = true
+        topBanner.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 41.3).isActive=true
+        topBanner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        let margins = view.layoutMarginsGuide
+        topBanner.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -203,6 +216,7 @@ class MainViewController: UIViewController {
         
         self.updateReachabilityColor()
         self.showBackground(showBackground: Variables.showBackground)
+        self.adjustUiConstraints(size: view.frame.size)
     }
     
     // Implement the round corners on the top.
