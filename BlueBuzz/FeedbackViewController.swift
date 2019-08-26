@@ -61,9 +61,8 @@ final class FeedbackViewController: UIViewController, UITextFieldDelegate, UITex
         
         //fix for container being offscreen
         feedbackBottomConstraint.constant = 70
-        
-        topBanner.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor,
-               constant: 8).isActive = true
+    topBanner.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor,
+           constant: 8).isActive = true
         topBanner.heightAnchor.constraint(equalToConstant: 31.4).isActive = true
         topBanner.widthAnchor.constraint(equalToConstant: size.width - 31.4).isActive = true
         topBanner.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 41.3).isActive=true
