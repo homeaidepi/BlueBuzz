@@ -597,6 +597,7 @@
                     </view>
                     <connections>
                         <outlet property="background" destination="Tk5-Fd-8xu" id="XqO-j6-UM6"/>
+                        <outlet property="versionLabel" destination="hp1-HC-kk6" id="Qmp-v2-QF9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K6u-gp-ABC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
