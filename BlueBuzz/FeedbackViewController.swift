@@ -12,6 +12,7 @@ final class FeedbackViewController: UIViewController, UITextFieldDelegate, UITex
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var comment: UITextView!
      @IBOutlet weak var background: UIImageView!
+    @IBOutlet weak var feedbackBottomConstraint: NSLayoutConstraint!
     
     private lazy var sessionDelegater: SessionDelegater = {
         return SessionDelegater()
@@ -34,11 +35,37 @@ final class FeedbackViewController: UIViewController, UITextFieldDelegate, UITex
         
         updateFields()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         background.isHidden = !Variables.showBackground
         
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+        adjustUiConstraints(size: size)
+    }
+    
+    func adjustUiConstraints(size: CGSize) {
+        var portrait = false
+        
+        if UIDevice.current.orientation.isLandscape {
+            print("Landscape")
+        } else {
+            print("Portrait")
+            portrait = true
+        }
+        
+        //fix for container being offscreen
+        feedbackBottomConstraint.constant = 70
+        
+        if (portrait) {
+            //logoLeadingConstraint.constant = size.width / 2 - 50
+        } else {
+            //logoLeadingConstraint.constant = size.width / 2 - 50
+        }
     }
     
     func setBorderColorTextField(textField:UITextField, color:CGColor ) {

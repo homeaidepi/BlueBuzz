@@ -20,6 +20,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var scrollViewPanel: UIScrollView!
     @IBOutlet weak var settingsPanel: UIStackView!
     @IBOutlet weak var logoLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var settingsBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var showBackgroundValue: UISwitch!
@@ -119,6 +120,7 @@ class MainViewController: UIViewController {
         
         //fix for container being offscreen
         containerTopConstraint.constant = size.height - 70
+        settingsBottomConstraint.constant = 70
         
         if (portrait) {
             //logoLeadingConstraint.constant = size.width / 2 - 50
