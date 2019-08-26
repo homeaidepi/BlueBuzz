@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="bg3-828x1792" translatesAutoresizingMaskIntoConstraints="NO" id="cEf-8m-DwY" userLabel="background">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="bg3-828x1792" translatesAutoresizingMaskIntoConstraints="NO" id="cEf-8m-DwY" userLabel="background">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
@@ -56,16 +56,17 @@
                         <constraints>
                             <constraint firstItem="Xf6-J3-bOG" firstAttribute="top" secondItem="3yo-Hu-PJL" secondAttribute="bottom" constant="33" id="6dn-uS-peg"/>
                             <constraint firstItem="qdY-e6-kEX" firstAttribute="leading" secondItem="Xf6-J3-bOG" secondAttribute="leading" id="9xF-Cm-N2h"/>
+                            <constraint firstItem="eEJ-Jp-oxf" firstAttribute="centerX" secondItem="cEf-8m-DwY" secondAttribute="centerX" id="ByY-P0-ea8"/>
                             <constraint firstItem="qdY-e6-kEX" firstAttribute="trailing" secondItem="Xf6-J3-bOG" secondAttribute="trailing" id="ErO-GH-UzA"/>
                             <constraint firstItem="qdY-e6-kEX" firstAttribute="top" secondItem="TSV-Ut-sqq" secondAttribute="bottom" constant="86" id="G6M-Q0-fjF"/>
-                            <constraint firstItem="qdY-e6-kEX" firstAttribute="centerX" secondItem="eEJ-Jp-oxf" secondAttribute="centerX" id="N28-xj-AR3"/>
                             <constraint firstItem="qdY-e6-kEX" firstAttribute="centerX" secondItem="cEf-8m-DwY" secondAttribute="centerX" id="PiL-IT-3DW"/>
                             <constraint firstItem="qdY-e6-kEX" firstAttribute="leading" secondItem="Km4-O6-89U" secondAttribute="leadingMargin" constant="13" id="TIf-rX-rnN"/>
                             <constraint firstItem="qdY-e6-kEX" firstAttribute="leading" secondItem="3yo-Hu-PJL" secondAttribute="leading" id="a4P-vi-vNM"/>
+                            <constraint firstItem="eEJ-Jp-oxf" firstAttribute="centerY" secondItem="Km4-O6-89U" secondAttribute="centerY" id="dfh-lC-bkd"/>
                             <constraint firstItem="3yo-Hu-PJL" firstAttribute="top" secondItem="qdY-e6-kEX" secondAttribute="bottom" constant="8" id="hJf-S4-qkm"/>
                             <constraint firstItem="qdY-e6-kEX" firstAttribute="trailing" secondItem="3yo-Hu-PJL" secondAttribute="trailing" id="kWn-zQ-hdL"/>
                             <constraint firstItem="qdY-e6-kEX" firstAttribute="centerX" secondItem="Km4-O6-89U" secondAttribute="centerX" id="lu7-hR-VcU"/>
-                            <constraint firstItem="eEJ-Jp-oxf" firstAttribute="top" secondItem="Xf6-J3-bOG" secondAttribute="bottom" constant="62" id="rqb-Dd-zMp"/>
+                            <constraint firstItem="eEJ-Jp-oxf" firstAttribute="centerY" secondItem="cEf-8m-DwY" secondAttribute="centerY" id="vfo-EU-flN"/>
                         </constraints>
                     </view>
                 </viewController>
