@@ -57,10 +57,10 @@
                                 <rect key="frame" x="20" y="88" width="369" height="581"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bQN-qj-Z1k" userLabel="Settings Panel">
-                                        <rect key="frame" x="13" y="8" width="360" height="458"/>
+                                        <rect key="frame" x="13" y="8" width="456" height="448.66666666666669"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Nag Alerts™" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VpF-hq-Ke2" userLabel="No Nag Alerts">
-                                                <rect key="frame" x="0.0" y="0.0" width="360" height="26"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="456" height="26"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="21"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -68,30 +68,30 @@
                                                 <size key="shadowOffset" width="0.0" height="1"/>
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k3r-3W-YZh" userLabel="Show Background Switch">
-                                                <rect key="frame" x="0.0" y="46" width="362" height="31"/>
+                                                <rect key="frame" x="0.0" y="46" width="458" height="31"/>
                                                 <connections>
                                                     <action selector="showBackgroundValueChangedWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="tr4-jI-7KP"/>
                                                 </connections>
                                             </switch>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Background" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S8e-ae-dUo">
-                                                <rect key="frame" x="0.0" y="97" width="360" height="25"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Background" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S8e-ae-dUo">
+                                                <rect key="frame" x="0.0" y="97" width="456" height="22.666666666666671"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="19"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nnb-6H-FUN" userLabel="Show Background Switch">
-                                                <rect key="frame" x="0.0" y="142" width="362" height="31"/>
+                                                <rect key="frame" x="0.0" y="139.66666666666666" width="458" height="31"/>
                                                 <connections>
                                                     <action selector="showBackgroundValueChangedWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="y6I-JK-fWL"/>
                                                 </connections>
                                             </switch>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seconds Before Checking Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nRj-Rb-vFq">
-                                                <rect key="frame" x="0.0" y="193" width="360" height="25"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seconds Before Checking Location" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nRj-Rb-vFq">
+                                                <rect key="frame" x="0.0" y="190.66666666666669" width="456" height="22.666666666666657"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="19"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <slider contentMode="redraw" verticalHuggingPriority="252" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="45" minValue="10" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Na6-cW-k8Y" userLabel="Seconds Before Checking Location">
-                                                <rect key="frame" x="-2" y="238" width="364" height="31"/>
+                                                <rect key="frame" x="-2" y="233.33333333333331" width="460" height="31"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <accessibility key="accessibilityConfiguration" label="Seconds Before Checking Distance"/>
@@ -99,14 +99,14 @@
                                                     <action selector="secondsBeforeCheckingLocationValueChangedWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="riP-3N-Z05"/>
                                                 </connections>
                                             </slider>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seconds Before Checking Distance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZb-pD-4uv">
-                                                <rect key="frame" x="0.0" y="288" width="360" height="25"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seconds Before Checking Distance" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fZb-pD-4uv">
+                                                <rect key="frame" x="0.0" y="283.33333333333331" width="456" height="22.666666666666686"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="19"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <slider opaque="NO" contentMode="redraw" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="60" minValue="10" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="l8b-yD-jlD" userLabel="Seconds Before Checking Distance">
-                                                <rect key="frame" x="-2" y="333" width="364" height="31"/>
+                                                <rect key="frame" x="-2" y="326" width="460" height="31"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <accessibility key="accessibilityConfiguration" label="Seconds Before Checking Distance"/>
@@ -114,14 +114,14 @@
                                                     <action selector="secondsBeforeCheckingDistanceValueChangedWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="2wh-h5-XDH"/>
                                                 </connections>
                                             </slider>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance Before Notifying Alert" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBg-kg-tYN">
-                                                <rect key="frame" x="0.0" y="383" width="360" height="25"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance Before Notifying Alert" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rBg-kg-tYN">
+                                                <rect key="frame" x="0.0" y="376" width="456" height="22.666666666666686"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="19"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <slider opaque="NO" contentMode="redraw" verticalHuggingPriority="252" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="10" maxValue="1000" translatesAutoresizingMaskIntoConstraints="NO" id="zQe-zy-bR5" userLabel="Distance Before Notifying Alert">
-                                                <rect key="frame" x="-2" y="428" width="364" height="31"/>
+                                                <rect key="frame" x="-2" y="418.66666666666663" width="460" height="31"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <accessibility key="accessibilityConfiguration" label="Distance Before Notifying Alert"/>
@@ -594,11 +594,11 @@
                             <constraint firstItem="iaM-1R-yhg" firstAttribute="trailing" secondItem="hp1-HC-kk6" secondAttribute="trailing" id="MPR-v5-uJU"/>
                             <constraint firstItem="hp1-HC-kk6" firstAttribute="top" secondItem="POE-Tl-JSM" secondAttribute="bottom" constant="33" id="PRk-Q6-wIu"/>
                             <constraint firstItem="iaM-1R-yhg" firstAttribute="trailing" secondItem="POE-Tl-JSM" secondAttribute="trailing" id="Rkq-zx-lKg"/>
-                            <constraint firstItem="iaM-1R-yhg" firstAttribute="top" secondItem="Rgz-pH-JdI" secondAttribute="bottom" constant="86" id="Tpg-MO-VCg"/>
                             <constraint firstAttribute="trailing" secondItem="Tk5-Fd-8xu" secondAttribute="trailing" id="VKU-ds-jNW"/>
                             <constraint firstItem="Nnk-T1-MJ9" firstAttribute="centerX" secondItem="Tk5-Fd-8xu" secondAttribute="centerX" id="X0q-Km-rEZ"/>
                             <constraint firstItem="Tk5-Fd-8xu" firstAttribute="top" secondItem="6md-i6-jeF" secondAttribute="top" id="XHM-vv-nKV"/>
                             <constraint firstItem="POE-Tl-JSM" firstAttribute="top" secondItem="iaM-1R-yhg" secondAttribute="bottom" constant="8" symbolic="YES" id="gsC-fa-ixB"/>
+                            <constraint firstItem="iaM-1R-yhg" firstAttribute="top" secondItem="Rgz-pH-JdI" secondAttribute="bottom" constant="86" id="joZ-7b-Tr9"/>
                             <constraint firstItem="iaM-1R-yhg" firstAttribute="centerX" secondItem="Nnk-T1-MJ9" secondAttribute="centerX" id="poM-lM-Xar"/>
                             <constraint firstItem="Tk5-Fd-8xu" firstAttribute="leading" secondItem="6md-i6-jeF" secondAttribute="leading" id="shm-yR-WhT"/>
                             <constraint firstAttribute="bottom" secondItem="Tk5-Fd-8xu" secondAttribute="bottom" id="upP-7Q-ujG"/>

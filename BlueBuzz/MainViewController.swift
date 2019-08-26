@@ -34,46 +34,52 @@ class MainViewController: UIViewController {
     
     var dataObject: String = ""
     
+    func saveSettings() {
+        var seconds = Int(secondsBeforeCheckingLocationValue.value)
+        
+        secondsBeforeCheckingLocationLabel.text = "\(seconds) Seconds Before Checking Location"
+        
+        //print("Slider changing to \(currentValue) ?")
+        sessionDelegater.saveSecondsBeforeCheckingLocation(secondsBeforeCheckingLocation: seconds)
+        
+        seconds = Int(secondsBeforeCheckingDistanceValue.value)
+        
+        secondsBeforeCheckingDistanceLabel.text = "\(seconds) Seconds Before Checking Distance"
+        
+        //print("Slider changing to \(currentValue) ?")
+        sessionDelegater.saveSecondsBeforeCheckingDistance(secondsBeforeCheckingDistance: seconds)
+        
+        let distance = Double(distanceBeforeNotifyingValue.value).rounded()
+        
+        distanceBeforeNotifyingLabel.text = "\(distance) Feet Before Sending Alert "
+        //print("Slider changing to \(currentValue) ?")
+        sessionDelegater.saveDistanceBeforeNotifying(distanceBeforeNotifying: distance)
+        
+        let showBackground = showBackgroundValue.isOn
+        
+        print("Switch changing to \(showBackground) ?")
+        sessionDelegater.saveShowBackground(showBackground: showBackground)
+    }
+    
     @IBAction func showBackgroundValueChanged(sender: UISwitch) {
-        let showBackgroundValue = sender.isOn
-        
-        print("Switch changing to \(showBackgroundValue) ?")
-        sessionDelegater.saveShowBackground(showBackground: showBackgroundValue)
-        
+        saveSettings()
         syncSettings()
         
-        showBackground(showBackground: showBackgroundValue)
+        showBackground(showBackground: Variables.showBackground)
     }
     
     @IBAction func secondsBeforeCheckingLocationValueChanged(sender: UISlider) {
-        let currentValue = Int(secondsBeforeCheckingLocationValue.value)
-        
-        secondsBeforeCheckingLocationLabel.text = "\(currentValue) Seconds Before Checking Location"
-        
-        //print("Slider changing to \(currentValue) ?")
-        sessionDelegater.saveSecondsBeforeCheckingLocation(secondsBeforeCheckingLocation: currentValue)
-        
+        saveSettings()
         syncSettings()
     }
     
     @IBAction func secondsBeforeCheckingDistanceValueChanged(sender: UISlider) {
-        let currentValue = Int(secondsBeforeCheckingDistanceValue.value)
-        
-        secondsBeforeCheckingDistanceLabel.text = "\(currentValue) Seconds Before Checking Distance"
-        
-        //print("Slider changing to \(currentValue) ?")
-        sessionDelegater.saveSecondsBeforeCheckingDistance(secondsBeforeCheckingDistance: currentValue)
-        
+        saveSettings()
         syncSettings()
     }
     
     @IBAction func distanceBeforeNotifyingValueChanged(sender: UISlider) {
-        let currentValue = Double(distanceBeforeNotifyingValue.value).rounded()
-        
-        distanceBeforeNotifyingLabel.text = "\(currentValue) Feet Before Sending Alert "
-        //print("Slider changing to \(currentValue) ?")
-        sessionDelegater.saveDistanceBeforeNotifying(distanceBeforeNotifying: currentValue)
-        
+        saveSettings()
         syncSettings()
     }
     
@@ -202,6 +208,7 @@ class MainViewController: UIViewController {
                 clearButton.setTitle("Reset", for: .normal)
                 scrollViewPanel.isUserInteractionEnabled = true
                 tableContainerView.isHidden = true
+                
                 setSettingSliders()
             case SessionPages.LogView.rawValue:
                 pageControl.currentPage = 2
@@ -254,6 +261,7 @@ class MainViewController: UIViewController {
         secondsBeforeCheckingDistanceValue.value =
             Float(sessionDelegater.getSecondsBeforeCheckingDistance())
         distanceBeforeNotifyingValue.value = Float(sessionDelegater.getDistanceBeforeNotifying())
+        saveSettings()
     }
     
     func getWelcomeMessage()
@@ -332,10 +340,8 @@ class MainViewController: UIViewController {
             secondsBeforeCheckingLocationValue.value = 45
             secondsBeforeCheckingDistanceValue.value = 60
             distanceBeforeNotifyingValue.value = 100
-        sessionDelegater.saveSecondsBeforeCheckingLocation(secondsBeforeCheckingLocation: Int(secondsBeforeCheckingLocationValue!.value))
-        sessionDelegater.saveSecondsBeforeCheckingDistance(secondsBeforeCheckingDistance: Int(secondsBeforeCheckingDistanceValue!.value))
-        sessionDelegater.saveDistanceBeforeNotifying(distanceBeforeNotifying: Double(distanceBeforeNotifyingValue!.value))
             
+            saveSettings()
             syncSettings()
         }
     }

@@ -741,11 +741,11 @@
 				CODE_SIGN_ENTITLEMENTS = "BlueBuzz WatchKit Extension/BlueBuzz WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
 				INFOPLIST_FILE = "BlueBuzz WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 13.0;
+				MARKETING_VERSION = 13.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.homeaidepi.bluebuzz1.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -764,11 +764,11 @@
 				CODE_SIGN_ENTITLEMENTS = "BlueBuzz WatchKit Extension/BlueBuzz WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
 				INFOPLIST_FILE = "BlueBuzz WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 13.0;
+				MARKETING_VERSION = 13.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.homeaidepi.bluebuzz1.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -789,7 +789,7 @@
 				CODE_SIGN_ENTITLEMENTS = "BlueBuzz WatchKit App/BlueBuzz WatchKit App.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
 				IBSC_MODULE = BlueBuzz_WatchKit_Extension;
 				INFOPLIST_FILE = "BlueBuzz WatchKit App/Info.plist";
@@ -818,7 +818,7 @@
 				CODE_SIGN_ENTITLEMENTS = "BlueBuzz WatchKit App/BlueBuzz WatchKit App.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
 				IBSC_MODULE = BlueBuzz_WatchKit_Extension;
 				INFOPLIST_FILE = "BlueBuzz WatchKit App/Info.plist";
@@ -844,7 +844,7 @@
 				CODE_SIGN_ENTITLEMENTS = BlueBuzz.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
 				INFOPLIST_FILE = BlueBuzz/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -865,7 +865,7 @@
 				CODE_SIGN_ENTITLEMENTS = BlueBuzz.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = F2VGAV7YDQ;
 				INFOPLIST_FILE = BlueBuzz/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
