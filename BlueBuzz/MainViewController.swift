@@ -128,10 +128,12 @@ class MainViewController: UIViewController {
         //fix for container being offscreen
         containerTopConstraint.constant = size.height - 70
         
-        settingsBottomConstraint.constant  = 31.4
+        //settingsBottomConstraint.constant  = 31.4
         
-        reachableLabel.widthAnchor.constraint(equalToConstant: (size.width / 2) + 31.4).isActive = true
+        //pageLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        //reachableLabel.widthAnchor.constraint(equalToConstant: 180).isActive = true
         reachableLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+
         
         topBanner.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor,
         constant: 8).isActive = true
