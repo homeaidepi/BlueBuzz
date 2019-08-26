@@ -137,6 +137,10 @@ class MainViewController: UIViewController {
         topBanner.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 41.3).isActive=true
         topBanner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
+        logView.widthAnchor.constraint(equalToConstant: size.width - 31.4).isActive = true
+        logView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        logView.heightAnchor.constraint(equalToConstant: size.height - 31.4).isActive=true
+        
         let margins = view.layoutMarginsGuide
         topBanner.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
         
