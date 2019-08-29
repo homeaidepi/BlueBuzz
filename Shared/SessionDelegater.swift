@@ -38,6 +38,9 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
     var blueBuzzWebServiceCheckDistanceByInstanceId = "CheckDistanceByInstanceId"
     var blueBuzzWebServiceGetChangeLogByVersion = "GetChangeLogByVersion"
     var blueBuzzWebServicePostComment = "PostComment"
+    var acceptType = "Application/json"
+    var headerType = "Content-Type"
+    var apiFieldName = "X-IBM-Client-Id"
 
     private var retval = false
     
@@ -374,8 +377,8 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         ]
         var request = URLRequest(url: serviceUrl)
         request.httpMethod = "POST"
-        request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(blueBuzzIbmSharingApiKey, forHTTPHeaderField: "X-IBM-Client-Id")
+        request.setValue(acceptType, forHTTPHeaderField: headerType)
+        request.setValue(blueBuzzIbmSharingApiKey, forHTTPHeaderField: apiFieldName)
         guard let httpBody = try? JSONSerialization.data(
             withJSONObject: parameterDictionary,
             options: []) else {
@@ -412,8 +415,8 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         var request = URLRequest(url: serviceUrl)
         
         request.httpMethod = "POST"
-        request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(blueBuzzIbmSharingApiKey, forHTTPHeaderField: "X-IBM-Client-Id")
+        request.setValue(acceptType, forHTTPHeaderField: headerType)
+        request.setValue(blueBuzzIbmSharingApiKey, forHTTPHeaderField: apiFieldName)
         guard let httpBody = try? JSONSerialization.data(
             withJSONObject: params,
             options: []) else {
