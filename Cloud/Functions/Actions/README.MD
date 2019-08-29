@@ -42,46 +42,26 @@ $ bx wsk package create BlueBuzzPackage
 $ bx wsk action create BlueBuzzPackage/GetChangeLogByVersion GetChangeLogByVersion.js --main GetChangeLogByVersion --kind nodejs:10
 ```
 
-### Retrieve file contents action
+### GetLocationByInstanceId action
 
 ```
 $ bx wsk action create BlueBuzzPackage/GetLocationByInstanceId GetLocationByInstanceId.js --main GetLocationByInstanceId --kind nodejs:10
 ```
 
-### Remove files from bucket action
+### CheckDistanceByInstanceId action
 
 ```
 $ bx wsk action create BlueBuzzPackage/CheckDistanceByInstanceId CheckDistanceByInstanceId.js --main CheckDistanceByInstanceId --kind nodejs:10
 ```
 
-### Create new files action
+### PostLocation action
 
 ```
-$ npm install
-$ zip -r upload.zip package.json actions.js node_modules
-$ bx wsk action create BlueBuzzPackage/upload-file upload.zip --main upload --kind nodejs:10
+$ bx wsk action create BlueBuzzPackage/PostLocationByInstanceId PostLocationByInstanceId.js --main PostLocationByInstanceId --kind nodejs:10
 ```
 
-### Modify object acls action
+### PostComment action
 
 ```
-$ bx wsk action create BlueBuzzPackage/make-public actions.js --main make_public --kind nodejs:10
-$ bx wsk action create BlueBuzzPackage/make-private actions.js --main make_private --kind nodejs:10
-```
-
-### Generate presigned URLs
-
-- **Provision HMAC authentication keys and save credentials to `credentials.json`.**
-
-```
-$ cd presign
-```
-```
-$ npm install
-```
-```
-$ zip -r presign.zip package.json presign.js node_modules
-```
-```
-$ bx wsk action create BlueBuzzPackage/presign presign.zip --main presign --kind nodejs:10 -P credentials.json
+$ bx wsk action create BlueBuzzPackage/PostComment PostComment.js --main PostComment --kind nodejs:10
 ```

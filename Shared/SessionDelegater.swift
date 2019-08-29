@@ -31,8 +31,8 @@ var emptyMessage = ""
 //
 class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
     var message = emptyMessage;
-    var blueBuzzIbmSharingApiKey = "11d31806-6344-4d16-9b54-dc27cdecfc1d"
-    var blueBuzzWebServiceBaseAddress = "https://0ef58499.us-east.apiconnect.appdomain.cloud/dfb98ba5-6be0-4704-b70c-885b7817ccb5"
+    var blueBuzzIbmSharingApiKey = "4157a3b1-9bdb-425f-bc7b-37b845bd8472"
+    var blueBuzzWebServiceBaseAddress = "https://80ab5307.us-south.apiconnect.appdomain.cloud/dfb98ba5-6be0-4704-b70c-885b7817ccb5"
     var blueBuzzWebServiceGetLocationByInstanceId = "Getlocationbyinstanceid"
     var blueBuzzWebServicePostLocation = "PostLocationByInstanceId"
     var blueBuzzWebServiceCheckDistanceByInstanceId = "CheckDistanceByInstanceId"

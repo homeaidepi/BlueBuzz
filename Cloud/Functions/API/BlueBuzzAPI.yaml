@@ -1,8 +1,7 @@
 swagger: '2.0'
 info:
   version: '1.0'
-  title: BlueBuzzAPI
-  x-ibm-name: BlueBuzzAPI
+  title: BlueBuzz
 schemes:
   - https
 consumes:
@@ -10,100 +9,16 @@ consumes:
 produces:
   - application/json
 paths:
-  /:
-    get:
-      description: Default get resource for endpoint
-      responses:
-        '200':
-          description: A successful invocation response
+  /CalcDistanceBetweenTwoLatLongs:
     post:
-      description: Default post resource for endpoint
-      responses:
-        '200':
-          description: A successful invocation response
-      parameters:
-        - name: body
-          in: body
-          description: Request body
-          required: false
-          schema:
-            type: object
-    put:
-      description: Default put resource for endpoint
-      responses:
-        '200':
-          description: A successful invocation response
-      parameters:
-        - name: body
-          in: body
-          description: Request body
-          required: false
-          schema:
-            type: object
-    delete:
-      description: Default delete resource for endpoint
-      responses:
-        '200':
-          description: A successful invocation response
-      parameters:
-        - name: body
-          in: body
-          description: Request body
-          required: false
-          schema:
-            type: object
-    patch:
-      description: Default patch resource for endpoint
-      responses:
-        '200':
-          description: A successful invocation response
-      parameters:
-        - name: body
-          in: body
-          description: Request body
-          required: false
-          schema:
-            type: object
-    head:
-      description: Default head resource for endpoint
-      responses:
-        '200':
-          description: A successful invocation response
-    options:
-      description: Default options resource for endpoint
-      responses:
-        '200':
-          description: A successful invocation response
-  /GetLocationByInstanceId:
-    post:
-      operationId: postGetlocationbyinstanceid
+      operationId: postCalcdistancebetweentwolatlongs
       x-openwhisk:
-        namespace: matthew.vandergrift@ibm.com_dev
-        action: GetLocationByInstanceId
-        package: BlueBuzz
+        namespace: da042bf6-fadb-4d9e-bc0e-df0287a40171
+        action: CalcDistanceBetweenTwoLatLongs
+        package: BlueBuzzVer13
         url: >-
-          https://us-south.functions.cloud.ibm.com/api/v1/web/matthew.vandergrift@ibm.com_dev/BlueBuzz/GetLocationByInstanceId.json
-        auth: 88a0062d-1feb-47d3-9865-a44c6cf5d67f
-      responses:
-        '200':
-          description: A successful invocation response
-      parameters:
-        - name: body
-          in: body
-          description: Request body
-          required: false
-          schema:
-            type: object
-  /PostLocationByInstanceId:
-    post:
-      operationId: postPostlocationbyinstanceid
-      x-openwhisk:
-        namespace: matthew.vandergrift@ibm.com_dev
-        action: PostLocation
-        package: BlueBuzz
-        url: >-
-          https://us-south.functions.cloud.ibm.com/api/v1/web/matthew.vandergrift@ibm.com_dev/BlueBuzz/PostLocation.json
-        auth: 15bb5702-985e-4b3f-9de4-867e063767e0
+          https://us-east.functions.cloud.ibm.com/api/v1/web/da042bf6-fadb-4d9e-bc0e-df0287a40171/BlueBuzzVer13/CalcDistanceBetweenTwoLatLongs.json
+        auth: dda0ed42-d346-42b7-bdd9-79da4cf0457f
       responses:
         '200':
           description: A successful invocation response
@@ -118,12 +33,12 @@ paths:
     post:
       operationId: postCheckdistancebyinstanceid
       x-openwhisk:
-        namespace: matthew.vandergrift@ibm.com_dev
+        namespace: da042bf6-fadb-4d9e-bc0e-df0287a40171
         action: CheckDistanceByInstanceId
-        package: BlueBuzz
+        package: BlueBuzzVer13
         url: >-
-          https://us-south.functions.cloud.ibm.com/api/v1/web/matthew.vandergrift@ibm.com_dev/BlueBuzz/CheckDistanceByInstanceId.json
-        auth: f02993ab-f84f-42dc-a930-5359895dec39
+          https://us-east.functions.cloud.ibm.com/api/v1/web/da042bf6-fadb-4d9e-bc0e-df0287a40171/BlueBuzzVer13/CheckDistanceByInstanceId.json
+        auth: 81a89b98-e523-45f1-ad99-4f171c167354
       responses:
         '200':
           description: A successful invocation response
@@ -138,12 +53,32 @@ paths:
     post:
       operationId: postGetchangelogbyversion
       x-openwhisk:
-        namespace: matthew.vandergrift@ibm.com_dev
+        namespace: da042bf6-fadb-4d9e-bc0e-df0287a40171
         action: GetChangeLogByVersion
-        package: BlueBuzz
+        package: BlueBuzzVer13
         url: >-
-          https://us-south.functions.cloud.ibm.com/api/v1/web/matthew.vandergrift@ibm.com_dev/BlueBuzz/GetChangeLogByVersion.json
-        auth: f581279c-b2c2-47e3-a73d-d853f5eab230
+          https://us-east.functions.cloud.ibm.com/api/v1/web/da042bf6-fadb-4d9e-bc0e-df0287a40171/BlueBuzzVer13/GetChangeLogByVersion.json
+        auth: 75b1d237-587e-42e7-8e86-5be00d3dea7c
+      responses:
+        '200':
+          description: A successful invocation response
+      parameters:
+        - name: body
+          in: body
+          description: Request body
+          required: false
+          schema:
+            type: object
+  /GetLocationByInstanceId:
+    post:
+      operationId: postGetlocationbyinstanceid
+      x-openwhisk:
+        namespace: da042bf6-fadb-4d9e-bc0e-df0287a40171
+        action: GetLocationByInstanceId
+        package: BlueBuzzVer13
+        url: >-
+          https://us-east.functions.cloud.ibm.com/api/v1/web/da042bf6-fadb-4d9e-bc0e-df0287a40171/BlueBuzzVer13/GetLocationByInstanceId.json
+        auth: b80c434d-b306-454d-90b7-83c370b88627
       responses:
         '200':
           description: A successful invocation response
@@ -158,12 +93,32 @@ paths:
     post:
       operationId: postPostcomment
       x-openwhisk:
-        namespace: matthew.vandergrift@ibm.com_dev
+        namespace: da042bf6-fadb-4d9e-bc0e-df0287a40171
         action: PostComment
-        package: BlueBuzz
+        package: BlueBuzzVer13
         url: >-
-          https://us-south.functions.cloud.ibm.com/api/v1/web/matthew.vandergrift@ibm.com_dev/BlueBuzz/PostComment.json
-        auth: 1f14890d-a47a-4633-b8f9-8a8a2b1dccfd
+          https://us-east.functions.cloud.ibm.com/api/v1/web/da042bf6-fadb-4d9e-bc0e-df0287a40171/BlueBuzzVer13/PostComment.json
+        auth: 4f8a044c-46c6-4918-bf5f-871148205e25
+      responses:
+        '200':
+          description: A successful invocation response
+      parameters:
+        - name: body
+          in: body
+          description: Request body
+          required: false
+          schema:
+            type: object
+  /PostLocationByInstanceId:
+    post:
+      operationId: postPostlocationbyinstanceid
+      x-openwhisk:
+        namespace: da042bf6-fadb-4d9e-bc0e-df0287a40171
+        action: PostLocation
+        package: BlueBuzzVer13
+        url: >-
+          https://us-east.functions.cloud.ibm.com/api/v1/web/da042bf6-fadb-4d9e-bc0e-df0287a40171/BlueBuzzVer13/PostLocation.json
+        auth: dfd80d23-04b2-432f-9ead-c36fefe6e809
       responses:
         '200':
           description: A successful invocation response
@@ -180,26 +135,15 @@ x-ibm-configuration:
       - operation-switch:
           case:
             - operations:
-                - postGetlocationbyinstanceid
+                - postCalcdistancebetweentwolatlongs
               execute:
                 - set-variable:
                     actions:
                       - set: message.headers.X-Require-Whisk-Auth
-                        value: 88a0062d-1feb-47d3-9865-a44c6cf5d67f
+                        value: dda0ed42-d346-42b7-bdd9-79da4cf0457f
                 - invoke:
                     target-url: >-
-                      https://us-south.functions.cloud.ibm.com/api/v1/web/matthew.vandergrift@ibm.com_dev/BlueBuzz/GetLocationByInstanceId.json
-                    verb: keep
-            - operations:
-                - postPostlocationbyinstanceid
-              execute:
-                - set-variable:
-                    actions:
-                      - set: message.headers.X-Require-Whisk-Auth
-                        value: 15bb5702-985e-4b3f-9de4-867e063767e0
-                - invoke:
-                    target-url: >-
-                      https://us-south.functions.cloud.ibm.com/api/v1/web/matthew.vandergrift@ibm.com_dev/BlueBuzz/PostLocation.json
+                      https://us-east.functions.cloud.ibm.com/api/v1/web/da042bf6-fadb-4d9e-bc0e-df0287a40171/BlueBuzzVer13/CalcDistanceBetweenTwoLatLongs.json
                     verb: keep
             - operations:
                 - postCheckdistancebyinstanceid
@@ -207,10 +151,10 @@ x-ibm-configuration:
                 - set-variable:
                     actions:
                       - set: message.headers.X-Require-Whisk-Auth
-                        value: f02993ab-f84f-42dc-a930-5359895dec39
+                        value: 81a89b98-e523-45f1-ad99-4f171c167354
                 - invoke:
                     target-url: >-
-                      https://us-south.functions.cloud.ibm.com/api/v1/web/matthew.vandergrift@ibm.com_dev/BlueBuzz/CheckDistanceByInstanceId.json
+                      https://us-east.functions.cloud.ibm.com/api/v1/web/da042bf6-fadb-4d9e-bc0e-df0287a40171/BlueBuzzVer13/CheckDistanceByInstanceId.json
                     verb: keep
             - operations:
                 - postGetchangelogbyversion
@@ -218,10 +162,21 @@ x-ibm-configuration:
                 - set-variable:
                     actions:
                       - set: message.headers.X-Require-Whisk-Auth
-                        value: f581279c-b2c2-47e3-a73d-d853f5eab230
+                        value: 75b1d237-587e-42e7-8e86-5be00d3dea7c
                 - invoke:
                     target-url: >-
-                      https://us-south.functions.cloud.ibm.com/api/v1/web/matthew.vandergrift@ibm.com_dev/BlueBuzz/GetChangeLogByVersion.json
+                      https://us-east.functions.cloud.ibm.com/api/v1/web/da042bf6-fadb-4d9e-bc0e-df0287a40171/BlueBuzzVer13/GetChangeLogByVersion.json
+                    verb: keep
+            - operations:
+                - postGetlocationbyinstanceid
+              execute:
+                - set-variable:
+                    actions:
+                      - set: message.headers.X-Require-Whisk-Auth
+                        value: b80c434d-b306-454d-90b7-83c370b88627
+                - invoke:
+                    target-url: >-
+                      https://us-east.functions.cloud.ibm.com/api/v1/web/da042bf6-fadb-4d9e-bc0e-df0287a40171/BlueBuzzVer13/GetLocationByInstanceId.json
                     verb: keep
             - operations:
                 - postPostcomment
@@ -229,16 +184,27 @@ x-ibm-configuration:
                 - set-variable:
                     actions:
                       - set: message.headers.X-Require-Whisk-Auth
-                        value: 1f14890d-a47a-4633-b8f9-8a8a2b1dccfd
+                        value: 4f8a044c-46c6-4918-bf5f-871148205e25
                 - invoke:
                     target-url: >-
-                      https://us-south.functions.cloud.ibm.com/api/v1/web/matthew.vandergrift@ibm.com_dev/BlueBuzz/PostComment.json
+                      https://us-east.functions.cloud.ibm.com/api/v1/web/da042bf6-fadb-4d9e-bc0e-df0287a40171/BlueBuzzVer13/PostComment.json
+                    verb: keep
+            - operations:
+                - postPostlocationbyinstanceid
+              execute:
+                - set-variable:
+                    actions:
+                      - set: message.headers.X-Require-Whisk-Auth
+                        value: dfd80d23-04b2-432f-9ead-c36fefe6e809
+                - invoke:
+                    target-url: >-
+                      https://us-east.functions.cloud.ibm.com/api/v1/web/da042bf6-fadb-4d9e-bc0e-df0287a40171/BlueBuzzVer13/PostLocation.json
                     verb: keep
           otherwise: []
           title: whisk-invoke
   cors:
     enabled: true
-basePath: /ea882ccc-8540-4ab2-b4e5-32ac20618606
+basePath: /dfb98ba5-6be0-4704-b70c-885b7817ccb5
 securityDefinitions:
   client_id:
     type: apiKey
