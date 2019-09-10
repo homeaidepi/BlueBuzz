@@ -17,6 +17,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var secondsBeforeCheckingLocationLabel: UILabel!
     @IBOutlet weak var secondsBeforeCheckingDistanceLabel: UILabel!
     @IBOutlet weak var showBackgroundLabel: UILabel!
+    @IBOutlet weak var noNagAlertsLabel: UILabel!
     @IBOutlet weak var distanceBeforeNotifyingLabel: UILabel!
     @IBOutlet weak var scrollViewPanel: UIScrollView!
     @IBOutlet weak var settingsPanel: UIStackView!
@@ -94,29 +95,43 @@ class MainViewController: UIViewController {
     func showBackground(showBackground: Bool) {
         Variables.showBackground = showBackground
         background.isHidden = !showBackground
+        
         if #available(iOS 13.0, *) {
             self.view.backgroundColor = UIColor.systemBackground
             self.primaryColor = UIColor.label
             self.secondaryColor = UIColor.secondaryLabel
         } else {
             // Fallback on earlier versions
-            if (!showBackground) {
-                self.view.backgroundColor = UIColor.white
-                self.secondaryColor = UIColor.white
+            if (showBackground) {
+                self.view.backgroundColor = UIColor.black
+                self.secondaryColor = UIColor.systemBlue
                 self.primaryColor = UIColor.black
             } else {
                 self.view.backgroundColor = UIColor.black
-                self.secondaryColor = UIColor.black
+                self.secondaryColor = UIColor.systemBlue
                 self.primaryColor = UIColor.white
                 }
         }
         
+        self.pageLabel.textColor = UIColor.systemBlue
         self.logView.textColor = self.primaryColor
-        self.pageLabel.textColor = self.primaryColor
+        
+        self.clearButton.setTitleShadowColor(secondaryColor, for: .normal)
+        
+        self.noNagAlertsLabel.textColor = self.primaryColor
+        self.noNagAlertsLabel.shadowColor = self.secondaryColor
+    
         self.distanceBeforeNotifyingLabel.textColor = self.primaryColor
+        self.distanceBeforeNotifyingLabel.shadowColor = self.secondaryColor
+        
         self.secondsBeforeCheckingDistanceLabel.textColor = self.primaryColor
+        self.secondsBeforeCheckingDistanceLabel.shadowColor = self.secondaryColor
+        
         self.secondsBeforeCheckingLocationLabel.textColor = self.primaryColor
+        self.secondsBeforeCheckingLocationLabel.shadowColor = self.secondaryColor
+        
         self.showBackgroundLabel.textColor = self.primaryColor
+        self.showBackgroundLabel.shadowColor = self.primaryColor
     }
     
     func syncSettings()
