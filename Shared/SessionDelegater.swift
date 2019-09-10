@@ -31,13 +31,16 @@ var emptyMessage = ""
 //
 class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
     var message = emptyMessage;
-    var blueBuzzIbmSharingApiKey = "a5e5ee30-1346-4eaf-acdd-e1a7dccdec20"
-    var blueBuzzWebServiceBaseAddress = "https://91ccdda5.us-south.apiconnect.appdomain.cloud/ea882ccc-8540-4ab2-b4e5-32ac20618606"
-    var blueBuzzWebServiceGetLocationByInstanceId = "getlocationbyinstanceid"
+    var blueBuzzIbmSharingApiKey = "4157a3b1-9bdb-425f-bc7b-37b845bd8472"
+    var blueBuzzWebServiceBaseAddress = "https://80ab5307.us-south.apiconnect.appdomain.cloud/dfb98ba5-6be0-4704-b70c-885b7817ccb5"
+    var blueBuzzWebServiceGetLocationByInstanceId = "Getlocationbyinstanceid"
     var blueBuzzWebServicePostLocation = "PostLocationByInstanceId"
     var blueBuzzWebServiceCheckDistanceByInstanceId = "CheckDistanceByInstanceId"
     var blueBuzzWebServiceGetChangeLogByVersion = "GetChangeLogByVersion"
     var blueBuzzWebServicePostComment = "PostComment"
+    var acceptType = "Application/json"
+    var headerType = "Content-Type"
+    var apiFieldName = "X-IBM-Client-Id"
 
     private var retval = false
     
@@ -374,8 +377,8 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         ]
         var request = URLRequest(url: serviceUrl)
         request.httpMethod = "POST"
-        request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("a5e5ee30-1346-4eaf-acdd-e1a7dccdec20", forHTTPHeaderField: "X-IBM-Client-Id")
+        request.setValue(acceptType, forHTTPHeaderField: headerType)
+        request.setValue(blueBuzzIbmSharingApiKey, forHTTPHeaderField: apiFieldName)
         guard let httpBody = try? JSONSerialization.data(
             withJSONObject: parameterDictionary,
             options: []) else {
@@ -412,8 +415,8 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         var request = URLRequest(url: serviceUrl)
         
         request.httpMethod = "POST"
-        request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("a5e5ee30-1346-4eaf-acdd-e1a7dccdec20", forHTTPHeaderField: "X-IBM-Client-Id")
+        request.setValue(acceptType, forHTTPHeaderField: headerType)
+        request.setValue(blueBuzzIbmSharingApiKey, forHTTPHeaderField: apiFieldName)
         guard let httpBody = try? JSONSerialization.data(
             withJSONObject: params,
             options: []) else {
@@ -485,7 +488,7 @@ class SessionDelegater: NSObject, WCSessionDelegate, URLSessionDelegate {
         var request = URLRequest(url: serviceUrl)
         request.httpMethod = "POST"
         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("a5e5ee30-1346-4eaf-acdd-e1a7dccdec20", forHTTPHeaderField: "X-IBM-Client-Id")
+        request.setValue(blueBuzzIbmSharingApiKey, forHTTPHeaderField: "X-IBM-Client-Id")
         guard let httpBody = try? JSONSerialization.data(
             withJSONObject: parameterDictionary,
             options: []) else {

@@ -16,6 +16,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var distanceBeforeNotifyingValue: UISlider!
     @IBOutlet weak var secondsBeforeCheckingLocationLabel: UILabel!
     @IBOutlet weak var secondsBeforeCheckingDistanceLabel: UILabel!
+    @IBOutlet weak var showBackgroundLabel: UILabel!
     @IBOutlet weak var distanceBeforeNotifyingLabel: UILabel!
     @IBOutlet weak var scrollViewPanel: UIScrollView!
     @IBOutlet weak var settingsPanel: UIStackView!
@@ -33,6 +34,8 @@ class MainViewController: UIViewController {
     let myDelegate = UIApplication.shared.delegate as? AppDelegate
     
     var dataObject: String = ""
+    var secondaryColor: UIColor = UIColor.white
+    var primaryColor: UIColor = UIColor.black
     
     func saveSettings() {
         var seconds = Int(secondsBeforeCheckingLocationValue.value)
@@ -91,6 +94,29 @@ class MainViewController: UIViewController {
     func showBackground(showBackground: Bool) {
         Variables.showBackground = showBackground
         background.isHidden = !showBackground
+        if #available(iOS 13.0, *) {
+            self.view.backgroundColor = UIColor.systemBackground
+            self.primaryColor = UIColor.label
+            self.secondaryColor = UIColor.secondaryLabel
+        } else {
+            // Fallback on earlier versions
+            if (!showBackground) {
+                self.view.backgroundColor = UIColor.white
+                self.secondaryColor = UIColor.white
+                self.primaryColor = UIColor.black
+            } else {
+                self.view.backgroundColor = UIColor.black
+                self.secondaryColor = UIColor.black
+                self.primaryColor = UIColor.white
+                }
+        }
+        
+        self.logView.textColor = self.primaryColor
+        self.pageLabel.textColor = self.primaryColor
+        self.distanceBeforeNotifyingLabel.textColor = self.primaryColor
+        self.secondsBeforeCheckingDistanceLabel.textColor = self.primaryColor
+        self.secondsBeforeCheckingLocationLabel.textColor = self.primaryColor
+        self.showBackgroundLabel.textColor = self.primaryColor
     }
     
     func syncSettings()
@@ -140,7 +166,7 @@ class MainViewController: UIViewController {
         //reachableLabel.widthAnchor.constraint(equalToConstant: 180).isActive = true
         reachableLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
 
-        
+        //todo 
         topBanner.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor,
         constant: 8).isActive = true
         topBanner.heightAnchor.constraint(equalToConstant: 31.4).isActive = true
@@ -152,6 +178,9 @@ class MainViewController: UIViewController {
         logView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         logView.heightAnchor.constraint(equalToConstant: size.height - 31.4).isActive=true
         
+        if (portrait == false) {
+            settingsPanel.heightAnchor.constraint(equalToConstant: size.height - 31.4).isActive = true
+        }
         let margins = view.layoutMarginsGuide
         topBanner.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
         
@@ -271,15 +300,7 @@ class MainViewController: UIViewController {
             self.logView.attributedText =  Variables.welcomeMessage.html2Attributed
             self.logView.setContentOffset(.zero, animated: false)
             self.logView.scrollRangeToVisible(NSRange(location:0, length:0))
-            if #available(iOS 13.0, *) {
-                self.logView.textColor = UIColor.label
-            } else {
-                if Variables.showBackground {
-                    self.logView.textColor = UIColor.lightText
-                } else {
-                    self.logView.textColor = UIColor.darkText
-                }
-            }
+            self.logView.textColor = self.primaryColor
         }
     }
     
@@ -289,15 +310,7 @@ class MainViewController: UIViewController {
             DispatchQueue.main.async {
                 self.logView.isHidden = false
                 self.logView.attributedText = Variables.logHistory
-                if #available(iOS 13.0, *) {
-                   self.logView.textColor = UIColor.label
-                } else {
-                    if Variables.showBackground {
-                       self.logView.textColor = UIColor.lightText
-                   } else {
-                       self.logView.textColor = UIColor.darkText
-                   }
-                }
+                self.logView.textColor = self.primaryColor
                 self.scrollToEndOfLogView()
             }
         }
