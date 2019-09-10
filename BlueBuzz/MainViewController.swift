@@ -17,7 +17,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var secondsBeforeCheckingLocationLabel: UILabel!
     @IBOutlet weak var secondsBeforeCheckingDistanceLabel: UILabel!
     @IBOutlet weak var showBackgroundLabel: UILabel!
-    
+    @IBOutlet weak var noNagAlertsLabel: UILabel!
     @IBOutlet weak var distanceBeforeNotifyingLabel: UILabel!
     @IBOutlet weak var scrollViewPanel: UIScrollView!
     @IBOutlet weak var settingsPanel: UIStackView!
@@ -115,6 +115,11 @@ class MainViewController: UIViewController {
         
         self.pageLabel.textColor = UIColor.systemBlue
         self.logView.textColor = self.primaryColor
+        
+        self.clearButton.setTitleShadowColor(secondaryColor, for: .normal)
+        
+        self.noNagAlertsLabel.textColor = self.primaryColor
+        self.noNagAlertsLabel.shadowColor = self.secondaryColor
     
         self.distanceBeforeNotifyingLabel.textColor = self.primaryColor
         self.distanceBeforeNotifyingLabel.shadowColor = self.secondaryColor

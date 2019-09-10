@@ -14,7 +14,17 @@ final class FeedbackViewController: UIViewController, UITextFieldDelegate, UITex
     @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var feedbackBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var topBanner: UIStackView!
+    @IBOutlet weak var givenNameLabel: UILabel!
+    @IBOutlet weak var familyNameLabel: UILabel!
+    @IBOutlet weak var ageLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var commentLabel: UILabel!
+    @IBOutlet weak var pageLabel: UILabel!
     
+    var tertiaryColor: UIColor = UIColor.yellow
+    var secondaryColor: UIColor = UIColor.white
+    var primaryColor: UIColor = UIColor.black
+           
     private lazy var sessionDelegater: SessionDelegater = {
         return SessionDelegater()
     }()
@@ -28,11 +38,45 @@ final class FeedbackViewController: UIViewController, UITextFieldDelegate, UITex
         self.email.delegate = self
         self.comment.delegate = self
         
-        setBorderColorTextField(textField: givenName, color: UIColor.yellow.cgColor)
-        setBorderColorTextField(textField: familyName, color: UIColor.yellow.cgColor)
-        setBorderColorTextField(textField: age, color: UIColor.yellow.cgColor)
-        setBorderColorTextField(textField: email, color: UIColor.yellow.cgColor)
-        setBorderColorTextView(textView: comment, color: UIColor.yellow.cgColor)
+        let showBackground = Variables.showBackground
+        
+        if #available(iOS 13.0, *) {
+            self.view.backgroundColor = UIColor.systemBackground
+            self.primaryColor = UIColor.label
+            self.secondaryColor = UIColor.secondaryLabel
+            self.tertiaryColor = UIColor.tertiaryLabel
+        } else {
+            // Fallback on earlier versions
+            if (showBackground) {
+                self.view.backgroundColor = UIColor.black
+                self.tertiaryColor = UIColor.yellow
+                self.secondaryColor = UIColor.systemBlue
+                self.primaryColor = UIColor.black
+            } else {
+                self.view.backgroundColor = UIColor.black
+                self.secondaryColor = UIColor.systemBlue
+                self.primaryColor = UIColor.white
+                }
+        }
+        
+        pageLabel.textColor = UIColor.systemBlue
+        
+        self.givenNameLabel.textColor = self.primaryColor
+        self.givenNameLabel.shadowColor = self.secondaryColor
+        self.familyNameLabel.textColor = self.primaryColor
+        self.familyNameLabel.shadowColor = self.secondaryColor
+        self.ageLabel.textColor = self.primaryColor
+        self.ageLabel.shadowColor = self.secondaryColor
+        self.emailLabel.textColor = self.primaryColor
+        self.emailLabel.shadowColor = self.secondaryColor
+        self.commentLabel.textColor = self.primaryColor
+        self.commentLabel.shadowColor = self.secondaryColor
+        
+        setBorderColorTextField(textField: givenName, color: self.tertiaryColor.cgColor)
+        setBorderColorTextField(textField: familyName, color: self.tertiaryColor.cgColor)
+        setBorderColorTextField(textField: age, color: self.tertiaryColor.cgColor)
+        setBorderColorTextField(textField: email, color: self.tertiaryColor.cgColor)
+        setBorderColorTextView(textView: comment, color: self.tertiaryColor.cgColor)
         
         updateFields()
     }
